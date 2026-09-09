@@ -312,13 +312,13 @@ export default function GraphView() {
       >
         {/* Mode + filter bar */}
         <div className="absolute top-3 left-3 z-10 flex gap-1.5 flex-wrap items-center">
-          <div className="flex rounded-full overflow-hidden border border-dark-500">
+          <div className="flex rounded-full overflow-hidden border border-gov-border shadow-gov">
             {(['network', 'community'] as const).map(m => (
               <button
                 key={m}
                 onClick={() => { setMode(m); setActiveComm(null) }}
                 className={`text-xs px-3 py-1 capitalize transition-all ${
-                  mode === m ? 'bg-blue-500 text-white' : 'bg-dark-800/80 text-gray-400 hover:text-white'
+                  mode === m ? 'bg-gov-navy text-white' : 'bg-white/90 text-gov-muted hover:text-gov-ink'
                 }`}
               >
                 {m}
@@ -329,10 +329,10 @@ export default function GraphView() {
             <button
               key={k}
               onClick={() => setFilter(k)}
-              className={`text-xs px-2.5 py-1 rounded-full border transition-all capitalize ${
+              className={`text-xs px-2.5 py-1 rounded-full border shadow-gov transition-all capitalize ${
                 filter === k
-                  ? 'bg-blue-500 border-blue-500 text-white'
-                  : 'bg-dark-800/80 border-dark-500 text-gray-400 hover:text-white'
+                  ? 'bg-gov-navy border-gov-navy text-white'
+                  : 'bg-white/90 border-gov-border text-gov-muted hover:text-gov-ink'
               }`}
             >
               {k}
@@ -342,34 +342,34 @@ export default function GraphView() {
 
         {/* Zoom / fullscreen controls */}
         <div className="absolute bottom-3 right-3 z-10 flex flex-col gap-1">
-          <button onClick={() => zoom(0.7)}  className="btn-ghost p-1.5 card"><ZoomIn  size={14} /></button>
-          <button onClick={() => zoom(1.4)}  className="btn-ghost p-1.5 card"><ZoomOut size={14} /></button>
-          <button onClick={loadGraph}         className="btn-ghost p-1.5 card"><RefreshCw size={14} /></button>
-          <button onClick={() => setFullscreen(f => !f)} className="btn-ghost p-1.5 card" title="Toggle fullscreen">
+          <button onClick={() => zoom(0.7)}  className="p-1.5 rounded-lg bg-white border border-gov-border shadow-gov text-gov-muted hover:text-gov-ink"><ZoomIn  size={14} /></button>
+          <button onClick={() => zoom(1.4)}  className="p-1.5 rounded-lg bg-white border border-gov-border shadow-gov text-gov-muted hover:text-gov-ink"><ZoomOut size={14} /></button>
+          <button onClick={loadGraph}         className="p-1.5 rounded-lg bg-white border border-gov-border shadow-gov text-gov-muted hover:text-gov-ink"><RefreshCw size={14} /></button>
+          <button onClick={() => setFullscreen(f => !f)} className="p-1.5 rounded-lg bg-white border border-gov-border shadow-gov text-gov-muted hover:text-gov-ink" title="Toggle fullscreen">
             {fullscreen ? <Minimize size={14} /> : <Maximize size={14} />}
           </button>
         </div>
 
         {/* Legend */}
-        <div className="absolute bottom-3 left-3 z-10 card p-2 space-y-1 max-h-56 overflow-y-auto">
+        <div className="absolute bottom-3 left-3 z-10 gov-card p-2 space-y-1 max-h-56 overflow-y-auto">
           {mode === 'network' ? (
             Object.entries(KIND_COLOR).map(([k, c]) => (
-              <div key={k} className="flex items-center gap-2 text-[10px] text-gray-400">
+              <div key={k} className="flex items-center gap-2 text-[10px] font-medium text-gov-muted">
                 <span className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />
                 {k}
               </div>
             ))
           ) : !commLoaded ? (
-            <p className="text-[10px] text-gray-500 px-1">Loading clusters…</p>
+            <p className="text-[10px] text-gov-muted px-1">Loading clusters…</p>
           ) : communities.length === 0 ? (
-            <p className="text-[10px] text-gray-500 px-1">No clusters found for this scope.</p>
+            <p className="text-[10px] text-gov-muted px-1">No clusters found for this scope.</p>
           ) : (
             communities.map((c, i) => (
               <button
                 key={c.community_id}
                 onClick={() => setActiveComm(a => a === c.community_id ? null : c.community_id)}
-                className={`flex items-center gap-2 text-[10px] px-1.5 py-1 rounded w-full text-left transition-colors ${
-                  activeComm === c.community_id ? 'bg-dark-600 text-white' : 'text-gray-400 hover:text-white'
+                className={`flex items-center gap-2 text-[10px] font-medium px-1.5 py-1 rounded w-full text-left transition-colors ${
+                  activeComm === c.community_id ? 'bg-gov-navy text-white' : 'text-gov-muted hover:bg-gov-wash hover:text-gov-ink'
                 }`}
               >
                 <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: COMMUNITY_COLORS[i % COMMUNITY_COLORS.length] }} />
@@ -380,24 +380,24 @@ export default function GraphView() {
         </div>
 
         {/* Scope / hint */}
-        <div className="absolute top-3 right-3 z-10 card px-2.5 py-1 flex items-center gap-2">
+        <div className="absolute top-3 right-3 z-10 gov-card px-2.5 py-1 flex items-center gap-2">
           {caseId ? (
             <>
-              <span className="text-[10px] text-cyan-400 font-mono">Case: {caseName || caseId}</span>
-              <button onClick={clearScope} title="Back to global graph" className="text-gray-500 hover:text-white">
+              <span className="text-[10px] text-gov-navy font-mono font-semibold">Case: {caseName || caseId}</span>
+              <button onClick={clearScope} title="Back to global graph" className="text-gov-faint hover:text-gov-ink">
                 <X size={12} />
               </button>
             </>
           ) : (
-            <p className="text-[10px] text-gray-500">Click a node for profile · click a link for its source record</p>
+            <p className="text-[10px] text-gov-muted">Click a node for profile · click a link for its source record</p>
           )}
         </div>
 
         {/* Focus bar */}
         {focus && (
-          <div className="absolute top-14 right-3 z-10 card px-2.5 py-1.5 flex items-center gap-2">
-            <span className="text-[10px] text-gray-400 font-mono">Focused: {labelOf(focus.id)} ({focus.hops}-hop)</span>
-            <button onClick={() => setFocus(null)} className="text-gray-500 hover:text-white">
+          <div className="absolute top-14 right-3 z-10 gov-card px-2.5 py-1.5 flex items-center gap-2">
+            <span className="text-[10px] text-gov-muted font-mono">Focused: {labelOf(focus.id)} ({focus.hops}-hop)</span>
+            <button onClick={() => setFocus(null)} className="text-gov-faint hover:text-gov-ink">
               <X size={12} />
             </button>
           </div>
@@ -415,10 +415,10 @@ export default function GraphView() {
 
         {!loading && !graphData && (
           <div className="absolute inset-0 flex items-center justify-center z-20">
-            <div className="text-center text-gray-500 max-w-xs">
-              <Info size={28} className="mx-auto mb-3 text-gray-700" />
-              <p className="text-sm text-gray-300">No graph available</p>
-              <p className="text-xs mt-1">
+            <div className="text-center max-w-xs gov-card p-6">
+              <Info size={28} className="mx-auto mb-3 text-gov-faint" />
+              <p className="text-sm text-gov-ink font-semibold">No graph available</p>
+              <p className="text-xs text-gov-muted mt-1">
                 {loadError || (caseId
                   ? 'This case has no built graph yet — open the case and run analysis first.'
                   : 'The shared graph has not been built yet.')}
@@ -458,33 +458,33 @@ export default function GraphView() {
 
       {/* ── Right panel: edge evidence / node profile / community members ── */}
       {selEdge ? (
-        <div className={`w-80 card p-4 overflow-y-auto space-y-4 ${fullscreen ? 'hidden' : ''}`}>
+        <div className={`w-80 gov-card p-4 overflow-y-auto space-y-4 ${fullscreen ? 'hidden' : ''}`}>
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <FileText size={16} className="text-yellow-400" />
+              <h3 className="text-base font-bold text-gov-ink flex items-center gap-2">
+                <FileText size={16} className="text-amber-600" />
                 Source Record
               </h3>
               <span className="badge-person mt-1 inline-block">{selEdge.kind}</span>
             </div>
-            <button onClick={() => setSelEdge(null)} className="text-gray-500 hover:text-white">
+            <button onClick={() => setSelEdge(null)} className="text-gov-faint hover:text-gov-ink">
               <X size={16} />
             </button>
           </div>
 
-          <div className="bg-dark-700 rounded-lg p-3 text-center">
-            <p className="text-xs text-gray-400">{labelOf(selEdge.src)}</p>
-            <p className="text-[10px] font-mono text-gray-600 my-0.5">— {selEdge.kind} · {SOURCE_LABEL[(selEdge.source_type || '').toLowerCase()] || selEdge.source_type || 'linked record'} —</p>
-            <p className="text-xs text-gray-400">{labelOf(selEdge.dst)}</p>
+          <div className="gov-well p-3 text-center">
+            <p className="text-xs font-medium text-gov-muted">{labelOf(selEdge.src)}</p>
+            <p className="text-[10px] font-mono text-gov-faint my-0.5">— {selEdge.kind} · {SOURCE_LABEL[(selEdge.source_type || '').toLowerCase()] || selEdge.source_type || 'linked record'} —</p>
+            <p className="text-xs font-medium text-gov-muted">{labelOf(selEdge.dst)}</p>
           </div>
 
           <div>
-            <p className="text-xs text-gray-400 mb-1">Source document</p>
-            <div className="bg-dark-700 rounded-lg p-3 space-y-1.5">
+            <p className="text-xs font-semibold text-gov-muted mb-1">Source document</p>
+            <div className="gov-well p-3 space-y-1.5">
               {edgeSourceDoc(selEdge).map(([k, v]) => (
                 <div key={k} className="flex justify-between text-xs">
-                  <span className="text-gray-500">{k}</span>
-                  <span className="text-gray-200 font-mono">{String(v ?? '—')}</span>
+                  <span className="text-gov-muted">{k}</span>
+                  <span className="text-gov-ink font-mono">{String(v ?? '—')}</span>
                 </div>
               ))}
             </div>
@@ -492,91 +492,91 @@ export default function GraphView() {
 
           {selEdge.supporting_text && (
             <div>
-              <p className="text-xs text-gray-400 mb-1">Supporting evidence</p>
-              <p className="text-xs text-gray-200 bg-dark-700 rounded-lg p-3 leading-relaxed">{selEdge.supporting_text}</p>
+              <p className="text-xs font-semibold text-gov-muted mb-1">Supporting evidence</p>
+              <p className="text-xs text-gov-ink gov-well p-3 leading-relaxed">{selEdge.supporting_text}</p>
             </div>
           )}
 
-          <div className="flex items-center gap-2 text-xs font-mono text-gray-500">
+          <div className="flex items-center gap-2 text-xs font-mono text-gov-faint">
             <Hash size={11} />
             <span>{selEdge.evidence_hash || 'no hash'} · conf {selEdge.confidence ?? '—'} · {selEdge.extractor || 'graph'}</span>
           </div>
         </div>
       ) : selected ? (
-        <div className={`w-72 card p-4 overflow-y-auto space-y-4 ${fullscreen ? 'hidden' : ''}`}>
+        <div className={`w-72 gov-card p-4 overflow-y-auto space-y-4 ${fullscreen ? 'hidden' : ''}`}>
           <div className="flex items-start justify-between">
             <div className="flex gap-3 items-center">
               <img
                 src={`/api/mugshots/${selected.id}.jpg`}
                 alt=""
                 onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
-                className="w-11 h-11 rounded-lg object-cover border border-dark-500 flex-shrink-0"
+                className="w-11 h-11 rounded-lg object-cover border border-gov-border flex-shrink-0 bg-gov-wash"
               />
               <div>
-                <h3 className="text-base font-bold text-white">{selected.label}</h3>
+                <h3 className="text-base font-bold text-gov-ink">{selected.label}</h3>
                 <span className={`badge-${(selected.kind || 'person').toLowerCase()} mt-1 inline-block`}>
                   {selected.kind}
                 </span>
               </div>
             </div>
-            <button onClick={() => { setSelected(null); setWhySignals([]) }} className="text-gray-500 hover:text-white">
+            <button onClick={() => { setSelected(null); setWhySignals([]) }} className="text-gov-faint hover:text-gov-ink">
               <X size={16} />
             </button>
           </div>
 
           {selected.risk_score !== undefined && (
-            <div className="bg-dark-700 rounded-lg p-3">
-              <p className="text-xs text-gray-400 mb-1">Risk Score</p>
+            <div className="gov-well p-3">
+              <p className="text-xs text-gov-muted mb-1">Risk Score</p>
               <div className="flex items-center gap-3">
-                <div className="flex-1 bg-dark-600 rounded-full h-2 overflow-hidden">
+                <div className="flex-1 bg-gov-border rounded-full h-2 overflow-hidden">
                   <div
-                    className="h-full rounded-full bg-red-500 transition-all"
+                    className="h-full rounded-full bg-gov-red transition-all"
                     style={{ width: `${Math.min(selected.risk_score, 100)}%` }}
                   />
                 </div>
-                <span className="text-sm font-mono font-bold text-red-400">{selected.risk_score}</span>
+                <span className="text-sm font-mono font-bold text-gov-red">{selected.risk_score}</span>
               </div>
             </div>
           )}
 
           {selected.cell && (
             <div>
-              <p className="text-xs text-gray-400 mb-1">Criminal Cell{selected.role ? ` · ${selected.role}` : ''}</p>
-              <p className="text-sm text-white font-mono bg-dark-700 rounded px-2 py-1">{selected.cell}</p>
+              <p className="text-xs text-gov-muted mb-1">Criminal Cell{selected.role ? ` · ${selected.role}` : ''}</p>
+              <p className="text-sm text-gov-ink font-mono gov-well px-2 py-1">{selected.cell}</p>
             </div>
           )}
 
           <div className="flex gap-2">
-            <button onClick={() => setFocus({ id: selected.id, hops: 1 })} className="btn-ghost card flex-1 justify-center text-xs py-1.5">1-Hop</button>
-            <button onClick={() => setFocus({ id: selected.id, hops: 2 })} className="btn-ghost card flex-1 justify-center text-xs py-1.5">2-Hop</button>
+            <button onClick={() => setFocus({ id: selected.id, hops: 1 })} className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5">1-Hop</button>
+            <button onClick={() => setFocus({ id: selected.id, hops: 2 })} className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5">2-Hop</button>
           </div>
 
           {whySignals.length > 0 && (
             <div>
-              <p className="text-xs text-gray-400 mb-1 flex items-center gap-1">
+              <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
                 <Info size={11} /> Why flagged
               </p>
-              <ul className="text-xs text-gray-300 bg-dark-700 rounded-lg p-3 leading-relaxed space-y-1.5 list-disc list-inside">
+              <ul className="text-xs text-gov-ink gov-well p-3 leading-relaxed space-y-1.5 list-disc list-inside">
                 {whySignals.map((s, i) => <li key={i}>{s}</li>)}
               </ul>
             </div>
           )}
         </div>
       ) : activeComm != null ? (
-        <div className={`w-72 card p-4 overflow-y-auto space-y-3 ${fullscreen ? 'hidden' : ''}`}>
+        <div className={`w-72 gov-card p-4 overflow-y-auto space-y-3 ${fullscreen ? 'hidden' : ''}`}>
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <Users size={16} className="text-green-400" />
+              <h3 className="text-base font-bold text-gov-ink flex items-center gap-2">
+                <Users size={16} className="text-gov-igreen" />
                 Cluster C{activeComm}
               </h3>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs text-gov-muted mt-0.5">
                 {communities.find(c => String(c.community_id) === String(activeComm))?.size} members
                 {communities.find(c => String(c.community_id) === String(activeComm))?.dominant_cell
                   ? ` · ${communities.find(c => String(c.community_id) === String(activeComm))?.dominant_cell}-dominant` : ''}
               </p>
             </div>
-            <button onClick={() => setActiveComm(null)} className="text-gray-500 hover:text-white">
+            <button onClick={() => setActiveComm(null)} className="text-gov-faint hover:text-gov-ink">
               <X size={16} />
             </button>
           </div>
@@ -587,20 +587,20 @@ export default function GraphView() {
                 <button
                   key={id}
                   onClick={() => n && selectNode(n)}
-                  className="w-full text-left px-3 py-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors"
+                  className="w-full text-left px-3 py-2 rounded-lg gov-well hover:border-gov-navy transition-colors"
                 >
-                  <p className="text-xs text-white font-medium truncate">{n?.label || id}</p>
-                  <p className="text-[10px] text-gray-500 font-mono">{id}{n?.kind ? ` · ${n.kind}` : ''}{n?.cell ? ` · Cell ${n.cell}` : ''}</p>
+                  <p className="text-xs text-gov-ink font-semibold truncate">{n?.label || id}</p>
+                  <p className="text-[10px] text-gov-muted font-mono">{id}{n?.kind ? ` · ${n.kind}` : ''}{n?.cell ? ` · Cell ${n.cell}` : ''}</p>
                 </button>
               )
             })}
           </div>
         </div>
       ) : (
-        <div className={`w-72 card p-4 flex flex-col items-center justify-center text-center text-gray-500 ${fullscreen ? 'hidden' : ''}`}>
-          <Info size={24} className="mb-2 text-gray-600" />
-          <p className="text-sm">Click any node</p>
-          <p className="text-xs mt-1">profile · or any link for its source record</p>
+        <div className={`w-72 gov-card p-4 flex flex-col items-center justify-center text-center ${fullscreen ? 'hidden' : ''}`}>
+          <Info size={24} className="mb-2 text-gov-faint" />
+          <p className="text-sm text-gov-ink font-medium">Click any node</p>
+          <p className="text-xs text-gov-muted mt-1">profile · or any link for its source record</p>
         </div>
       )}
     </div>

@@ -11,6 +11,57 @@
 }
 
 @layer components {
+  /* ── Gov light primitives (pilot: Layout, Dashboard, Graph, Login) ─────── */
+  .gov-card {
+    @apply bg-gov-surface border border-gov-border rounded-xl shadow-gov;
+  }
+  .gov-btn {
+    @apply bg-gov-navy hover:bg-gov-navydeep text-white text-sm font-medium
+           px-4 py-2 rounded-lg transition-colors flex items-center gap-2;
+  }
+  .gov-btn-accent {
+    @apply bg-gov-saffron hover:brightness-95 text-white text-sm font-medium
+           px-4 py-2 rounded-lg transition-colors flex items-center gap-2;
+  }
+  .gov-ghost {
+    @apply hover:bg-gov-wash text-gov-muted hover:text-gov-ink text-sm
+           px-3 py-2 rounded-lg transition-colors flex items-center gap-2;
+  }
+  .gov-input {
+    @apply bg-white border border-gov-borderd rounded-lg px-3 py-2 text-sm
+           text-gov-ink placeholder-gov-faint focus:outline-none focus:border-gov-navy
+           transition-colors w-full;
+  }
+  .gov-nav {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gov-muted
+           hover:text-gov-ink hover:bg-gov-wash transition-all cursor-pointer;
+  }
+  .gov-nav.active {
+    @apply text-white bg-gov-navy;
+  }
+  .gov-stat {
+    @apply gov-card p-4 flex flex-col gap-1;
+  }
+  .gov-well {
+    @apply bg-gov-wash border border-gov-border rounded-lg;
+  }  .gov-tag {
+    @apply text-[10px] font-semibold px-2 py-0.5 rounded-full border font-mono whitespace-nowrap;
+  }
+
+  /* Light-safe badge variants inside gov surfaces (dark pages keep the
+     translucent originals above) */
+  .gov-card .badge-person   { @apply bg-red-50 text-gov-red border-red-200; }
+  .gov-card .badge-phone    { @apply bg-blue-50 text-blue-700 border-blue-200; }
+  .gov-card .badge-account  { @apply bg-green-50 text-gov-igreen border-green-200; }
+  .gov-card .badge-location { @apply bg-orange-50 text-orange-700 border-orange-200; }
+  .gov-card .badge-vehicle  { @apply bg-purple-50 text-purple-700 border-purple-200; }
+  .gov-card .badge-organization { @apply bg-cyan-50 text-cyan-700 border-cyan-200; }
+  .gov-card .badge-post         { @apply bg-slate-100 text-slate-600 border-slate-300; }
+  .gov-card .badge-fir          { @apply bg-yellow-50 text-yellow-700 border-yellow-200; }
+  .gov-card .badge-surveillance { @apply bg-orange-50 text-orange-700 border-orange-200; }
+  .gov-card .badge-intel        { @apply bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200; }
+
+  /* ── Legacy dark primitives (non-pilot pages) ─────────────────────────── */
   .card {
     @apply bg-dark-800 border border-dark-600 rounded-xl;
   }

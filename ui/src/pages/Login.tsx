@@ -25,62 +25,73 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gov-bg flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
 
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-dark-700 border border-dark-500 mb-4">
-            <Shield size={32} className="text-accent-blue" />
+        <div className="text-center mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gov-navy shadow-gov mb-4">
+            <Shield size={32} className="text-white" />
           </div>
-          <h1 className="text-xl font-bold text-white">CNAS Platform</h1>
-          <p className="text-xs text-gray-500 mt-1 font-mono">
-            Criminal Network Analysis System · NCRB
+          <h1 className="text-xl font-bold text-gov-ink">CNAS Platform</h1>
+          <p className="text-xs text-gov-muted mt-1">
+            Criminal Network Analysis System
+          </p>
+          <p className="text-[11px] text-gov-faint font-mono mt-0.5">
+            National Crime Records Bureau · Restricted Access
           </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={submit} className="card p-6 space-y-4">
-          <div>
-            <label className="text-xs text-gray-400 block mb-1.5">Username</label>
-            <input
-              className="input-dark"
-              value={user}
-              onChange={e => setUser(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label className="text-xs text-gray-400 block mb-1.5">Password</label>
-            <div className="relative">
+        <form onSubmit={submit} className="gov-card overflow-hidden">
+          <div
+            className="h-1"
+            style={{ background: 'linear-gradient(90deg, #E8762D 0%, #E8762D 33%, #D9DEE7 33%, #D9DEE7 66%, #1E7E46 66%, #1E7E46 100%)' }}
+          />
+          <div className="p-6 space-y-4">
+            <div>
+              <label className="text-xs font-semibold text-gov-ink block mb-1.5">Username</label>
               <input
-                className="input-dark pr-9"
-                type={show ? 'text' : 'password'}
-                value={pass}
-                onChange={e => setPass(e.target.value)}
+                className="gov-input"
+                value={user}
+                onChange={e => setUser(e.target.value)}
+                placeholder="Official username"
                 required
               />
-              <button
-                type="button"
-                onClick={() => setShow(!show)}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white"
-              >
-                {show ? <EyeOff size={14} /> : <Eye size={14} />}
-              </button>
             </div>
+            <div>
+              <label className="text-xs font-semibold text-gov-ink block mb-1.5">Password</label>
+              <div className="relative">
+                <input
+                  className="gov-input pr-9"
+                  type={show ? 'text' : 'password'}
+                  value={pass}
+                  onChange={e => setPass(e.target.value)}
+                  placeholder="Password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShow(!show)}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gov-faint hover:text-gov-ink"
+                >
+                  {show ? <EyeOff size={14} /> : <Eye size={14} />}
+                </button>
+              </div>
+            </div>
+            {err && <p className="text-xs text-gov-red bg-red-50 border border-red-200 rounded-lg px-3 py-2">{err}</p>}
+            <button
+              type="submit"
+              disabled={busy}
+              className="gov-btn w-full justify-center py-2.5 disabled:opacity-50"
+            >
+              {busy ? 'Authenticating…' : 'Sign In'}
+            </button>
           </div>
-          {err && <p className="text-xs text-red-400 bg-red-500/10 rounded-lg px-3 py-2">{err}</p>}
-          <button
-            type="submit"
-            disabled={busy}
-            className="btn-primary w-full justify-center py-2.5 disabled:opacity-50"
-          >
-            {busy ? 'Authenticating…' : 'Sign In'}
-          </button>
         </form>
 
-        <p className="text-center text-xs text-gray-600 mt-4">
-          Ministry of Home Affairs · NCRB · Restricted Access
+        <p className="text-center text-[11px] text-gov-faint mt-4">
+          Ministry of Home Affairs · All actions are audit-logged
         </p>
       </div>
     </div>

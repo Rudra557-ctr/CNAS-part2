@@ -32,21 +32,21 @@ export default function Dashboard() {
   }, [])
 
   // Backend may return lowercase severity/priority; normalize before comparing.
-  const riskColor = (level?: string) => {
-    const u = (level || '').toUpperCase()
-    return u === 'HIGH' ? 'text-red-400' : u === 'MEDIUM' ? 'text-yellow-400' : 'text-green-400'
+  const prio = (level?: string) => (level || '').toUpperCase()
+  const prioText = (level?: string) => {
+    const u = prio(level)
+    return u === 'HIGH' ? 'text-gov-red' : u === 'MEDIUM' ? 'text-amber-700' : 'text-gov-igreen'
   }
-
-  const riskBg = (level?: string) => {
-    const u = (level || '').toUpperCase()
-    return u === 'HIGH' ? 'bg-red-500/10 border-red-500/20' : u === 'MEDIUM' ? 'bg-yellow-500/10 border-yellow-500/20' : 'bg-green-500/10 border-green-500/20'
+  const prioBox = (level?: string) => {
+    const u = prio(level)
+    return u === 'HIGH' ? 'bg-red-50 border-red-200' : u === 'MEDIUM' ? 'bg-amber-50 border-amber-200' : 'bg-green-50 border-green-200'
   }
 
   if (loading) return (
     <div className="flex items-center justify-center h-64">
       <div className="text-center">
-        <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-        <p className="text-xs text-gray-500 font-mono">Loading intelligence…</p>
+        <div className="w-8 h-8 border-2 border-gov-navy border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <p className="text-xs text-gov-muted font-mono">Loading intelligence…</p>
       </div>
     </div>
   )
@@ -57,30 +57,30 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold text-white">Analyst Dashboard</h1>
-          <p className="text-xs text-gray-500 mt-0.5">AI-powered criminal network intelligence · Real-time analysis</p>
+          <h1 className="text-xl font-bold text-gov-ink">Analyst Dashboard</h1>
+          <p className="text-xs text-gov-muted mt-0.5">Criminal network intelligence · Real-time analysis</p>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="pulse-dot bg-green-400" />
-          <span className="text-xs text-green-400 font-mono">All systems nominal</span>
+        <div className="flex items-center gap-2 gov-card px-3 py-1.5">
+          <span className="w-2 h-2 rounded-full bg-gov-igreen animate-pulse" />
+          <span className="text-xs text-gov-igreen font-semibold">All systems nominal</span>
         </div>
       </div>
 
       {/* Stat cards */}
       <div className="grid grid-cols-4 gap-3">
         {[
-          { label: 'Total Entities',   value: stats.nodes, icon: Users,         color: 'text-blue-400',   sub: 'persons, phones, accounts' },
-          { label: 'Connections',      value: stats.edges, icon: Network,        color: 'text-purple-400', sub: 'relationships mapped' },
-          { label: 'High-Risk Leads',  value: leads.filter(l => l.priority === 'HIGH').length, icon: TrendingUp, color: 'text-red-400',  sub: 'require immediate action' },
-          { label: 'Active Anomalies', value: anomalies.length, icon: AlertTriangle, color: 'text-yellow-400', sub: 'detected this cycle' },
+          { label: 'Total Entities',   value: stats.nodes, icon: Users,         color: 'text-gov-navy',   sub: 'persons, phones, accounts' },
+          { label: 'Connections',      value: stats.edges, icon: Network,        color: 'text-gov-navy', sub: 'relationships mapped' },
+          { label: 'High-Risk Leads',  value: leads.filter(l => prio(l.priority) === 'HIGH').length, icon: TrendingUp, color: 'text-gov-red',  sub: 'require immediate action' },
+          { label: 'Active Anomalies', value: anomalies.length, icon: AlertTriangle, color: 'text-gov-saffron', sub: 'detected this cycle' },
         ].map(s => (
-          <div key={s.label} className="stat-card">
+          <div key={s.label} className="gov-stat">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-gray-500">{s.label}</span>
-              <s.icon size={14} className={s.color} />
+              <span className="text-xs font-medium text-gov-muted">{s.label}</span>
+              <s.icon size={15} className={s.color} />
             </div>
-            <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
-            <p className="text-[10px] text-gray-600">{s.sub}</p>
+            <p className="text-[26px] font-bold text-gov-ink leading-tight">{s.value}</p>
+            <p className="text-[10px] text-gov-faint">{s.sub}</p>
           </div>
         ))}
       </div>
@@ -89,25 +89,25 @@ export default function Dashboard() {
       <div className="grid grid-cols-3 gap-4">
 
         {/* Top Leads */}
-        <div className="card p-4">
+        <div className="gov-card p-4">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <TrendingUp size={14} className="text-red-400" />
-              <h2 className="text-sm font-semibold text-white">Priority Suspects</h2>
+              <TrendingUp size={14} className="text-gov-red" />
+              <h2 className="text-sm font-bold text-gov-ink">Priority Suspects</h2>
             </div>
-            <button onClick={() => navigate('/graph')} className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1">
+            <button onClick={() => navigate('/graph')} className="text-xs text-gov-navy hover:underline flex items-center gap-1 font-medium">
               View all <ArrowRight size={11} />
             </button>
           </div>
           <div className="space-y-2">
             {leads.map((l, i) => (
-              <div key={l.entity_id} className={`flex items-center gap-3 p-2.5 rounded-lg border ${riskBg(l.priority)}`}>
-                <span className="text-xs font-mono text-gray-500 w-4">#{i + 1}</span>
+              <div key={l.entity_id} className={`flex items-center gap-3 p-2.5 rounded-lg border ${prioBox(l.priority)}`}>
+                <span className="text-xs font-mono text-gov-faint w-4">#{i + 1}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-white font-medium truncate">{l.label}</p>
-                  <p className="text-[10px] text-gray-500">{l.cell ? `Cell ${l.cell}` : 'Unknown cell'}{l.role ? ` · ${l.role}` : ''}</p>
+                  <p className="text-sm text-gov-ink font-semibold truncate">{l.label}</p>
+                  <p className="text-[10px] text-gov-muted">{l.cell ? `Cell ${l.cell}` : 'Unknown cell'}{l.role ? ` · ${l.role}` : ''}</p>
                 </div>
-                <span className={`text-xs font-mono font-bold ${riskColor(l.priority)}`}>
+                <span className={`text-xs font-mono font-bold ${prioText(l.priority)}`}>
                   {l.lead_score ?? '—'}
                 </span>
               </div>
@@ -116,24 +116,24 @@ export default function Dashboard() {
         </div>
 
         {/* Bridge Nodes */}
-        <div className="card p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <GitBranch size={14} className="text-purple-400" />
-            <h2 className="text-sm font-semibold text-white">Bridge Nodes</h2>
+        <div className="gov-card p-4">
+          <div className="flex items-center gap-2 mb-1">
+            <GitBranch size={14} className="text-gov-navy" />
+            <h2 className="text-sm font-bold text-gov-ink">Bridge Nodes</h2>
           </div>
-          <p className="text-[10px] text-gray-500 mb-3">
-            Entities that hold multiple criminal cells together. Arresting a bridge fragments the network.
+          <p className="text-[10px] text-gov-muted mb-3">
+            Entities holding multiple criminal cells together. Removing a bridge fragments the network.
           </p>
           <div className="space-y-2">
             {bridges.map((b) => (
-              <div key={b.id} className="flex items-center gap-3 p-2.5 rounded-lg bg-dark-700">
+              <div key={b.id} className="flex items-center gap-3 p-2.5 rounded-lg gov-well">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-white truncate">{b.name || b.id}</p>
-                  <p className="text-[10px] text-gray-500">Connects {b.cells?.length ?? 2}+ cells</p>
+                  <p className="text-sm text-gov-ink font-medium truncate">{b.name || b.id}</p>
+                  <p className="text-[10px] text-gov-muted">Connects {b.cells?.length ?? 2}+ cells</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-mono text-purple-400">{(b.bridge_score || b.betweenness || 0).toFixed(3)}</p>
-                  <p className="text-[10px] text-gray-600">bridge score</p>
+                  <p className="text-xs font-mono font-bold text-gov-navy">{(b.bridge_score || b.betweenness || 0).toFixed(3)}</p>
+                  <p className="text-[10px] text-gov-faint">bridge score</p>
                 </div>
               </div>
             ))}
@@ -141,26 +141,26 @@ export default function Dashboard() {
         </div>
 
         {/* Anomalies */}
-        <div className="card p-4">
+        <div className="gov-card p-4">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Activity size={14} className="text-yellow-400" />
-              <h2 className="text-sm font-semibold text-white">Live Anomalies</h2>
+              <Activity size={14} className="text-gov-saffron" />
+              <h2 className="text-sm font-bold text-gov-ink">Live Anomalies</h2>
             </div>
-            <button onClick={() => navigate('/alerts')} className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1">
+            <button onClick={() => navigate('/alerts')} className="text-xs text-gov-navy hover:underline flex items-center gap-1 font-medium">
               All alerts <ArrowRight size={11} />
             </button>
           </div>
           <div className="space-y-2">
             {anomalies.map((a, i) => (
-              <div key={i} className={`p-2.5 rounded-lg border ${riskBg(a.severity)}`}>
+              <div key={i} className={`p-2.5 rounded-lg border ${prioBox(a.severity)}`}>
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-white truncate">{a.anomaly_type}</p>
-                    <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-2">{(a as any).explanation || a.description}</p>
+                    <p className="text-xs font-semibold text-gov-ink truncate">{a.anomaly_type}</p>
+                    <p className="text-[10px] text-gov-muted mt-0.5 line-clamp-2">{(a as any).explanation || a.description}</p>
                   </div>
-                  <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${riskBg(a.severity)} ${riskColor(a.severity)} flex-shrink-0`}>
-                    {a.severity}
+                  <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border flex-shrink-0 ${prioBox(a.severity)} ${prioText(a.severity)}`}>
+                    {prio(a.severity)}
                   </span>
                 </div>
               </div>
@@ -170,25 +170,25 @@ export default function Dashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="card p-4">
-        <h2 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-          <Eye size={14} className="text-cyan-400" />
+      <div className="gov-card p-4">
+        <h2 className="text-sm font-bold text-gov-ink mb-3 flex items-center gap-2">
+          <Eye size={14} className="text-gov-navy" />
           Quick Actions
         </h2>
         <div className="grid grid-cols-5 gap-3">
           {[
-            { label: 'Explore Graph',       to: '/graph',      color: 'border-blue-500/30   hover:border-blue-500   text-blue-400' },
-            { label: 'View Movement Map',   to: '/map',        color: 'border-orange-500/30 hover:border-orange-500 text-orange-400' },
-            { label: 'Timeline Analysis',   to: '/timeline',   color: 'border-purple-500/30 hover:border-purple-500 text-purple-400' },
-            { label: 'Simulate Takedown',   to: '/takedown',   color: 'border-red-500/30    hover:border-red-500    text-red-400' },
-            { label: 'Data Connectors',     to: '/connectors', color: 'border-green-500/30  hover:border-green-500  text-green-400' },
+            { label: 'Explore Graph',       to: '/graph',      accent: 'text-gov-navy' },
+            { label: 'View Movement Map',   to: '/map',        accent: 'text-gov-saffron' },
+            { label: 'Timeline Analysis',   to: '/timeline',   accent: 'text-gov-navy' },
+            { label: 'Simulate Takedown',   to: '/takedown',   accent: 'text-gov-red' },
+            { label: 'Data Connectors',     to: '/connectors', accent: 'text-gov-igreen' },
           ].map(a => (
             <button
               key={a.to}
               onClick={() => navigate(a.to)}
-              className={`p-3 rounded-xl border bg-dark-700 text-sm font-medium transition-all ${a.color}`}
+              className="p-3 rounded-xl border border-gov-border bg-white hover:border-gov-navy hover:shadow-gov text-sm font-semibold text-gov-ink transition-all"
             >
-              {a.label}
+              <span className={a.accent}>{a.label}</span>
             </button>
           ))}
         </div>
