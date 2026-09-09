@@ -1,5 +1,6 @@
 // ── Graph types ────────────────────────────────────────────────────────────
 export type NodeKind = 'Person' | 'Phone' | 'Account' | 'Location' | 'Vehicle' | 'Organization'
+  | 'Post' | 'FIR' | 'Surveillance' | 'Intel' | 'Tower'
 
 export interface GraphNode {
   id: string

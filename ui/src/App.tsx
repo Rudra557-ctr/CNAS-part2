@@ -9,6 +9,7 @@ import Takedown    from './pages/Takedown'
 import Explainer   from './pages/Explainer'
 import Cases       from './pages/Cases'
 import CaseDetail  from './pages/CaseDetail'
+import Search      from './pages/Search'
 import Connectors  from './pages/Connectors'
 import Login       from './pages/Login'
 import { useAuth } from './components/AuthContext'
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="explain"     element={<Explainer />} />
         <Route path="cases"      element={<Cases />} />
         <Route path="cases/:iid" element={<CaseDetail />} />
+        <Route path="search"     element={<Search />} />
         <Route path="connectors" element={<Connectors />} />
       </Route>
     </Routes>

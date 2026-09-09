@@ -43,10 +43,16 @@ export default function GlobalSearch() {
         <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gov-faint" />
         <input
           className="gov-input pl-8 pr-8 !py-1.5 text-xs"
-          placeholder="Search suspects, phones, accounts, locations…"
+          placeholder="Search suspects, phones, accounts, locations…  (Enter for all sources)"
           value={q}
           onChange={e => search(e.target.value)}
           onFocus={() => { if (results.length) setOpen(true) }}
+          onKeyDown={e => {
+            if (e.key === 'Enter' && q.trim()) {
+              setOpen(false)
+              navigate(`/search?q=${encodeURIComponent(q.trim())}`)
+            }
+          }}
         />
         {q && (
           <button

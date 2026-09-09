@@ -2,7 +2,7 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from './AuthContext'
 import {
   LayoutDashboard, Network, Map, Clock, Bell,
-  Crosshair, FolderOpen, Plug, LogOut, Shield, Share2,
+  Crosshair, FolderOpen, Plug, LogOut, Shield, Share2, Search,
 } from 'lucide-react'
 import GlobalSearch from './GlobalSearch'
 
@@ -14,6 +14,7 @@ const NAV = [
   { to: '/alerts',     icon: Bell,             label: 'Alerts',    badge: true },
   { to: '/takedown',   icon: Crosshair,        label: 'Takedown Sim' },
   { to: '/explain',    icon: Share2,           label: 'Why Connected' },
+  { to: '/search',     icon: Search,           label: 'Search All' },
   { to: '/cases',      icon: FolderOpen,       label: 'Cases' },
   { to: '/connectors', icon: Plug,             label: 'Data Connectors' },
 ]

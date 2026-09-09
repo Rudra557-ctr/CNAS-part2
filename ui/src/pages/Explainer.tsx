@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Share2, ArrowLeftRight, Phone, Wallet, FileText, Eye, Brain, Users, Network, Hash } from 'lucide-react'
 import { searchPeople, explainConnection } from '../api/client'
 
@@ -145,6 +145,21 @@ export default function Explainer() {
   const [data, setData] = useState<ExplainData | null>(null)
   const [loading, setLoading] = useState(false)
   const [err, setErr] = useState('')
+  const paired = useRef(false)
+
+  // Deep-link from Federated Search evidence rows.
+  useEffect(() => {
+    if (paired.current) return
+    paired.current = true
+    try {
+      const raw = sessionStorage.getItem('explainPair')
+      if (!raw) return
+      sessionStorage.removeItem('explainPair')
+      const { src, dst } = JSON.parse(raw)
+      if (src && dst) run(src, dst)
+    } catch { /* ignore malformed handoff */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const run = async (a?: string, b?: string) => {
     const s = a || src?.id || srcId.trim()
