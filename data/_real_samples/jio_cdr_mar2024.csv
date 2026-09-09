@@ -1,0 +1,6 @@
+A_Number;B_Number;Call_Date;Call_Time;Duration(sec);Tower_Address;Circle
+9820098200;9811198111;12/03/2024;21:34:11;407;Andheri West, Mumbai;Mumbai
+9820098200;9890198901;13/03/2024;09:02:44;89;Kothrud, Pune – near Karve Putala;Maharashtra
+9811198111;9769097690;13/03/2024;22:15:02;1240;Nashik Road, Nashik;Maharashtra
+9890198901;9820098200;14/03/2024;18:40:30;65;Bandra East, Mumbai;Mumbai
+9769097690;9811198111;15/03/2024;11:05:19;312;Viman Nagar, Pune;Maharashtra

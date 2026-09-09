@@ -11,5 +11,18 @@
     "approved_by": "admin",
     "approved_at": "2026-09-06T20:17:40.869840Z",
     "rejection_reason": null
+  },
+  "vibhu123": {
+    "password_hash": "517278fb1525a23af5bdeb29ab0e0c76dc0dbe90dfcec31e23cd4474a45c97a8",
+    "role": "investigator",
+    "name": "ACP Vibhanshu Sharma",
+    "badge_id": "ASCP-02/RET",
+    "department": "Task Force",
+    "justification": "",
+    "status": "active",
+    "created_at": "2026-09-07T00:35:15.659594Z",
+    "approved_by": "admin",
+    "approved_at": "2026-09-07T00:35:15.659594Z",
+    "rejection_reason": null
   }
 }

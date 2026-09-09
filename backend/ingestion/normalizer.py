@@ -152,6 +152,21 @@ def clean_date(value) -> str:
     return parse_date(value)
 
 
+def _combine_date_time(date_raw, ts_raw) -> str:
+    """Join a separate date column + time-only column into one timestamp.
+
+    Real telecom/bank exports often split them (Call_Date + Call_Time).
+    If the timestamp already carries a date, it wins; a bare time like
+    "21:34:11" would otherwise parse as *today* and corrupt the day axis.
+    """
+    date_raw = str(date_raw or "").strip()
+    ts_raw = str(ts_raw or "").strip()
+    if date_raw and ts_raw and re.fullmatch(r"\d{1,2}:\d{2}(?::\d{2})?", ts_raw):
+        return f"{date_raw} {ts_raw}"
+    return ts_raw or date_raw
+
+
+
 def _to_day(timestamp_str):
     if not timestamp_str:
         return None
@@ -215,8 +230,8 @@ def normalize_cdrs(rows: List[Dict]) -> List[Dict]:
     for i, r in enumerate(rows):
         # fill missing ids
         call_id = r.get("call_id") or f"GEN-CDR{i+1:05d}"
-        # timestamp fallback (date normalizer handles DD/MM/YYYY etc.)
-        ts_raw = r.get("timestamp") or r.get("date") or ""
+        # timestamp fallback: combine split date + time-only columns (date normalizer handles DD/MM/YYYY etc.)
+        ts_raw = _combine_date_time(r.get("date"), r.get("timestamp"))
         ts = parse_date(ts_raw) if ts_raw else ""
         day = r.get("day")
         if not day or str(day).strip() in ("", "None"):
@@ -250,7 +265,7 @@ def normalize_transactions(rows: List[Dict]) -> List[Dict]:
     out=[]
     for i, r in enumerate(rows):
         txn_id = r.get("txn_id") or f"GEN-TXN{i+1:05d}"
-        ts_raw = r.get("timestamp") or r.get("date") or ""
+        ts_raw = _combine_date_time(r.get("date"), r.get("timestamp"))
         ts = parse_date(ts_raw) if ts_raw else ""
         day = r.get("day") or _to_day(ts_raw or ts)
         amt = parse_amount(r.get("amount_inr") if r.get("amount_inr") not in (None, "") else r.get("amount", 0))

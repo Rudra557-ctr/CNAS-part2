@@ -43,36 +43,54 @@ def validate_headers(file_path: Path, expected: List[str], rows: List[Dict]) -> 
     return True, ""
 
 def load_csv_with_quarantine(file_path: Path, expected_headers: List[str], source_file: str, quarantine: List[Dict]) -> List[Dict]:
-    """Load CSV, validate, strip ground_truth_flag, log quarantined rows."""
+    """
+    Load CSV with fault-tolerant schema handling.
+
+    Accepts ANY column layout — synthetic demo data OR real authorized data
+    (CCTNS exports, TRAI CDR format, FIU-IND, state police exports).
+    Schema drift is WARNED not rejected; ingestion mapper normalizes columns.
+    """
     if not file_path.exists():
         quarantine.append({"row_no": 0, "source_file": source_file, "reason": f"File not found: {file_path}", "confidence": 0.0})
         return []
-    with open(file_path, newline='', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        # header check
-        if reader.fieldnames != expected_headers:
-            quarantine.append({
-                "row_no": 0,
-                "source_file": source_file,
-                "reason": f"Schema drift: expected {expected_headers} got {reader.fieldnames}",
-                "confidence": 0.0
-            })
-            return []
-        rows = []
-        has_day = "day" in expected_headers
-        for idx, row in enumerate(reader, start=2):  # row 1 = header
-            # basic validation per design edge cases: missing tower/day — only if file expects day
-            if has_day:
-                day_raw = row.get("day", "").strip() if row.get("day") else ""
-                if day_raw == "" or day_raw is None:
-                    # keep earliest with low confidence per spec — quarantine log with low conf
-                    quarantine.append({"row_no": idx, "source_file": source_file, "reason": "Missing day", "confidence": 0.3})
-                    # still keep row but mark confidence low (pipeline will handle)
-                    row["_quarantine_confidence"] = 0.3
-            # strip eval flag
-            for flag in STRIP_FLAGS:
-                row.pop(flag, None)
-            rows.append(row)
+
+    # Try multiple encodings — real govt exports often use non-UTF8
+    raw_rows = []
+    detected_headers = None
+    for enc in ["utf-8-sig", "utf-8", "cp1252", "latin-1", "iso-8859-1"]:
+        try:
+            with open(file_path, newline='', encoding=enc) as f:
+                reader = csv.DictReader(f)
+                detected_headers = reader.fieldnames or []
+                raw_rows = list(reader)
+            break
+        except (UnicodeDecodeError, Exception):
+            continue
+
+    if not raw_rows:
+        quarantine.append({"row_no": 0, "source_file": source_file, "reason": "Unreadable file (all encodings failed)", "confidence": 0.0})
+        return []
+
+    # Warn (don't reject) if headers differ — mapper will normalize
+    if detected_headers != expected_headers:
+        quarantine.append({
+            "row_no": 0,
+            "source_file": source_file,
+            "reason": f"Schema drift (non-fatal): got {detected_headers}. Mapper will normalize.",
+            "confidence": 0.7
+        })
+
+    rows = []
+    has_day = "day" in (detected_headers or [])
+    for idx, row in enumerate(raw_rows, start=2):
+        for flag in STRIP_FLAGS:
+            row.pop(flag, None)
+        if has_day:
+            day_raw = (row.get("day") or "").strip()
+            if not day_raw:
+                quarantine.append({"row_no": idx, "source_file": source_file, "reason": "Missing day", "confidence": 0.3})
+                row["_quarantine_confidence"] = 0.3
+        rows.append(row)
     return rows
 
 def load_people_directory(data_dir: Path, quarantine: List[Dict]) -> Dict:

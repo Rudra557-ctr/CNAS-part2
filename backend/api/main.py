@@ -798,11 +798,46 @@ def inv_process(iid: str, user: dict = Depends(get_current_user)):
         else:
             # unknown type → treat as firs-like
             inv_datasets["firs"].extend(normed)
-    # Ensure people_directory exists — if not uploaded, reuse default synthetic for demo (fast path)
+    # Real-data day axis: demo files carry story days (1-90, anchored 2026-01-01),
+    # but authorized real exports carry calendar dates far outside that window
+    # (_to_day returns None). Rebase those onto a case-relative axis
+    # (earliest observed timestamp = day 1) so bursts/timeline work on real cases.
+    # Demo rows already have valid days and are untouched.
+    try:
+        from datetime import datetime as _dt
+        _ts_fields = ["timestamp", "date"]
+        _dated = []
+        for _k, _rows in inv_datasets.items():
+            if not isinstance(_rows, list):
+                continue
+            for _r in _rows:
+                if _r.get("day") not in (None, ""):
+                    continue
+                for _tf in _ts_fields:
+                    _raw = str(_r.get(_tf) or "").strip()
+                    if not _raw:
+                        continue
+                    try:
+                        _parsed = _dt.fromisoformat(_raw.replace(" ", "T").split(".")[0])
+                    except Exception:
+                        continue
+                    if _parsed.year >= 2000:
+                        _dated.append((_r, _parsed))
+                        break
+        if _dated:
+            _min = min(_d for _, _d in _dated)
+            for _r, _d in _dated:
+                _r["day"] = (_d - _min).days + 1
+            quarantine.append({"row_no": 0, "source_file": "day_rebase",
+                               "reason": f"Rebased {len(_dated)} rows onto case-relative days (day 1 = {_min.date()})",
+                               "confidence": 0.8})
+    except Exception as _e:
+        print(f"Day rebase skipped: {_e}")
+    # Ensure people_directory exists — bootstrap from uploaded data only.
+    # (Never inherit the synthetic demo directory: a real case must contain
+    # only entities observed in its own uploads, plus AUTO-bootstrapped profiles.)
     if not inv_datasets["people_directory"].get("network_people"):
-        import json as js
-        default_pd = js.loads((DATA_DIR / "people_directory.json").read_text())
-        inv_datasets["people_directory"] = default_pd
+        inv_datasets["people_directory"] = {"network_people": [], "noise_people": []}
     # Pillar 3.E — autonomous entity bootstrapping (plan line 115): backfill
     # suspect profiles from phones/accounts/names seen in messy uploads.
     try:
@@ -1051,7 +1086,7 @@ def get_structuring(iid: Optional[str] = Query(None), user: dict = Depends(get_c
 @app.get("/communities")
 def get_communities(filter_bridges: bool = True, iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    comms = detect_communities(filter_bridges=filter_bridges)
+    comms = detect_communities(filter_bridges=filter_bridges, graph_serial=serial if iid else None)
     audit_log(f"/communities?filter_bridges={filter_bridges}", [str(c["community_id"]) for c in comms])
     return comms
 

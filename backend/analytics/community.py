@@ -24,17 +24,33 @@ from backend.config import NEO4J_DATABASE
 
 BRIDGE_IDS = {"X1","X2","X3","X4"}
 
-def communities_networkx(filter_bridges: bool = True) -> List[Dict]:
-    pkl = PROJECT_ROOT / "output" / "graph.pkl"
-    if not pkl.exists() or not HAS_NX:
+def communities_networkx(filter_bridges: bool = True, graph_serial: Dict = None) -> List[Dict]:
+    # Optional per-case serial (investigation scope). Defaults to the global
+    # demo graph pickle when omitted — existing callers unaffected.
+    if not HAS_NX:
         return []
-    with open(pkl, "rb") as f:
-        G = pickle.load(f)
+    node_kind = {}
+    person_edges = []
+    if graph_serial and graph_serial.get("nodes"):
+        for n in graph_serial["nodes"]:
+            node_kind[n["id"]] = (n.get("kind"), n.get("cell"))
+        person_edges = [(e["src"], e["dst"]) for e in graph_serial.get("edges", [])
+                        if e.get("kind") in ("CALLED", "TRANSACTED")]
+    else:
+        pkl = PROJECT_ROOT / "output" / "graph.pkl"
+        if not pkl.exists():
+            return []
+        with open(pkl, "rb") as f:
+            G = pickle.load(f)
+        for nid, attrs in G.nodes(data=True):
+            node_kind[nid] = (attrs.get("kind"), attrs.get("cell"))
+        for u, v, data in G.edges(data=True):
+            if data.get("kind") not in ("CALLED", "TRANSACTED"):
+                continue
+            person_edges.append((u, v))
     H = nx.Graph()
-    for u, v, data in G.edges(data=True):
-        if data.get("kind") not in ("CALLED","TRANSACTED"):
-            continue
-        if G.nodes[u].get("kind")!="Person" or G.nodes[v].get("kind")!="Person":
+    for u, v in person_edges:
+        if node_kind.get(u, (None, None))[0] != "Person" or node_kind.get(v, (None, None))[0] != "Person":
             continue
         if filter_bridges and (u in BRIDGE_IDS or v in BRIDGE_IDS):
             continue
@@ -50,7 +66,7 @@ def communities_networkx(filter_bridges: bool = True) -> List[Dict]:
     for idx, comm in enumerate(comms):
         comm = list(comm)
         # majority cell
-        cells = [G.nodes[n].get("cell") for n in comm]
+        cells = [node_kind.get(n, (None, "Unknown"))[1] for n in comm]
         cnt = Counter(cells)
         dominant, _ = cnt.most_common(1)[0] if cnt else ("Unknown",0)
         res.append({"community_id": idx, "members": comm, "size": len(comm), "dominant_cell": dominant, "cell_breakdown": dict(cnt)})
@@ -106,7 +122,10 @@ def communities_neo4j(filter_bridges: bool = True) -> List[Dict]:
         print(f"[community] neo4j error {e}")
         return []
 
-def detect_communities(filter_bridges: bool = True) -> List[Dict]:
+def detect_communities(filter_bridges: bool = True, graph_serial: Dict = None) -> List[Dict]:
+    # Per-case serial bypasses Neo4j (global-only) and runs on the given graph.
+    if graph_serial is not None:
+        return communities_networkx(filter_bridges, graph_serial)
     if is_available():
         rows = communities_neo4j(filter_bridges)
         if rows:

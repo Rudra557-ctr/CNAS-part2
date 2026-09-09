@@ -30,20 +30,68 @@ except ImportError:
 
 from backend.config import DATA_DIR
 
-# Regex patterns — synthetic data uses obviously fake blocks
-PHONE_RE = re.compile(r"70000\d{5}")
-ACCOUNT_RE = re.compile(r"AC0009\d{6}")
-VEHICLE_RE = re.compile(r"MH-DEMO-\d{4}")
-# Indian-style phone generic fallback (if phonenumbers unavailable)
-GENERIC_PHONE_RE = re.compile(r"\+?91[\s-]?[6-9]\d{9}|\b70000\d{5}\b")
+# ---------------------------------------------------------------------------
+# Regex patterns — support BOTH synthetic demo data AND real authorized data
+# ---------------------------------------------------------------------------
 
-# Location list from generate_dataset.py
+# Real Indian mobile numbers: +91-9876543210, 09876543210, 9876543210
+# Also matches synthetic demo numbers (70000xxxxx) for backward compatibility
+PHONE_RE = re.compile(
+    r'(?:(?:\+|00)91[\s\-]?)?[6-9]\d{9}\b'   # real Indian mobiles
+    r'|\b70000\d{5}\b'                          # synthetic fallback
+)
+
+# Real Indian bank accounts: IFSC-prefixed (HDFC0001234567890),
+# pure numeric (SBI 11-17 digit), or synthetic AC0009xxxxxx
+ACCOUNT_RE = re.compile(
+    r'\b[A-Z]{4}0\d{6,15}\b'   # IFSC-style (real)
+    r'|\b\d{11,17}\b'           # pure numeric account (real)
+    r'|AC0009\d{6}'             # synthetic fallback
+)
+
+# Real Indian vehicle registration: MH-12-AB-1234, DL-01-CAB-0001
+# Also matches synthetic MH-DEMO-xxxx
+VEHICLE_RE = re.compile(
+    r'\b[A-Z]{2}[\s\-]?\d{1,2}[\s\-]?[A-Z]{1,3}[\s\-]?\d{4}\b'
+)
+
+# Indian-style phone generic fallback (if phonenumbers unavailable)
+GENERIC_PHONE_RE = re.compile(
+    r'(?:(?:\+|00)91[\s\-]?)?[6-9]\d{9}\b|\b70000\d{5}\b'
+)
+
+# Synthetic-data location list kept for backward compatibility with demo data.
+# For real authorized data, location extraction uses spaCy GPE entities (below).
 KNOWN_LOCATIONS = ["Dockside Ward", "Old Market Circle", "Riverside Colony",
                    "Industrial Estate Road", "Central Junction", "Eastgate",
                    "Hilltop Society", "Station Road", "New Colony",
                    "Warehouse District", "North Bypass", "Lakeview Chowk"]
 
 LOCATION_RE = re.compile("|".join(re.escape(l) for l in KNOWN_LOCATIONS))
+
+
+def extract_locations_from_text(text: str) -> list:
+    """
+    Extract locations from free text using two-pass strategy:
+    1. Regex match against KNOWN_LOCATIONS (synthetic demo data)
+    2. spaCy GPE/LOC/FAC NER (real authorized data — any location name)
+    Returns deduplicated list of location strings.
+    """
+    found = set()
+    # Pass 1: synthetic known locations
+    for m in LOCATION_RE.finditer(text):
+        found.add(m.group(0))
+    # Pass 2: spaCy NER for real location names
+    nlp = get_nlp()
+    if nlp and text:
+        try:
+            doc = nlp(text[:5000])  # cap to avoid timeout on long documents
+            for ent in doc.ents:
+                if ent.label_ in ("GPE", "LOC", "FAC"):
+                    found.add(ent.text.strip())
+        except Exception:
+            pass
+    return list(found)
 
 _nlp = None
 def get_nlp():
@@ -169,10 +217,11 @@ def extract_unstructured_entities(datasets: Dict, known_people_names: List[str] 
         for m in VEHICLE_RE.finditer(text):
             snip = snippet_for(m.group(), text, m.start(), m.end())
             entities.append({"entity_type": "Vehicle", "value": m.group(), "canonical_id": m.group(), "source_id": source_id, "source_type": source_type, "day": day, "confidence": 0.95, "raw_text": m.group(), "evidence_snippet": snip, "evidence_hash": _hash_evidence(snip), "extractor": "regex_vehicle"})
-        for loc in KNOWN_LOCATIONS:
-            if loc in text:
-                snip = snippet_for(loc, text)
-                entities.append({"entity_type": "Location", "value": loc, "canonical_id": loc, "source_id": source_id, "source_type": source_type, "day": day, "confidence": 0.85, "raw_text": loc, "evidence_snippet": snip, "evidence_hash": _hash_evidence(snip), "extractor": "regex_location"})
+        # Real-location extraction: synthetic gazetteer + spaCy GPE/LOC/FAC
+        # (handles real authorized data — any location name, not just demo wards)
+        for loc in extract_locations_from_text(text):
+            snip = snippet_for(loc, text)
+            entities.append({"entity_type": "Location", "value": loc, "canonical_id": loc, "source_id": source_id, "source_type": source_type, "day": day, "confidence": 0.85, "raw_text": loc, "evidence_snippet": snip, "evidence_hash": _hash_evidence(snip), "extractor": "regex_location"})
 
         # 2. spaCy NER for PERSON / ORG / GPE if available — Task2: add evidence snippet + hash + extractor
         if nlp:
@@ -270,9 +319,13 @@ def extract_relationships(datasets: Dict) -> List[Dict]:
     """
     rels = []
     for row in datasets.get("cdrs", []):
-        snippet = f"{row.get('caller_name')} -> {row.get('callee_name')} day{row.get('day')} tower {row.get('cell_tower_location')}"
+        caller = row.get("caller_id") or row.get("caller_phone")
+        callee = row.get("callee_id") or row.get("callee_phone")
+        cname = row.get("caller_name") or caller or "?"
+        dname = row.get("callee_name") or callee or "?"
+        snippet = f"{cname} -> {dname} day{row.get('day')} tower {row.get('cell_tower_location')}"
         rels.append({
-            "src": row.get("caller_id"), "dst": row.get("callee_id"),
+            "src": caller, "dst": callee,
             "kind": "CALLED", "source": row.get("call_id"), "source_type": "cdr",
             "day": row.get("day"), "timestamp": row.get("timestamp"),
             "confidence": 1.0 if row.get("caller_id") and row.get("callee_id") else 0.5,
@@ -282,16 +335,46 @@ def extract_relationships(datasets: Dict) -> List[Dict]:
             "meta": {"duration_sec": row.get("duration_sec"), "tower": row.get("cell_tower_location"), "call_type": row.get("call_type")}
         })
     for row in datasets.get("transactions", []):
-        snippet = f"{row.get('sender_name')} -> {row.get('receiver_name')} INR{row.get('amount_inr')} {row.get('txn_type')}"
+        # Real bank exports carry accounts, not person IDs (normalizer fills UNK ids).
+        # Fall back to account-node endpoints so the money trail still graphs;
+        # persons attach via OWNS_ACCOUNT edges from bootstrapping.
+        sid = row.get("sender_id")
+        rid = row.get("receiver_id")
+        sacc = (row.get("sender_account") or "").strip()
+        racc = (row.get("receiver_account") or "").strip()
+        if (not sid or str(sid).startswith("UNK")) and sacc:
+            sid = f"ACCT_{sacc}"
+        if (not rid or str(rid).startswith("UNK")) and racc:
+            rid = f"ACCT_{racc}"
+        sname = row.get("sender_name") or (sid if sid and not str(sid).startswith("UNK") else sacc) or "?"
+        rname = row.get("receiver_name") or (rid if rid and not str(rid).startswith("UNK") else racc) or "?"
+        snippet = f"{sname} -> {rname} INR{row.get('amount_inr')} {row.get('txn_type')}"
         rels.append({
-            "src": row.get("sender_id"), "dst": row.get("receiver_id"),
+            "src": sid, "dst": rid,
             "kind": "TRANSACTED", "source": row.get("txn_id"), "source_type": "transaction",
             "day": row.get("day"), "timestamp": row.get("timestamp"),
-            "confidence": 1.0,
+            "confidence": 1.0 if row.get("sender_id") and row.get("receiver_id") else 0.7,
             "supporting_text": snippet,
             "evidence_hash": _hash_rel(snippet),
             "extractor": "txn_structured",
             "meta": {"amount": row.get("amount_inr"), "txn_type": row.get("txn_type")}
+        })
+    # CDR tower co-location: caller observed at tower (drives Location nodes + hotspots)
+    for row in datasets.get("cdrs", []):
+        tower = (row.get("cell_tower_location") or "").strip()
+        if not tower or tower == "Unknown":
+            continue
+        who = row.get("caller_id") or row.get("caller_phone")
+        if not who:
+            continue
+        snippet = f"{who} observed at {tower} day{row.get('day')} ({row.get('call_id')})"
+        rels.append({
+            "src": who, "dst": tower,
+            "kind": "LOCATED_AT", "source": row.get("call_id"), "source_type": "cdr",
+            "day": row.get("day"), "timestamp": row.get("timestamp"),
+            "confidence": 0.9, "supporting_text": snippet, "evidence_hash": _hash_rel(snippet),
+            "extractor": "cdr_tower",
+            "meta": {"tower": tower}
         })
     # Structured LOCATED_AT
     for row in datasets.get("firs", []):

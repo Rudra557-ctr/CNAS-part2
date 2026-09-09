@@ -2,7 +2,7 @@
 Format + Dataset Type + Schema Detection (Task-agnostic).
 
 Pillar 3 — Universal Dataset Compatibility & Fault-Tolerant Ingestion:
-- Multi-encoding sniffer: utf-8-sig -> utf-8 -> latin-1 -> cp1252 -> iso-8859-1
+- Multi-encoding sniffer: utf-8-sig -> utf-8 -> cp1252 -> latin-1 -> iso-8859-1
 - Delimiter sniffing: comma, semicolon, tab, pipe
 - Handlers: CSV, TSV/TXT/LOG (table vs free-text), multi-sheet XLSX/XLS,
   JSON, Word DOCX + legal PDFs (paragraph/FIR extraction), ZIP contents
@@ -30,7 +30,11 @@ SUPPORTED_FORMATS = {
 }
 
 # Pillar 3.B — encoding trial order (plan line 101)
-ENCODING_SEQUENCE = ["utf-8-sig", "utf-8", "latin-1", "cp1252", "iso-8859-1"]
+# NOTE: cp1252 precedes latin-1 deliberately. latin-1 never raises (it maps
+# every byte), so Windows exports containing 0x80-0x9F glyphs (en-dash etc.)
+# would otherwise decode as control characters. cp1252 is a strict superset
+# for real-world files, so nothing that decoded before breaks.
+ENCODING_SEQUENCE = ["utf-8-sig", "utf-8", "cp1252", "latin-1", "iso-8859-1"]
 
 # Pillar 3.B — delimiter candidates (plan line 102)
 DELIMITERS = [",", ";", "\t", "|"]

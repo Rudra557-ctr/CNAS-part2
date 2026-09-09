@@ -68,7 +68,7 @@ ALIASES = {
                      "callee_msisdn", "called_party", "terminating_number", "to_number",
                      "callee_mobile", "destination_mobile", "destination"],
     "timestamp": ["timestamp", "event_time", "call_time", "date_time", "datetime", "time",
-                  "event time", "call_datetime", "start_time", "call_date", "date", "cdr_date"],
+                  "event time", "call_datetime", "start_time", "date", "cdr_datetime"],
     "day": ["day", "day_number", "daynum", "day_no", "day_count"],
     "call_type": ["call_type", "type", "category", "call_category", "call_class"],
     "duration_sec": ["duration_sec", "duration", "call_duration", "duration_seconds",
@@ -78,7 +78,7 @@ ALIASES = {
                             "lac_cell", "cgi", "tower_address", "coverage_area"],
     # ---- transactions ----
     "txn_id": ["txn_id", "transaction_id", "id", "trans_id", "txn_no", "ref_no", "utr",
-               "reference", "reference_no", "transaction_ref"],
+               "utr_no", "utr_number", "reference", "reference_no", "transaction_ref"],
     "sender_id": ["sender_id", "sender", "from_id", "source_id", "payer_id", "remitter",
                   "remitter_id", "debit_id", "originator", "payer", "from_account_id"],
     "sender_name": ["sender_name", "sender", "from_name", "payer_name", "remitter",
@@ -104,7 +104,9 @@ ALIASES = {
     "fir_id": ["fir_id", "case_id", "id", "report_id", "fir id", "fir_no", "fir_number",
                "case_no", "case_number", "crime_no", "complaint_no"],
     "date": ["date", "timestamp", "event_time", "incident_date", "date_of_incident",
-             "fir_date", "report_date", "occurrence_date", "incident_time"],
+             "fir_date", "report_date", "occurrence_date", "incident_time",
+             "call_date", "cdr_date", "value_date", "txn_date", "transaction_date",
+             "calldate", "valuedate"],
     "station": ["station", "police_station", "station_name", "ps", "thana", "police_chowki",
                 "outpost", "reporting_station"],
     "location": ["location", "place", "area", "ward", "site", "spot", "venue",
@@ -190,8 +192,8 @@ def suggest_mapping(columns: List[str], detected_type: str) -> Dict[str, str]:
     """
     # Build target set for this type (must cover every REQUIRED field)
     targets_by_type = {
-        "cdrs": ["call_id","caller_id","caller_name","caller_phone","callee_id","callee_name","callee_phone","timestamp","day","call_type","duration_sec","cell_tower_location"],
-        "transactions": ["txn_id","sender_id","sender_name","sender_account","receiver_id","receiver_name","receiver_account","amount_inr","timestamp","day","txn_type"],
+        "cdrs": ["call_id","caller_id","caller_name","caller_phone","callee_id","callee_name","callee_phone","timestamp","date","day","call_type","duration_sec","cell_tower_location"],
+        "transactions": ["txn_id","sender_id","sender_name","sender_account","receiver_id","receiver_name","receiver_account","amount_inr","timestamp","date","day","txn_type"],
         "firs": ["fir_id","date","day","station","location","ipc_sections","narrative","accused_name","complainant_name"],
         "social_posts": ["post_id","handle","person_id","timestamp","day","location_tag","post_text","hashtags"],
         "criminal_history": ["record_id","person_id","name","alias","dob","prior_offences","gang_affiliation","known_address"],

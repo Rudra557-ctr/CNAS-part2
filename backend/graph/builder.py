@@ -107,14 +107,17 @@ def build_in_memory_graph(datasets: Dict, entities: List[Dict], relationships: L
         src_resolved = mention_map.get(src, src)
         dst_resolved = mention_map.get(dst, dst)
         # Only add edge if both nodes exist (or create placeholder for missing like Location strings)
+        _is_located = rel.get("kind") == "LOCATED_AT"
         if not G.has_node(src_resolved):
-            # Locations / FIRs may appear as dst strings — create if needed
-            if isinstance(src_resolved, str) and ("Ward" in src_resolved or "Colony" in src_resolved or "Road" in src_resolved):
+            # Locations / FIRs may appear as dst strings — create if needed.
+            # Besides the synthetic Ward/Colony/Road heuristic, any LOCATED_AT
+            # endpoint is a real location (authorized-data tower addresses etc.)
+            if _is_located or (isinstance(src_resolved, str) and ("Ward" in src_resolved or "Colony" in src_resolved or "Road" in src_resolved)):
                 G.add_node(src_resolved, label=src_resolved, kind="Location", cell="Location")
             else:
                 continue
         if not G.has_node(dst_resolved):
-            if isinstance(dst_resolved, str) and ("Ward" in dst_resolved or "Colony" in dst_resolved or "Road" in dst_resolved):
+            if _is_located or (isinstance(dst_resolved, str) and ("Ward" in dst_resolved or "Colony" in dst_resolved or "Road" in dst_resolved)):
                 G.add_node(dst_resolved, label=dst_resolved, kind="Location", cell="Location")
             else:
                 continue

@@ -21,3 +21,6 @@ tmp/
 audit.jsonl
 data/investigations/*
 !data/investigations/.gitkeep
+
+# Frontend build output (regenerate with `npm run build` in ui/)
+ui/dist/
