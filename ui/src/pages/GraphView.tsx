@@ -4,11 +4,12 @@ import ForceGraph2D from 'react-force-graph-2d'
 import {
   fetchGraph, fetchWhy, fetchCommunities, fetchBridges,
   fetchInvGraph, fetchInvWhy, fetchInvCommunities,
+  patchEntity, mergeEntities, fetchEntityHistory,
 } from '../api/client'
 import type { GraphData, GraphNode, GraphEdge, Community } from '../types'
 import {
   X, ZoomIn, ZoomOut, RefreshCw, Info, FileText, Hash,
-  Users, Maximize, Minimize,
+  Users, Maximize, Minimize, Pencil, History, GitMerge,
 } from 'lucide-react'
 
 // Node colour by type (Palantir colour convention, matches previous UI)
@@ -73,6 +74,7 @@ export default function GraphView() {
   const [selected,  setSelected]    = useState<GraphNode | null>(null)
   const [selEdge,   setSelEdge]     = useState<GraphEdge | null>(null)
   const [whySignals, setWhySignals] = useState<string[]>([])
+  const [history,   setHistory]     = useState<any[]>([])
   const [loading,   setLoading]     = useState(true)
   const [loadError, setLoadError]   = useState('')
   const [filter,    setFilter]      = useState<string>('all')
@@ -87,6 +89,7 @@ export default function GraphView() {
     sessionStorage.removeItem('caseId'); sessionStorage.removeItem('caseName')
     setCaseId(null); setCaseName('')
     setSelected(null); setSelEdge(null); setActiveComm(null); setFocus(null)
+    setHistory([]); setEditMode(false); setMergeArmed(false)
     setGraphData(null); setCommunities([]); setCommLoaded(false); setBridges(new Set())
     fitted.current = false
   }
@@ -96,6 +99,16 @@ export default function GraphView() {
   const [communities, setCommunities] = useState<Community[]>([])
   const [commLoaded, setCommLoaded] = useState(false)
   const [activeComm, setActiveComm] = useState<string | number | null>(null)
+
+  // ── Curation (edit / merge) state ───────────────────────────────────────────
+  const [editMode, setEditMode] = useState(false)
+  const [editVals, setEditVals] = useState({ label: '', role: '', cell: '' })
+  const [editBusy, setEditBusy] = useState(false)
+  const [editErr,  setEditErr]  = useState('')
+  const [mergeTarget, setMergeTarget] = useState('')
+  const [mergeArmed,  setMergeArmed]  = useState(false)
+  const [mergeMsg,    setMergeMsg]    = useState('')
+  const [actionMsg,   setActionMsg]   = useState('')
 
   // ── 1-hop / 2-hop focus ───────────────────────────────────────────────────
   const [focus, setFocus] = useState<{ id: string; hops: number } | null>(null)
@@ -115,11 +128,64 @@ export default function GraphView() {
     setSelected(node)
     setSelEdge(null)
     setWhySignals([])
-    const cid = sessionStorage.getItem('caseId')
+    setHistory([])
+    setEditMode(false); setEditErr(''); setMergeArmed(false); setMergeMsg(''); setActionMsg('')
+    const cid = sessionStorage.getItem('caseId') || undefined
     const p = cid ? fetchInvWhy(cid, node.id) : fetchWhy(node.id)
     p.then(r => setWhySignals(r.data.top_signals || []))
      .catch(() => setWhySignals([]))
+    const h = fetchEntityHistory(node.id, cid)
+    h.then(r => setHistory(r.data.events || []))
+     .catch(() => setHistory([]))
   }, [])
+
+  // Reload graph data and (re)select one node — used after curation writes.
+  const refreshAndSelect = async (id: string | null) => {
+    const cid = sessionStorage.getItem('caseId')
+    setLoading(true)
+    try {
+      const { data } = cid ? await fetchInvGraph(cid) : await fetchGraph()
+      setGraphData(data)
+      if (id) {
+        const n = (data.nodes || []).find((x: GraphNode) => x.id === id)
+        if (n) selectNode(n)
+        else { setSelected(null); setActionMsg(`Entity ${id} is no longer on the canvas.`) }
+      }
+    } catch (e) { console.error(e) }
+    finally { setLoading(false) }
+  }
+
+  const saveEdits = async () => {
+    if (!selected) return
+    const cid = sessionStorage.getItem('caseId') || undefined
+    setEditBusy(true); setEditErr('')
+    try {
+      const orig = { label: selected.label || '', role: selected.role || '', cell: selected.cell || '' }
+      for (const f of ['label', 'role', 'cell'] as const) {
+        const v = editVals[f].trim()
+        if (v && v !== orig[f]) await patchEntity(selected.id, f, v, cid)
+      }
+      setEditMode(false)
+      await refreshAndSelect(selected.id)
+    } catch (e: any) {
+      setEditErr(e.response?.data?.detail || 'Save failed.')
+    } finally { setEditBusy(false) }
+  }
+
+  const runMerge = async () => {
+    if (!selected || !mergeTarget.trim()) return
+    if (!mergeArmed) { setMergeArmed(true); setMergeMsg(''); return }
+    const cid = sessionStorage.getItem('caseId') || undefined
+    setMergeMsg('')
+    try {
+      await mergeEntities(mergeTarget.trim(), selected.id, cid)
+      setMergeArmed(false); setMergeTarget('')
+      await refreshAndSelect(mergeTarget.trim())
+    } catch (e: any) {
+      setMergeMsg(e.response?.data?.detail || 'Merge failed.')
+      setMergeArmed(false)
+    }
+  }
 
   // ── Load graph (+ bridges for gold links) ───────────────────────────────────
   const loadGraph = useCallback(async () => {
@@ -283,6 +349,7 @@ export default function GraphView() {
     selectNode({
       id: String(n.id), label: n.name || n.label || String(n.id),
       kind: n.kind, cell: n.cell, role: n.role, risk_score: n.risk_score,
+      analyst_edited: n.analyst_edited, analyst_override: n.analyst_override,
     })
   }
 
@@ -295,7 +362,10 @@ export default function GraphView() {
     setSelected(null); setWhySignals([])
   }
 
-  const clearSel = () => { setSelected(null); setSelEdge(null); setWhySignals([]); setFocus(null) }
+  const clearSel = () => {
+    setSelected(null); setSelEdge(null); setWhySignals([]); setFocus(null)
+    setHistory([]); setEditMode(false); setEditErr(''); setMergeArmed(false); setMergeMsg(''); setActionMsg('')
+  }
 
   const kinds = ['all', 'person', 'phone', 'account', 'location', 'vehicle']
   // `any`: 2D and 3D components accept the shared props used below.
@@ -514,11 +584,56 @@ export default function GraphView() {
               />
               <div>
                 <h3 className="text-base font-bold text-gov-ink">{selected.label}</h3>
-                <span className={`badge-${(selected.kind || 'person').toLowerCase()} mt-1 inline-block`}>
-                  {selected.kind}
+                <span className="flex items-center gap-1.5 mt-1 flex-wrap">
+                  <span className={`badge-${(selected.kind || 'person').toLowerCase()} inline-block`}>
+                    {selected.kind}
+                  </span>
+                  {selected.analyst_edited && (
+                    <span className="gov-tag bg-amber-50 text-amber-700 border-amber-200">Analyst-edited</span>
+                  )}
                 </span>
               </div>
             </div>
+            <div className="flex gap-2 -mt-2">
+              <button
+                onClick={() => {
+                  setEditMode(m => !m); setEditErr('')
+                  setEditVals({ label: selected.label || '', role: selected.role || '', cell: selected.cell || '' })
+                }}
+                className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5"
+              >
+                <Pencil size={12} /> {editMode ? 'Cancel edit' : 'Edit entity'}
+              </button>
+            </div>
+            {actionMsg && (
+              <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">{actionMsg}</p>
+            )}
+            {editMode && (
+              <div className="gov-well p-3 space-y-2">
+                <div>
+                  <label className="text-[11px] font-semibold text-gov-muted">Display name</label>
+                  <input className="gov-input mt-0.5" value={editVals.label}
+                    onChange={e => setEditVals(v => ({ ...v, label: e.target.value }))} />
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="text-[11px] font-semibold text-gov-muted">Role</label>
+                    <input className="gov-input mt-0.5" value={editVals.role}
+                      onChange={e => setEditVals(v => ({ ...v, role: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label className="text-[11px] font-semibold text-gov-muted">Cell</label>
+                    <input className="gov-input mt-0.5" value={editVals.cell}
+                      onChange={e => setEditVals(v => ({ ...v, cell: e.target.value }))} />
+                  </div>
+                </div>
+                {editErr && <p className="text-[11px] text-gov-red">{editErr}</p>}
+                <button onClick={saveEdits} disabled={editBusy} className="gov-btn w-full justify-center py-1.5 disabled:opacity-50">
+                  {editBusy ? 'Saving…' : 'Save changes'}
+                </button>
+                <p className="text-[10px] text-gov-faint">Edits layer over source data — originals are never modified.</p>
+              </div>
+            )}
             <button onClick={() => { setSelected(null); setWhySignals([]) }} className="text-gov-faint hover:text-gov-ink">
               <X size={16} />
             </button>
@@ -551,6 +666,37 @@ export default function GraphView() {
             <button onClick={() => setFocus({ id: selected.id, hops: 2 })} className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5">2-Hop</button>
           </div>
 
+          <div className="gov-well p-3 space-y-2">
+            <p className="text-xs font-semibold text-gov-muted flex items-center gap-1.5">
+              <GitMerge size={12} /> Merge duplicate into…
+            </p>
+            <div className="flex gap-2">
+              <input
+                className="gov-input flex-1 font-mono !py-1.5"
+                placeholder="Keep ID, e.g. N6"
+                value={mergeTarget}
+                onChange={e => { setMergeTarget(e.target.value); setMergeArmed(false); setMergeMsg('') }}
+              />
+              <button
+                onClick={runMerge}
+                disabled={!mergeTarget.trim()}
+                className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-colors disabled:opacity-50 flex-shrink-0 ${
+                  mergeArmed
+                    ? 'bg-gov-red text-white border-gov-red'
+                    : 'bg-white text-gov-ink border-gov-border hover:border-gov-navy'
+                }`}
+              >
+                {mergeArmed ? 'Confirm?' : 'Merge'}
+              </button>
+            </div>
+            {mergeArmed && (
+              <p className="text-[11px] text-amber-700">
+                {selected.id} will be absorbed into {mergeTarget.trim()}. Its links re-point; the record stays in history.
+              </p>
+            )}
+            {mergeMsg && <p className="text-[11px] text-gov-red">{mergeMsg}</p>}
+          </div>
+
           {whySignals.length > 0 && (
             <div>
               <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
@@ -561,6 +707,37 @@ export default function GraphView() {
               </ul>
             </div>
           )}
+
+          <div>
+            <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
+              <History size={11} /> Curation history
+            </p>
+            {history.length === 0 ? (
+              <p className="text-[11px] text-gov-faint">No analyst edits yet — machine values.</p>
+            ) : (
+              <div className="space-y-1.5">
+                {history.map((h, i) => (
+                  <div key={i} className="gov-well px-3 py-2 text-[11px]">
+                    {h.kind === 'override' ? (
+                      <p className="text-gov-ink">
+                        <span className="font-mono font-semibold">{h.field}</span>
+                        {': '}{String(h.old_value ?? '—')} → <b>{String(h.new_value)}</b>
+                      </p>
+                    ) : (
+                      <p className="text-gov-ink">
+                        {h.drop_id === selected.id
+                          ? <>Absorbed into <b className="font-mono">{h.keep_id}</b></>
+                          : <>Absorbed <b className="font-mono">{h.drop_id}</b></>}
+                      </p>
+                    )}
+                    <p className="text-gov-faint font-mono mt-0.5">
+                      {h.updated_by || h.merged_by} · {new Date(h.updated_at || h.merged_at).toLocaleString('en-IN')}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       ) : activeComm != null ? (
         <div className={`w-72 gov-card p-4 overflow-y-auto space-y-3 ${fullscreen ? 'hidden' : ''}`}>

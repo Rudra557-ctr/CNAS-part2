@@ -919,7 +919,7 @@ def inv_graph(iid: str, day: Optional[int] = Query(None, ge=1, le=90), user: dic
     if not out.exists():
         raise HTTPException(status_code=404, detail="Not processed")
     import json as js
-    serial = js.loads(out.read_text())
+    serial = apply_overrides(js.loads(out.read_text()), scope_dir_for(iid))
     nodes, edges = serial["nodes"], serial["edges"]
     if day is not None:
         filtered_edges = [e for e in edges if e.get("day") is None or (isinstance(e.get("day"), int) and e["day"] <= day and e["day"] >= day-6)]
@@ -1008,7 +1008,7 @@ def stats(user: dict = Depends(get_current_user)):
 
 @app.get("/graph")
 def get_graph(day: Optional[int] = Query(None, ge=1, le=90, description="Day filter 1-90, story slice 50-70"), user: dict = Depends(CAN_VIEW_GRAPH)):
-    serial = load_graph_serial()
+    serial = apply_overrides(load_graph_serial(), scope_dir_for(None))
     if not serial["nodes"]:
         raise HTTPException(status_code=503, detail="Graph not built yet — run: python -m backend.loader --clean && python -m backend.graph.builder")
     nodes = serial["nodes"]
@@ -1363,12 +1363,16 @@ def get_inv_geo_hotspots_endpoint(iid: str, user: dict = Depends(get_current_use
 @app.get("/why/{entity_id}")
 def why_flagged(entity_id: str, iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
     import json as js
+    scope = scope_dir_for(iid)
+    merged_to = drop_target_of(scope, entity_id)
+    if merged_to:
+        raise HTTPException(status_code=410, detail=f"{entity_id} was merged into {merged_to} by an analyst — see /entity/{merged_to}/history")
     if iid and (INV_ROOT / iid / "output" / "graph.json").exists():
-        serial = js.loads((INV_ROOT / iid / "output" / "graph.json").read_text())
+        serial = apply_overrides(js.loads((INV_ROOT / iid / "output" / "graph.json").read_text()), scope)
         full_ds_path = INV_ROOT / iid / "mapped" / "full_datasets.json"
         datasets = js.loads(full_ds_path.read_text()) if full_ds_path.exists() else {}
     else:
-        serial = load_graph_serial()
+        serial = apply_overrides(load_graph_serial(), scope)
         datasets, _ = load_all(DATA_DIR)
 
     node = next((n for n in serial["nodes"] if n["id"]==entity_id), None)
@@ -1464,6 +1468,72 @@ def why_flagged(entity_id: str, iid: Optional[str] = Query(None), user: dict = D
         "sources": sources[:8],
         "disclaimer": "Potential investigative lead — not a guilt determination. Trace to source records above."
     }
+
+# -------------------------------------------------------------
+# Analyst curation (Gotham Browser-lite): property overrides + merges.
+# Writes require CAN_UPLOAD; reads are open to all authenticated roles.
+# Scope: global demo graph by default, per-case via ?iid=. Overrides never
+# mutate source files or built graphs — they layer on at serve time.
+# -------------------------------------------------------------
+from backend.graph.overrides import (
+    OVERRIDABLE_FIELDS, scope_dir_for, add_override, add_merge,
+    drop_target_of, history_for, apply_overrides,
+)
+
+def _curation_serial(iid: Optional[str] = None):
+    """Load the (un-curated) serial + scope dir for global or case scope."""
+    import json as js
+    if iid:
+        out = INV_ROOT / iid / "output" / "graph.json"
+        if not out.exists():
+            raise HTTPException(status_code=404, detail="Case has no built graph — run analysis first")
+        return js.loads(out.read_text()), scope_dir_for(iid)
+    return load_graph_serial(), scope_dir_for(None)
+
+class EntityPatchRequest(BaseModel):
+    field: str
+    value: str
+
+class EntityMergeRequest(BaseModel):
+    keep_id: str
+    drop_id: str
+
+@app.patch("/entity/{entity_id}")
+def patch_entity(entity_id: str, payload: EntityPatchRequest,
+                 iid: Optional[str] = Query(None), user: dict = Depends(CAN_UPLOAD)):
+    if payload.field not in OVERRIDABLE_FIELDS:
+        raise HTTPException(status_code=400, detail=f"Field must be one of {sorted(OVERRIDABLE_FIELDS)}")
+    serial, scope = _curation_serial(iid)
+    if drop_target_of(scope, entity_id):
+        raise HTTPException(status_code=410, detail=f"{entity_id} was merged away — edit {drop_target_of(scope, entity_id)} instead")
+    node = next((n for n in serial.get("nodes", []) if n.get("id") == entity_id), None)
+    if not node:
+        raise HTTPException(status_code=404, detail=f"Unknown id {entity_id}")
+    rec = add_override(scope, entity_id, payload.field, node.get(payload.field), payload.value,
+                       user.get("username", "analyst"))
+    audit_log(f"PATCH /entity/{entity_id} {payload.field}={payload.value!r}", [entity_id])
+    return {**rec, "iid": iid}
+
+@app.post("/entity/merge")
+def merge_entities(payload: EntityMergeRequest,
+                   iid: Optional[str] = Query(None), user: dict = Depends(CAN_UPLOAD)):
+    serial, scope = _curation_serial(iid)
+    ids = {n.get("id") for n in serial.get("nodes", [])}
+    for x in (payload.keep_id, payload.drop_id):
+        if x not in ids:
+            raise HTTPException(status_code=404, detail=f"Unknown id {x}")
+    try:
+        rec = add_merge(scope, payload.keep_id, payload.drop_id, user.get("username", "analyst"))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    audit_log(f"POST /entity/merge {payload.drop_id} -> {payload.keep_id}", [payload.keep_id, payload.drop_id])
+    return {**rec, "iid": iid}
+
+@app.get("/entity/{entity_id}/history")
+def entity_history(entity_id: str, iid: Optional[str] = Query(None),
+                   user: dict = Depends(get_current_user)):
+    _, scope = _curation_serial(iid)
+    return {"id": entity_id, "iid": iid, "events": history_for(scope, entity_id)}
 
 # -------------------------------------------------------------
 # Tactical Takedown & Arrest Optimization Simulator

@@ -73,6 +73,19 @@ export const fetchTakedownStrategies = ()    => api.get('/takedown/strategies')
 export const simulateTakedown = (target_ids: string[], freeze_accounts = true) =>
   api.post('/takedown/simulate', { target_ids, freeze_accounts })
 
+// ── Analyst curation (Gotham Browser-lite) ─────────────────────────────────
+//  PATCH /entity/{id} {field, value} — label/cell/role overrides (CAN_UPLOAD)
+//  POST  /entity/merge {keep_id, drop_id} — merge duplicates (CAN_UPLOAD)
+//  GET   /entity/{id}/history — curation events (all roles)
+//  Optional ?iid= scopes to a case; default is the shared graph.
+const _iid = (iid?: string) => (iid ? { iid } : {})
+export const patchEntity = (id: string, field: string, value: string, iid?: string) =>
+  api.patch(`/entity/${encodeURIComponent(id)}`, { field, value }, { params: _iid(iid) })
+export const mergeEntities = (keep_id: string, drop_id: string, iid?: string) =>
+  api.post('/entity/merge', { keep_id, drop_id }, { params: _iid(iid) })
+export const fetchEntityHistory = (id: string, iid?: string) =>
+  api.get(`/entity/${encodeURIComponent(id)}/history`, { params: _iid(iid) })
+
 // ── Connection explainer ───────────────────────────────────────────────────
 // Backend: GET /connections/explain?src=X1&dst=X2 → evidence chain between entities
 export const explainConnection  = (src: string, dst: string) =>

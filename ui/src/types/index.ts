@@ -11,6 +11,8 @@ export interface GraphNode {
   risk_score?: number
   lat?: number
   lng?: number
+  analyst_edited?: boolean
+  analyst_override?: Record<string, { by: string; at: string }>
 }
 
 export interface GraphEdge {
