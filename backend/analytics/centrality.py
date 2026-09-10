@@ -42,7 +42,8 @@ def compute_centrality_networkx(graph_serial: Dict = None, pkl_path: Path = None
             H.add_edge(u, v)
     if len(H.nodes) == 0:
         return []
-    bet = nx.betweenness_centrality(H, normalized=True)
+    k_sample = min(len(H), 150) if len(H) > 300 else None
+    bet = nx.betweenness_centrality(H, k=k_sample, normalized=True, seed=42)
     deg = dict(H.degree())
     deg_cent = nx.degree_centrality(H)
     try:

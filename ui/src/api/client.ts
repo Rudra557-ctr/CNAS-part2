@@ -108,6 +108,7 @@ export const deleteInvestigation = (iid: string) => api.delete(`/investigations/
 export const processInvestigation = (iid: string) => api.post(`/investigations/${iid}/process`)
 export const fetchInvGraph       = (iid: string, day?: number) =>
   api.get(`/investigations/${iid}/graph`, { params: day ? { day } : {} })
+export const fetchInvStats       = (iid: string) => api.get(`/investigations/${iid}/stats`)
 export const fetchInvLeads       = (iid: string) => api.get(`/investigations/${iid}/leads`)
 export const fetchInvWhy         = (iid: string, id: string) => api.get(`/why/${id}`, { params: { iid } })
 export const fetchInvCommunities = (iid: string) => api.get('/communities', { params: { iid } })

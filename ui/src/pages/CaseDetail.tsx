@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import {
   getInvestigation, deleteInvestigation, processInvestigation,
-  fetchInvGraph, fetchInvLeads, fetchInvDetection,
+  fetchInvGraph, fetchInvStats, fetchInvLeads, fetchInvDetection,
   fetchLiveDossier, pinDossierBlock, unpinDossierBlock,
 } from '../api/client'
 import { useAuth } from '../components/AuthContext'
@@ -53,28 +53,46 @@ export default function CaseDetail() {
     if (!iid) return
     setLoading(true); setErr('')
     try {
-      const [{ data: m }, g, l, d] = await Promise.all([
+      const [{ data: m }, gStats, l, d] = await Promise.all([
         getInvestigation(iid),
-        fetchInvGraph(iid).catch(() => ({ data: null })),
+        fetchInvStats(iid).catch(() => ({ data: null })),
         fetchInvLeads(iid).catch(() => ({ data: null })),
         fetchLiveDossier(iid).catch(() => ({ data: null })),
       ])
       setMeta(m)
-      if (g.data) setStats({
-        nodes: g.data.stats?.node_count ?? g.data.nodes?.length ?? 0,
-        edges: g.data.stats?.edge_count ?? g.data.edges?.length ?? 0,
+      const graphCounts = gStats?.data?.graph || m.processing || {}
+      setStats({
+        nodes: graphCounts.graph_nodes ?? graphCounts.node_count ?? 0,
+        edges: graphCounts.graph_edges ?? graphCounts.edge_count ?? 0,
       })
       if (l.data) setLeads((l.data.leads || []).slice(0, 5))
       if (d.data) setBlocks(d.data.blocks || [])
-      // Mapping status per file (validated vs needs analyst review)
+
+      // Use saved mappings directly from investigation metadata when available
       const files: CaseFile[] = m.files || []
       const statuses: Record<string, { ok: boolean; missing: string[] }> = {}
-      await Promise.all(files.map(async f => {
-        try {
-          const { data } = await fetchInvDetection(iid, f.original)
-          statuses[f.original] = { ok: !!data.validated, missing: data.missing || [] }
-        } catch { statuses[f.original] = { ok: false, missing: ['detection failed'] } }
-      }))
+      const savedMap = m.mapping || {}
+      const needFetch: CaseFile[] = []
+
+      for (const f of files) {
+        if (savedMap[f.original]) {
+          statuses[f.original] = {
+            ok: !!savedMap[f.original].validated,
+            missing: savedMap[f.original].missing || [],
+          }
+        } else {
+          needFetch.push(f)
+        }
+      }
+
+      if (needFetch.length > 0) {
+        await Promise.all(needFetch.map(async f => {
+          try {
+            const { data } = await fetchInvDetection(iid, f.original)
+            statuses[f.original] = { ok: !!data.validated, missing: data.missing || [] }
+          } catch { statuses[f.original] = { ok: false, missing: ['detection failed'] } }
+        }))
+      }
       setMapStatus(statuses)
     } catch (e: any) {
       setErr(e.response?.data?.detail || 'Could not load investigation.')
