@@ -1536,6 +1536,102 @@ def entity_history(entity_id: str, iid: Optional[str] = Query(None),
     return {"id": entity_id, "iid": iid, "events": history_for(scope, entity_id)}
 
 # -------------------------------------------------------------
+# Dossier-lite: per-case live-linked report blocks.
+# Blocks store refs (+pin-time snapshots), never frozen copies — /live
+# re-resolves every ref against current data and flags changed blocks.
+# -------------------------------------------------------------
+from backend.dossier import load_blocks, save_blocks, append_block
+
+@app.get("/investigations/{iid}/dossier")
+def get_dossier(iid: str, user: dict = Depends(get_current_user)):
+    _require_meta(iid)
+    return {"iid": iid, "blocks": load_blocks(iid)}
+
+class DossierSaveRequest(BaseModel):
+    blocks: List[Dict]
+
+@app.post("/investigations/{iid}/dossier")
+def save_dossier(iid: str, payload: DossierSaveRequest, user: dict = Depends(CAN_UPLOAD)):
+    _require_meta(iid)
+    try:
+        blocks = save_blocks(iid, payload.blocks, user.get("username", "analyst"))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    audit_log(f"POST /investigations/{iid}/dossier ({len(blocks)} blocks)", [iid])
+    return {"iid": iid, "blocks": blocks}
+
+@app.post("/investigations/{iid}/dossier/blocks")
+def pin_block(iid: str, payload: Dict, user: dict = Depends(CAN_UPLOAD)):
+    _require_meta(iid)
+    try:
+        rec = append_block(iid, payload, user.get("username", "analyst"))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    audit_log(f"POST /investigations/{iid}/dossier/blocks {rec['kind']}", [iid])
+    return rec
+
+@app.delete("/investigations/{iid}/dossier/blocks/{bid}")
+def unpin_block(iid: str, bid: str, user: dict = Depends(CAN_UPLOAD)):
+    _require_meta(iid)
+    blocks = [b for b in load_blocks(iid) if b.get("id") != bid]
+    save_blocks(iid, blocks, user.get("username", "analyst"))
+    return {"iid": iid, "blocks": blocks}
+
+@app.get("/investigations/{iid}/dossier/live")
+def live_dossier(iid: str, user: dict = Depends(get_current_user)):
+    _require_meta(iid)
+    datasets, serial = _get_inv_datasets_and_serial(iid)
+    serial = apply_overrides(serial, scope_dir_for(iid))
+    nodes = {n.get("id"): n for n in serial.get("nodes", [])}
+    out = []
+    for b in load_blocks(iid):
+        live: Dict = {"id": b["id"], "kind": b["kind"], "title": b.get("title"),
+                      "text": b.get("text"), "created_by": b.get("created_by"),
+                      "created_at": b.get("created_at"), "changed": False,
+                      "entity_id": b.get("entity_id"), "src": b.get("src"), "dst": b.get("dst")}
+        snap = b.get("snapshot") or {}
+        if b["kind"] == "note":
+            pass
+        elif b["kind"] == "stats":
+            fresh = {"node_count": serial.get("stats", {}).get("node_count", len(nodes)),
+                     "edge_count": serial.get("stats", {}).get("edge_count", len(serial.get("edges", [])))}
+            live["fresh"] = fresh
+            live["changed"] = bool(snap) and any(
+                k in snap and fresh.get(k) != snap.get(k) for k in fresh)
+        elif b["kind"] == "entity":
+            n = nodes.get(b.get("entity_id"))
+            if not n:
+                live["missing"] = True
+            else:
+                lead = None
+                try:
+                    lead = lead_for_entity(b["entity_id"], datasets, serial)
+                except Exception:
+                    lead = None
+                fresh = {"label": n.get("label"), "cell": n.get("cell"), "role": n.get("role"),
+                         "lead_score": (lead or {}).get("lead_score"),
+                         "priority": (lead or {}).get("priority")}
+                live["fresh"] = fresh
+                live["changed"] = bool(snap) and any(
+                    k in snap and fresh.get(k) != snap.get(k)
+                    for k in ("label", "cell", "role", "lead_score"))
+        elif b["kind"] == "explainer":
+            try:
+                res = explain_connection(src_id=b.get("src"), dst_id=b.get("dst"), datasets=datasets, graph=serial)
+                fresh = {"relationship_strength": res.get("relationship_strength"),
+                         "evidence_score": res.get("evidence_score"),
+                         "story_synopsis": (res.get("story_synopsis") or "")[:500]}
+                live["fresh"] = fresh
+                live["changed"] = bool(snap) and any(
+                    k in snap and fresh.get(k) != snap.get(k)
+                    for k in ("relationship_strength", "evidence_score"))
+            except Exception as e:
+                live["missing"] = True
+                live["error"] = str(e)[:200]
+        out.append(live)
+    return {"iid": iid, "blocks": out}
+
+# -------------------------------------------------------------
 # Tactical Takedown & Arrest Optimization Simulator
 # -------------------------------------------------------------
 @app.get("/takedown/strategies")

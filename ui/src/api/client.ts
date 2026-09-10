@@ -86,6 +86,14 @@ export const mergeEntities = (keep_id: string, drop_id: string, iid?: string) =>
 export const fetchEntityHistory = (id: string, iid?: string) =>
   api.get(`/entity/${encodeURIComponent(id)}/history`, { params: _iid(iid) })
 
+// ── Dossier-lite (per-case live-linked report blocks) ──────────────────────
+export const fetchDossier     = (iid: string) => api.get(`/investigations/${iid}/dossier`)
+export const fetchLiveDossier = (iid: string) => api.get(`/investigations/${iid}/dossier/live`)
+export const pinDossierBlock  = (iid: string, block: object) =>
+  api.post(`/investigations/${iid}/dossier/blocks`, block)
+export const unpinDossierBlock = (iid: string, bid: string) =>
+  api.delete(`/investigations/${iid}/dossier/blocks/${bid}`)
+
 // ── Connection explainer ───────────────────────────────────────────────────
 // Backend: GET /connections/explain?src=X1&dst=X2 → evidence chain between entities
 export const explainConnection  = (src: string, dst: string) =>

@@ -4,12 +4,12 @@ import ForceGraph2D from 'react-force-graph-2d'
 import {
   fetchGraph, fetchWhy, fetchCommunities, fetchBridges,
   fetchInvGraph, fetchInvWhy, fetchInvCommunities,
-  patchEntity, mergeEntities, fetchEntityHistory,
+  patchEntity, mergeEntities, fetchEntityHistory, pinDossierBlock,
 } from '../api/client'
 import type { GraphData, GraphNode, GraphEdge, Community } from '../types'
 import {
   X, ZoomIn, ZoomOut, RefreshCw, Info, FileText, Hash,
-  Users, Maximize, Minimize, Pencil, History, GitMerge,
+  Users, Maximize, Minimize, Pencil, History, GitMerge, Pin,
 } from 'lucide-react'
 
 // Node colour by type (Palantir colour convention, matches previous UI)
@@ -109,6 +109,7 @@ export default function GraphView() {
   const [mergeArmed,  setMergeArmed]  = useState(false)
   const [mergeMsg,    setMergeMsg]    = useState('')
   const [actionMsg,   setActionMsg]   = useState('')
+  const [pinMsg,      setPinMsg]      = useState('')
 
   // ── 1-hop / 2-hop focus ───────────────────────────────────────────────────
   const [focus, setFocus] = useState<{ id: string; hops: number } | null>(null)
@@ -130,6 +131,7 @@ export default function GraphView() {
     setWhySignals([])
     setHistory([])
     setEditMode(false); setEditErr(''); setMergeArmed(false); setMergeMsg(''); setActionMsg('')
+    setPinMsg('')
     const cid = sessionStorage.getItem('caseId') || undefined
     const p = cid ? fetchInvWhy(cid, node.id) : fetchWhy(node.id)
     p.then(r => setWhySignals(r.data.top_signals || []))
@@ -365,6 +367,23 @@ export default function GraphView() {
   const clearSel = () => {
     setSelected(null); setSelEdge(null); setWhySignals([]); setFocus(null)
     setHistory([]); setEditMode(false); setEditErr(''); setMergeArmed(false); setMergeMsg(''); setActionMsg('')
+    setPinMsg('')
+  }
+
+  const pinEntity = async () => {
+    if (!selected) return
+    const cid = sessionStorage.getItem('caseId')
+    if (!cid) { setPinMsg('Open a case graph to pin into its dossier.'); return }
+    setPinMsg('')
+    try {
+      await pinDossierBlock(cid, {
+        kind: 'entity', title: selected.label || selected.id, entity_id: selected.id,
+        snapshot: { label: selected.label, cell: selected.cell, role: selected.role },
+      })
+      setPinMsg('Pinned to the case dossier.')
+    } catch (e: any) {
+      setPinMsg(e.response?.data?.detail || 'Pin failed.')
+    }
   }
 
   const kinds = ['all', 'person', 'phone', 'account', 'location', 'vehicle']
@@ -604,7 +623,17 @@ export default function GraphView() {
               >
                 <Pencil size={12} /> {editMode ? 'Cancel edit' : 'Edit entity'}
               </button>
+              <button
+                onClick={pinEntity}
+                className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5"
+                title="Pin this entity into the open case dossier"
+              >
+                <Pin size={12} /> Pin to dossier
+              </button>
             </div>
+            {pinMsg && (
+              <p className="text-[11px] text-gov-muted -mt-1">{pinMsg}</p>
+            )}
             {actionMsg && (
               <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">{actionMsg}</p>
             )}

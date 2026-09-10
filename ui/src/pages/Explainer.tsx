@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { Share2, ArrowLeftRight, Phone, Wallet, FileText, Eye, Brain, Users, Network, Hash } from 'lucide-react'
-import { searchPeople, explainConnection } from '../api/client'
+import { Share2, ArrowLeftRight, Phone, Wallet, FileText, Eye, Brain, Users, Network, Hash, Pin } from 'lucide-react'
+import { searchPeople, explainConnection, pinDossierBlock } from '../api/client'
 
 interface Person {
   id: string
@@ -145,6 +145,7 @@ export default function Explainer() {
   const [data, setData] = useState<ExplainData | null>(null)
   const [loading, setLoading] = useState(false)
   const [err, setErr] = useState('')
+  const [pinMsg, setPinMsg] = useState('')
   const paired = useRef(false)
 
   // Deep-link from Federated Search evidence rows.
@@ -165,7 +166,7 @@ export default function Explainer() {
     const s = a || src?.id || srcId.trim()
     const d = b || dst?.id || dstId.trim()
     if (!s || !d) { setErr('Select two entities to explain.'); return }
-    setLoading(true); setErr(''); setData(null)
+    setLoading(true); setErr(''); setData(null); setPinMsg('')
     try {
       const { data } = await explainConnection(s, d)
       setData(data)
@@ -181,6 +182,28 @@ export default function Explainer() {
     setSrc(dst); setDst(src)
     setSrcId(dst?.id || ''); setDstId(src?.id || '')
     setData(null)
+  }
+
+  const pinExplainer = async () => {
+    if (!data) return
+    const cid = sessionStorage.getItem('caseId')
+    if (!cid) { setPinMsg('Open a case graph first, then pin.'); return }
+    setPinMsg('')
+    try {
+      await pinDossierBlock(cid, {
+        kind: 'explainer',
+        title: `${data.source_person.name} ↔ ${data.target_person.name}`,
+        src: data.source_person.id, dst: data.target_person.id,
+        snapshot: {
+          relationship_strength: data.relationship_strength,
+          evidence_score: data.evidence_score,
+        },
+      })
+      setPinMsg('Pinned to the case dossier.')
+      setTimeout(() => setPinMsg(''), 4000)
+    } catch (e: any) {
+      setPinMsg(e.response?.data?.detail || 'Pin failed.')
+    }
   }
 
   const t = data?.telephony
@@ -273,9 +296,14 @@ export default function Explainer() {
               </div>
             </div>
             <div className="mt-4 pt-4 border-t border-dark-600">
-              <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full border mb-3 ${badgeStyle(data.strength_badge)}`}>
-                {data.relationship_strength || 'Unknown relationship'}
-              </span>
+              <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
+                <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full border ${badgeStyle(data.strength_badge)}`}>
+                  {data.relationship_strength || 'Unknown relationship'}
+                </span>
+                <button onClick={pinExplainer} className="btn-ghost card text-xs py-1.5" title="Pin this analysis into the open case dossier">
+                  <Pin size={12} /> {pinMsg || 'Pin to dossier'}
+                </button>
+              </div>
               {data.story_synopsis && <Synopsis text={data.story_synopsis} />}
             </div>
           </div>

@@ -3,11 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   FolderOpen, Calendar, Network, GitBranch, FileText,
   Play, Trash2, ArrowLeft, CheckCircle, AlertTriangle,
+  BookOpen, Plus, X, Download, RefreshCw, ExternalLink,
 } from 'lucide-react'
 import {
   getInvestigation, deleteInvestigation, processInvestigation,
   fetchInvGraph, fetchInvLeads, fetchInvDetection,
+  fetchLiveDossier, pinDossierBlock, unpinDossierBlock,
 } from '../api/client'
+import { useAuth } from '../components/AuthContext'
+import { exportDossierPdf } from '../lib/dossierPdf'
 import type { Lead } from '../types'
 
 interface CaseFile {
@@ -21,6 +25,7 @@ interface CaseFile {
 export default function CaseDetail() {
   const { iid } = useParams<{ iid: string }>()
   const navigate = useNavigate()
+  const { username } = useAuth()
   const [meta, setMeta] = useState<any>(null)
   const [stats, setStats] = useState({ nodes: 0, edges: 0 })
   const [leads, setLeads] = useState<Lead[]>([])
@@ -29,15 +34,30 @@ export default function CaseDetail() {
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState('')
   const [confirmDel, setConfirmDel] = useState(false)
+  // Dossier
+  const [blocks, setBlocks] = useState<any[]>([])
+  const [dosBusy, setDosBusy] = useState(false)
+  const [noteTitle, setNoteTitle] = useState('')
+  const [noteText, setNoteText] = useState('')
+  const [noteOpen, setNoteOpen] = useState(false)
+
+  const loadDossier = async () => {
+    if (!iid) return
+    try {
+      const { data } = await fetchLiveDossier(iid)
+      setBlocks(data.blocks || [])
+    } catch { setBlocks([]) }
+  }
 
   const load = async () => {
     if (!iid) return
     setLoading(true); setErr('')
     try {
-      const [{ data: m }, g, l] = await Promise.all([
+      const [{ data: m }, g, l, d] = await Promise.all([
         getInvestigation(iid),
         fetchInvGraph(iid).catch(() => ({ data: null })),
         fetchInvLeads(iid).catch(() => ({ data: null })),
+        fetchLiveDossier(iid).catch(() => ({ data: null })),
       ])
       setMeta(m)
       if (g.data) setStats({
@@ -45,6 +65,7 @@ export default function CaseDetail() {
         edges: g.data.stats?.edge_count ?? g.data.edges?.length ?? 0,
       })
       if (l.data) setLeads((l.data.leads || []).slice(0, 5))
+      if (d.data) setBlocks(d.data.blocks || [])
       // Mapping status per file (validated vs needs analyst review)
       const files: CaseFile[] = m.files || []
       const statuses: Record<string, { ok: boolean; missing: string[] }> = {}
@@ -82,6 +103,61 @@ export default function CaseDetail() {
     sessionStorage.setItem('caseId', iid)
     sessionStorage.setItem('caseName', meta?.name || iid)
     navigate('/graph')
+  }
+
+  const openEntity = (id: string) => {
+    if (!iid) return
+    sessionStorage.setItem('caseId', iid)
+    sessionStorage.setItem('caseName', meta?.name || iid)
+    sessionStorage.setItem('focusNode', id)
+    navigate('/graph')
+  }
+
+  const openPair = (src: string, dst: string) => {
+    sessionStorage.setItem('explainPair', JSON.stringify({ src, dst }))
+    navigate('/explain')
+  }
+
+  const addNote = async () => {
+    if (!iid || !noteText.trim()) return
+    setDosBusy(true)
+    try {
+      await pinDossierBlock(iid, { kind: 'note', title: noteTitle.trim() || 'Analyst note', text: noteText.trim() })
+      setNoteTitle(''); setNoteText(''); setNoteOpen(false)
+      await loadDossier()
+    } catch (e: any) { setErr(e.response?.data?.detail || 'Could not save note.') }
+    finally { setDosBusy(false) }
+  }
+
+  const pinSnapshot = async () => {
+    if (!iid) return
+    setDosBusy(true)
+    try {
+      await pinDossierBlock(iid, {
+        kind: 'stats', title: 'Case snapshot',
+        snapshot: { node_count: stats.nodes, edge_count: stats.edges },
+      })
+      await loadDossier()
+    } catch (e: any) { setErr(e.response?.data?.detail || 'Could not pin snapshot.') }
+    finally { setDosBusy(false) }
+  }
+
+  const unpin = async (bid: string) => {
+    if (!iid) return
+    try {
+      await unpinDossierBlock(iid, bid)
+      setBlocks(b => b.filter(x => x.id !== bid))
+    } catch (e: any) { setErr(e.response?.data?.detail || 'Could not remove block.') }
+  }
+
+  const exportPdf = async () => {
+    if (!iid) return
+    setDosBusy(true)
+    try {
+      const { data } = await fetchLiveDossier(iid)
+      exportDossierPdf(meta?.name || 'Investigation', iid, username, data.blocks || [])
+    } catch (e: any) { setErr(e.response?.data?.detail || 'Export failed.') }
+    finally { setDosBusy(false) }
   }
 
   if (loading) return (
@@ -223,6 +299,125 @@ export default function CaseDetail() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* ── Dossier: live-linked report ─────────────────────────────────── */}
+      <div className="card p-4">
+        <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
+          <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+            <BookOpen size={14} className="text-cyan-400" />
+            Investigation Dossier
+            <span className="text-[10px] font-mono text-gray-500 bg-dark-700 px-1.5 py-0.5 rounded">{blocks.length}</span>
+          </h2>
+          <div className="flex gap-2 flex-wrap">
+            <button onClick={() => setNoteOpen(o => !o)} className="btn-ghost card text-xs py-1.5">
+              <Plus size={12} /> Note
+            </button>
+            <button onClick={pinSnapshot} disabled={dosBusy} className="btn-ghost card text-xs py-1.5 disabled:opacity-50">
+              <Plus size={12} /> Snapshot
+            </button>
+            <button onClick={loadDossier} disabled={dosBusy} className="btn-ghost card text-xs py-1.5 disabled:opacity-50">
+              <RefreshCw size={12} /> Refresh live
+            </button>
+            <button onClick={exportPdf} disabled={dosBusy || blocks.length === 0} className="btn-primary text-xs py-1.5 disabled:opacity-50">
+              <Download size={12} /> Export PDF
+            </button>
+          </div>
+        </div>
+        <p className="text-[11px] text-gray-500 mb-3">
+          Pinned entities and analyses stay live — values re-resolve on every view and flag when the underlying data changed. Pin from the graph or Why-Connected while this case is open.
+        </p>
+
+        {noteOpen && (
+          <div className="bg-dark-700 rounded-lg p-3 space-y-2 mb-3">
+            <input
+              className="input-dark !py-1.5" placeholder="Note title (optional)"
+              value={noteTitle} onChange={e => setNoteTitle(e.target.value)}
+            />
+            <textarea
+              className="input-dark" rows={3} placeholder="Observation, hypothesis, next step…"
+              value={noteText} onChange={e => setNoteText(e.target.value)}
+            />
+            <div className="flex justify-end">
+              <button onClick={addNote} disabled={dosBusy || !noteText.trim()} className="btn-primary text-xs py-1.5 disabled:opacity-50">
+                Save note
+              </button>
+            </div>
+          </div>
+        )}
+
+        {blocks.length === 0 ? (
+          <p className="text-xs text-gray-500 text-center py-6">
+            Empty dossier. Pin entities from the case graph, analyses from Why-Connected, or write the first note above.
+          </p>
+        ) : (
+          <div className="space-y-2">
+            {blocks.map(b => (
+              <div key={b.id} className="bg-dark-700 rounded-lg p-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded border border-dark-500 text-gray-400 uppercase flex-shrink-0">
+                      {b.kind}
+                    </span>
+                    <p className="text-xs text-white font-semibold truncate">
+                      {b.title || ({ note: 'Analyst note', entity: b.fresh?.label || 'Entity', explainer: 'Connection analysis', stats: 'Case snapshot' } as any)[b.kind]}
+                    </p>
+                    {b.changed && (
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 flex-shrink-0">
+                        UPDATED SINCE PINNED
+                      </span>
+                    )}
+                    {b.missing && (
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded border border-red-500/30 bg-red-500/10 text-red-400 flex-shrink-0">
+                        UNRESOLVED
+                      </span>
+                    )}
+                  </div>
+                  <button onClick={() => unpin(b.id)} className="text-gray-600 hover:text-red-400 flex-shrink-0" title="Remove block">
+                    <X size={13} />
+                  </button>
+                </div>
+
+                {b.kind === 'note' && b.text && (
+                  <p className="text-xs text-gray-300 mt-1.5 whitespace-pre-line">{b.text}</p>
+                )}
+                {b.kind === 'stats' && b.fresh && (
+                  <p className="text-xs text-gray-400 font-mono mt-1.5">
+                    {b.fresh.node_count} entities · {b.fresh.edge_count} relationships
+                  </p>
+                )}
+                {b.kind === 'entity' && b.fresh && (
+                  <div className="flex items-center justify-between gap-2 mt-1.5">
+                    <p className="text-xs text-gray-400 truncate">
+                      {b.fresh.cell ? `Cell ${b.fresh.cell} · ` : ''}{b.fresh.role || ''}
+                      {b.fresh.lead_score != null ? ` · lead ${b.fresh.lead_score}` : ''}
+                    </p>
+                    {b.entity_id && (
+                      <button onClick={() => openEntity(b.entity_id)} className="text-[11px] text-blue-400 hover:text-blue-300 flex items-center gap-1 flex-shrink-0">
+                        Open <ExternalLink size={11} />
+                      </button>
+                    )}
+                  </div>
+                )}
+                {b.kind === 'explainer' && b.fresh && (
+                  <div className="mt-1.5">
+                    <p className="text-xs text-gray-300">{b.fresh.relationship_strength} · score {b.fresh.evidence_score}</p>
+                    {b.src && b.dst && (
+                      <button onClick={() => openPair(b.src, b.dst)} className="text-[11px] text-blue-400 hover:text-blue-300 flex items-center gap-1 mt-1">
+                        Open analysis <ExternalLink size={11} />
+                      </button>
+                    )}
+                  </div>
+                )}
+                {b.created_by && (
+                  <p className="text-[10px] text-gray-600 font-mono mt-1.5">
+                    {b.created_by}{b.created_at ? ` · ${new Date(b.created_at).toLocaleString('en-IN')}` : ''}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
