@@ -53,20 +53,13 @@ export default function CaseDetail() {
     if (!iid) return
     setLoading(true); setErr('')
     try {
-      const [{ data: m }, gStats, l, d] = await Promise.all([
-        getInvestigation(iid),
-        fetchInvStats(iid).catch(() => ({ data: null })),
-        fetchInvLeads(iid).catch(() => ({ data: null })),
-        fetchLiveDossier(iid).catch(() => ({ data: null })),
-      ])
+      const { data: m } = await getInvestigation(iid)
       setMeta(m)
-      const graphCounts = gStats?.data?.graph || m.processing || {}
+      const graphCounts = m.processing || {}
       setStats({
         nodes: graphCounts.graph_nodes ?? graphCounts.node_count ?? 0,
         edges: graphCounts.graph_edges ?? graphCounts.edge_count ?? 0,
       })
-      if (l.data) setLeads((l.data.leads || []).slice(0, 5))
-      if (d.data) setBlocks(d.data.blocks || [])
 
       // Use saved mappings directly from investigation metadata when available
       const files: CaseFile[] = m.files || []
@@ -85,18 +78,56 @@ export default function CaseDetail() {
         }
       }
 
+      setMapStatus(statuses)
+      // Unblock page immediately once metadata is ready
+      setLoading(false)
+
+      // Fetch file detections if missing
       if (needFetch.length > 0) {
-        await Promise.all(needFetch.map(async f => {
+        Promise.all(needFetch.map(async f => {
           try {
             const { data } = await fetchInvDetection(iid, f.original)
-            statuses[f.original] = { ok: !!data.validated, missing: data.missing || [] }
-          } catch { statuses[f.original] = { ok: false, missing: ['detection failed'] } }
-        }))
+            return { [f.original]: { ok: !!data.validated, missing: data.missing || [] } }
+          } catch {
+            return { [f.original]: { ok: false, missing: ['detection failed'] } }
+          }
+        })).then(results => {
+          setMapStatus(prev => {
+            const updated = { ...prev }
+            for (const r of results) Object.assign(updated, r)
+            return updated
+          })
+        }).catch(() => {})
       }
-      setMapStatus(statuses)
+
+      // Fetch fresh stats asynchronously
+      fetchInvStats(iid).then(res => {
+        if (res.data?.graph) {
+          setStats({
+            nodes: res.data.graph.graph_nodes ?? res.data.graph.node_count ?? 0,
+            edges: res.data.graph.graph_edges ?? res.data.graph.edge_count ?? 0,
+          })
+        }
+      }).catch(() => {})
+
+      // Fetch top investigative leads asynchronously
+      fetchInvLeads(iid).then(res => {
+        if (res.data?.leads) {
+          setLeads(res.data.leads.slice(0, 5))
+        }
+      }).catch(() => {})
+
+      // Fetch dossier blocks asynchronously
+      fetchLiveDossier(iid).then(res => {
+        if (res.data?.blocks) {
+          setBlocks(res.data.blocks)
+        }
+      }).catch(() => {})
+
     } catch (e: any) {
       setErr(e.response?.data?.detail || 'Could not load investigation.')
-    } finally { setLoading(false) }
+      setLoading(false)
+    }
   }
 
   useEffect(() => { load() }, [iid])

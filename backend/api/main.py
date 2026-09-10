@@ -907,10 +907,21 @@ def inv_leads(iid: str, limit: int = Query(20, ge=1, le=100), user: dict = Depen
     if not out.exists():
         raise HTTPException(status_code=404, detail="Not processed")
     import json as js
+    leads_cache = INV_ROOT / iid / "output" / "leads.json"
+    if leads_cache.exists():
+        try:
+            cached = js.loads(leads_cache.read_text())
+            return {"leads": cached[:limit], "investigation_id": iid}
+        except Exception:
+            pass
     serial = js.loads(out.read_text())
     full_ds_path = INV_ROOT / iid / "mapped" / "full_datasets.json"
     ds = js.loads(full_ds_path.read_text()) if full_ds_path.exists() else None
     leads = get_leads(limit=limit, datasets=ds, graph_serial=serial)
+    try:
+        leads_cache.write_text(js.dumps(leads, indent=2))
+    except Exception:
+        pass
     return {"leads": leads[:limit], "investigation_id": iid}
 
 @app.get("/investigations/{iid}/graph")

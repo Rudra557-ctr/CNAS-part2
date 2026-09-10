@@ -18,8 +18,9 @@ from backend.analytics.centrality import compute_centrality
 
 BRIDGE_IDS_GT = {"X1","X2","X3","X4"}
 
-def compute_bridges(graph_serial: Dict = None) -> List[Dict]:
-    centrality = compute_centrality(graph_serial=graph_serial)
+def compute_bridges(graph_serial: Dict = None, centrality: List[Dict] = None) -> List[Dict]:
+    if centrality is None:
+        centrality = compute_centrality(graph_serial=graph_serial)
     if not centrality:
         return []
     # Exclude Noise isolates if cell is Noise

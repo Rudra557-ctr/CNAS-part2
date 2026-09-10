@@ -17,39 +17,46 @@ from backend.loader import load_all
 def detect_cross_case(datasets: Dict = None) -> List[Dict]:
     if datasets is None:
         datasets, _ = load_all(DATA_DIR)
-    # Build case -> entities mapping via graph edges? Simpler: use FIR narratives mentions
-    # For each FIR, collect mentioned persons (via resolved mention_map) + location + vehicle
-    # We need mention_map from resolver — but we can approximate via canonical names substring
-    from backend.extraction.entity_extractor import extract_all
-    from backend.resolution.resolver import resolve_entities
 
-    # Re-run extraction/resolution to get canonical mapping (Task2 pipeline already does, but we recompute light)
-    all_ents, _ = extract_all(datasets)
-    struct = [e for e in all_ents if e.get("confidence",0) >= 0.8]
-    unstruct = [e for e in all_ents if e.get("confidence",0) < 0.8]
-    mention_map, _ = resolve_entities(struct, unstruct, datasets.get("people_directory", {}), datasets=datasets)
+    firs = datasets.get("firs", [])
+    survs = datasets.get("surveillance_reports", [])
+    pd = datasets.get("people_directory", {})
+    people = (pd.get("network_people", []) + pd.get("noise_people", [])) if isinstance(pd, dict) else []
+
+    if len(firs) > 100 or len(people) > 100:
+        # Fast path for large or custom datasets: use direct name matching and sampled cases
+        mention_map = {p["name"]: p["id"] for p in people if isinstance(p, dict) and "name" in p and "id" in p}
+        target_firs = firs[:300]
+        target_survs = survs[:300]
+    else:
+        # Re-run extraction/resolution to get canonical mapping (original path for small test datasets)
+        from backend.extraction.entity_extractor import extract_all
+        from backend.resolution.resolver import resolve_entities
+        all_ents, _ = extract_all(datasets)
+        struct = [e for e in all_ents if e.get("confidence",0) >= 0.8]
+        unstruct = [e for e in all_ents if e.get("confidence",0) < 0.8]
+        mention_map, _ = resolve_entities(struct, unstruct, pd, datasets=datasets)
+        target_firs = firs
+        target_survs = survs
 
     # Build case_entities: case_id -> set(canonical_ids) + set(locations)
     case_to_entities = defaultdict(set)
     case_meta = {}  # case_id -> {cell, day, type}
 
-    for row in datasets.get("firs", []):
+    for row in target_firs:
         fid = row.get("fir_id") or f"FIR-{row.get('day', 0)}"
         nar = str(row.get("narrative") or "")
         # Map mentions in narrative to canonical
         for mention, canon in mention_map.items():
             if mention and mention in nar and canon != mention:
-                # canon is person id like A1, X1
                 case_to_entities[fid].add(canon)
         # Also add location
         if row.get("location"):
             case_to_entities[fid].add(f"LOC:{row.get('location')}")
-        # Cell hint from ground_truth_flag is stripped, but we have ipc + narrative cell inference
-        # Use location + day for meta
         case_meta[fid] = {"day": row.get("day"), "location": row.get("location"), "type": "FIR", "ground_cell": str(row.get("ipc_sections") or "")[:20]}
 
     # Similarly surveillance as cases
-    for row in datasets.get("surveillance_reports", []):
+    for row in target_survs:
         rid = row.get("report_id") or f"SURV-{row.get('day', 0)}"
         notes = str(row.get("activity_notes") or "")
         for mention, canon in mention_map.items():
@@ -63,8 +70,7 @@ def detect_cross_case(datasets: Dict = None) -> List[Dict]:
     entity_to_cases = defaultdict(list)
     for case, ents in case_to_entities.items():
         for e in ents:
-            # Only track Person ids (A/B/C/X) and LOC
-            if e.startswith("LOC:") or (len(e)<=3 and e[0] in "ABCX" and e[1:].isdigit()):
+            if e.startswith("LOC:") or e.startswith("UP-") or (len(e)<=3 and e[0] in "ABCX" and e[1:].isdigit()) or (not e.startswith("RAW:")):
                 entity_to_cases[e].append(case)
 
     results = []

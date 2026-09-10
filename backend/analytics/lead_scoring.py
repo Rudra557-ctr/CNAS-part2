@@ -38,8 +38,9 @@ def compute_lead_scores(datasets: Dict = None, graph_serial: Dict = None) -> Lis
     if datasets is None:
         datasets, _ = load_all(DATA_DIR)
     # Precompute signals dynamically
-    bridges = {b["id"]: b for b in compute_bridges(graph_serial=graph_serial)}
-    cent = {c["id"]: c for c in compute_centrality(graph_serial=graph_serial)}
+    cent_list = compute_centrality(graph_serial=graph_serial)
+    bridges = {b["id"]: b for b in compute_bridges(graph_serial=graph_serial, centrality=cent_list)}
+    cent = {c["id"]: c for c in cent_list}
     max_bet = max((c.get("betweenness",0) for c in cent.values()), default=1) or 1
     max_deg = max((c.get("degree",0) for c in cent.values()), default=1) or 1
 
