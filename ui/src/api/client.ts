@@ -129,6 +129,12 @@ export const createInvestigation = (name: string, description = '') =>
 export const getInvestigation    = (iid: string) => api.get(`/investigations/${iid}`)
 export const deleteInvestigation = (iid: string) => api.delete(`/investigations/${iid}`)
 export const processInvestigation = (iid: string) => api.post(`/investigations/${iid}/process`)
+export const fetchCaseTransactions = (iid: string, p?: { q?: string; page?: number; limit?: number }) =>
+  api.get(`/investigations/${iid}/transactions`, { params: p })
+export const fetchCaseCommunications = (iid: string, p?: { q?: string; page?: number; limit?: number }) =>
+  api.get(`/investigations/${iid}/communications`, { params: p })
+export const fetchCaseEvidence = (iid: string, p?: { type?: string; q?: string; page?: number; limit?: number }) =>
+  api.get(`/investigations/${iid}/evidence`, { params: p })
 export const fetchInvGraph       = (iid: string, day?: number) =>
   api.get(`/investigations/${iid}/graph`, { params: day ? { day } : {} })
 export const fetchInvStats       = (iid: string) => api.get(`/investigations/${iid}/stats`)

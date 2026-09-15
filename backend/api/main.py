@@ -444,6 +444,108 @@ def inv_files(iid: str, user: dict = Depends(get_current_user)):
         raise HTTPException(status_code=404, detail="Investigation not found")
     return {"files": meta.get("files", [])}
 
+
+def _case_datasets(iid: str) -> Dict:
+    """Normalized per-case datasets from the processed full_datasets.json."""
+    full = INV_ROOT / iid / "mapped" / "full_datasets.json"
+    if not full.exists():
+        raise HTTPException(status_code=404, detail="Case has no processed datasets — run analysis first")
+    import json as _js
+    try:
+        data = _js.loads(full.read_text(encoding="utf-8"))
+    except Exception:
+        raise HTTPException(status_code=500, detail="Could not read processed case datasets")
+    return data if isinstance(data, dict) else {}
+
+
+def _paginate(rows: List[Dict], q: Optional[str], fields: List[str], page: int, limit: int) -> Dict:
+    if q:
+        ql = q.strip().lower()
+        rows = [r for r in rows if any(ql in str(r.get(f, "") or "").lower() for f in fields)]
+    total = len(rows)
+    page = max(1, page)
+    limit = min(max(1, limit), 200)
+    start = (page - 1) * limit
+    return {"total": total, "page": page, "limit": limit, "rows": rows[start:start + limit]}
+
+
+@app.get("/investigations/{iid}/transactions")
+def inv_transactions(iid: str, q: Optional[str] = Query(None), page: int = Query(1, ge=1),
+                     limit: int = Query(50, ge=1, le=200), user: dict = Depends(get_current_user)):
+    _require_meta(iid)
+    txns = _case_datasets(iid).get("transactions", []) or []
+    total_amount = 0.0
+    for t in txns:
+        try:
+            total_amount += float(str(t.get("amount_inr", 0) or 0).replace(",", ""))
+        except (TypeError, ValueError):
+            pass
+    out = _paginate(txns, q, ["txn_id", "sender_id", "sender_name", "sender_account",
+                              "receiver_id", "receiver_name", "receiver_account", "txn_type"], page, limit)
+    out["summary"] = {"count": len(txns), "total_amount_inr": round(total_amount, 2)}
+    audit_log(f"/investigations/{iid}/transactions?q={q or ''}", [iid])
+    return out
+
+
+@app.get("/investigations/{iid}/communications")
+def inv_communications(iid: str, q: Optional[str] = Query(None), page: int = Query(1, ge=1),
+                       limit: int = Query(50, ge=1, le=200), user: dict = Depends(get_current_user)):
+    _require_meta(iid)
+    cdrs = _case_datasets(iid).get("cdrs", []) or []
+    total_dur = 0
+    for c in cdrs:
+        try:
+            total_dur += int(float(str(c.get("duration_sec", 0) or 0)))
+        except (TypeError, ValueError):
+            pass
+    out = _paginate(cdrs, q, ["call_id", "caller_id", "caller_name", "caller_phone",
+                              "callee_id", "callee_name", "callee_phone",
+                              "cell_tower_location", "call_type"], page, limit)
+    out["summary"] = {"count": len(cdrs), "total_duration_sec": total_dur}
+    audit_log(f"/investigations/{iid}/communications?q={q or ''}", [iid])
+    return out
+
+
+EVIDENCE_TYPES = ["firs", "surveillance", "intel", "social", "files"]
+
+
+@app.get("/investigations/{iid}/evidence")
+def inv_evidence(iid: str, type: str = Query("firs"), q: Optional[str] = Query(None),
+                 page: int = Query(1, ge=1), limit: int = Query(50, ge=1, le=200),
+                 user: dict = Depends(get_current_user)):
+    meta = _require_meta(iid)
+    if type not in EVIDENCE_TYPES:
+        raise HTTPException(status_code=400, detail=f"type must be one of {EVIDENCE_TYPES}")
+    ds = _case_datasets(iid)
+    counts = {
+        "firs": len(ds.get("firs", []) or []),
+        "surveillance": len(ds.get("surveillance_reports", []) or []),
+        "intel": len(ds.get("intelligence_reports", []) or []),
+        "social": len(ds.get("social_posts", []) or []),
+        "files": len(meta.get("files", []) or []),
+    }
+    if type == "files":
+        rows = [{"original": f.get("original"), "format": f.get("format"),
+                 "detected_type": f.get("detected_type"),
+                 "type_confidence": f.get("type_confidence")} for f in (meta.get("files", []) or [])]
+        fields = ["original", "detected_type", "format"]
+    else:
+        key = {"firs": "firs", "surveillance": "surveillance_reports",
+               "intel": "intelligence_reports", "social": "social_posts"}[type]
+        rows = ds.get(key, []) or []
+        fields = {
+            "firs": ["fir_id", "station", "location", "ipc_sections", "narrative",
+                     "accused_name", "complainant_name"],
+            "surveillance": ["report_id", "team", "location", "activity_notes", "confidence"],
+            "intel": ["report_id", "narrative", "mentioned_entity_ids", "source_reliability"],
+            "social": ["post_id", "handle", "location_tag", "post_text", "hashtags"],
+        }[type]
+    out = _paginate(rows, q, fields, page, limit)
+    out["counts"] = counts
+    out["type"] = type
+    audit_log(f"/investigations/{iid}/evidence?type={type}&q={q or ''}", [iid])
+    return out
+
 @app.get("/investigations/{iid}/detection/{filename}")
 def inv_detection(iid: str, filename: str, user: dict = Depends(CAN_UPLOAD)):
     try:

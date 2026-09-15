@@ -11,6 +11,9 @@ import Cases       from './pages/Cases'
 import CaseDetail  from './pages/CaseDetail'
 import Search      from './pages/Search'
 import Trust       from './pages/Trust'
+import Finance     from './pages/Finance'
+import Communications from './pages/Communications'
+import Evidence    from './pages/Evidence'
 import Connectors  from './pages/Connectors'
 import Login       from './pages/Login'
 import { useAuth } from './components/AuthContext'
@@ -36,6 +39,9 @@ export default function App() {
         <Route path="cases/:iid" element={<CaseDetail />} />
         <Route path="search"     element={<Search />} />
         <Route path="trust"      element={<Trust />} />
+        <Route path="finance"    element={<Finance />} />
+        <Route path="communications" element={<Communications />} />
+        <Route path="evidence"   element={<Evidence />} />
         <Route path="connectors" element={<Connectors />} />
       </Route>
     </Routes>
