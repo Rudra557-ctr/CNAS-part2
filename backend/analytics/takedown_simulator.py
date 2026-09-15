@@ -12,13 +12,21 @@ Provides:
 """
 import json
 import math
+import random
 from collections import defaultdict, deque
 from typing import Dict, List, Optional, Any, Set, Tuple
 
 from backend.config import DATA_DIR
 from backend.loader import load_all
 from backend.graph.builder import load_graph_serial
-from backend.analytics.centrality import compute_betweenness_centrality, compute_pagerank
+from backend.analytics.centrality import compute_centrality_networkx
+
+# Above this node count, exact all-pairs efficiency becomes prohibitive
+# (O(N·E) BFS per simulation × 8 simulations per strategies call).
+# Sampling sources with a fixed seed keeps results deterministic and within
+# a few percent, while graphs at/below this size stay bit-identical.
+EFFICIENCY_EXACT_MAX_NODES = 1500
+EFFICIENCY_SAMPLE_SOURCES = 400
 
 
 def _txn_amount(t: Dict) -> float:
@@ -69,15 +77,23 @@ def _calculate_network_efficiency(adj: Dict[str, Set[str]]) -> float:
     """
     Calculate global network communication efficiency (Latora & Marchiori index):
     E(G) = 1 / (N * (N-1)) * sum_{i != j} 1 / d(i, j)
+
+    Exact for small graphs. For large graphs (N > EFFICIENCY_EXACT_MAX_NODES)
+    BFS runs from a fixed-seed sample of sources — deterministic and close,
+    instead of timing out.
     """
     nodes = list(adj.keys())
     n = len(nodes)
     if n <= 1:
         return 0.0
 
+    if n > EFFICIENCY_EXACT_MAX_NODES:
+        sources = random.Random(42).sample(nodes, min(EFFICIENCY_SAMPLE_SOURCES, n))
+    else:
+        sources = nodes
+
     total_inv_dist = 0.0
-    for i in range(n):
-        src = nodes[i]
+    for src in sources:
         distances = {src: 0}
         q = deque([src])
         while q:
@@ -89,8 +105,10 @@ def _calculate_network_efficiency(adj: Dict[str, Set[str]]) -> float:
                     total_inv_dist += 1.0 / (curr_d + 1)
                     q.append(nbr)
 
+    # Scale sampled sum back to full-pair normalization
     max_pairs = n * (n - 1)
-    return total_inv_dist / max_pairs if max_pairs > 0 else 0.0
+    scale = n / len(sources)
+    return (total_inv_dist * scale) / max_pairs if max_pairs > 0 else 0.0
 
 
 def _get_person_priors(person_id: str, datasets: Dict[str, Any]) -> Dict[str, Any]:
@@ -134,7 +152,8 @@ def simulate_takedown(
     target_ids: List[str],
     datasets: Optional[Dict] = None,
     graph: Optional[Dict] = None,
-    freeze_financial_accounts: bool = True
+    freeze_financial_accounts: bool = True,
+    precomputed_base: Optional[Tuple[Any, float, List]] = None
 ) -> Dict[str, Any]:
     """
     Simulate the strategic neutralization/arrest of specified target nodes and accounts.
@@ -173,10 +192,13 @@ def simulate_takedown(
                 if p_data.get("phone"):
                     excluded.add(p_data["phone"])
 
-    # Baseline network analysis
-    base_adj = _build_adj_list(all_nodes, all_edges, set())
-    base_efficiency = _calculate_network_efficiency(base_adj)
-    base_components = _calculate_connected_components(base_adj)
+    # Baseline network analysis (reused across strategy simulations when provided)
+    if precomputed_base is not None:
+        base_adj, base_efficiency, base_components = precomputed_base
+    else:
+        base_adj = _build_adj_list(all_nodes, all_edges, set())
+        base_efficiency = _calculate_network_efficiency(base_adj)
+        base_components = _calculate_connected_components(base_adj)
 
     # Post-takedown network analysis
     post_adj = _build_adj_list(all_nodes, all_edges, excluded)
@@ -304,8 +326,11 @@ def get_takedown_strategies(
     person_map = {p["id"]: p for p in people}
 
     # Compute graph metrics for strategy identification
-    pr_scores = compute_pagerank(graph)
-    bw_scores = compute_betweenness_centrality(graph)
+    # (single pass: pagerank + betweenness both derive from one centrality run,
+    #  instead of recomputing the whole thing twice)
+    cent_rows = compute_centrality_networkx(graph_serial=graph)
+    pr_scores = {r["id"]: r.get("pagerank", 0.0) for r in cent_rows}
+    bw_scores = {r["id"]: r.get("betweenness", 0.0) for r in cent_rows}
 
     # 1. Decapitation Targets (Top PageRank / Kingpins)
     kingpin_candidates = sorted(
@@ -337,11 +362,16 @@ def get_takedown_strategies(
     # 4. Synchronized Strike Package (Balanced Pareto Optimal Strike)
     sync_candidates = list(dict.fromkeys(kingpin_candidates[:2] + bridge_candidates[:2] + mule_people[:2]))
 
-    # Run simulations for all 4 packages
-    sim_decap = simulate_takedown(kingpin_candidates, datasets, graph)
-    sim_bridge = simulate_takedown(bridge_candidates, datasets, graph)
-    sim_mule = simulate_takedown(mule_people, datasets, graph)
-    sim_sync = simulate_takedown(sync_candidates, datasets, graph)
+    # Run simulations for all 4 packages (baseline computed once, shared)
+    _base_adj = _build_adj_list(
+        graph.get("nodes", []), graph.get("edges", []), set()
+    )
+    _shared_base = (_base_adj, _calculate_network_efficiency(_base_adj),
+                    _calculate_connected_components(_base_adj))
+    sim_decap = simulate_takedown(kingpin_candidates, datasets, graph, precomputed_base=_shared_base)
+    sim_bridge = simulate_takedown(bridge_candidates, datasets, graph, precomputed_base=_shared_base)
+    sim_mule = simulate_takedown(mule_people, datasets, graph, precomputed_base=_shared_base)
+    sim_sync = simulate_takedown(sync_candidates, datasets, graph, precomputed_base=_shared_base)
 
     strategies = [
         {

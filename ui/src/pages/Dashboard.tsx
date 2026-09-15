@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Network, AlertTriangle, Users, TrendingUp, Activity, GitBranch, Eye, ArrowRight } from 'lucide-react'
-import { fetchGraph, fetchLeads, fetchBridges, fetchAnomalies } from '../api/client'
+import { fetchGraph, fetchInvGraph, fetchLeads, fetchBridges, fetchAnomalies } from '../api/client'
+import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
 import type { Lead, Bridge, Anomaly } from '../types'
 
 export default function Dashboard() {
   const navigate = useNavigate()
+  const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [stats,     setStats]     = useState({ nodes: 0, edges: 0 })
   const [leads,     setLeads]     = useState<Lead[]>([])
   const [bridges,   setBridges]   = useState<Bridge[]>([])
@@ -16,7 +18,8 @@ export default function Dashboard() {
     // Independent fetches: one forbidden endpoint (e.g. /graph for analysts)
     // must not blank the panels the role CAN see.
     const safe = <T,>(p: Promise<T>): Promise<T | null> => p.catch(() => null)
-    Promise.all([safe(fetchGraph()), safe(fetchLeads()), safe(fetchBridges()), safe(fetchAnomalies())])
+    const gReq = iid ? fetchInvGraph(iid) : fetchGraph()
+    Promise.all([safe(gReq), safe(fetchLeads(iid)), safe(fetchBridges(iid)), safe(fetchAnomalies(iid))])
       .then(([g, l, b, a]) => {
         // /graph returns stats as {node_count, edge_count}
         const s = g?.data?.stats || {}
@@ -29,7 +32,7 @@ export default function Dashboard() {
         setAnomalies(((a?.data as any)?.anomalies  || (a?.data as any) || []).slice(0, 5))
       })
       .finally(() => setLoading(false))
-  }, [])
+  }, [scopeKey])
 
   // Backend may return lowercase severity/priority; normalize before comparing.
   const prio = (level?: string) => (level || '').toUpperCase()
@@ -60,9 +63,12 @@ export default function Dashboard() {
           <h1 className="text-xl font-bold text-gov-ink">Analyst Dashboard</h1>
           <p className="text-xs text-gov-muted mt-0.5">Criminal network intelligence · Real-time analysis</p>
         </div>
-        <div className="flex items-center gap-2 gov-card px-3 py-1.5">
-          <span className="w-2 h-2 rounded-full bg-gov-igreen animate-pulse" />
-          <span className="text-xs text-gov-igreen font-semibold">All systems nominal</span>
+        <div className="flex items-center gap-2">
+          {iid && <CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} />}
+          <div className="flex items-center gap-2 gov-card px-3 py-1.5">
+            <span className="w-2 h-2 rounded-full bg-gov-igreen animate-pulse" />
+            <span className="text-xs text-gov-igreen font-semibold">All systems nominal</span>
+          </div>
         </div>
       </div>
 

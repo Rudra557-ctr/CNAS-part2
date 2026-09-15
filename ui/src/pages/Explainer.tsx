@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Share2, ArrowLeftRight, Phone, Wallet, FileText, Eye, Brain, Users, Network, Hash, Pin } from 'lucide-react'
 import { searchPeople, explainConnection, pinDossierBlock } from '../api/client'
+import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
 
 interface Person {
   id: string
@@ -59,11 +60,12 @@ function Synopsis({ text }: { text: string }) {
 }
 
 function EntityPicker({
-  label, value, onPick,
+  label, value, onPick, iid,
 }: {
   label: string
   value: Person | null
   onPick: (p: Person) => void
+  iid?: string
 }) {
   const [q, setQ] = useState('')
   const [hits, setHits] = useState<Person[]>([])
@@ -75,7 +77,7 @@ function EntityPicker({
     if (!val.trim()) { setHits([]); setOpen(false); return }
     setBusy(true); setOpen(true)
     try {
-      const { data } = await searchPeople(val.trim())
+      const { data } = await searchPeople(val.trim(), iid)
       setHits(data.results || [])
     } catch { setHits([]) }
     finally { setBusy(false) }
@@ -138,6 +140,7 @@ const badgeStyle = (b?: string) =>
   : 'text-gray-300 border-dark-500 bg-dark-700'
 
 export default function Explainer() {
+  const { iid, caseName, clear } = useCaseScope()
   const [src, setSrc] = useState<Person | null>(null)
   const [dst, setDst] = useState<Person | null>(null)
   const [srcId, setSrcId] = useState('')
@@ -168,7 +171,7 @@ export default function Explainer() {
     if (!s || !d) { setErr('Select two entities to explain.'); return }
     setLoading(true); setErr(''); setData(null); setPinMsg('')
     try {
-      const { data } = await explainConnection(s, d)
+      const { data } = await explainConnection(s, d, iid)
       setData(data)
       // Populate header cards from the authoritative response
       if (data.source_person) setSrc(data.source_person)
@@ -220,6 +223,7 @@ export default function Explainer() {
         <p className="text-xs text-gray-500 mt-0.5">
           Select two suspects to reveal the full evidence chain linking them — calls, money, cases, and mutual associates.
         </p>
+        {iid && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>}
       </div>
 
       {/* Demo shortcuts */}
@@ -239,11 +243,11 @@ export default function Explainer() {
       {/* Pickers */}
       <div className="card p-4">
         <div className="flex gap-3 items-end">
-          <EntityPicker label="Entity A" value={src} onPick={p => { setSrc(p); setSrcId(p?.id || '') }} />
+          <EntityPicker label="Entity A" value={src} iid={iid} onPick={p => { setSrc(p); setSrcId(p?.id || '') }} />
           <button onClick={swap} title="Swap entities" className="btn-ghost p-2.5 mb-0.5 flex-shrink-0">
             <ArrowLeftRight size={16} />
           </button>
-          <EntityPicker label="Entity B" value={dst} onPick={p => { setDst(p); setDstId(p?.id || '') }} />
+          <EntityPicker label="Entity B" value={dst} iid={iid} onPick={p => { setDst(p); setDstId(p?.id || '') }} />
         </div>
         {/* Raw-ID fallback (e.g. paste X3 from a mutual-associate chip) */}
         <div className="flex gap-2 mt-3">

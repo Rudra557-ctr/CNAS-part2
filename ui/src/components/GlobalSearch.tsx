@@ -24,7 +24,8 @@ export default function GlobalSearch() {
     if (!val.trim()) { setResults([]); setOpen(false); return }
     setLoading(true); setOpen(true)
     try {
-      const { data } = await searchPeople(val.trim())
+      const iid = sessionStorage.getItem('caseId') || undefined
+      const { data } = await searchPeople(val.trim(), iid)
       setResults(data.results || [])
     } catch { setResults([]) }
     finally { setLoading(false) }

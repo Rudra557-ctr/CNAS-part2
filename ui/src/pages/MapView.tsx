@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import 'leaflet.heat'
 import L from 'leaflet'
 import { fetchTowers, fetchTrajectories, fetchHotspots, fetchHeatmap } from '../api/client'
+import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
 import { Map as MapIcon, Navigation, Flame, ThermometerSun } from 'lucide-react'
 
 const INDIA_CENTER: [number, number] = [19.045, 72.855]
@@ -54,6 +55,7 @@ function HeatLayer({ points }: { points: number[][] }) {
 }
 
 export default function MapView() {
+  const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [towers,       setTowers]       = useState<Tower[]>([])
   const [trajectories, setTrajectories] = useState<Trajectory[]>([])
   const [hotspots,     setHotspots]     = useState<Hotspot[]>([])
@@ -63,16 +65,16 @@ export default function MapView() {
   const [layer, setLayer] = useState<'towers'|'trajectories'|'hotspots'|'heatmap'>('towers')
 
   useEffect(() => {
-    fetchTowers()      .then(r => setTowers(r.data.towers        || [])).catch(()=>{})
-    fetchTrajectories().then(r => setTrajectories(r.data.trajectories || [])).catch(()=>{})
-    fetchHotspots()    .then(r => setHotspots(r.data.hotspots    || [])).catch(()=>{})
-    fetchHeatmap()     .then(r => {
+    fetchTowers(iid)      .then(r => setTowers(r.data.towers        || [])).catch(()=>{})
+    fetchTrajectories(iid ? { iid } : undefined).then(r => setTrajectories(r.data.trajectories || [])).catch(()=>{})
+    fetchHotspots(iid)    .then(r => setHotspots(r.data.hotspots    || [])).catch(()=>{})
+    fetchHeatmap(iid ? { iid } : undefined).then(r => {
       const pts: number[][] = r.data.points || []
       setHeatPoints(pts.map((p: number[]) => [p[0], p[1], p[2]]))
       const dr: [number, number] = r.data.day_range || [1, 90]
       setHeatRange(dr); setWindowDays(dr)
     }).catch(()=>{})
-  }, [])
+  }, [scopeKey])
 
   const filteredTowers = useMemo(() => {
     if (layer !== 'towers' || !windowDays) return towers
@@ -108,6 +110,7 @@ export default function MapView() {
             Geospatial Intelligence
           </h1>
           <p className="text-xs text-gray-500 mt-0.5">Cell tower data, suspect trajectories, crime hotspots and call-density heatmap</p>
+          {iid && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>}
         </div>
         <div className="flex gap-2">
           {[

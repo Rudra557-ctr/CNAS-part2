@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { fetchTemporal } from '../api/client'
+import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
 import { Clock, TrendingUp, Link2 } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
 
@@ -20,6 +21,7 @@ interface CorrelatedGroup {
 }
 
 export default function Timeline() {
+  const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [bursts, setBursts]   = useState<Burst[]>([])
   const [groups, setGroups]   = useState<CorrelatedGroup[]>([])
   const [story,  setStory]    = useState<{ range?: number[] } | null>(null)
@@ -27,7 +29,8 @@ export default function Timeline() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchTemporal()
+    setLoading(true)
+    fetchTemporal(iid)
       .then(r => {
         setBursts(r.data.bursts || [])
         setGroups(r.data.correlated_groups || [])
@@ -36,7 +39,7 @@ export default function Timeline() {
       })
       .catch(console.error)
       .finally(() => setLoading(false))
-  }, [])
+  }, [scopeKey])
 
   if (loading) return (
     <div className="flex items-center justify-center h-64">
@@ -61,6 +64,7 @@ export default function Timeline() {
           Communication bursts and multi-cell coordinated activity
           {story?.range ? ` · Story slice: days ${story.range[0]}–${story.range[1]}` : ''}
         </p>
+        {iid && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>}
       </div>
 
       {explanation && (

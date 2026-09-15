@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { fetchTakedownStrategies, simulateTakedown } from '../api/client'
+import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
 import type { TakedownStrategy, TakedownResult } from '../types'
 import { Crosshair, Zap, AlertTriangle, CheckCircle, Wallet } from 'lucide-react'
 
@@ -11,6 +12,7 @@ const BADGE_COLOR: Record<string, string> = {
 }
 
 export default function Takedown() {
+  const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [strategies, setStrategies] = useState<TakedownStrategy[]>([])
   const [selected,   setSelected]   = useState<TakedownStrategy | null>(null)
   const [result,     setResult]     = useState<TakedownResult | null>(null)
@@ -18,20 +20,21 @@ export default function Takedown() {
   const [loadError,  setLoadError]  = useState('')
 
   useEffect(() => {
-    fetchTakedownStrategies()
+    setStrategies([]); setSelected(null); setResult(null); setLoadError('')
+    fetchTakedownStrategies(iid)
       .then(r => {
         const list = r.data.strategies || []
         setStrategies(list)
         if (list.length > 0) setSelected(list[0])
       })
       .catch(() => setLoadError('Could not load strike packages from the backend.'))
-  }, [])
+  }, [scopeKey])
 
   const simulate = async () => {
     if (!selected) return
     setRunning(true); setResult(null)
     try {
-      const { data } = await simulateTakedown(selected.target_ids, true)
+      const { data } = await simulateTakedown(selected.target_ids, true, iid)
       setResult(data)
     } catch (e) { console.error(e) }
     finally { setRunning(false) }
@@ -50,6 +53,7 @@ export default function Takedown() {
           Simulate the network impact of arresting key individuals or dismantling cells.
           Used to optimise law enforcement intervention strategy.
         </p>
+        {iid && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>}
       </div>
 
       <div className="grid grid-cols-2 gap-5">

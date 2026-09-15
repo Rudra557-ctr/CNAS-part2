@@ -4,7 +4,8 @@ import {
   Search as SearchIcon, User, Phone, Wallet, MapPin, FileText,
   Link2, ChevronRight,
 } from 'lucide-react'
-import { searchPeople, fetchGraph, fetchTowers } from '../api/client'
+import { searchPeople, fetchGraph, fetchInvGraph, fetchTowers } from '../api/client'
+import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
 import type { GraphNode, GraphEdge } from '../types'
 
 interface Tower { tower_id: string; tower_name?: string; name?: string }
@@ -22,6 +23,7 @@ const EMPTY: Groups = { people: [], phones: [], accounts: [], places: [], report
 
 export default function Search() {
   const navigate = useNavigate()
+  const { iid, caseName, clear } = useCaseScope()
   const [params, setParams] = useSearchParams()
   const initial = params.get('q') || ''
   const [q, setQ] = useState(initial)
@@ -36,9 +38,9 @@ export default function Search() {
     setLoading(true)
     try {
       const [people, graph, towers] = await Promise.all([
-        searchPeople(query).then(r => r.data.results || []).catch(() => []),
-        fetchGraph().then(r => r.data).catch(() => null),
-        fetchTowers().then(r => r.data.towers || []).catch(() => []),
+        searchPeople(query, iid).then(r => r.data.results || []).catch(() => []),
+        (iid ? fetchInvGraph(iid) : fetchGraph()).then(r => r.data).catch(() => null),
+        fetchTowers(iid).then(r => r.data.towers || []).catch(() => []),
       ])
       const ql = query.toLowerCase()
       const hit = (s: unknown) => String(s || '').toLowerCase().includes(ql)
@@ -106,6 +108,7 @@ export default function Search() {
           Federated Search
         </h1>
         <p className="text-xs text-gov-muted mt-0.5">One query across persons, phones, accounts, places, reports and evidence mentions.</p>
+        {iid && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>}
       </div>
 
       <form

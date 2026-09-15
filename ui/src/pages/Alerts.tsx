@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { fetchAnomalies, fetchBridges, fetchBursts, fetchCrossCase } from '../api/client'
+import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
 import type { Anomaly, Bridge, Burst } from '../types'
 import { AlertTriangle, Bell, Activity, GitBranch } from 'lucide-react'
 
 export default function Alerts() {
+  const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [anomalies, setAnomalies] = useState<Anomaly[]>([])
   const [bridges,   setBridges]   = useState<Bridge[]>([])
   const [bursts,    setBursts]    = useState<Burst[]>([])
@@ -11,11 +13,11 @@ export default function Alerts() {
   const [tab, setTab] = useState<'anomaly'|'bridge'|'burst'|'cross'>('anomaly')
 
   useEffect(() => {
-    fetchAnomalies().then(r => setAnomalies(r.data.anomalies || r.data || [])).catch(()=>{})
-    fetchBridges()  .then(r => setBridges(r.data.bridges    || r.data || [])).catch(()=>{})
-    fetchBursts()   .then(r => setBursts(r.data.bursts      || r.data || [])).catch(()=>{})
-    fetchCrossCase().then(r => setCrossCase(r.data.links    || r.data || [])).catch(()=>{})
-  }, [])
+    fetchAnomalies(iid).then(r => setAnomalies(r.data.anomalies || r.data || [])).catch(()=>{})
+    fetchBridges(iid)  .then(r => setBridges(r.data.bridges    || r.data || [])).catch(()=>{})
+    fetchBursts(iid)   .then(r => setBursts(r.data.bursts      || r.data || [])).catch(()=>{})
+    fetchCrossCase(iid).then(r => setCrossCase(r.data.links    || r.data || [])).catch(()=>{})
+  }, [scopeKey])
 
   const TABS = [
     { id: 'anomaly', label: 'Anomalies',    icon: AlertTriangle, count: anomalies.length,  color: 'text-red-400' },
@@ -40,6 +42,7 @@ export default function Alerts() {
       <div>
         <h1 className="text-lg font-bold text-white">Alert Centre</h1>
         <p className="text-xs text-gray-500">Automated detections requiring analyst review</p>
+        {iid && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>}
       </div>
 
       {/* Tabs */}

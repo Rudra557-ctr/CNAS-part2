@@ -211,6 +211,10 @@ def get_suspect_trajectories(
     person_map = {p["id"]: p for p in all_people}
 
     target_pids = [person_id] if person_id else [p["id"] for p in all_people if p.get("cell") in ("A", "B", "C", "Bridge")]
+    if not target_pids:
+        # Unlabeled real-world cases (e.g. bulk uploads with Unknown cells):
+        # track everyone rather than returning nothing.
+        target_pids = [p["id"] for p in all_people]
 
     trajectories_by_person = defaultdict(list)
 
@@ -355,6 +359,27 @@ def get_co_location_hotspots(datasets: Optional[Dict] = None) -> Dict[str, Any]:
                 "risk_tier": "CRITICAL MEETING HUB" if len(distinct_cells) >= 3 else "HIGH CO-LOCATION SITE",
                 "sample_evidence": data["sample_evidence"][:2],
             })
+
+    if not hotspots:
+        # Unlabeled real-world cases: no A/B/C cells exist, so fall back to
+        # pure co-location density rather than returning nothing.
+        for loc, data in location_events.items():
+            if len(data["suspects"]) >= 3:
+                coords = _get_loc_coords(loc)
+                hotspots.append({
+                    "location_name": loc,
+                    "lat": coords["lat"],
+                    "lng": coords["lng"],
+                    "zone": coords.get("zone", "Metropolitan Area"),
+                    "description": coords.get("description", ""),
+                    "suspects_count": len(data["suspects"]),
+                    "suspects_list": list(data["suspects"])[:8],
+                    "cells_involved": sorted(data["cells"]),
+                    "days_count": len(data["days"]),
+                    "total_events": data["total_interactions"],
+                    "risk_tier": "CO-LOCATION SITE (UNLABELED CELLS)",
+                    "sample_evidence": data["sample_evidence"][:2],
+                })
 
     hotspots.sort(key=lambda h: (len(h["cells_involved"]), h["suspects_count"]), reverse=True)
 

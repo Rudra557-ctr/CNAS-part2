@@ -37,7 +37,8 @@ export const fetchAsk     = (q: string)       => api.get('/ask', { params: { q }
 
 // ── People search (entity lookup by name / ID / phone / account) ───────────
 // Backend: GET /people/search?q=… → {query, results: [{id,name,cell,role,phone,account,photo}], count}
-export const searchPeople = (q: string)       => api.get('/people/search', { params: { q } })
+export const searchPeople = (q: string, iid?: string) =>
+  api.get('/people/search', { params: { q, ..._iid(iid) } })
 
 // ── Analytics ──────────────────────────────────────────────────────────────
 //  /bridges     → array [{id,name,bridge_score,betweenness,flagged,rank,cells}]
@@ -47,21 +48,21 @@ export const searchPeople = (q: string)       => api.get('/people/search', { par
 //  /cross-case  → array [{shared_entity,cases,…}]   (hyphenated route)
 //  /temporal    → {bursts, correlated_groups, story_slice, narrative_days, explanation}
 export const fetchBridges   = (iid?: string)  => api.get('/bridges', { params: iid ? { iid } : {} })
-export const fetchBursts    = ()             => api.get('/bursts')
-export const fetchLeads     = ()             => api.get('/leads')
-export const fetchAnomalies = ()             => api.get('/anomalies')
-export const fetchCommunities = ()           => api.get('/communities')
-export const fetchCentrality  = ()           => api.get('/centrality')
-export const fetchCrossCase   = ()           => api.get('/cross-case')
-export const fetchTemporal    = ()           => api.get('/temporal')
+export const fetchBursts    = (iid?: string) => api.get('/bursts', { params: _iid(iid) })
+export const fetchLeads     = (iid?: string) => api.get('/leads', { params: _iid(iid) })
+export const fetchAnomalies = (iid?: string) => api.get('/anomalies', { params: _iid(iid) })
+export const fetchCommunities = (iid?: string) => api.get('/communities', { params: _iid(iid) })
+export const fetchCentrality  = (iid?: string) => api.get('/centrality', { params: _iid(iid) })
+export const fetchCrossCase   = (iid?: string) => api.get('/cross-case', { params: _iid(iid) })
+export const fetchTemporal    = (iid?: string) => api.get('/temporal', { params: _iid(iid) })
 
 // ── Geospatial ─────────────────────────────────────────────────────────────
 //  /geospatial/towers       → {towers: [{tower_name,lat,lng,call_count,unique_suspects_count,dominant_cell,…}]}
 //  /geospatial/trajectories → {trajectories: [{person_id,person_name,path_coordinates, timeline_events, waypoints_count}]}
 //  /geospatial/hotspots     → {hotspots: [{location_name,lat,lng,suspects_count,cells_involved,risk_tier}]}
-export const fetchTowers      = ()           => api.get('/geospatial/towers')
-export const fetchTrajectories= ()           => api.get('/geospatial/trajectories')
-export const fetchHotspots    = ()           => api.get('/geospatial/hotspots')
+export const fetchTowers      = (iid?: string) => api.get('/geospatial/towers', { params: _iid(iid) })
+export const fetchTrajectories= (p?: { iid?: string }) => api.get('/geospatial/trajectories', { params: p })
+export const fetchHotspots    = (iid?: string) => api.get('/geospatial/hotspots', { params: _iid(iid) })
 export const fetchHeatmap     = (p?: { day_start?: number; day_end?: number; iid?: string }) =>
   api.get('/geospatial/heatmap', { params: p })
 
@@ -71,9 +72,9 @@ export const fetchHeatmap     = (p?: { day_start?: number; day_end?: number; iid
 //                               baseline_efficiency, post_takedown_efficiency,
 //                               isolated_fragments_count, severed_channels_count,
 //                               recoverable_assets_inr, …}
-export const fetchTakedownStrategies = ()    => api.get('/takedown/strategies')
-export const simulateTakedown = (target_ids: string[], freeze_accounts = true) =>
-  api.post('/takedown/simulate', { target_ids, freeze_accounts })
+export const fetchTakedownStrategies = (iid?: string) => api.get('/takedown/strategies', { params: _iid(iid) })
+export const simulateTakedown = (target_ids: string[], freeze_accounts = true, iid?: string) =>
+  api.post('/takedown/simulate', { target_ids, freeze_accounts, ...(iid ? { iid } : {}) })
 
 // ── Analyst curation (Gotham Browser-lite) ─────────────────────────────────
 //  PATCH /entity/{id} {field, value} — label/cell/role overrides (CAN_UPLOAD)
@@ -118,8 +119,8 @@ export const unpinDossierBlock = (iid: string, bid: string) =>
 
 // ── Connection explainer ───────────────────────────────────────────────────
 // Backend: GET /connections/explain?src=X1&dst=X2 → evidence chain between entities
-export const explainConnection  = (src: string, dst: string) =>
-  api.get('/connections/explain', { params: { src, dst } })
+export const explainConnection  = (src: string, dst: string, iid?: string) =>
+  api.get('/connections/explain', { params: { src, dst, ..._iid(iid) } })
 
 // ── Cases ──────────────────────────────────────────────────────────────────
 export const listInvestigations  = ()             => api.get('/investigations')
