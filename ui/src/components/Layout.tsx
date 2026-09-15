@@ -22,10 +22,11 @@ const NAV = [
   { to: '/evidence',   icon: FileText,         label: 'Evidence' },
   { to: '/cases',      icon: FolderOpen,       label: 'Cases' },
   { to: '/connectors', icon: Plug,             label: 'Data Connectors' },
+  { to: '/admin',      icon: ShieldCheck,      label: 'Administration', adminOnly: true },
 ]
 
 export default function Layout() {
-  const { username, logout } = useAuth()
+  const { username, role, logout } = useAuth()
   const navigate = useNavigate()
 
   return (
@@ -57,7 +58,7 @@ export default function Layout() {
 
         {/* Nav */}
         <nav className="flex-1 px-2.5 py-3 space-y-0.5 overflow-y-auto">
-          {NAV.map(({ to, icon: Icon, label, badge }) => (
+          {NAV.filter(item => !(item as any).adminOnly || role === 'admin').map(({ to, icon: Icon, label, badge }) => (
             <NavLink
               key={to}
               to={to}
@@ -83,7 +84,7 @@ export default function Layout() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs text-gov-ink font-semibold truncate">{username}</p>
-              <p className="text-[10px] text-gov-muted">Operator</p>
+              <p className="text-[10px] text-gov-muted capitalize">{role || 'Operator'}</p>
             </div>
             <button
               onClick={() => { logout(); navigate('/login') }}

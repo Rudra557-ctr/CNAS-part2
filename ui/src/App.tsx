@@ -16,11 +16,18 @@ import Communications from './pages/Communications'
 import Evidence    from './pages/Evidence'
 import Connectors  from './pages/Connectors'
 import Login       from './pages/Login'
+import Admin       from './pages/Admin'
 import { useAuth } from './components/AuthContext'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { token } = useAuth()
   return token ? <>{children}</> : <Navigate to="/login" replace />
+}
+
+function AdminRoute({ children }: { children: React.ReactNode }) {
+  const { token, role } = useAuth()
+  if (!token) return <Navigate to="/login" replace />
+  return role === 'admin' ? <>{children}</> : <Navigate to="/" replace />
 }
 
 export default function App() {
@@ -43,6 +50,7 @@ export default function App() {
         <Route path="communications" element={<Communications />} />
         <Route path="evidence"   element={<Evidence />} />
         <Route path="connectors" element={<Connectors />} />
+        <Route path="admin" element={<AdminRoute><Admin /></AdminRoute>} />
       </Route>
     </Routes>
   )

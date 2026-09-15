@@ -47,7 +47,7 @@ from backend.analytics.takedown_simulator import (
     generate_operation_order
 )
 from backend.auth import (
-    CAN_UPLOAD, CAN_VIEW_GRAPH, REQUIRE_SUPERVISOR, AccountStatusError,
+    CAN_WRITE, CAN_VIEW_GRAPH, REQUIRE_SUPERVISOR, AccountStatusError,
     authenticate, create_token, get_current_user,
 )
 from backend.loader import load_all
@@ -100,6 +100,7 @@ from pydantic import BaseModel
 class LoginRequest(BaseModel):
     username: str
     password: str
+    role: Optional[str] = None
 
 @app.post("/login")
 def login(payload: LoginRequest):
@@ -111,6 +112,10 @@ def login(payload: LoginRequest):
     if not user:
         audit_log(f"POST /login failed for '{(payload.username or '').strip().lower()}'", [])
         raise HTTPException(status_code=401, detail="Invalid username or password")
+    want = (payload.role or "").strip().lower()
+    if want and want != user["role"]:
+        audit_log(f"POST /login post mismatch for '{user['username']}' (asked {want}, is {user['role']})", [])
+        raise HTTPException(status_code=403, detail=f"This account is not registered for the post '{payload.role}'. Contact your administrator.")
     audit_log(f"POST /login {user['username']} ({user['role']})", [user["username"]])
     return {"access_token": create_token(user), "token_type": "bearer",
             "username": user["username"], "role": user["role"], "name": user["name"],
@@ -178,7 +183,7 @@ def register(payload: RegisterRequest):
 
 
 # -------------------------------------------------------------
-# System Administrator & Department Clearance APIs (supervisor only)
+# System Administrator & Department Clearance APIs (admin only)
 # -------------------------------------------------------------
 class AdminCreateUserRequest(BaseModel):
     username: str
@@ -312,7 +317,7 @@ def admin_audit_trail(limit: int = Query(200, ge=1, le=2000), q: Optional[str] =
     return {"events": events, "count": len(events)}
 
 @app.post("/investigations")
-def create_inv(payload: InvestigationCreate, user: dict = Depends(get_current_user)):
+def create_inv(payload: InvestigationCreate, user: dict = Depends(CAN_WRITE)):
     meta = create_investigation(payload.name, payload.description)
     audit_log(f"POST /investigations {meta['id']}", [meta['id']])
     return meta
@@ -329,8 +334,8 @@ def get_inv(iid: str, user: dict = Depends(get_current_user)):
 
 
 @app.delete("/investigations/{iid}")
-def delete_inv(iid: str, user: dict = Depends(get_current_user)):
-    """Delete an investigation: filesystem data + Neo4j graph nodes. Allowed for all roles."""
+def delete_inv(iid: str, user: dict = Depends(CAN_WRITE)):
+    """Delete an investigation: filesystem data + Neo4j graph nodes. Admins and investigators only."""
     from backend.ingestion.store import delete_investigation
     from backend.graph.neo4j_client import delete_investigation_graph
 
@@ -355,7 +360,7 @@ ZIP_MEMBER_SUFFIXES = (".csv", ".xlsx", ".xls", ".json",
 
 
 @app.post("/investigations/{iid}/upload")
-async def upload_inv_files(iid: str, files: List[UploadFile] = File(...), user: dict = Depends(CAN_UPLOAD)):
+async def upload_inv_files(iid: str, files: List[UploadFile] = File(...), user: dict = Depends(CAN_WRITE)):
     try:
         get_meta(iid)
     except:
@@ -547,7 +552,7 @@ def inv_evidence(iid: str, type: str = Query("firs"), q: Optional[str] = Query(N
     return out
 
 @app.get("/investigations/{iid}/detection/{filename}")
-def inv_detection(iid: str, filename: str, user: dict = Depends(CAN_UPLOAD)):
+def inv_detection(iid: str, filename: str, user: dict = Depends(CAN_WRITE)):
     try:
         meta = _require_meta(iid)
     except FileNotFoundError:
@@ -567,7 +572,7 @@ def inv_detection(iid: str, filename: str, user: dict = Depends(CAN_UPLOAD)):
             "saved_mapping": (saved or {}).get("mapping")}
 
 @app.post("/investigations/{iid}/mapping")
-def inv_set_mapping(iid: str, payload: Dict, user: dict = Depends(CAN_UPLOAD)):
+def inv_set_mapping(iid: str, payload: Dict, user: dict = Depends(CAN_WRITE)):
     # payload: {filename: {normalized_field: original_col or null}}
     # Validates every file first, then saves all mappings to meta.json.
     meta = _require_meta(iid)
@@ -790,7 +795,7 @@ def download_template_csv(dataset_type: str):
 
 
 @app.post("/investigations/{iid}/process")
-def inv_process(iid: str, user: dict = Depends(get_current_user)):
+def inv_process(iid: str, user: dict = Depends(CAN_WRITE)):
     meta = _require_meta(iid)
     # Demo fast path: if no files, load synthetic demo data (same pipeline, no case-specific logic)
     if not meta.get("files"):
@@ -1599,7 +1604,7 @@ def why_flagged(entity_id: str, iid: Optional[str] = Query(None), user: dict = D
 
 # -------------------------------------------------------------
 # Analyst curation (Gotham Browser-lite): property overrides + merges.
-# Writes require CAN_UPLOAD; reads are open to all authenticated roles.
+# Writes require CAN_WRITE (admin + investigator); analysts are read-only.
 # Scope: global demo graph by default, per-case via ?iid=. Overrides never
 # mutate source files or built graphs — they layer on at serve time.
 # -------------------------------------------------------------
@@ -1628,7 +1633,7 @@ class EntityMergeRequest(BaseModel):
 
 @app.patch("/entity/{entity_id}")
 def patch_entity(entity_id: str, payload: EntityPatchRequest,
-                 iid: Optional[str] = Query(None), user: dict = Depends(CAN_UPLOAD)):
+                 iid: Optional[str] = Query(None), user: dict = Depends(CAN_WRITE)):
     if payload.field not in OVERRIDABLE_FIELDS:
         raise HTTPException(status_code=400, detail=f"Field must be one of {sorted(OVERRIDABLE_FIELDS)}")
     serial, scope = _curation_serial(iid)
@@ -1644,7 +1649,7 @@ def patch_entity(entity_id: str, payload: EntityPatchRequest,
 
 @app.post("/entity/merge")
 def merge_entities(payload: EntityMergeRequest,
-                   iid: Optional[str] = Query(None), user: dict = Depends(CAN_UPLOAD)):
+                   iid: Optional[str] = Query(None), user: dict = Depends(CAN_WRITE)):
     serial, scope = _curation_serial(iid)
     ids = {n.get("id") for n in serial.get("nodes", [])}
     for x in (payload.keep_id, payload.drop_id):
@@ -1690,7 +1695,7 @@ class DossierSaveRequest(BaseModel):
     blocks: List[Dict]
 
 @app.post("/investigations/{iid}/dossier")
-def save_dossier(iid: str, payload: DossierSaveRequest, user: dict = Depends(CAN_UPLOAD)):
+def save_dossier(iid: str, payload: DossierSaveRequest, user: dict = Depends(CAN_WRITE)):
     _require_meta(iid)
     try:
         blocks = save_blocks(iid, payload.blocks, user.get("username", "analyst"))
@@ -1700,7 +1705,7 @@ def save_dossier(iid: str, payload: DossierSaveRequest, user: dict = Depends(CAN
     return {"iid": iid, "blocks": blocks}
 
 @app.post("/investigations/{iid}/dossier/blocks")
-def pin_block(iid: str, payload: Dict, user: dict = Depends(CAN_UPLOAD)):
+def pin_block(iid: str, payload: Dict, user: dict = Depends(CAN_WRITE)):
     _require_meta(iid)
     try:
         rec = append_block(iid, payload, user.get("username", "analyst"))
@@ -1710,7 +1715,7 @@ def pin_block(iid: str, payload: Dict, user: dict = Depends(CAN_UPLOAD)):
     return rec
 
 @app.delete("/investigations/{iid}/dossier/blocks/{bid}")
-def unpin_block(iid: str, bid: str, user: dict = Depends(CAN_UPLOAD)):
+def unpin_block(iid: str, bid: str, user: dict = Depends(CAN_WRITE)):
     _require_meta(iid)
     blocks = [b for b in load_blocks(iid) if b.get("id") != bid]
     save_blocks(iid, blocks, user.get("username", "analyst"))
@@ -1797,7 +1802,7 @@ def list_annotations(target_type: Optional[str] = Query(None),
 @app.post("/annotations")
 def create_annotation(payload: AnnotationCreateRequest,
                       iid: Optional[str] = Query(None),
-                      user: dict = Depends(CAN_UPLOAD)):
+                      user: dict = Depends(CAN_WRITE)):
     if iid:
         _require_meta(iid)
     scope = scope_dir_for(iid)
@@ -1814,7 +1819,7 @@ def create_annotation(payload: AnnotationCreateRequest,
 
 @app.delete("/annotations/{cid}")
 def remove_annotation(cid: str, iid: Optional[str] = Query(None),
-                      user: dict = Depends(CAN_UPLOAD)):
+                      user: dict = Depends(CAN_WRITE)):
     if iid:
         _require_meta(iid)
     scope = scope_dir_for(iid)

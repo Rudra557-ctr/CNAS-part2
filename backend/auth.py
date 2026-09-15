@@ -3,13 +3,13 @@ JWT authentication + Role-Based Access Control with
 Departmental & Administrative Approval Lifecycle.
 
 Roles:
-  supervisor   — full access + admin clearance portal (demo user: admin)
+  admin        — full access + access-permission management (demo user: admin)
   analyst      — upload + map data, NO final intelligence graph
   investigator — graph + queries, NO raw-data upload
 
 Lifecycle (Government & Law-Enforcement Grade):
   open self-registration is REMOVED. New officers submit an Access Request
-  (status ``pending_approval``) via ``request_access_user()``. A supervisor
+   (status ``pending_approval``) via ``request_access_user()``. An admin
   approves / rejects / suspends / provisions / resets via the admin helpers.
   Only ``status == "active"`` accounts can authenticate or use saved JWTs.
 
@@ -60,7 +60,7 @@ def _now_iso() -> str:
 USERS = {
     "admin": {
         "password_hash": _hash("supervisor123"),
-        "role": "supervisor",
+        "role": "admin",
         "name": "System Administrator",
         "badge_id": "ADMIN-001",
         "department": "Central Cyber & Intelligence Bureau",
@@ -99,12 +99,12 @@ USERS = {
     },
 }
 
-VALID_ROLES = {"supervisor", "analyst", "investigator"}
+VALID_ROLES = {"admin", "analyst", "investigator"}
 
 VALID_STATUSES = {"active", "pending_approval", "suspended", "rejected"}
 
-# Roles a new access request may ask for (supervisor is never self-granted;
-# only an existing supervisor can provision one via admin_create_user).
+# Roles a new access request may ask for (admin is never self-granted;
+# only an existing admin can provision one via admin_create_user).
 SELF_REGISTER_ROLES = ("investigator", "analyst")
 REQUESTABLE_ROLES = ("investigator", "analyst")
 
@@ -213,7 +213,7 @@ def _validate_new_credentials(username: str, password: str, role: str, *, allow_
     allowed = VALID_ROLES if allow_supervisor else set(REQUESTABLE_ROLES)
     if (role or "").strip().lower() not in allowed:
         if allow_supervisor:
-            raise ValueError("Role must be supervisor, investigator or analyst")
+            raise ValueError("Role must be admin, investigator or analyst")
         raise ValueError("Role must be investigator or analyst")
     if username in _all_users():
         raise ValueError("Username is already taken")
@@ -274,7 +274,7 @@ def admin_create_user(
     department: str = "",
     created_by: str = "admin",
 ) -> dict:
-    """Direct account provisioning by a supervisor — immediately active."""
+    """Direct account provisioning by an admin — immediately active."""
     username = _validate_new_credentials(username, password, role, allow_supervisor=True)
     role = (role or "").strip().lower()
     registered = _load_registered()
@@ -315,7 +315,7 @@ def approve_user(username: str, approved_by: str, role: str = None) -> dict:
     if role is not None:
         role = (role or "").strip().lower()
         if role not in VALID_ROLES:
-            raise ValueError("Role must be supervisor, investigator or analyst")
+            raise ValueError("Role must be admin, investigator or analyst")
         rec["role"] = role
     rec["status"] = "active"
     rec["approved_by"] = approved_by
@@ -485,7 +485,9 @@ def require_roles(*allowed: str):
     return check
 
 
-# Convenience role groups used by the API routes
-CAN_UPLOAD = require_roles("analyst", "supervisor", "investigator")
-CAN_VIEW_GRAPH = require_roles("investigator", "supervisor")
-REQUIRE_SUPERVISOR = require_roles("supervisor")
+# Convenience role groups used by the API routes.
+# Analysts are strictly read-only: they may view everything but change nothing.
+# Investigators may do everything except access management (admin-only).
+CAN_WRITE = require_roles("admin", "investigator")
+CAN_VIEW_GRAPH = require_roles("investigator", "admin", "analyst")
+REQUIRE_SUPERVISOR = require_roles("admin")

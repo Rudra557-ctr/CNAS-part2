@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { listInvestigations, createInvestigation, uploadFiles } from '../api/client'
+import { useCanWrite } from '../components/AuthContext'
+import ReadOnlyBanner from '../components/ReadOnlyBanner'
 import { FolderOpen, Plus, Calendar, Users, Upload } from 'lucide-react'
 
 export default function Cases() {
   const navigate = useNavigate()
+  const canWrite = useCanWrite()
   const [cases,   setCases]   = useState<any[]>([])
   const [name,    setName]    = useState('')
   const [desc,    setDesc]    = useState('')
@@ -67,6 +70,8 @@ export default function Cases() {
       </div>
 
       {/* New case */}
+      {!canWrite && <ReadOnlyBanner />}
+      {canWrite && (
       <div className="card p-4">
         <h2 className="text-sm font-semibold text-white mb-3">Open New Investigation</h2>
         <div className="space-y-2">
@@ -92,6 +97,7 @@ export default function Cases() {
           </div>
         </div>
       </div>
+      )}
 
       {/* Case list */}
       {loading ? (
@@ -132,6 +138,7 @@ export default function Cases() {
                 <p className="text-xs text-gray-500 mt-2 line-clamp-2">{c.description}</p>
               )}
               {/* Evidence upload */}
+              {canWrite && (
               <div className="mt-3 pt-3 border-t border-dark-600" onClick={e => e.stopPropagation()}>
                 <label className="flex items-center gap-2 text-xs text-gray-400 hover:text-white cursor-pointer">
                   <Upload size={12} />
@@ -149,6 +156,7 @@ export default function Cases() {
                   <p className="text-[11px] text-gray-500 mt-1">{uploadMsg[c.id || c.investigation_id]}</p>
                 )}
               </div>
+              )}
             </div>
           ))}
         </div>

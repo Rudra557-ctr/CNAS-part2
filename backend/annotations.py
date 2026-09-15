@@ -62,8 +62,8 @@ def delete_comment(scope_dir: Path, cid: str, username: str, role: str) -> bool:
     comments = load_comments(scope_dir)
     for c in comments:
         if c["id"] == cid:
-            if c["created_by"] != username and role != "supervisor":
-                raise PermissionError("Only the author or a supervisor can delete this comment")
+            if c["created_by"] != username and role != "admin":
+                raise PermissionError("Only the author or an admin can delete this comment")
             _save(scope_dir, [x for x in comments if x["id"] != cid])
             return True
     return False

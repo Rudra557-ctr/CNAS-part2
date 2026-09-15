@@ -24,11 +24,11 @@ def test_validation(tmp_path):
         add_comment(tmp_path, "node", "B1", "x" * 2001, "ann")
 
 
-def test_delete_author_or_supervisor(tmp_path):
+def test_delete_author_or_admin(tmp_path):
     rec = add_comment(tmp_path, "node", "B1", "hi", "ann")
     with pytest.raises(PermissionError):
         delete_comment(tmp_path, rec["id"], "mallory", "investigator")
-    assert delete_comment(tmp_path, rec["id"], "boss", "supervisor") is True
-    assert delete_comment(tmp_path, "missing", "boss", "supervisor") is False
+    assert delete_comment(tmp_path, rec["id"], "boss", "admin") is True
+    assert delete_comment(tmp_path, "missing", "boss", "admin") is False
     rec2 = add_comment(tmp_path, "node", "B1", "hi again", "ann")
     assert delete_comment(tmp_path, rec2["id"], "ann", "analyst") is True

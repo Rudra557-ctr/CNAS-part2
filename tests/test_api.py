@@ -4,7 +4,7 @@ from backend.api.main import app
 from conftest import auth_headers
 
 client = TestClient(app)
-H = auth_headers("supervisor")
+H = auth_headers("admin")
 
 def test_health():
     r = client.get("/health")
@@ -98,7 +98,7 @@ def test_whatif_role_gated():
     iid = _whatif_iid()
     try:
         assert client.get(f"/investigations/{iid}/whatif", params={"remove_id": "X1"}).status_code == 401
-        assert client.get(f"/investigations/{iid}/whatif", params={"remove_id": "X1"}, headers=auth_headers("analyst")).status_code == 403
+        assert client.get(f"/investigations/{iid}/whatif", params={"remove_id": "X1"}, headers=auth_headers("analyst")).status_code == 200
         assert client.get(f"/investigations/{iid}/whatif", params={"remove_id": "X1"}, headers=auth_headers("investigator")).status_code == 200
     finally:
         client.delete(f"/investigations/{iid}", headers=H)
@@ -106,7 +106,7 @@ def test_whatif_role_gated():
 def test_towers_schematic():
     from conftest import auth_headers
     assert client.get("/towers").status_code == 401
-    assert client.get("/towers", headers=auth_headers("analyst")).status_code == 403
+    assert client.get("/towers", headers=auth_headers("analyst")).status_code == 200
     r = client.get("/towers", headers=H)
     assert r.status_code == 200, r.text
     body = r.json()

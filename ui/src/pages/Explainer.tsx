@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Share2, ArrowLeftRight, Phone, Wallet, FileText, Eye, Brain, Users, Network, Hash, Pin } from 'lucide-react'
 import { searchPeople, explainConnection, pinDossierBlock } from '../api/client'
 import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
+import { useCanWrite } from '../components/AuthContext'
 
 interface Person {
   id: string
@@ -140,6 +141,7 @@ const badgeStyle = (b?: string) =>
   : 'text-gray-300 border-dark-500 bg-dark-700'
 
 export default function Explainer() {
+  const canWrite = useCanWrite()
   const { iid, caseName, clear } = useCaseScope()
   const [src, setSrc] = useState<Person | null>(null)
   const [dst, setDst] = useState<Person | null>(null)
@@ -304,9 +306,11 @@ export default function Explainer() {
                 <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full border ${badgeStyle(data.strength_badge)}`}>
                   {data.relationship_strength || 'Unknown relationship'}
                 </span>
+{canWrite && (
                 <button onClick={pinExplainer} className="btn-ghost card text-xs py-1.5" title="Pin this analysis into the open case dossier">
                   <Pin size={12} /> {pinMsg || 'Pin to dossier'}
                 </button>
+              )}
               </div>
               {data.story_synopsis && <Synopsis text={data.story_synopsis} />}
             </div>

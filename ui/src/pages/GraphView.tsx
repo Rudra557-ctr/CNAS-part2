@@ -13,7 +13,7 @@ import {
   Users, Maximize, Minimize, Pencil, History, GitMerge, Pin,
   MessageSquare, Trash2, Scale,
 } from 'lucide-react'
-import { useAuth } from '../components/AuthContext'
+import { useAuth, useCanWrite } from '../components/AuthContext'
 
 // Node colour by type (Palantir colour convention, matches previous UI)
 const KIND_COLOR: Record<string, string> = {
@@ -60,6 +60,7 @@ const idOf = (v: unknown): string =>
   typeof v === 'object' && v !== null ? String((v as { id: unknown }).id) : String(v)
 
 export default function GraphView() {
+  const canWrite = useCanWrite()
   const { username } = useAuth()
   const fgRef   = useRef<any>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -247,7 +248,7 @@ export default function GraphView() {
     } catch (e: any) {
       console.error(e)
       setLoadError(e.response?.status === 403
-        ? 'Graph viewing is restricted to investigator and supervisor roles.'
+        ? 'Graph viewing is restricted to signed-in officers.'
         : 'Could not load the graph.')
     }
     finally { setLoading(false) }
@@ -655,6 +656,7 @@ export default function GraphView() {
                 </span>
               </div>
             </div>
+            {canWrite && (
             <div className="flex gap-2 -mt-2">
               <button
                 onClick={() => {
@@ -673,6 +675,7 @@ export default function GraphView() {
                 <Pin size={12} /> Pin to dossier
               </button>
             </div>
+            )}
             {pinMsg && (
               <p className="text-[11px] text-gov-muted -mt-1">{pinMsg}</p>
             )}
@@ -789,6 +792,7 @@ export default function GraphView() {
             <button onClick={() => setFocus({ id: selected.id, hops: 2 })} className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5">2-Hop</button>
           </div>
 
+          {canWrite && (
           <div className="gov-well p-3 space-y-2">
             <p className="text-xs font-semibold text-gov-muted flex items-center gap-1.5">
               <GitMerge size={12} /> Merge duplicate into…
@@ -819,6 +823,7 @@ export default function GraphView() {
             )}
             {mergeMsg && <p className="text-[11px] text-gov-red">{mergeMsg}</p>}
           </div>
+          )}
 
           {whySignals.length > 0 && (
             <div>
@@ -887,6 +892,8 @@ export default function GraphView() {
               </div>
             )}
             <div className="flex gap-1.5">
+              {canWrite ? (
+              <>
               <input
                 className="gov-input flex-1 !py-1.5 text-xs"
                 placeholder="Discuss this entity… (Enter to post)"
@@ -898,6 +905,12 @@ export default function GraphView() {
                 className="gov-btn !px-3 !py-1.5 text-xs disabled:opacity-50 flex-shrink-0">
                 Post
               </button>
+              </>
+              ) : (
+              <p className="text-[11px] text-gov-muted bg-gov-wash border border-gov-border rounded-lg px-3 py-2 w-full">
+                Commenting is disabled for the Analyst post.
+              </p>
+              )}
             </div>
           </div>
         </div>

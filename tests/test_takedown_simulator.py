@@ -25,7 +25,7 @@ def client():
 
 @pytest.fixture
 def auth_headers():
-    token = create_token({"username": "admin", "role": "supervisor", "name": "Super Admin"})
+    token = create_token({"username": "admin", "role": "admin", "name": "Super Admin"})
     return {"Authorization": f"Bearer {token}"}
 
 

@@ -12,7 +12,8 @@ import {
   fetchLiveDossier, pinDossierBlock, unpinDossierBlock,
   fetchActivity, postAnnotation,
 } from '../api/client'
-import { useAuth } from '../components/AuthContext'
+import { useAuth, useCanWrite } from '../components/AuthContext'
+import ReadOnlyBanner from '../components/ReadOnlyBanner'
 import { exportDossierPdf } from '../lib/dossierPdf'
 import type { Lead } from '../types'
 
@@ -28,6 +29,7 @@ export default function CaseDetail() {
   const { iid } = useParams<{ iid: string }>()
   const navigate = useNavigate()
   const { username } = useAuth()
+  const canWrite = useCanWrite()
   const [meta, setMeta] = useState<any>(null)
   const [stats, setStats] = useState({ nodes: 0, edges: 0 })
   const [leads, setLeads] = useState<Lead[]>([])
@@ -289,10 +291,12 @@ export default function CaseDetail() {
           <button onClick={openGraph} className="btn-primary">
             <Network size={14} /> Open case graph
           </button>
+          {canWrite && (
           <button onClick={rerun} disabled={busy} className="btn-ghost card disabled:opacity-50">
             <Play size={14} /> {busy ? 'Processing…' : 'Re-run analysis'}
           </button>
-          {!confirmDel ? (
+          )}
+          {canWrite && (!confirmDel ? (
             <button onClick={() => setConfirmDel(true)} className="btn-ghost card text-red-400 hover:text-red-300">
               <Trash2 size={14} /> Delete
             </button>
@@ -300,9 +304,10 @@ export default function CaseDetail() {
             <button onClick={remove} disabled={busy} className="btn-ghost card text-red-400 border-red-500/40 disabled:opacity-50">
               <Trash2 size={14} /> Confirm delete?
             </button>
-          )}
+          ))}
         </div>
         {err && <p className="text-xs text-red-400 bg-red-500/10 rounded-lg px-3 py-2 mt-3">{err}</p>}
+        {!canWrite && <div className="mt-3"><ReadOnlyBanner /></div>}
       </div>
 
       {/* Stat strip */}
@@ -391,12 +396,16 @@ export default function CaseDetail() {
             <span className="text-[10px] font-mono text-gray-500 bg-dark-700 px-1.5 py-0.5 rounded">{blocks.length}</span>
           </h2>
           <div className="flex gap-2 flex-wrap">
+            {canWrite && (
             <button onClick={() => setNoteOpen(o => !o)} className="btn-ghost card text-xs py-1.5">
               <Plus size={12} /> Note
             </button>
+            )}
+            {canWrite && (
             <button onClick={pinSnapshot} disabled={dosBusy} className="btn-ghost card text-xs py-1.5 disabled:opacity-50">
               <Plus size={12} /> Snapshot
             </button>
+            )}
             <button onClick={loadDossier} disabled={dosBusy} className="btn-ghost card text-xs py-1.5 disabled:opacity-50">
               <RefreshCw size={12} /> Refresh live
             </button>
@@ -454,9 +463,11 @@ export default function CaseDetail() {
                       </span>
                     )}
                   </div>
+                  {canWrite && (
                   <button onClick={() => unpin(b.id)} className="text-gray-600 hover:text-red-400 flex-shrink-0" title="Remove block">
                     <X size={13} />
                   </button>
+                  )}
                 </div>
 
                 {b.kind === 'note' && b.text && (
@@ -515,6 +526,8 @@ export default function CaseDetail() {
         </div>
 
         <div className="flex gap-1.5 mb-3">
+          {canWrite ? (
+          <>
           <input
             className="input-dark flex-1 !py-1.5 text-xs"
             placeholder="Discuss this case with the team… (Enter to post)"
@@ -526,6 +539,12 @@ export default function CaseDetail() {
             className="btn-primary !px-3 !py-1.5 text-xs disabled:opacity-50 flex-shrink-0">
             <Send size={12} />
           </button>
+          </>
+          ) : (
+          <p className="text-[11px] text-gov-muted bg-gov-wash border border-gov-border rounded-lg px-3 py-2 w-full">
+            Commenting is disabled for the Analyst post.
+          </p>
+          )}
         </div>
 
         {activity.length === 0 ? (

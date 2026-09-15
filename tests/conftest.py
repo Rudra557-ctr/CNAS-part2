@@ -7,7 +7,7 @@ import backend.api.main as main_mod
 from backend.api.main import app
 
 CREDS = {
-    "supervisor": ("admin", "supervisor123"),
+    "admin": ("admin", "supervisor123"),
     "analyst": ("analyst", "analyst123"),
     "investigator": ("investigator", "investigator123"),
 }
@@ -31,7 +31,7 @@ def isolate_investigations_directory(tmp_path_factory):
     main_mod.INV_ROOT = orig_main_root
 
 
-def auth_headers(role: str = "supervisor") -> dict:
+def auth_headers(role: str = "admin") -> dict:
     """Return Authorization headers for a demo user (tokens cached per role)."""
     if role not in _tokens:
         username, password = CREDS[role]

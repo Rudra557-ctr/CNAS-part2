@@ -36,9 +36,19 @@ def teardown_module():
     _drop_users(*_CREATED)
 
 
+def test_login_post_match_and_mismatch():
+    r = client.post("/login", json={"username": "vibhu123", "password": "Vibhu@2026", "role": "investigator"})
+    assert r.status_code == 200, r.text
+    r = client.post("/login", json={"username": "vibhu123", "password": "Vibhu@2026", "role": "analyst"})
+    assert r.status_code == 403, r.text
+    assert "post" in r.json()["detail"].lower()
+    r = client.post("/login", json={"username": "analyst", "password": "analyst123", "role": "analyst"})
+    assert r.status_code == 200, r.text
+
+
 def test_login_success_roles():
     for username, password, role in [
-        ("admin", "supervisor123", "supervisor"),
+        ("admin", "supervisor123", "admin"),
         ("analyst", "analyst123", "analyst"),
         ("investigator", "investigator123", "investigator"),
     ]:
@@ -72,19 +82,26 @@ def test_health_open():
     assert client.get("/health").status_code == 200
 
 
-def test_analyst_cannot_view_graph():
+def test_analyst_can_view_graph_read_only():
     h = auth_headers("analyst")
-    assert client.get("/graph?day=58", headers=h).status_code == 403
-    assert client.get("/bursts", headers=h).status_code == 403
-    assert client.get("/ask", params={"q": "Why was X1 flagged"}, headers=h).status_code == 403
+    assert client.get("/graph?day=58", headers=h).status_code == 200
+    assert client.get("/bursts", headers=h).status_code == 200
+    assert client.get("/ask", params={"q": "Why was X1 flagged"}, headers=h).status_code == 200
+    assert client.get("/leads", headers=h).status_code == 200
 
 
-def test_analyst_can_upload_and_map():
-    # upload + mapping endpoints accept analyst (file I/O not exercised here;
-    # 404 proves auth+role passed and routing reached the handler)
+def test_analyst_cannot_write_case_data():
     h = auth_headers("analyst")
-    r = client.get("/investigations/nope/files", headers=h)
-    assert r.status_code in (404, 200)
+    iid = _make_investigation(auth_headers("admin"))
+    try:
+        assert client.post("/investigations", headers=h, json={"name": "x"}).status_code == 403
+        assert client.delete(f"/investigations/{iid}", headers=h).status_code == 403
+        assert client.post(f"/investigations/{iid}/process", headers=h).status_code == 403
+        assert client.post("/investigations/nope/upload", headers=h, files={"file": ("a.csv", "x")}).status_code == 403
+        assert client.patch("/entity/X1", headers=h, json={"field": "role", "value": "y"}).status_code == 403
+        assert client.post("/entity/merge", headers=h, json={"keep_id": "X1", "drop_id": "X2"}).status_code == 403
+    finally:
+        assert client.delete(f"/investigations/{iid}", headers=auth_headers("admin")).status_code == 200
 
 
 def test_investigator_can_upload_and_map():
@@ -100,8 +117,8 @@ def test_investigator_can_view_graph_and_ask():
     assert r.status_code == 200
 
 
-def test_supervisor_full_access():
-    h = auth_headers("supervisor")
+def test_admin_full_access():
+    h = auth_headers("admin")
     assert client.get("/graph?day=58", headers=h).status_code == 200
     assert client.get("/bursts", headers=h).status_code == 200
     assert client.get("/leads", headers=h).status_code == 200
@@ -118,7 +135,7 @@ def test_me_returns_full_profile():
 
 
 def test_tampered_token_rejected():
-    h = dict(auth_headers("supervisor"))
+    h = dict(auth_headers("admin"))
     h["Authorization"] += "tampered"
     assert client.get("/leads", headers=h).status_code == 401
 
@@ -163,7 +180,7 @@ def test_approval_activates_login_to_role_dashboard():
         "name": "Inspector Clear", "badge_id": "CYBER-103",
         "department": "Special Crime Branch",
     }).status_code == 201
-    h = auth_headers("supervisor")
+    h = auth_headers("admin")
     r = client.post(f"/admin/users/{username}/approve", headers=h, json={})
     assert r.status_code == 200, r.text
     assert r.json()["status"] == "active"
@@ -181,7 +198,7 @@ def test_rejected_login_reports_reason():
     assert client.post("/auth/request-access", json={
         "username": username, "password": "secret123", "role": "investigator",
     }).status_code == 201
-    h = auth_headers("supervisor")
+    h = auth_headers("admin")
     r = client.post(f"/admin/users/{username}/reject", headers=h, json={"reason": "Unverified badge"})
     assert r.status_code == 200 and r.json()["status"] == "rejected"
     r = client.post("/login", json={"username": username, "password": "secret123"})
@@ -192,7 +209,7 @@ def test_rejected_login_reports_reason():
 def test_suspend_blocks_login_and_reactivate_restores():
     username = _unique_user("patel")
     _track(username)
-    h = auth_headers("supervisor")
+    h = auth_headers("admin")
     r = client.post("/admin/users", headers=h, json={
         "username": username, "password": "secret123", "role": "analyst",
         "name": "Analyst Patel", "badge_id": "ANL-207", "department": "Data Analytics Unit",
@@ -212,7 +229,7 @@ def test_suspend_blocks_login_and_reactivate_restores():
 def test_admin_direct_provision_and_password_reset():
     username = _unique_user("rohan")
     _track(username)
-    h = auth_headers("supervisor")
+    h = auth_headers("admin")
     r = client.post("/admin/users", headers=h, json={
         "username": username, "password": "firstpass1", "role": "investigator",
         "name": "ACP Rohan", "badge_id": "DL-9001", "department": "Special Crime Branch",
@@ -225,7 +242,7 @@ def test_admin_direct_provision_and_password_reset():
 
 
 def test_admin_list_and_audit_trail():
-    h = auth_headers("supervisor")
+    h = auth_headers("admin")
     r = client.get("/admin/users", headers=h)
     assert r.status_code == 200 and r.json()["count"] >= 3
     r = client.get("/admin/users?status=active", headers=h)
@@ -235,7 +252,7 @@ def test_admin_list_and_audit_trail():
     assert r.status_code == 200 and "events" in r.json()
 
 
-def test_admin_endpoints_gated_to_supervisor():
+def test_admin_endpoints_gated_to_admin():
     for role in ("analyst", "investigator"):
         h = auth_headers(role)
         assert client.get("/admin/users", headers=h).status_code == 403
@@ -259,7 +276,7 @@ def test_register_deprecated_returns_pending_request():
 
 def test_request_access_validation():
     assert client.post("/auth/request-access", json={
-        "username": _unique_user(), "password": "secret123", "role": "supervisor",
+        "username": _unique_user(), "password": "secret123", "role": "admin",
     }).status_code == 400
     assert client.post("/auth/request-access", json={
         "username": "ab", "password": "secret123", "role": "investigator",
@@ -285,33 +302,35 @@ def _make_investigation(headers):
 
 
 def test_delete_requires_auth():
-    iid = _make_investigation(auth_headers("supervisor"))
+    iid = _make_investigation(auth_headers("admin"))
     assert client.delete(f"/investigations/{iid}").status_code == 401
-    # cleanup as supervisor
-    assert client.delete(f"/investigations/{iid}", headers=auth_headers("supervisor")).status_code == 200
+    # cleanup as admin
+    assert client.delete(f"/investigations/{iid}", headers=auth_headers("admin")).status_code == 200
 
 
-def test_delete_allowed_for_all_roles():
-    for role in ("analyst", "investigator", "supervisor"):
-        iid = _make_investigation(auth_headers("supervisor"))
+def test_delete_allowed_for_writers_only():
+    for role, expect in (("analyst", 403), ("investigator", 200), ("admin", 200)):
+        iid = _make_investigation(auth_headers("admin"))
         r = client.delete(f"/investigations/{iid}", headers=auth_headers(role))
-        assert r.status_code == 200, (role, r.text)
+        assert r.status_code == expect, (role, r.text)
+        if expect != 200:
+            assert client.delete(f"/investigations/{iid}", headers=auth_headers("admin")).status_code == 200
 
 
 def test_delete_removes_filesystem_and_is_idempotent_404():
     from backend.ingestion.store import ROOT
-    iid = _make_investigation(auth_headers("supervisor"))
+    iid = _make_investigation(auth_headers("admin"))
     assert (ROOT / iid).exists()
-    r = client.delete(f"/investigations/{iid}", headers=auth_headers("supervisor"))
+    r = client.delete(f"/investigations/{iid}", headers=auth_headers("admin"))
     assert r.status_code == 200, r.text
     body = r.json()
     assert body["deleted"] is True and body["investigation_id"] == iid
     assert body["neo4j_nodes_deleted"] == 0  # Neo4j unavailable in CI
     assert not (ROOT / iid).exists()
-    assert client.get(f"/investigations/{iid}", headers=auth_headers("supervisor")).status_code == 404
-    assert client.delete(f"/investigations/{iid}", headers=auth_headers("supervisor")).status_code == 404
+    assert client.get(f"/investigations/{iid}", headers=auth_headers("admin")).status_code == 404
+    assert client.delete(f"/investigations/{iid}", headers=auth_headers("admin")).status_code == 404
 
 
 def test_delete_rejects_path_traversal():
-    r = client.delete("/investigations/..%2F..", headers=auth_headers("supervisor"))
+    r = client.delete("/investigations/..%2F..", headers=auth_headers("admin"))
     assert r.status_code in (404, 422)

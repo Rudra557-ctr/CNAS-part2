@@ -25,10 +25,37 @@ api.interceptors.response.use(
 )
 
 // ── Auth ───────────────────────────────────────────────────────────────────
-// Backend: POST /login with JSON {username, password}
-//          → {access_token, username, role, ...}
-export const login = (username: string, password: string) =>
-  api.post('/login', { username, password })
+// Backend: POST /login with JSON {username, password, role?}
+//          → {access_token, username, role, ...}. role is validated: a wrong
+//          post for the account is rejected with 403.
+export const login = (username: string, password: string, role?: string) =>
+  api.post('/login', { username, password, ...(role ? { role } : {}) })
+
+export interface AccessRequestPayload {
+  username: string; password: string; role: string
+  name?: string; badge_id?: string; department?: string; justification?: string
+}
+
+// Departmental access request — no token issued, admin must approve.
+export const requestAccess = (p: AccessRequestPayload) =>
+  api.post('/auth/request-access', p)
+
+// ── Admin (access management — admin role only) ────────────────────────────
+export const adminListUsers = (p?: { status?: string; role?: string; search?: string }) =>
+  api.get('/admin/users', { params: p })
+export const adminCreateUser = (p: AccessRequestPayload) =>
+  api.post('/admin/users', p)
+export const adminApproveUser = (username: string, role?: string) =>
+  api.post(`/admin/users/${encodeURIComponent(username)}/approve`, role ? { role } : {})
+export const adminRejectUser = (username: string, reason: string) =>
+  api.post(`/admin/users/${encodeURIComponent(username)}/reject`, { reason })
+export const adminSetUserStatus = (username: string, status: 'active' | 'suspended') =>
+  api.patch(`/admin/users/${encodeURIComponent(username)}/status`, { status })
+export const adminResetPassword = (username: string, new_password?: string) =>
+  api.post(`/admin/users/${encodeURIComponent(username)}/reset-password`,
+    new_password ? { new_password } : {})
+export const adminAuditTrail = (p?: { limit?: number; q?: string }) =>
+  api.get('/admin/audit-trail', { params: p })
 
 // ── Graph ──────────────────────────────────────────────────────────────────
 export const fetchGraph   = (day?: number)    => api.get('/graph', { params: day ? { day } : {} })
@@ -78,8 +105,8 @@ export const simulateTakedown = (target_ids: string[], freeze_accounts = true, i
   api.post('/takedown/simulate', { target_ids, freeze_accounts, ...(iid ? { iid } : {}) })
 
 // ── Analyst curation (Gotham Browser-lite) ─────────────────────────────────
-//  PATCH /entity/{id} {field, value} — label/cell/role overrides (CAN_UPLOAD)
-//  POST  /entity/merge {keep_id, drop_id} — merge duplicates (CAN_UPLOAD)
+//  PATCH /entity/{id} {field, value} — label/cell/role overrides (CAN_WRITE: admin/investigator)
+//  POST  /entity/merge {keep_id, drop_id} — merge duplicates (CAN_WRITE: admin/investigator)
 //  GET   /entity/{id}/history — curation events (all roles)
 //  Optional ?iid= scopes to a case; default is the shared graph.
 const _iid = (iid?: string) => (iid ? { iid } : {})
