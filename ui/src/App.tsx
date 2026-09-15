@@ -11,9 +11,7 @@ import Cases       from './pages/Cases'
 import CaseDetail  from './pages/CaseDetail'
 import Search      from './pages/Search'
 import Trust       from './pages/Trust'
-import Finance     from './pages/Finance'
-import Communications from './pages/Communications'
-import Evidence    from './pages/Evidence'
+import KeyInsights from './pages/KeyInsights'
 import Connectors  from './pages/Connectors'
 import Login       from './pages/Login'
 import Admin       from './pages/Admin'
@@ -46,9 +44,10 @@ export default function App() {
         <Route path="cases/:iid" element={<CaseDetail />} />
         <Route path="search"     element={<Search />} />
         <Route path="trust"      element={<Trust />} />
-        <Route path="finance"    element={<Finance />} />
-        <Route path="communications" element={<Communications />} />
-        <Route path="evidence"   element={<Evidence />} />
+        <Route path="key-insights" element={<KeyInsights />} />
+        <Route path="finance"    element={<Navigate to="/key-insights?tab=finance" replace />} />
+        <Route path="communications" element={<Navigate to="/key-insights?tab=communications" replace />} />
+        <Route path="evidence"   element={<Navigate to="/key-insights?tab=evidence" replace />} />
         <Route path="connectors" element={<Connectors />} />
         <Route path="admin" element={<AdminRoute><Admin /></AdminRoute>} />
       </Route>

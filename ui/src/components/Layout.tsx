@@ -3,7 +3,7 @@ import { useAuth } from './AuthContext'
 import {
   LayoutDashboard, Network, Map, Clock, Bell,
   Crosshair, FolderOpen, Plug, LogOut, Shield, Share2, Search, ShieldCheck,
-  Wallet, Phone, FileText,
+  Lightbulb,
 } from 'lucide-react'
 import GlobalSearch from './GlobalSearch'
 
@@ -17,9 +17,7 @@ const NAV = [
   { to: '/explain',    icon: Share2,           label: 'Why Connected' },
   { to: '/search',     icon: Search,           label: 'Search All' },
   { to: '/trust',      icon: ShieldCheck,      label: 'Evidence Trust' },
-  { to: '/finance',    icon: Wallet,           label: 'Finance' },
-  { to: '/communications', icon: Phone,        label: 'Communications' },
-  { to: '/evidence',   icon: FileText,         label: 'Evidence' },
+  { to: '/key-insights', icon: Lightbulb,   label: 'Key Insights' },
   { to: '/cases',      icon: FolderOpen,       label: 'Cases' },
   { to: '/connectors', icon: Plug,             label: 'Data Connectors' },
   { to: '/admin',      icon: ShieldCheck,      label: 'Administration', adminOnly: true },

@@ -65,7 +65,7 @@ const COLUMNS: Record<EvType, TableColumn[]> = {
   ],
 }
 
-export default function Evidence() {
+export default function Evidence({ embedded = false }: { embedded?: boolean }) {
   const navigate = useNavigate()
   const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [type, setType] = useState<EvType>('firs')
@@ -81,9 +81,11 @@ export default function Evidence() {
   if (!iid) {
     return (
       <div className="space-y-5 max-w-3xl">
+        {!embedded && (
         <h1 className="text-xl font-bold text-gov-ink flex items-center gap-2">
           <FileText size={20} className="text-amber-700" /> Evidence
         </h1>
+        )}
         <div className="gov-card p-8 text-center">
           <p className="text-sm text-gov-ink font-medium">No case open</p>
           <p className="text-xs text-gov-muted mt-1 mb-4">Open a case to browse everything found in it so far.</p>
@@ -96,11 +98,15 @@ export default function Evidence() {
   return (
     <div className="space-y-4 max-w-6xl">
       <div>
+        {!embedded && (
         <h1 className="text-xl font-bold text-gov-ink flex items-center gap-2">
           <FileText size={20} className="text-amber-700" /> Evidence
         </h1>
-        <p className="text-xs text-gov-muted mt-0.5">Everything found in this case so far — reports, posts and source files.</p>
-        <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>
+        )}
+        {!embedded && <p className="text-xs text-gov-muted mt-0.5">Everything found in this case so far — reports, posts and source files.</p>
+        }
+        {!embedded && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>
+        }
       </div>
 
       <div className="flex gap-2 flex-wrap">

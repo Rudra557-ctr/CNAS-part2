@@ -26,7 +26,7 @@ const fmtDurTotal = (s: number) => {
   return h > 0 ? `${h}h ${Math.round((s % 3600) / 60)}m` : `${Math.round(s / 60)}m`;
 }
 
-export default function Communications() {
+export default function Communications({ embedded = false }: { embedded?: boolean }) {
   const navigate = useNavigate()
   const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [summary, setSummary] = useState<{ count: number; total_duration_sec: number } | null>(null)
@@ -41,9 +41,11 @@ export default function Communications() {
   if (!iid) {
     return (
       <div className="space-y-5 max-w-3xl">
+        {!embedded && (
         <h1 className="text-xl font-bold text-gov-ink flex items-center gap-2">
           <Phone size={20} className="text-blue-700" /> Communications
         </h1>
+        )}
         <div className="gov-card p-8 text-center">
           <p className="text-sm text-gov-ink font-medium">No case open</p>
           <p className="text-xs text-gov-muted mt-1 mb-4">Open a case to see every recorded call in it.</p>
@@ -56,11 +58,15 @@ export default function Communications() {
   return (
     <div className="space-y-4 max-w-6xl">
       <div>
+        {!embedded && (
         <h1 className="text-xl font-bold text-gov-ink flex items-center gap-2">
           <Phone size={20} className="text-blue-700" /> Communications
         </h1>
-        <p className="text-xs text-gov-muted mt-0.5">Every call record (CDR) captured in this case.</p>
-        <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>
+        )}
+        {!embedded && <p className="text-xs text-gov-muted mt-0.5">Every call record (CDR) captured in this case.</p>
+        }
+        {!embedded && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>
+        }
       </div>
 
       <div className="grid grid-cols-2 gap-3">

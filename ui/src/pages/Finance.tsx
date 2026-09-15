@@ -19,7 +19,7 @@ const party = (name: unknown, id: unknown, acct: unknown) => (
   </span>
 )
 
-export default function Finance() {
+export default function Finance({ embedded = false }: { embedded?: boolean }) {
   const navigate = useNavigate()
   const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [summary, setSummary] = useState<{ count: number; total_amount_inr: number } | null>(null)
@@ -34,9 +34,11 @@ export default function Finance() {
   if (!iid) {
     return (
       <div className="space-y-5 max-w-3xl">
+        {!embedded && (
         <h1 className="text-xl font-bold text-gov-ink flex items-center gap-2">
           <Wallet size={20} className="text-gov-igreen" /> Finance
         </h1>
+        )}
         <div className="gov-card p-8 text-center">
           <p className="text-sm text-gov-ink font-medium">No case open</p>
           <p className="text-xs text-gov-muted mt-1 mb-4">Open a case to see every financial transaction recorded in it.</p>
@@ -49,11 +51,15 @@ export default function Finance() {
   return (
     <div className="space-y-4 max-w-6xl">
       <div>
+        {!embedded && (
         <h1 className="text-xl font-bold text-gov-ink flex items-center gap-2">
           <Wallet size={20} className="text-gov-igreen" /> Finance
         </h1>
-        <p className="text-xs text-gov-muted mt-0.5">Every financial transaction recorded in this case.</p>
-        <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>
+        )}
+        {!embedded && <p className="text-xs text-gov-muted mt-0.5">Every financial transaction recorded in this case.</p>
+        }
+        {!embedded && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>
+        }
       </div>
 
       <div className="grid grid-cols-2 gap-3">
