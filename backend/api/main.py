@@ -1650,6 +1650,99 @@ def live_dossier(iid: str, user: dict = Depends(get_current_user)):
     return {"iid": iid, "blocks": out}
 
 # -------------------------------------------------------------
+# Annotations + activity feed (collaboration-lite).
+# Comments pin to nodes or whole cases, per scope (?iid= like curation).
+# Activity projects the audit trail filtered to the case, newest first.
+# -------------------------------------------------------------
+from backend.annotations import (
+    load_comments, add_comment, delete_comment, comments_for,
+)
+
+class AnnotationCreateRequest(BaseModel):
+    target_type: str = "node"
+    target_id: str = ""
+    text: str = ""
+
+@app.get("/annotations")
+def list_annotations(target_type: Optional[str] = Query(None),
+                     target_id: Optional[str] = Query(None),
+                     iid: Optional[str] = Query(None),
+                     user: dict = Depends(get_current_user)):
+    if iid:
+        _require_meta(iid)
+    scope = scope_dir_for(iid)
+    return {"iid": iid, "comments": comments_for(scope, target_type, target_id)}
+
+@app.post("/annotations")
+def create_annotation(payload: AnnotationCreateRequest,
+                      iid: Optional[str] = Query(None),
+                      user: dict = Depends(CAN_UPLOAD)):
+    if iid:
+        _require_meta(iid)
+    scope = scope_dir_for(iid)
+    target = payload.target_id or "case"
+    if payload.target_type == "case":
+        target = "case"
+    try:
+        rec = add_comment(scope, payload.target_type, target, payload.text,
+                          user.get("username", "analyst"))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    audit_log(f"POST /annotations {payload.target_type}:{target}", [target])
+    return {**rec, "iid": iid}
+
+@app.delete("/annotations/{cid}")
+def remove_annotation(cid: str, iid: Optional[str] = Query(None),
+                      user: dict = Depends(CAN_UPLOAD)):
+    if iid:
+        _require_meta(iid)
+    scope = scope_dir_for(iid)
+    try:
+        ok = delete_comment(scope, cid, user.get("username", "analyst"),
+                            user.get("role", ""))
+    except PermissionError as e:
+        raise HTTPException(status_code=403, detail=str(e))
+    if not ok:
+        raise HTTPException(status_code=404, detail="Comment not found")
+    audit_log(f"DELETE /annotations/{cid}", [cid])
+    return {"deleted": cid, "iid": iid}
+
+@app.get("/investigations/{iid}/activity")
+def case_activity(iid: str, limit: int = Query(50, ge=1, le=200),
+                  user: dict = Depends(get_current_user)):
+    _require_meta(iid)
+    events: List[Dict] = []
+    # Analyst comments as first-class events
+    for c in load_comments(scope_dir_for(iid)):
+        events.append({"ts": c.get("created_at"), "actor": c.get("created_by"),
+                       "kind": "comment", "summary": f"Comment on {c['target_type']}:{c['target_id']}",
+                       "text": c.get("text", "")[:280], "ref": c.get("id")})
+    # Audit trail projection (tail-read for large logs)
+    try:
+        with open(AUDIT_PATH, "rb") as f:
+            f.seek(0, 2)
+            size = f.tell()
+            f.seek(max(0, size - 200000))
+            tail = f.read().decode("utf-8", errors="replace").splitlines()
+        for line in reversed(tail):
+            line = line.strip()
+            if iid not in line:
+                continue
+            try:
+                e = json.loads(line)
+            except Exception:
+                continue
+            events.append({"ts": e.get("ts"), "actor": e.get("user"), "kind": "audit",
+                           "summary": str(e.get("query", ""))[:200],
+                           "text": "", "ref": ""})
+            if len(events) >= limit + 60:
+                break
+    except FileNotFoundError:
+        pass
+    events.sort(key=lambda e: e.get("ts") or "", reverse=True)
+    return {"iid": iid, "events": events[:limit]}
+
+# -------------------------------------------------------------
 # Tactical Takedown & Arrest Optimization Simulator
 # -------------------------------------------------------------
 @app.get("/takedown/strategies")

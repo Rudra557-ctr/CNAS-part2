@@ -4,11 +4,13 @@ import {
   FolderOpen, Calendar, Network, GitBranch, FileText,
   Play, Trash2, ArrowLeft, CheckCircle, AlertTriangle,
   BookOpen, Plus, X, Download, RefreshCw, ExternalLink,
+  MessageSquare, Send, Activity as ActivityIcon,
 } from 'lucide-react'
 import {
   getInvestigation, deleteInvestigation, processInvestigation,
   fetchInvGraph, fetchInvStats, fetchInvLeads, fetchInvDetection,
   fetchLiveDossier, pinDossierBlock, unpinDossierBlock,
+  fetchActivity, postAnnotation,
 } from '../api/client'
 import { useAuth } from '../components/AuthContext'
 import { exportDossierPdf } from '../lib/dossierPdf'
@@ -40,6 +42,29 @@ export default function CaseDetail() {
   const [noteTitle, setNoteTitle] = useState('')
   const [noteText, setNoteText] = useState('')
   const [noteOpen, setNoteOpen] = useState(false)
+  // Activity
+  const [activity, setActivity] = useState<any[]>([])
+  const [caseComment, setCaseComment] = useState('')
+  const [commentBusy, setCommentBusy] = useState(false)
+
+  const loadActivity = async () => {
+    if (!iid) return
+    try {
+      const { data } = await fetchActivity(iid, 50)
+      setActivity(data.events || [])
+    } catch { setActivity([]) }
+  }
+
+  const postCaseComment = async () => {
+    if (!iid || !caseComment.trim()) return
+    setCommentBusy(true)
+    try {
+      await postAnnotation({ target_type: 'case', target_id: 'case', text: caseComment.trim() }, iid)
+      setCaseComment('')
+      await loadActivity()
+    } catch (e: any) { setErr(e.response?.data?.detail || 'Could not post comment.') }
+    finally { setCommentBusy(false) }
+  }
 
   const loadDossier = async () => {
     if (!iid) return
@@ -121,6 +146,13 @@ export default function CaseDetail() {
       fetchLiveDossier(iid).then(res => {
         if (res.data?.blocks) {
           setBlocks(res.data.blocks)
+        }
+      }).catch(() => {})
+
+      // Fetch case activity asynchronously
+      fetchActivity(iid, 50).then(res => {
+        if (res.data?.events) {
+          setActivity(res.data.events)
         }
       }).catch(() => {})
 
@@ -463,6 +495,58 @@ export default function CaseDetail() {
                     {b.created_by}{b.created_at ? ` · ${new Date(b.created_at).toLocaleString('en-IN')}` : ''}
                   </p>
                 )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ── Activity: case discussion + audit trail ───────────────────────── */}
+      <div className="card p-4">
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+            <ActivityIcon size={14} className="text-green-400" />
+            Case Activity
+            <span className="text-[10px] font-mono text-gray-500 bg-dark-700 px-1.5 py-0.5 rounded">{activity.length}</span>
+          </h2>
+          <button onClick={loadActivity} className="btn-ghost card text-xs py-1.5">
+            <RefreshCw size={12} /> Refresh
+          </button>
+        </div>
+
+        <div className="flex gap-1.5 mb-3">
+          <input
+            className="input-dark flex-1 !py-1.5 text-xs"
+            placeholder="Discuss this case with the team… (Enter to post)"
+            value={caseComment}
+            onChange={e => setCaseComment(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') postCaseComment() }}
+          />
+          <button onClick={postCaseComment} disabled={commentBusy || !caseComment.trim()}
+            className="btn-primary !px-3 !py-1.5 text-xs disabled:opacity-50 flex-shrink-0">
+            <Send size={12} />
+          </button>
+        </div>
+
+        {activity.length === 0 ? (
+          <p className="text-xs text-gray-500 text-center py-4">No activity yet — actions on this case will appear here.</p>
+        ) : (
+          <div className="space-y-1.5 max-h-80 overflow-y-auto">
+            {activity.map((a, i) => (
+              <div key={i} className="bg-dark-700 rounded-lg px-3 py-2 flex items-start gap-2">
+                {a.kind === 'comment'
+                  ? <MessageSquare size={12} className="text-blue-400 mt-0.5 flex-shrink-0" />
+                  : <span className="w-2 h-2 rounded-full bg-gray-600 mt-1.5 flex-shrink-0" />}
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs text-gray-200">
+                    <span className="font-mono text-gray-400">{a.actor || 'system'}</span>
+                    {' · '}{a.summary}
+                  </p>
+                  {a.text && <p className="text-xs text-gray-400 mt-0.5 whitespace-pre-line">{a.text}</p>}
+                  <p className="text-[10px] text-gray-600 font-mono mt-0.5">
+                    {a.ts ? new Date(a.ts).toLocaleString('en-IN') : ''}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

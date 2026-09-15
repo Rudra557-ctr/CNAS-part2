@@ -5,12 +5,15 @@ import {
   fetchGraph, fetchWhy, fetchCommunities, fetchBridges,
   fetchInvGraph, fetchInvWhy, fetchInvCommunities,
   patchEntity, mergeEntities, fetchEntityHistory, pinDossierBlock,
+  fetchAnnotations, postAnnotation, deleteAnnotation,
 } from '../api/client'
 import type { GraphData, GraphNode, GraphEdge, Community } from '../types'
 import {
   X, ZoomIn, ZoomOut, RefreshCw, Info, FileText, Hash,
   Users, Maximize, Minimize, Pencil, History, GitMerge, Pin,
+  MessageSquare, Trash2,
 } from 'lucide-react'
+import { useAuth } from '../components/AuthContext'
 
 // Node colour by type (Palantir colour convention, matches previous UI)
 const KIND_COLOR: Record<string, string> = {
@@ -57,6 +60,7 @@ const idOf = (v: unknown): string =>
   typeof v === 'object' && v !== null ? String((v as { id: unknown }).id) : String(v)
 
 export default function GraphView() {
+  const { username } = useAuth()
   const fgRef   = useRef<any>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
   const fitted  = useRef(false)
@@ -90,6 +94,7 @@ export default function GraphView() {
     setCaseId(null); setCaseName('')
     setSelected(null); setSelEdge(null); setActiveComm(null); setFocus(null)
     setHistory([]); setEditMode(false); setMergeArmed(false)
+    setComments([]); setCommentText('')
     setGraphData(null); setCommunities([]); setCommLoaded(false); setBridges(new Set())
     fitted.current = false
   }
@@ -110,6 +115,10 @@ export default function GraphView() {
   const [mergeMsg,    setMergeMsg]    = useState('')
   const [actionMsg,   setActionMsg]   = useState('')
   const [pinMsg,      setPinMsg]      = useState('')
+  // ── Node discussion thread ────────────────────────────────────────────────
+  const [comments,    setComments]    = useState<any[]>([])
+  const [commentText, setCommentText] = useState('')
+  const [commentBusy, setCommentBusy] = useState(false)
 
   // ── 1-hop / 2-hop focus ───────────────────────────────────────────────────
   const [focus, setFocus] = useState<{ id: string; hops: number } | null>(null)
@@ -132,6 +141,7 @@ export default function GraphView() {
     setHistory([])
     setEditMode(false); setEditErr(''); setMergeArmed(false); setMergeMsg(''); setActionMsg('')
     setPinMsg('')
+    setComments([]); setCommentText('')
     const cid = sessionStorage.getItem('caseId') || undefined
     const p = cid ? fetchInvWhy(cid, node.id) : fetchWhy(node.id)
     p.then(r => setWhySignals(r.data.top_signals || []))
@@ -139,7 +149,34 @@ export default function GraphView() {
     const h = fetchEntityHistory(node.id, cid)
     h.then(r => setHistory(r.data.events || []))
      .catch(() => setHistory([]))
+    fetchAnnotations({ target_type: 'node', target_id: node.id, ...(cid ? { iid: cid } : {}) })
+      .then(r => setComments(r.data.comments || []))
+      .catch(() => setComments([]))
   }, [])
+
+  const postComment = async () => {
+    if (!selected || !commentText.trim()) return
+    const cid = sessionStorage.getItem('caseId') || undefined
+    setCommentBusy(true)
+    try {
+      const { data } = await postAnnotation(
+        { target_type: 'node', target_id: selected.id, text: commentText.trim() }, cid)
+      setComments(c => [...c, data])
+      setCommentText('')
+    } catch (e: any) {
+      setActionMsg(e.response?.data?.detail || 'Could not post comment.')
+    } finally { setCommentBusy(false) }
+  }
+
+  const removeComment = async (commentId: string) => {
+    const cid = sessionStorage.getItem('caseId') || undefined
+    try {
+      await deleteAnnotation(commentId, cid)
+      setComments(c => c.filter(x => x.id !== commentId))
+    } catch (e: any) {
+      setActionMsg(e.response?.data?.detail || 'Could not delete comment.')
+    }
+  }
 
   // Reload graph data and (re)select one node — used after curation writes.
   const refreshAndSelect = async (id: string | null) => {
@@ -367,7 +404,7 @@ export default function GraphView() {
   const clearSel = () => {
     setSelected(null); setSelEdge(null); setWhySignals([]); setFocus(null)
     setHistory([]); setEditMode(false); setEditErr(''); setMergeArmed(false); setMergeMsg(''); setActionMsg('')
-    setPinMsg('')
+    setPinMsg(''); setComments([]); setCommentText('')
   }
 
   const pinEntity = async () => {
@@ -766,6 +803,45 @@ export default function GraphView() {
                 ))}
               </div>
             )}
+          </div>
+
+          <div>
+            <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
+              <MessageSquare size={11} /> Discussion
+              <span className="text-[10px] font-mono text-gov-faint bg-gov-wash px-1.5 py-0.5 rounded-full">{comments.length}</span>
+            </p>
+            {comments.length > 0 && (
+              <div className="space-y-1.5 mb-2">
+                {comments.map(c => (
+                  <div key={c.id} className="gov-well px-3 py-2">
+                    <p className="text-xs text-gov-ink whitespace-pre-line">{c.text}</p>
+                    <div className="flex items-center justify-between mt-1">
+                      <p className="text-[10px] text-gov-faint font-mono">
+                        {c.created_by} · {new Date(c.created_at).toLocaleString('en-IN')}
+                      </p>
+                      {(c.created_by === username) && (
+                        <button onClick={() => removeComment(c.id)} className="text-gov-faint hover:text-gov-red" title="Delete comment">
+                          <Trash2 size={11} />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="flex gap-1.5">
+              <input
+                className="gov-input flex-1 !py-1.5 text-xs"
+                placeholder="Discuss this entity… (Enter to post)"
+                value={commentText}
+                onChange={e => setCommentText(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') postComment() }}
+              />
+              <button onClick={postComment} disabled={commentBusy || !commentText.trim()}
+                className="gov-btn !px-3 !py-1.5 text-xs disabled:opacity-50 flex-shrink-0">
+                Post
+              </button>
+            </div>
           </div>
         </div>
       ) : activeComm != null ? (

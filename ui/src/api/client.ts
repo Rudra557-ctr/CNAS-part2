@@ -88,6 +88,16 @@ export const mergeEntities = (keep_id: string, drop_id: string, iid?: string) =>
 export const fetchEntityHistory = (id: string, iid?: string) =>
   api.get(`/entity/${encodeURIComponent(id)}/history`, { params: _iid(iid) })
 
+// ── Annotations + activity (collaboration-lite) ────────────────────────────
+export const fetchAnnotations = (o?: { target_type?: string; target_id?: string; iid?: string }) =>
+  api.get('/annotations', { params: o })
+export const postAnnotation = (b: { target_type: string; target_id: string; text: string }, iid?: string) =>
+  api.post('/annotations', b, { params: _iid(iid) })
+export const deleteAnnotation = (cid: string, iid?: string) =>
+  api.delete(`/annotations/${cid}`, { params: _iid(iid) })
+export const fetchActivity = (iid: string, limit = 50) =>
+  api.get(`/investigations/${iid}/activity`, { params: { limit } })
+
 // ── Dossier-lite (per-case live-linked report blocks) ──────────────────────
 export const fetchDossier     = (iid: string) => api.get(`/investigations/${iid}/dossier`)
 export const fetchLiveDossier = (iid: string) => api.get(`/investigations/${iid}/dossier/live`)
