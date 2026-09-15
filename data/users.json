@@ -24,5 +24,31 @@
     "approved_by": "admin",
     "approved_at": "2026-09-07T00:35:15.659594Z",
     "rejection_reason": null
+  },
+  "sparsh1234": {
+    "password_hash": "304e8ae02ef72b4bf2379f3cd87bb9461324f8f74de20bfb4cacef617030dc18",
+    "role": "investigator",
+    "name": "Sparsh Gupta",
+    "badge_id": "sis213",
+    "department": "forensic",
+    "justification": "",
+    "status": "active",
+    "created_at": "2026-09-15T19:11:54.338430Z",
+    "approved_by": "admin",
+    "approved_at": "2026-09-15T19:11:54.338430Z",
+    "rejection_reason": null
+  },
+  "vib234": {
+    "password_hash": "312d86c1f003223393aa591bb6e4bfeb39b91691212e10892b94eade327b3cb6",
+    "role": "analyst",
+    "name": "vibha devi",
+    "badge_id": "sis234",
+    "department": "forensic",
+    "justification": "",
+    "status": "active",
+    "created_at": "2026-09-15T19:13:31.385137Z",
+    "approved_by": "admin",
+    "approved_at": "2026-09-15T19:13:31.385137Z",
+    "rejection_reason": null
   }
 }
