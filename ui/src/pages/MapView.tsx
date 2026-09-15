@@ -54,6 +54,17 @@ function HeatLayer({ points }: { points: number[][] }) {
   return null
 }
 
+// Fit the viewport to the case's own data — never a hardcoded city.
+// Falls back to a country-level India view while data loads.
+function FitBounds({ bounds }: { bounds: L.LatLngBounds | null }) {
+  const map = useMap()
+  useEffect(() => {
+    if (bounds && bounds.isValid()) map.fitBounds(bounds, { padding: [30, 30] })
+    else map.setView(INDIA_CENTER, 5)
+  }, [map, bounds])
+  return null
+}
+
 export default function MapView() {
   const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [towers,       setTowers]       = useState<Tower[]>([])
@@ -100,6 +111,25 @@ export default function MapView() {
     // heatPoints already windowed if fetched per-window; for now static full-range
     return heatPoints
   }, [heatPoints, windowDays])
+
+  // Viewport follows the data: bounding box over every plotted point.
+  const dataBounds = useMemo(() => {
+    const pts: Array<[number, number]> = []
+    towers.forEach(t => { if (t.lat && t.lng) pts.push([t.lat, t.lng]) })
+    trajectories.forEach(tr => {
+      ;(tr.path_coordinates || []).forEach(p => { if (p[0] && p[1]) pts.push([p[0], p[1]]) })
+      ;(tr.timeline_events || []).forEach(e => { if (e.lat && e.lng) pts.push([e.lat, e.lng]) })
+    })
+    hotspots.forEach(h => { if (h.lat && h.lng) pts.push([h.lat, h.lng]) })
+    heatPoints.forEach(p => { if (p[0] && p[1]) pts.push([p[0], p[1]]) })
+    if (!pts.length) return null
+    try {
+      const b = L.latLngBounds(pts)
+      return b.isValid() ? b.pad(0.15) : null
+    } catch {
+      return null
+    }
+  }, [towers, trajectories, hotspots, heatPoints])
 
   return (
     <div className="space-y-4 h-[calc(100vh-7rem)]">
@@ -151,9 +181,10 @@ export default function MapView() {
       <div className="flex-1 card overflow-hidden" style={{ height: 'calc(100% - 60px)' }}>
         <MapContainer
           center={INDIA_CENTER}
-          zoom={12}
+          zoom={5}
           style={{ width: '100%', height: '100%' }}
         >
+          <FitBounds bounds={dataBounds} />
           {/* No-key dark basemap (Esri) + labels overlay.
               CARTO gated anonymous tiles behind an API key ("API key required"
               baked into tiles), so it is no longer usable keyless. */}
