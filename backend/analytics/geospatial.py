@@ -363,3 +363,37 @@ def get_co_location_hotspots(datasets: Optional[Dict] = None) -> Dict[str, Any]:
         "total_hotspots": len(hotspots),
         "hotspots": hotspots,
     }
+
+
+def get_heatmap_grid(datasets: Optional[Dict] = None, day_start: Optional[int] = None,
+                     day_end: Optional[int] = None) -> Dict[str, Any]:
+    """Per-day call-count grid for the heatmap layer and timeline scrubber.
+
+    Returns {points: [[lat, lng, intensity], ...], day_range: [min,max]}.
+    intensity is 0..1 normalised by max cell count in the window.
+    """
+    if datasets is None:
+        datasets, _ = load_all(DATA_DIR)
+    buckets: Dict[str, Dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    days: List[int] = []
+    for cdr in datasets.get("cdrs", []):
+        try:
+            d = int(cdr.get("day"))  # type: ignore[arg-type]
+        except Exception:
+            continue
+        if day_start is not None and d < day_start:
+            continue
+        if day_end is not None and d > day_end:
+            continue
+        loc = cdr.get("cell_tower_location") or "Unknown"
+        buckets[d][loc] += 1
+        days.append(d)
+    if not buckets:
+        return {"points": [], "day_range": [1, 1]}
+    max_c = max(max(v.values()) for v in buckets.values())
+    pts: List[List[float]] = []
+    for d, locs in buckets.items():
+        for loc, cnt in locs.items():
+            coords = _get_loc_coords(loc)
+            pts.append([coords["lat"], coords["lng"], round(cnt / max_c, 3), int(d)])
+    return {"points": pts, "day_range": [min(days), max(days)]}

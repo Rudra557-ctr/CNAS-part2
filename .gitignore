@@ -24,3 +24,6 @@ data/investigations/*
 
 # Frontend build output (regenerate with `npm run build` in ui/)
 ui/dist/
+
+# Regenerable generator output (see scripts/generate_up_hybrid_dataset.py)
+data/up_dataset/

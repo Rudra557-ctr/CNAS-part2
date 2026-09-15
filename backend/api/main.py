@@ -1364,6 +1364,13 @@ def get_geo_hotspots_endpoint(iid: Optional[str] = Query(None), user: dict = Dep
     audit_log("/geospatial/hotspots", [h["location_name"] for h in data.get("hotspots", [])[:10]])
     return data
 
+@app.get("/geospatial/heatmap")
+def get_heatmap(iid: Optional[str] = Query(None), day_start: Optional[int] = Query(None),
+                day_end: Optional[int] = Query(None), user: dict = Depends(get_current_user)):
+    from backend.analytics.geospatial import get_heatmap_grid
+    datasets, _ = _get_inv_datasets_and_serial(iid)
+    return get_heatmap_grid(datasets, day_start, day_end)
+
 @app.get("/investigations/{iid}/geospatial/hotspots")
 def get_inv_geo_hotspots_endpoint(iid: str, user: dict = Depends(get_current_user)):
     datasets, serial = _get_inv_datasets_and_serial(iid)

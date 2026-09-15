@@ -62,6 +62,8 @@ export const fetchTemporal    = ()           => api.get('/temporal')
 export const fetchTowers      = ()           => api.get('/geospatial/towers')
 export const fetchTrajectories= ()           => api.get('/geospatial/trajectories')
 export const fetchHotspots    = ()           => api.get('/geospatial/hotspots')
+export const fetchHeatmap     = (p?: { day_start?: number; day_end?: number; iid?: string }) =>
+  api.get('/geospatial/heatmap', { params: p })
 
 // ── Takedown ───────────────────────────────────────────────────────────────
 //  GET  /takedown/strategies → {strategies: [{id,name,badge,description,target_ids,metrics}], …}
