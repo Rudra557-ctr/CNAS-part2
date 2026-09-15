@@ -90,6 +90,14 @@ export const fetchEntityHistory = (id: string, iid?: string) =>
 export const fetchEntityLineage = (id: string, iid?: string) =>
   api.get(`/entity/${encodeURIComponent(id)}/lineage`, { params: _iid(iid) })
 
+// ── Evidence trust (ledger, BSA-63 certificate, hash verifier) ─────────────
+export const fetchLedger = (iid?: string) =>
+  api.get('/blockchain-ledger', { params: _iid(iid) })
+export const fetchCertificate = (iid?: string) =>
+  api.get('/chain-of-custody-certificate', { params: _iid(iid) })
+export const verifyEvidenceHash = (query: string, iid?: string) =>
+  api.post('/verify-evidence-hash', { query, ...(iid ? { iid } : {}) })
+
 // ── Annotations + activity (collaboration-lite) ────────────────────────────
 export const fetchAnnotations = (o?: { target_type?: string; target_id?: string; iid?: string }) =>
   api.get('/annotations', { params: o })

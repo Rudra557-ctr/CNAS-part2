@@ -10,6 +10,7 @@ import Explainer   from './pages/Explainer'
 import Cases       from './pages/Cases'
 import CaseDetail  from './pages/CaseDetail'
 import Search      from './pages/Search'
+import Trust       from './pages/Trust'
 import Connectors  from './pages/Connectors'
 import Login       from './pages/Login'
 import { useAuth } from './components/AuthContext'
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="cases"      element={<Cases />} />
         <Route path="cases/:iid" element={<CaseDetail />} />
         <Route path="search"     element={<Search />} />
+        <Route path="trust"      element={<Trust />} />
         <Route path="connectors" element={<Connectors />} />
       </Route>
     </Routes>
