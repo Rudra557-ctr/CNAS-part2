@@ -129,6 +129,18 @@ export interface TakedownResult {
   succession_risk?: unknown
   target_profiles?: Array<{ id?: string; name?: string; [key: string]: unknown }>
   tactical_resource_allocation?: Record<string, number>
+  lenses?: {
+    fragmentation?: { label: string; method: string; components_before: number; components_after: number; new_fragments: number; isolated_singletons_after: number }
+    communication?: { label: string; method: string; called_total: number; called_severed: number; called_share_pct: number; efficiency_before: number; efficiency_after: number }
+    financial?: { label: string; method: string; case_volume_inr: number; seized_inr: number; money_share_pct: number; frozen_transactions: number; frozen_accounts: number; transacted_edges_severed: number }
+    leadership?: { label: string; method: string; roles_neutralized: Record<string, number>; deputies_remaining: string[]; deputies_remaining_count: number }
+  }
+  case_resolution?: {
+    label: string; method: string
+    suspects_neutralized: number; suspects_total: number; suspect_share_pct: number
+    firs_linked: number; firs_total: number; fir_share_pct: number
+    overall_pct: number
+  }
 }
 
 // ── Auth ───────────────────────────────────────────────────────────────────

@@ -1,210 +1,363 @@
 import { useEffect, useState } from 'react'
-import { fetchTakedownStrategies, simulateTakedown } from '../api/client'
+import { fetchTakedownStrategies, simulateTakedown, searchPeople } from '../api/client'
 import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
 import type { TakedownStrategy, TakedownResult } from '../types'
-import { Crosshair, Zap, AlertTriangle, CheckCircle, Wallet } from 'lucide-react'
+import { Crosshair, Play, Plus, X } from 'lucide-react'
 
-const BADGE_COLOR: Record<string, string> = {
-  green:  'text-green-400 border-green-500/30 bg-green-500/10',
-  blue:   'text-blue-400 border-blue-500/30 bg-blue-500/10',
-  yellow: 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10',
-  purple: 'text-purple-400 border-purple-500/30 bg-purple-500/10',
+interface Suspect {
+  id: string
+  name: string
+  role?: string
+  cell?: string
+}
+
+const MAX_TARGETS = 12
+
+function formalName(name: string): string {
+  return name.replace(/^[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\s]+/u, '').trim()
+}
+
+function inr(n: number): string {
+  if (!Number.isFinite(n)) return '₹0'
+  if (Math.abs(n) >= 1e7) return `₹${(n / 1e7).toFixed(2)} Cr`
+  if (Math.abs(n) >= 1e5) return `₹${(n / 1e5).toFixed(2)} L`
+  return `₹${Math.round(n).toLocaleString('en-IN')}`
 }
 
 export default function Takedown() {
   const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [strategies, setStrategies] = useState<TakedownStrategy[]>([])
-  const [selected,   setSelected]   = useState<TakedownStrategy | null>(null)
-  const [result,     setResult]     = useState<TakedownResult | null>(null)
-  const [running,    setRunning]    = useState(false)
-  const [loadError,  setLoadError]  = useState('')
+  const [activePreset, setActivePreset] = useState<string | null>(null)
+  const [targets, setTargets] = useState<Suspect[]>([])
+  const [freeze, setFreeze] = useState(true)
+  const [query, setQuery] = useState('')
+  const [hits, setHits] = useState<Suspect[]>([])
+  const [searching, setSearching] = useState(false)
+  const [result, setResult] = useState<TakedownResult | null>(null)
+  const [running, setRunning] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
-    setStrategies([]); setSelected(null); setResult(null); setLoadError('')
+    setStrategies([]); setActivePreset(null); setTargets([])
+    setResult(null); setError(''); setHits([]); setQuery('')
     fetchTakedownStrategies(iid)
-      .then(r => {
-        const list = r.data.strategies || []
-        setStrategies(list)
-        if (list.length > 0) setSelected(list[0])
-      })
-      .catch(() => setLoadError('Could not load strike packages from the backend.'))
+      .then(r => setStrategies(r.data.strategies || []))
+      .catch(() => setError('Could not load arrest scenarios from the backend.'))
   }, [scopeKey])
 
-  const simulate = async () => {
-    if (!selected) return
-    setRunning(true); setResult(null)
-    try {
-      const { data } = await simulateTakedown(selected.target_ids, true, iid)
-      setResult(data)
-    } catch (e) { console.error(e) }
-    finally { setRunning(false) }
+  useEffect(() => {
+    const q = query.trim()
+    if (q.length < 2) { setHits([]); return }
+    setSearching(true)
+    const t = setTimeout(() => {
+      searchPeople(q, iid)
+        .then(r => setHits((r.data.results || []).slice(0, 8)))
+        .catch(() => setHits([]))
+        .finally(() => setSearching(false))
+    }, 250)
+    return () => clearTimeout(t)
+  }, [query, iid, scopeKey])
+
+  const applyPreset = (s: TakedownStrategy) => {
+    setActivePreset(s.id)
+    setResult(null); setError('')
+    setTargets((s.target_ids || []).slice(0, MAX_TARGETS).map(id => ({ id, name: id })))
   }
 
-  const impact = result?.dismantlement_score_pct ?? 0
+  const addSuspect = (s: Suspect) => {
+    setActivePreset(null)
+    setResult(null)
+    setTargets(prev => {
+      if (prev.some(t => t.id === s.id) || prev.length >= MAX_TARGETS) return prev
+      return [...prev, s]
+    })
+    setQuery(''); setHits([])
+  }
+
+  const removeTarget = (id: string) => {
+    setActivePreset(null)
+    setResult(null)
+    setTargets(prev => prev.filter(t => t.id !== id))
+  }
+
+  const simulate = async () => {
+    if (targets.length === 0 || running) return
+    setRunning(true); setResult(null); setError('')
+    try {
+      const { data } = await simulateTakedown(targets.map(t => t.id), freeze, iid)
+      setResult(data)
+    } catch {
+      setError('Simulation failed. Check the backend connection and try again.')
+    } finally {
+      setRunning(false)
+    }
+  }
+
+  const lenses = result?.lenses
+  const reso = result?.case_resolution
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 max-w-6xl">
       <div>
-        <h1 className="text-lg font-bold text-white flex items-center gap-2">
-          <Crosshair size={20} className="text-red-400" />
-          Takedown Simulator
+        <h1 className="text-xl font-bold text-gov-ink flex items-center gap-2">
+          <Crosshair size={20} className="text-gov-navy" />
+          Arrest Impact Simulator
         </h1>
-        <p className="text-xs text-gray-500 mt-0.5">
-          Simulate the network impact of arresting key individuals or dismantling cells.
-          Used to optimise law enforcement intervention strategy.
+        <p className="text-xs text-gov-muted mt-0.5">
+          Select suspects for arrest. The simulator measures the outcome four ways and reports
+          how much of the case is resolved and how much of the syndicate is dismantled.
         </p>
         {iid && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>}
       </div>
 
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-5 gap-4 items-start">
+        {/* ── Left: scenario builder ─────────────────────────── */}
+        <div className="col-span-2 gov-card p-4 space-y-4">
+          <section>
+            <h2 className="text-sm font-bold text-gov-ink mb-2">1 · Start from a preset package</h2>
+            <div className="space-y-2">
+              {strategies.map(s => (
+                <button
+                  key={s.id}
+                  onClick={() => applyPreset(s)}
+                  className={`w-full text-left p-3 rounded-lg border transition-colors ${
+                    activePreset === s.id
+                      ? 'border-gov-navy bg-gov-wash'
+                      : 'border-gov-border bg-white hover:border-gov-navy'
+                  }`}
+                >
+                  <span className="flex items-baseline justify-between gap-2">
+                    <span className="text-sm font-semibold text-gov-ink">{formalName(s.name)}</span>
+                    <span className="text-xs font-mono text-gov-muted flex-shrink-0">
+                      {s.metrics?.dismantlement_score_pct != null
+                        ? `${s.metrics.dismantlement_score_pct}%`
+                        : '—'}
+                    </span>
+                  </span>
+                  <span className="block text-xs text-gov-muted mt-0.5">{s.description}</span>
+                  <span className="block text-[11px] text-gov-faint mt-1 font-mono">
+                    {(s.target_ids || []).length} targets
+                  </span>
+                </button>
+              ))}
+              {strategies.length === 0 && !error && (
+                <p className="text-xs text-gov-muted text-center py-4">Loading scenarios…</p>
+              )}
+            </div>
+          </section>
 
-        {/* Strategy selector */}
-        <div className="card p-5 space-y-4">
-          <h2 className="text-sm font-semibold text-white">Select Strike Package</h2>
-          <div className="space-y-2">
-            {strategies.map(s => (
-              <button
-                key={s.id}
-                onClick={() => { setSelected(s); setResult(null) }}
-                className={`w-full text-left p-3 rounded-xl border transition-all ${
-                  selected?.id === s.id
-                    ? 'border-red-500 bg-red-500/10'
-                    : 'border-dark-500 bg-dark-700 hover:border-dark-400'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1 gap-2">
-                  <p className="text-sm font-medium text-white">{s.name}</p>
-                  <span className="text-xs font-mono text-red-400 flex-shrink-0">
-                    {s.metrics?.dismantlement_score_pct != null
-                      ? `${s.metrics.dismantlement_score_pct}% impact`
-                      : ''}
-                  </span>
+          <section>
+            <h2 className="text-sm font-bold text-gov-ink mb-2">2 · Adjust the arrest list</h2>
+            <div className="relative">
+              <input
+                className="gov-input"
+                placeholder="Type a name, ID or phone to add…"
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+              />
+              {(hits.length > 0 || searching) && (
+                <div className="absolute top-full mt-1 left-0 right-0 bg-white border border-gov-border rounded-lg shadow-gov z-30 max-h-56 overflow-y-auto">
+                  {searching && hits.length === 0
+                    ? <p className="px-4 py-3 text-xs text-gov-muted">Searching…</p>
+                    : hits.map(h => (
+                      <button
+                        key={h.id}
+                        onClick={() => addSuspect(h)}
+                        className="w-full text-left px-4 py-2 hover:bg-gov-wash flex items-center gap-2"
+                      >
+                        <Plus size={12} className="text-gov-navy flex-shrink-0" />
+                        <span>
+                          <span className="block text-sm text-gov-ink font-medium">{h.name || h.id}</span>
+                          <span className="block text-[11px] text-gov-muted font-mono">
+                            {h.id}{h.role ? ` · ${h.role}` : ''}{h.cell ? ` · Cell ${h.cell}` : ''}
+                          </span>
+                        </span>
+                      </button>
+                    ))}
                 </div>
-                {s.badge && (
-                  <span className={`inline-block text-[10px] font-mono px-1.5 py-0.5 rounded border mb-1 ${BADGE_COLOR[s.badge_color || ''] || 'text-gray-400 border-dark-500'}`}>
-                    {s.badge}
-                  </span>
-                )}
-                <p className="text-xs text-gray-500">{s.description}</p>
-                <p className="text-[10px] text-gray-600 mt-1 font-mono">
-                  Targets: {(s.target_ids || []).slice(0, 3).join(', ')}
-                  {(s.target_ids || []).length > 3 ? ` +${s.target_ids.length - 3} more` : ''}
-                </p>
-              </button>
-            ))}
-            {strategies.length === 0 && (
-              <p className="text-xs text-gray-500 text-center py-4">
-                {loadError || 'Loading strategies from backend…'}
-              </p>
+              )}
+            </div>
+            {targets.length > 0 ? (
+              <table className="w-full text-xs mt-2">
+                <thead>
+                  <tr className="border-b border-gov-border text-left text-gov-muted">
+                    <th className="font-semibold py-1.5 pr-2">Target</th>
+                    <th className="font-semibold py-1.5 pr-2">Role</th>
+                    <th className="py-1.5 w-8" />
+                  </tr>
+                </thead>
+                <tbody>
+                  {targets.map(t => (
+                    <tr key={t.id} className="border-b border-gov-border last:border-0">
+                      <td className="py-1.5 pr-2">
+                        <span className="block font-medium text-gov-ink">{t.name}</span>
+                        <span className="block font-mono text-[10px] text-gov-faint">{t.id}</span>
+                      </td>
+                      <td className="py-1.5 pr-2 text-gov-muted">{t.role || '—'}</td>
+                      <td className="py-1.5 text-right">
+                        <button onClick={() => removeTarget(t.id)}
+                          className="text-gov-faint hover:text-gov-red" title="Remove">
+                          <X size={13} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p className="text-xs text-gov-faint mt-2">No targets yet — pick a package or add suspects above (max {MAX_TARGETS}).</p>
             )}
-          </div>
+            {targets.length >= MAX_TARGETS && (
+              <p className="text-[11px] text-gov-muted mt-1">Target list is full ({MAX_TARGETS}). Remove one to add another.</p>
+            )}
+          </section>
+
+          <section className="flex items-center gap-2">
+            <input
+              id="freeze-accts"
+              type="checkbox"
+              checked={freeze}
+              onChange={e => setFreeze(e.target.checked)}
+              className="w-4 h-4 accent-[#1B3A6B]"
+            />
+            <label htmlFor="freeze-accts" className="text-xs text-gov-ink">
+              Also freeze linked bank accounts and seize phones
+            </label>
+          </section>
 
           <button
             onClick={simulate}
-            disabled={!selected || running}
-            className="btn-primary w-full justify-center disabled:opacity-50"
+            disabled={targets.length === 0 || running}
+            className="gov-btn w-full justify-center disabled:opacity-50"
           >
             {running ? (
               <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 Simulating…
               </>
             ) : (
               <>
-                <Zap size={14} />
-                Run Simulation
+                <Play size={14} />
+                Run simulation{activePreset ? '' : ` (${targets.length} custom targets)`}
               </>
             )}
           </button>
+          {error && <p className="text-xs text-gov-red bg-red-50 border border-red-200 rounded-lg px-3 py-2">{error}</p>}
         </div>
 
-        {/* Result panel */}
-        <div className="card p-5">
+        {/* ── Right: verdict ─────────────────────────────────── */}
+        <div className="col-span-3 gov-card p-5">
           {!result ? (
-            <div className="flex flex-col items-center justify-center h-full text-gray-500 text-center gap-2 py-12">
-              <Crosshair size={36} className="text-gray-700" />
-              <p className="text-sm">Select a strategy and run simulation</p>
-              <p className="text-xs">Results show network fragmentation after arrest</p>
+            <div className="flex flex-col items-center justify-center text-center gap-2 py-14">
+              <Crosshair size={32} className="text-gov-borderd" />
+              <p className="text-sm font-medium text-gov-ink">No simulation yet</p>
+              <p className="text-xs text-gov-muted max-w-sm">
+                Build an arrest list on the left and run it. You will get two verdicts —
+                case resolved and syndicate dismantled — each broken down by how it was measured.
+              </p>
             </div>
           ) : (
             <div className="space-y-5">
-              {/* Score */}
-              <div className="text-center">
-                <div className="text-5xl font-mono font-bold text-red-400 mb-1">
-                  {impact}%
-                </div>
-                <p className="text-sm text-gray-400">Network Dismantlement</p>
-                <p className="text-xs text-gray-600 mt-0.5">
-                  {result.targets_count} targets neutralised
-                </p>
-              </div>
-
-              {/* Efficiency before / after */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="border rounded-xl p-3 bg-dark-700 border-yellow-500/30">
-                  <p className="text-xs font-mono font-bold mb-2 text-yellow-400">Baseline efficiency</p>
-                  <p className="text-xl font-mono text-white">{result.baseline_efficiency?.toFixed(4)}</p>
-                </div>
-                <div className="border rounded-xl p-3 bg-dark-700 border-green-500/30">
-                  <p className="text-xs font-mono font-bold mb-2 text-green-400">Post-strike efficiency</p>
-                  <p className="text-xl font-mono text-white">{result.post_takedown_efficiency?.toFixed(4)}</p>
-                </div>
-              </div>
-
-              {/* Impact stats */}
-              <div className="grid grid-cols-3 gap-3 text-center">
-                <div className="bg-dark-700 rounded-xl p-3">
-                  <p className="text-lg font-mono font-bold text-white">{result.isolated_fragments_count}</p>
-                  <p className="text-[10px] text-gray-500">isolated fragments</p>
-                </div>
-                <div className="bg-dark-700 rounded-xl p-3">
-                  <p className="text-lg font-mono font-bold text-white">{result.severed_channels_count}</p>
-                  <p className="text-[10px] text-gray-500">channels severed</p>
-                </div>
-                <div className="bg-dark-700 rounded-xl p-3">
-                  <p className="text-lg font-mono font-bold text-white">
-                    ₹{(result.recoverable_assets_inr / 100000).toFixed(1)}L
+                <div className="gov-well p-4 text-center">
+                  <p className="text-4xl font-bold text-gov-navy font-mono">
+                    {reso?.overall_pct ?? 0}%
                   </p>
-                  <p className="text-[10px] text-gray-500 flex items-center justify-center gap-1">
-                    <Wallet size={10} /> assets freezable
+                  <p className="text-xs font-bold text-gov-ink mt-1">Case resolved</p>
+                  <p className="text-[11px] text-gov-muted mt-0.5">
+                    {reso?.suspects_neutralized ?? 0} of {reso?.suspects_total ?? 0} suspects ·
+                    {' '}{reso?.firs_linked ?? 0} of {reso?.firs_total ?? 0} FIRs linked
+                  </p>
+                </div>
+                <div className="gov-well p-4 text-center">
+                  <p className="text-4xl font-bold text-gov-navy font-mono">
+                    {result.dismantlement_score_pct ?? 0}%
+                  </p>
+                  <p className="text-xs font-bold text-gov-ink mt-1">Syndicate dismantled</p>
+                  <p className="text-[11px] text-gov-muted mt-0.5">
+                    {result.targets_count} arrested · {result.isolated_fragments_count} fragments remain
                   </p>
                 </div>
               </div>
 
-              {/* Resource allocation */}
-              {result.tactical_resource_allocation && (
-                <div className="bg-dark-700 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <CheckCircle size={14} className="text-green-400" />
-                    <p className="text-xs font-semibold text-white">Tactical Resource Allocation</p>
-                  </div>
-                  <div className="space-y-1 text-xs text-gray-300">
-                    {Object.entries(result.tactical_resource_allocation).map(([k, v]) => (
-                      <div key={k} className="flex justify-between">
-                        <span className="capitalize">{k.replace(/_/g, ' ')}</span>
-                        <span className="font-mono">{v}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Targets */}
-              <div>
-                <p className="text-xs text-gray-400 mb-2 flex items-center gap-1">
-                  <AlertTriangle size={11} /> Neutralised targets
-                </p>
-                <div className="flex flex-wrap gap-1">
-                  {(result.target_profiles || []).map((t, i) => (
-                    <span key={i} className="badge-person">
-                      {(t.name as string) || (t.id as string) || (t.target_id as string) || `Target ${i + 1}`}
-                    </span>
+              <section>
+                <h3 className="text-sm font-bold text-gov-ink mb-2">Assessment by lens</h3>
+                <dl className="divide-y divide-gov-border border border-gov-border rounded-lg overflow-hidden">
+                  {lenses && ([
+                    {
+                      k: 'fragmentation' as const,
+                      headline: `${lenses.fragmentation?.components_before ?? '—'} → ${lenses.fragmentation?.components_after ?? '—'} fragments (${lenses.fragmentation?.new_fragments ?? 0} new)`,
+                    },
+                    {
+                      k: 'communication' as const,
+                      headline: `${lenses.communication?.called_severed ?? 0} of ${lenses.communication?.called_total ?? 0} call links severed (${lenses.communication?.called_share_pct ?? 0}%)`,
+                    },
+                    {
+                      k: 'financial' as const,
+                      headline: `${inr(lenses.financial?.seized_inr ?? 0)} seized of ${inr(lenses.financial?.case_volume_inr ?? 0)} (${lenses.financial?.money_share_pct ?? 0}%) · ${lenses.financial?.frozen_transactions ?? 0} transfers frozen`,
+                    },
+                    {
+                      k: 'leadership' as const,
+                      headline: (() => {
+                        const r = lenses.leadership?.roles_neutralized || {}
+                        const parts = Object.entries(r).map(([role, n]) => `${n}× ${role}`)
+                        return parts.length ? parts.join(', ') + ' neutralised' : 'No leadership roles neutralised'
+                      })(),
+                    },
+                  ]).map(({ k, headline }) => (
+                    <div key={k} className="px-4 py-3 bg-white">
+                      <dt className="text-xs font-bold text-gov-ink">
+                        {lenses[k]?.label} — <span className="font-medium">{headline}</span>
+                      </dt>
+                      <dd className="text-[11px] text-gov-muted mt-0.5">{lenses[k]?.method}</dd>
+                      {k === 'leadership' && (lenses.leadership?.deputies_remaining_count ?? 0) > 0 && (
+                        <dd className="text-[11px] text-gov-muted mt-0.5">
+                          Still active: {(lenses.leadership?.deputies_remaining || []).join(', ')}
+                          {` (${lenses.leadership?.deputies_remaining_count} deputies)`}
+                        </dd>
+                      )}
+                    </div>
                   ))}
-                  {(!result.target_profiles || result.target_profiles.length === 0) && (
-                    <span className="text-xs text-gray-500">{result.targets_count} targets</span>
-                  )}
-                </div>
-              </div>
+                </dl>
+              </section>
+
+              <section>
+                <h3 className="text-sm font-bold text-gov-ink mb-2">
+                  Arrested ({result.target_profiles?.length ?? result.targets_count})
+                </h3>
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="border-b border-gov-border text-left text-gov-muted">
+                      <th className="font-semibold py-1.5 pr-2">Name</th>
+                      <th className="font-semibold py-1.5 pr-2">Role</th>
+                      <th className="font-semibold py-1.5 pr-2">Cell</th>
+                      <th className="font-semibold py-1.5">Risk</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(result.target_profiles || []).map((t, i) => (
+                      <tr key={i} className="border-b border-gov-border last:border-0">
+                        <td className="py-1.5 pr-2 font-medium text-gov-ink">
+                          {(t.name as string) || (t.target_id as string)}
+                        </td>
+                        <td className="py-1.5 pr-2 text-gov-muted">{(t.role as string) || '—'}</td>
+                        <td className="py-1.5 pr-2 text-gov-muted font-mono">{(t.cell as string) || '—'}</td>
+                        <td className="py-1.5 text-gov-muted">{(t.risk_level as string) || '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
+
+              {result.tactical_resource_allocation && (
+                <p className="text-[11px] text-gov-muted">
+                  Suggested deployment: {result.tactical_resource_allocation.armed_tactical_units} armed units ·{' '}
+                  {result.tactical_resource_allocation.cyber_forensics_officers} cyber-forensics officers ·{' '}
+                  {result.tactical_resource_allocation.perimeter_containment_squads} perimeter squads
+                  ({result.tactical_resource_allocation.total_personnel_required} personnel).
+                  {' '}{typeof result.succession_risk === 'string' ? result.succession_risk : ''}
+                </p>
+              )}
             </div>
           )}
         </div>

@@ -278,6 +278,88 @@ def simulate_takedown(
     ]
     succession_risk = "LOW — Command structure shattered" if not remaining_suspects else f"MODERATE — Deputy leaders remain ({', '.join(remaining_suspects[:2])})"
 
+    # ---- Assessment lenses: the same arrests, measured four honest ways ----
+    total_called = sum(1 for e in all_edges if e.get("kind") == "CALLED")
+    severed_called = sum(1 for e in cross_cell_severed if e.get("kind") == "CALLED")
+    severed_transacted = sum(1 for e in cross_cell_severed if e.get("kind") == "TRANSACTED")
+    case_txn_volume = sum(_txn_amount(t) for t in datasets.get("transactions", []))
+    roles_hit: Dict[str, int] = defaultdict(int)
+    for tp in target_profiles:
+        roles_hit[str(tp.get("role", "Suspect"))] += 1
+    lenses = {
+        "fragmentation": {
+            "label": "Network fragmentation",
+            "method": "Connected components before vs after removal (undirected).",
+            "components_before": len(base_components),
+            "components_after": len(post_components),
+            "new_fragments": max(0, len(post_components) - len(base_components)),
+            "isolated_singletons_after": sum(1 for c in post_components if len(c) == 1),
+        },
+        "communication": {
+            "label": "Communication degradation",
+            "method": "Share of CALLED edges severed; Latora–Marchiori efficiency drop.",
+            "called_total": total_called,
+            "called_severed": severed_called,
+            "called_share_pct": round(100.0 * severed_called / total_called, 1) if total_called else 0.0,
+            "efficiency_before": round(base_efficiency, 4),
+            "efficiency_after": round(post_efficiency, 4),
+        },
+        "financial": {
+            "label": "Financial disruption",
+            "method": "Frozen-transfer value ÷ total case transfer value.",
+            "case_volume_inr": round(case_txn_volume, 2),
+            "seized_inr": round(seized_funds, 2),
+            "money_share_pct": round(100.0 * seized_funds / case_txn_volume, 1) if case_txn_volume > 0 else 0.0,
+            "frozen_transactions": frozen_txns_count,
+            "frozen_accounts": len(frozen_accounts),
+            "transacted_edges_severed": severed_transacted,
+        },
+        "leadership": {
+            "label": "Leadership removal",
+            "method": "Roles neutralized among targets; named deputies still active.",
+            "roles_neutralized": dict(roles_hit),
+            "deputies_remaining": remaining_suspects[:5],
+            "deputies_remaining_count": len(remaining_suspects),
+        },
+    }
+
+    # ---- Case resolution: what share of THIS case is closed out ----
+    # Mean of three observable shares; each component is reported separately
+    # so the headline can never hide a weak dimension.
+    suspect_ids = {p["id"] for p in people_list}
+    neutralized_suspects = [t for t in target_ids if t in suspect_ids]
+    suspect_share = (len(neutralized_suspects) / len(suspect_ids)) if suspect_ids else 0.0
+    firs = datasets.get("firs", [])
+    linked_firs = 0
+    name_bits = set()
+    for tp in target_profiles:
+        tid = str(tp.get("target_id", ""))
+        if tid:
+            name_bits.add(tid.lower())
+        nm = str(tp.get("name", "") or "")
+        if nm and nm != tid:
+            name_bits.add(nm.lower())
+    for f in firs:
+        hay = (
+            str(f.get("suspects") or "") + " "
+            + str(f.get("narrative") or f.get("description") or "")
+        ).lower()
+        if any(b and b in hay for b in name_bits):
+            linked_firs += 1
+    fir_share = (linked_firs / len(firs)) if firs else 0.0
+    money_share = (seized_funds / case_txn_volume) if case_txn_volume > 0 else 0.0
+    case_resolution = {
+        "label": "Case resolution",
+        "method": "Mean of suspect / FIR-evidence / seized-funds shares (each shown).",
+        "suspects_neutralized": len(neutralized_suspects),
+        "suspects_total": len(suspect_ids),
+        "suspect_share_pct": round(100.0 * suspect_share, 1),
+        "firs_linked": linked_firs,
+        "firs_total": len(firs),
+        "fir_share_pct": round(100.0 * fir_share, 1),
+        "overall_pct": round(100.0 * (suspect_share + fir_share + money_share) / 3.0, 1),
+    }
+
     return {
         "status": "success",
         "targets_count": len(target_ids),
@@ -291,6 +373,8 @@ def simulate_takedown(
         "recoverable_assets_inr": seized_funds,
         "frozen_transactions_count": frozen_txns_count,
         "succession_risk": succession_risk,
+        "lenses": lenses,
+        "case_resolution": case_resolution,
         "tactical_resource_allocation": {
             "armed_tactical_units": armed_swat_needed,
             "cyber_forensics_officers": cyber_forensics_needed,
@@ -333,8 +417,12 @@ def get_takedown_strategies(
     bw_scores = {r["id"]: r.get("betweenness", 0.0) for r in cent_rows}
 
     # 1. Decapitation Targets (Top PageRank / Kingpins)
+    # Prefer labeled cells, but fall back to all known persons so unlabeled
+    # real-world cases (no A/B/C tags) still produce a valid package.
+    labeled_ids = [n["id"] for n in nodes if n["id"] in person_map and person_map[n["id"]].get("cell") in ("A", "B", "C", "Bridge")]
+    candidate_pool = labeled_ids if labeled_ids else [n["id"] for n in nodes if n["id"] in person_map]
     kingpin_candidates = sorted(
-        [n["id"] for n in nodes if n["id"] in person_map and person_map[n["id"]].get("cell") in ("A", "B", "C", "Bridge")],
+        candidate_pool,
         key=lambda nid: pr_scores.get(nid, 0.0),
         reverse=True
     )[:3]
@@ -416,8 +504,10 @@ def get_takedown_strategies(
         "status": "success",
         "total_strategies": len(strategies),
         "strategies": strategies,
-        "available_suspects": [
-            {
+        # Labeled cells preferred; fall back to top-ranked persons on
+        # unlabeled cases (capped to bound payload size).
+        "available_suspects": (
+            [{
                 "id": p["id"],
                 "name": p.get("name", p["id"]),
                 "role": p.get("role", "Suspect"),
@@ -425,8 +515,24 @@ def get_takedown_strategies(
                 "pagerank": round(pr_scores.get(p["id"], 0.0), 4),
                 "betweenness": round(bw_scores.get(p["id"], 0.0), 4),
             }
-            for p in people if p.get("cell") in ("A", "B", "C", "Bridge")
-        ]
+             for p in people if p.get("cell") in ("A", "B", "C", "Bridge")]
+            if labeled_ids
+            else sorted(
+                (
+                    {
+                        "id": p["id"],
+                        "name": p.get("name", p["id"]),
+                        "role": p.get("role", "Suspect"),
+                        "cell": p.get("cell", "Unknown"),
+                        "pagerank": round(pr_scores.get(p["id"], 0.0), 4),
+                        "betweenness": round(bw_scores.get(p["id"], 0.0), 4),
+                    }
+                    for p in people
+                ),
+                key=lambda r: r["pagerank"],
+                reverse=True,
+            )[:100]
+        ),
     }
 
 
