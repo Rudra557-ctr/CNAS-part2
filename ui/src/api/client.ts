@@ -87,6 +87,8 @@ export const mergeEntities = (keep_id: string, drop_id: string, iid?: string) =>
   api.post('/entity/merge', { keep_id, drop_id }, { params: _iid(iid) })
 export const fetchEntityHistory = (id: string, iid?: string) =>
   api.get(`/entity/${encodeURIComponent(id)}/history`, { params: _iid(iid) })
+export const fetchEntityLineage = (id: string, iid?: string) =>
+  api.get(`/entity/${encodeURIComponent(id)}/lineage`, { params: _iid(iid) })
 
 // ── Annotations + activity (collaboration-lite) ────────────────────────────
 export const fetchAnnotations = (o?: { target_type?: string; target_id?: string; iid?: string }) =>

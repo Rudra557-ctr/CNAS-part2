@@ -1553,6 +1553,17 @@ def entity_history(entity_id: str, iid: Optional[str] = Query(None),
     _, scope = _curation_serial(iid)
     return {"id": entity_id, "iid": iid, "events": history_for(scope, entity_id)}
 
+@app.get("/entity/{entity_id}/lineage")
+def entity_lineage(entity_id: str, iid: Optional[str] = Query(None),
+                   user: dict = Depends(get_current_user)):
+    from backend.lineage import build_lineage
+    datasets, serial = _get_inv_datasets_and_serial(iid)
+    serial = apply_overrides(serial, scope_dir_for(iid))
+    out = build_lineage(entity_id, datasets, serial)
+    out["iid"] = iid
+    audit_log(f"/entity/{entity_id}/lineage", [entity_id])
+    return out
+
 # -------------------------------------------------------------
 # Dossier-lite: per-case live-linked report blocks.
 # Blocks store refs (+pin-time snapshots), never frozen copies — /live

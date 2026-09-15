@@ -4,14 +4,14 @@ import ForceGraph2D from 'react-force-graph-2d'
 import {
   fetchGraph, fetchWhy, fetchCommunities, fetchBridges,
   fetchInvGraph, fetchInvWhy, fetchInvCommunities,
-  patchEntity, mergeEntities, fetchEntityHistory, pinDossierBlock,
+  patchEntity, mergeEntities, fetchEntityHistory, fetchEntityLineage, pinDossierBlock,
   fetchAnnotations, postAnnotation, deleteAnnotation,
 } from '../api/client'
 import type { GraphData, GraphNode, GraphEdge, Community } from '../types'
 import {
   X, ZoomIn, ZoomOut, RefreshCw, Info, FileText, Hash,
   Users, Maximize, Minimize, Pencil, History, GitMerge, Pin,
-  MessageSquare, Trash2,
+  MessageSquare, Trash2, Scale,
 } from 'lucide-react'
 import { useAuth } from '../components/AuthContext'
 
@@ -79,6 +79,7 @@ export default function GraphView() {
   const [selEdge,   setSelEdge]     = useState<GraphEdge | null>(null)
   const [whySignals, setWhySignals] = useState<string[]>([])
   const [history,   setHistory]     = useState<any[]>([])
+  const [lineage,   setLineage]     = useState<any | null>(null)
   const [loading,   setLoading]     = useState(true)
   const [loadError, setLoadError]   = useState('')
   const [filter,    setFilter]      = useState<string>('all')
@@ -94,7 +95,7 @@ export default function GraphView() {
     setCaseId(null); setCaseName('')
     setSelected(null); setSelEdge(null); setActiveComm(null); setFocus(null)
     setHistory([]); setEditMode(false); setMergeArmed(false)
-    setComments([]); setCommentText('')
+    setComments([]); setCommentText(''); setLineage(null)
     setGraphData(null); setCommunities([]); setCommLoaded(false); setBridges(new Set())
     fitted.current = false
   }
@@ -139,6 +140,7 @@ export default function GraphView() {
     setSelEdge(null)
     setWhySignals([])
     setHistory([])
+    setLineage(null)
     setEditMode(false); setEditErr(''); setMergeArmed(false); setMergeMsg(''); setActionMsg('')
     setPinMsg('')
     setComments([]); setCommentText('')
@@ -149,6 +151,9 @@ export default function GraphView() {
     const h = fetchEntityHistory(node.id, cid)
     h.then(r => setHistory(r.data.events || []))
      .catch(() => setHistory([]))
+    fetchEntityLineage(node.id, cid)
+      .then(r => setLineage(r.data))
+      .catch(() => setLineage(null))
     fetchAnnotations({ target_type: 'node', target_id: node.id, ...(cid ? { iid: cid } : {}) })
       .then(r => setComments(r.data.comments || []))
       .catch(() => setComments([]))
@@ -404,7 +409,7 @@ export default function GraphView() {
   const clearSel = () => {
     setSelected(null); setSelEdge(null); setWhySignals([]); setFocus(null)
     setHistory([]); setEditMode(false); setEditErr(''); setMergeArmed(false); setMergeMsg(''); setActionMsg('')
-    setPinMsg(''); setComments([]); setCommentText('')
+    setPinMsg(''); setComments([]); setCommentText(''); setLineage(null)
   }
 
   const pinEntity = async () => {
@@ -717,6 +722,58 @@ export default function GraphView() {
                 </div>
                 <span className="text-sm font-mono font-bold text-gov-red">{selected.risk_score}</span>
               </div>
+            </div>
+          )}
+
+          {lineage && lineage.lead_score != null && (
+            <div>
+              <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
+                <Scale size={11} /> Score lineage
+                <span className="text-[10px] font-mono text-gov-faint">
+                  {lineage.lead_score}/100 · {lineage.priority}
+                </span>
+              </p>
+              <div className="gov-well p-3 space-y-2">
+                {(lineage.contributions || []).map((c: any) => (
+                  <div key={c.signal}>
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-gov-ink">{c.label}</span>
+                      <span className="font-mono text-gov-muted">
+                        {c.points}pts <span className="text-gov-faint">· w{c.weight} × {c.value}</span>
+                      </span>
+                    </div>
+                    <div className="h-1.5 bg-gov-border rounded-full overflow-hidden mt-0.5">
+                      <div
+                        className="h-full rounded-full bg-gov-navy transition-all"
+                        style={{ width: `${Math.min(Math.max(c.value * 100, 0), 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+                <p className="text-[10px] font-mono text-gov-faint pt-1">{lineage.formula}</p>
+              </div>
+              {(lineage.records || []).length > 0 && (
+                <div className="mt-2 space-y-1.5">
+                  <p className="text-[11px] font-semibold text-gov-muted">Contributing records</p>
+                  {(lineage.records || []).slice(0, 6).map((r: any, i: number) => (
+                    <div key={i} className="gov-well px-3 py-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-mono font-bold text-gov-navy uppercase">{r.kind}</span>
+                        <span className="text-[11px] font-mono text-gov-ink truncate">{r.ref || '—'}</span>
+                        {r.confidence != null && (
+                          <span className="text-[10px] font-mono text-gov-faint ml-auto flex-shrink-0">
+                            {typeof r.confidence === 'number' ? r.confidence.toFixed(2) : r.confidence}
+                          </span>
+                        )}
+                      </div>
+                      {r.detail && <p className="text-[11px] text-gov-muted mt-0.5 truncate">{r.detail}</p>}
+                      {r.evidence_hash && (
+                        <p className="text-[10px] font-mono text-gov-faint mt-0.5">⛓ {String(r.evidence_hash).slice(0, 16)}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
