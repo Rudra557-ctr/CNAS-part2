@@ -154,9 +154,16 @@ export default function MapView() {
           zoom={12}
           style={{ width: '100%', height: '100%' }}
         >
+          {/* No-key dark basemap (Esri) + labels overlay.
+              CARTO gated anonymous tiles behind an API key ("API key required"
+              baked into tiles), so it is no longer usable keyless. */}
           <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+            attribution='&copy; <a href="https://www.esri.com/">Esri</a> & contributors'
+          />
+          <TileLayer
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}"
+            attribution=''
           />
 
           {/* Cell towers */}
