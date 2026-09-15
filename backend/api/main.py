@@ -1278,6 +1278,14 @@ def get_temporal(iid: Optional[str] = Query(None), user: dict = Depends(get_curr
     audit_log("/temporal", [f"{g['span']}" for g in ti["correlated_groups"]])
     return ti
 
+@app.get("/temporal/playback")
+def get_playback(iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend.analytics.temporal import get_playback as build_playback
+    datasets, _ = _get_inv_datasets_and_serial(iid)
+    data = build_playback(datasets)
+    audit_log(f"/temporal/playback iid={iid or 'demo'}", [f"days:{data['day_start']}-{data['day_end']}"])
+    return data
+
 @app.get("/connections/explain")
 def explain_connection_endpoint(
     src: str = Query(..., description="Source entity ID"),

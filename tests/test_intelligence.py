@@ -131,3 +131,36 @@ def test_temporal_api():
     r = client.get("/temporal", headers=auth_headers())
     assert r.status_code == 200
     assert "correlated_groups" in r.json()
+
+
+def test_playback_structure_and_order():
+    from backend.analytics.temporal import get_playback
+    pb = get_playback()
+    assert pb["day_start"] <= pb["day_end"]
+    days = [d["day"] for d in pb["days"]]
+    assert days == sorted(days)
+    for d in pb["days"]:
+        assert {"day", "calls", "transactions", "txn_amount", "firs", "top_entities", "top_pairs"} <= set(d.keys())
+    for k in pb["key_dates"]:
+        assert {"day", "kind", "title", "reason", "evidence"} <= set(k.keys())
+        assert {"names", "refs"} <= set(k["evidence"].keys())
+    spans = [p["span"] for p in pb["unusual_periods"]]
+    assert spans == sorted(spans)
+    for p in pb["unusual_periods"]:
+        assert {"span", "kind", "title", "reason", "key_names", "evidence"} <= set(p.keys())
+    fdays = [f["day"] for f in pb["flagged_days"]]
+    assert fdays == sorted(fdays)
+    for f in pb["flagged_days"]:
+        assert f["issues"] and f["insights"]
+
+
+def test_playback_api():
+    from fastapi.testclient import TestClient
+    from backend.api.main import app
+    from conftest import auth_headers
+    client = TestClient(app)
+    r = client.get("/temporal/playback", headers=auth_headers())
+    assert r.status_code == 200
+    d = r.json()
+    assert d["day_end"] > d["day_start"] >= 0
+    assert len(d["key_dates"]) > 0 and len(d["flagged_days"]) > 0

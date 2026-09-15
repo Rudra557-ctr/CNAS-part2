@@ -55,6 +55,7 @@ export const fetchCommunities = (iid?: string) => api.get('/communities', { para
 export const fetchCentrality  = (iid?: string) => api.get('/centrality', { params: _iid(iid) })
 export const fetchCrossCase   = (iid?: string) => api.get('/cross-case', { params: _iid(iid) })
 export const fetchTemporal    = (iid?: string) => api.get('/temporal', { params: _iid(iid) })
+export const fetchPlayback    = (iid?: string) => api.get('/temporal/playback', { params: _iid(iid) })
 
 // ── Geospatial ─────────────────────────────────────────────────────────────
 //  /geospatial/towers       → {towers: [{tower_name,lat,lng,call_count,unique_suspects_count,dominant_cell,…}]}
