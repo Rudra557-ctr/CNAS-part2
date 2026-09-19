@@ -1,0 +1,168 @@
+{
+  "id": "3a898031",
+  "name": "Operation Real Format",
+  "description": "Clean run, fixed mapper",
+  "created": "2026-09-09T13:51:47.726321Z",
+  "status": "completed",
+  "files": [
+    {
+      "original": "jio_cdr_mar2024.csv",
+      "stored": "3a898031/files/jio_cdr_mar2024.csv",
+      "format": "csv",
+      "detected_type": "cdrs",
+      "type_confidence": 0.231,
+      "columns": [
+        "A_Number",
+        "B_Number",
+        "Call_Date",
+        "Call_Time",
+        "Duration(sec)",
+        "Tower_Address",
+        "Circle"
+      ],
+      "sample_rows": [
+        {
+          "A_Number": "9820098200",
+          "B_Number": "9811198111",
+          "Call_Date": "12/03/2024",
+          "Call_Time": "21:34:11",
+          "Duration(sec)": "407",
+          "Tower_Address": "Andheri West, Mumbai",
+          "Circle": "Mumbai"
+        },
+        {
+          "A_Number": "9820098200",
+          "B_Number": "9890198901",
+          "Call_Date": "13/03/2024",
+          "Call_Time": "09:02:44",
+          "Duration(sec)": "89",
+          "Tower_Address": "Kothrud, Pune \u0096 near Karve Putala",
+          "Circle": "Maharashtra"
+        }
+      ]
+    },
+    {
+      "original": "sbi_txns_mar2024.csv",
+      "stored": "3a898031/files/sbi_txns_mar2024.csv",
+      "format": "csv",
+      "detected_type": "transactions",
+      "type_confidence": 0.486,
+      "columns": [
+        "UTR_No",
+        "Value_Date",
+        "Debit_Acct",
+        "Credit_Acct",
+        "Amount_INR",
+        "Mode",
+        "Branch"
+      ],
+      "sample_rows": [
+        {
+          "UTR_No": "SBIN424071234567",
+          "Value_Date": "12/03/2024",
+          "Debit_Acct": "HDFC00012345678901",
+          "Credit_Acct": "521402010009876",
+          "Amount_INR": "48000",
+          "Mode": "RTGS",
+          "Branch": "Andheri"
+        },
+        {
+          "UTR_No": "SBIN424071234568",
+          "Value_Date": "13/03/2024",
+          "Debit_Acct": "521402010009876",
+          "Credit_Acct": "ICIC00099887766554",
+          "Amount_INR": "49000",
+          "Mode": "IMPS",
+          "Branch": "Pune"
+        }
+      ]
+    },
+    {
+      "original": "fir_0214_narrative.txt",
+      "stored": "3a898031/files/fir_0214_narrative.txt",
+      "format": "txt",
+      "detected_type": "firs",
+      "type_confidence": 0.744,
+      "columns": [
+        "fir_id",
+        "date",
+        "station",
+        "location",
+        "ipc_sections",
+        "narrative"
+      ],
+      "sample_rows": [
+        {
+          "fir_id": "0214/2024",
+          "date": "",
+          "station": "",
+          "location": "",
+          "ipc_sections": "",
+          "narrative": "FIR No. 0214/2024, Andheri Police Station, Mumbai. Complainant states that accused\nRaju Shinde (mobile 9820098200) was seen meeting an associate near Andheri station before\ntravelling to Pune by vehicle MH-12-AB-1234. Call records show frequent contact with\n9811198111. Offence registered under BNS Section 318 (cheating) and 336 (forgery).\nWitness Kavita Deshmukh of Kothrud, Pune confirms the meeting at Nashik Road.",
+          "accused_name": "Raju Shinde",
+          "_source_doc": "2d6777f43ba846949d6f23c871e0ebbb_fir_0214_narrative.txt"
+        }
+      ]
+    }
+  ],
+  "mapping": {
+    "jio_cdr_mar2024.csv": {
+      "mapping": {
+        "caller_phone": "A_Number",
+        "callee_phone": "B_Number",
+        "caller_id": null,
+        "callee_id": null,
+        "timestamp": "Call_Time",
+        "date": "Call_Date",
+        "duration_sec": "Duration(sec)",
+        "day": null,
+        "call_id": null,
+        "caller_name": null,
+        "callee_name": null,
+        "call_type": null,
+        "cell_tower_location": "Tower_Address"
+      },
+      "validated": true,
+      "missing": []
+    },
+    "sbi_txns_mar2024.csv": {
+      "mapping": {
+        "sender_account": "Debit_Acct",
+        "receiver_account": "Credit_Acct",
+        "sender_id": null,
+        "receiver_id": null,
+        "amount_inr": "Amount_INR",
+        "timestamp": null,
+        "date": "Value_Date",
+        "day": null,
+        "txn_id": "UTR_No",
+        "sender_name": null,
+        "receiver_name": null,
+        "txn_type": "Mode"
+      },
+      "validated": true,
+      "missing": []
+    },
+    "fir_0214_narrative.txt": {
+      "mapping": {
+        "date": "date",
+        "day": null,
+        "fir_id": "fir_id",
+        "station": "station",
+        "location": "location",
+        "ipc_sections": "ipc_sections",
+        "narrative": "narrative",
+        "accused_name": null,
+        "complainant_name": null
+      },
+      "validated": true,
+      "missing": []
+    }
+  },
+  "processing": {
+    "entities": 57,
+    "relationships": 16,
+    "graph_nodes": 20,
+    "graph_edges": 24
+  }
+}

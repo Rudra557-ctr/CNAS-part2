@@ -1,0 +1,27 @@
+master_id,merged_ids,method,confidence,name_score,phone_score,context_score,source_id,source_type,evidence_snippet,evidence_hash
+Bhai,candidate->A12 score 71.2,fuzzy_reject(name:40/100=0.400+phone:0.0*0.04+ctx:0.5*0.02=0.410),0.5,40.0,0.0,0.5,CRIM0003,criminal_history,Bhai,d41c55bf957849d2
+Bablu,candidate->C4 score 71.2,fuzzy_reject(name:50/100=0.500+phone:0.0*0.04+ctx:0.5*0.02=0.510),0.5,50.0,0.0,0.5,CRIM0014,criminal_history,Bablu,05d254f12e450f8f
+Sher,candidate->A1 score 71.2,fuzzy_reject(name:38/100=0.375+phone:0.0*0.04+ctx:0.5*0.02=0.385),0.5,37.5,0.0,0.5,CRIM0025,criminal_history,Sher,78e16d25efa2812c
+A13,Kaarn Mehra,fuzzy(name:91/100=0.909+phone:0.0*0.04+ctx:0.5*0.02=0.919),0.919,90.9,0.0,0.5,FIR0001,fir,red after a scuffle involving Kaarn Mehra at Old Market Circle. Prelimi,277c5554bbe0b8d6
+B12,Mohsin Qrueshi,fuzzy(name:93/100=0.929+phone:0.0*0.04+ctx:0.5*0.02=0.939),0.939,92.9,0.0,0.5,FIR0015,fir,"k's network, was seen meeting Mohsin Qrueshi at Riverside Colony. Nature o",5d77ca24a06a32f0
+C1,Prakash Shetty's,fuzzy(name:93/100=0.933+phone:0.0*0.04+ctx:0.5*0.02=0.943),0.943,93.3,0.0,0.5,FIR0020,fir,Source intelligence indicates Prakash Shetty's group may be preparing for an,01d55d0ebb9af9f4
+B12,Mohsin Quraishi,fuzzy(name:90/100=0.897+phone:0.0*0.04+ctx:0.5*0.02=0.907),0.907,89.7,0.0,0.5,FIR0016,fir,n persons believed to include Mohsin Quraishi and Salim Pathan around Wareh,0c9171a0ac9e4272
+A8,Sajnay More,fuzzy(name:91/100=0.909+phone:0.0*0.04+ctx:0.5*0.02=0.919),0.919,90.9,0.0,0.5,FIR0007,fir,twork linked to Anwar Sheikh. Sajnay More was found in possession of a,9de8d295101d568b
+A10,Faiasl Shah,fuzzy(name:91/100=0.909+phone:0.0*0.04+ctx:0.5*0.02=0.919),0.919,90.9,0.0,0.5,FIR0007,fir,hone with frequent contact to Faiasl Shah. Case registered under IPC 12,a7140c0b7c95141a
+A1,Anwar Sheikh's,fuzzy(name:92/100=0.923+phone:0.0*0.04+ctx:0.5*0.02=0.933),0.933,92.3,0.0,0.5,FIR0003,fir,Source intelligence indicates Anwar Sheikh's group may be preparing for an,68d9c380510c1e35
+A13,Kraan Mehra,fuzzy(name:91/100=0.909+phone:0.0*0.04+ctx:0.5*0.02=0.919),0.919,90.9,0.0,0.5,FIR0003,fir,ng operation. Suresh Rane and Kraan Mehra were observed conferring near,54d8cd90ac2262f4
+C11,Neha Klkarni,fuzzy(name:96/100=0.960+phone:0.0*0.04+ctx:0.5*0.02=0.970),0.97,96.0,0.0,0.5,FIR0022,fir,hone with frequent contact to Neha Klkarni. Case registered under IPC 50,8d4631c4059b8359
+A3,Farhan,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,FIR0008,fir,ng for an upcoming operation. Farhan and Ramesh Yadav were observe,073382869e66378d
+B5,Ashk Gaikwad,fuzzy(name:96/100=0.960+phone:0.0*0.04+ctx:0.5*0.02=0.970),0.97,96.0,0.0,0.5,FIR0009,fir,g suggests a possible link to Ashk Gaikwad through a prior known associa,f4e68da471d381e3
+C5,Yusfu Ali,fuzzy(name:89/100=0.889+phone:0.0*0.04+ctx:0.5*0.02=0.899),0.899,88.9,0.0,0.5,FIR0018,fir,peration. Ramesh Chougule and Yusfu Ali were observed conferring near,e59fc9fe0fc55529
+C13,Ramesh Chugule,fuzzy(name:97/100=0.966+phone:0.0*0.04+ctx:0.5*0.02=0.976),0.976,96.6,0.0,0.5,FIR0017,fir,"Informant states that Ramesh Chugule, associated with Prakash Shet",2b3926295e6c248c
+A9,Tariq Ansri,fuzzy(name:96/100=0.957+phone:0.0*0.04+ctx:0.5*0.02=0.967),0.967,95.7,0.0,0.5,FIR0004,fir,n persons believed to include Tariq Ansri and Ganesh Pawar around Docks,04b9cf48e67195d7
+A7,रमेश यादव,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,DOC-0001,fir,खनऊ। मुखबिर की सूचना पर आरोपी रमेश यादव (मोबाइल 9820098200) तथा आरोपी,ae510102245c5030
+A7,यादव,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,DOC-0001,fir,मुखबिर की सूचना पर आरोपी रमेश यादव (मोबाइल 9820098200) तथा आरोपी,792fb1cfcf6e1049
+A2,सुरेश राणे,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,DOC-0001,fir,(मोबाइल 9820098200) तथा आरोपी सुरेश राणे को डॉकसाइड वार्ड के पास देखा,8bb2c5fd948eea10
+A2,राणे,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,DOC-0001,fir,ल 9820098200) तथा आरोपी सुरेश राणे को डॉकसाइड वार्ड के पास देखा,084d99786faabab2
+B11,कविता देसाई,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,DOC-0001,fir,के पर बरामद हुआ। गवाह श्रीमती कविता देसाई ने बयान दर्ज कराया। अपराध भार,42265ddb09f673e6
+B11,देसाई,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,DOC-0001,fir,बरामद हुआ। गवाह श्रीमती कविता देसाई ने बयान दर्ज कराया। अपराध भार,c759c661e3adcc1d
+C12,Snil Pillai,fuzzy(name:96/100=0.957+phone:0.0*0.04+ctx:0.5*0.02=0.967),0.967,95.7,0.0,0.5,SOC0041,social_post,Snil Pillai collecting around Lakeview Ch,e2161e9b7912c0e0
+A3,Farhan Quraishi,fuzzy(name:90/100=0.897+phone:0.0*0.04+ctx:0.5*0.02=0.907),0.907,89.7,0.0,0.5,SOC0006,social_post,Met Farhan Quraishi near Warehouse District last,f163fc4b7256d133
+C4,Baban Srve,fuzzy(name:95/100=0.952+phone:0.0*0.04+ctx:0.5*0.02=0.962),0.962,95.2,0.0,0.5,SOC0034,social_post,"Told Baban Srve the drop moves to New Colony,",4be02a4b583df01f

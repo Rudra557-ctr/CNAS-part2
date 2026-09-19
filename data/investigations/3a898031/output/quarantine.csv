@@ -1,0 +1,3 @@
+row_no,source_file,reason,confidence
+0,day_rebase,Rebased 8 rows onto case-relative days (day 1 = 2024-03-12),0.8
+0,entity_bootstrapper,"Auto-created profiles: {'phones_bootstrapped': 4, 'accounts_bootstrapped': 3, 'names_bootstrapped': 0}",0.5

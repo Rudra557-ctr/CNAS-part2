@@ -1,0 +1,601 @@
+record_id,person_id,name,alias,dob,prior_offences,gang_affiliation,known_address,ground_truth_flag
+UP-CRIM-0001,UP00001,Rajesh Rajput,,1978-07-11,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"168, Near Shivpur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0002,UP00002,Rajesh Tiwari,,1984-03-18,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"114, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0003,UP00003,Abhay Tripathi,,1999-06-08,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"147, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0004,UP00004,Imran Nishad,Imran Nishad @ Don,1991-04-10,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"139, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0005,UP00005,Ravindra Kushwaha,,2000-01-19,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"79, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0006,UP00006,Rizwan Chaudhary,,2003-05-01,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"144, Near Tajganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0007,UP00007,Gufran Siddiqui,,1996-03-10,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"71, Near Indirapuram PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0008,UP00008,Gufran Tripathi,,1994-04-05,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"134, Near Rakabganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0009,UP00009,Chhotu Maurya,,1985-02-19,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"245, Near Knowledge Park PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0010,UP00010,Babloo Tiwari,Babloo Tiwari @ Pandit,1995-11-03,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"214, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0011,UP00011,Chhotu Gupta,,1998-11-20,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"40, Near Indirapuram PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0012,UP00012,Akhilesh Nagar,,1989-01-07,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"78, Near Hazratganj PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0013,UP00013,Satish Siddiqui,,1981-05-14,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"208, Near Nauchandi PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0014,UP00014,Bablu Bind,,1991-10-28,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"129, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0015,UP00015,Amit Tyagi,,1977-10-19,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"239, Near Cantt PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0016,UP00016,Sonu Tiwari,,1977-12-05,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"162, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0017,UP00017,Dharmendra Yadav,,1979-12-22,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"39, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0018,UP00018,Pankaj Siddiqui,,1983-03-17,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"209, Near Civil Lines PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0019,UP00019,Tariq Gautam,,1998-09-24,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"124, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0020,UP00020,Santosh Gurjar,,1980-05-03,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"71, Near Cantt PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0021,UP00021,Mahesh Qureshi,,1990-07-21,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"177, Near George Town PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0022,UP00022,Rizwan Nagar,,1976-07-17,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"65, Near Sector 20 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0023,UP00023,Sanjay Jaiswal,,1978-05-09,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"117, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0024,UP00024,Deepak Gautam,,1990-06-19,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"85, Near Hari Parbat PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0025,UP00025,Dhananjay Pal,,1982-01-18,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"125, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0026,UP00026,Rajesh Shukla,,1995-09-04,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"57, Near Shahganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0027,UP00027,Vikram Singh,,2001-01-21,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"106, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0028,UP00028,Akhilesh Kushwaha,,1980-07-23,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"171, Near Cantt PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0029,UP00029,Ramesh Gautam,,1989-02-15,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"27, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0030,UP00030,Ramesh Maurya,,1997-05-19,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"222, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0031,UP00031,Imran Tomar,,1984-10-17,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"21, Near Indirapuram PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0032,UP00032,Babloo Tomar,,1980-05-18,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"143, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0033,UP00033,Aslam Tomar,,1989-01-07,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"78, Near Sahibabad PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0034,UP00034,Satish Jaiswal,Satish Jaiswal @ Raja,1975-07-23,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"199, Near Sigra PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0035,UP00035,Rizwan Nagar,,1981-05-28,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"120, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0036,UP00036,Amit Kushwaha,,1982-11-27,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"234, Near Civil Lines PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0037,UP00037,Sunil Gautam,,1990-02-13,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"198, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0038,UP00038,Sunil Tiwari,,1998-01-27,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"162, Near Nawabad PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0039,UP00039,Deepak Bind,,1995-10-06,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"166, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0040,UP00040,Rizwan Mishra,,1990-09-20,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"38, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0041,UP00041,Neeraj Pal,Neeraj Pal @ Bhaiya,1993-03-16,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"200, Near Chinhat PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0042,UP00042,Brijesh Tripathi,,1981-02-02,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"72, Near Sadar Bazar PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0043,UP00043,Bablu Singh,,1981-12-21,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"63, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0044,UP00044,Mahesh Pandey,Mahesh Pandey @ Contractor,1981-03-02,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"241, Near Rakabganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0045,UP00045,Tariq Tiwari,,1992-10-27,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"54, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0046,UP00046,Rajesh Dubey,,1993-10-07,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"67, Near Hazratganj PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0047,UP00047,Chhotu Tripathi,,1987-01-22,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"65, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0048,UP00048,Imran Maurya,Imran Maurya @ Pandit,1987-05-01,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"129, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0049,UP00049,Virendra Tyagi,Virendra Tyagi @ Vakil,2002-04-09,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"92, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0050,UP00050,Akhilesh Rawat,,1985-07-16,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"57, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0051,UP00051,Suresh Dubey,,1988-07-07,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"113, Near Brahmpuri PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0052,UP00052,Amit Yadav,,1986-01-03,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"51, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0053,UP00053,Rajesh Chauhan,Rajesh Chauhan @ Chacha,1988-11-10,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"109, Near Sahibabad PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0054,UP00054,Sonu Chaudhary,,1982-06-05,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"247, Near Nauchandi PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0055,UP00055,Pappu Pandey,,1996-08-16,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"153, Near Shahpur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0056,UP00056,Ajay Jaiswal,,1989-11-03,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"44, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0057,UP00057,Akhilesh Chauhan,Akhilesh Chauhan @ Pahalwan,1993-01-08,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"218, Near Chinhat PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0058,UP00058,Suresh Jaiswal,,1997-01-22,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"14, Near Katra PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0059,UP00059,Aslam Chauhan,,1984-05-12,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"90, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0060,UP00060,Gufran Khan,,1998-06-27,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"243, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0061,UP00061,Sonu Khan,,1986-10-06,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"169, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0062,UP00062,Manoj Chauhan,,1984-11-20,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"137, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0063,UP00063,Sanjay Pandey,,1993-06-11,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"250, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0064,UP00064,Alok Nagar,,1987-06-05,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"130, Near Gorakhnath PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0065,UP00065,Munna Srivastav,,2003-01-11,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"39, Near Kotwali PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0066,UP00066,Sanjay Nishad,,2000-08-19,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"41, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0067,UP00067,Rakesh Mishra,,1985-07-20,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"84, Near Shahganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0068,UP00068,Mahesh Tomar,,1999-04-04,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"118, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0069,UP00069,Pramod Yadav,,1975-03-19,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"23, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0070,UP00070,Pankaj Tiwari,,1997-07-21,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"162, Near Nauchandi PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0071,UP00071,Babloo Chauhan,,1975-04-08,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"92, Near Naini PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0072,UP00072,Chhotu Nagar,,1985-08-03,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"141, Near Raunahi PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0073,UP00073,Akhilesh Khan,,1989-02-11,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"98, Near Kalyanpur PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0074,UP00074,Rajesh Tripathi,Rajesh Tripathi @ Don,2003-10-22,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"209, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0075,UP00075,Anil Chauhan,,1982-10-18,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"240, Near Sahibabad PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0076,UP00076,Mahesh Mishra,,2001-07-14,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"149, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0077,UP00077,Suresh Khan,Suresh Khan @ Urf Chhotu,1999-03-10,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"111, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0078,UP00078,Rizwan Gurjar,,2002-03-18,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"213, Near Raunahi PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0079,UP00079,Pramod Gautam,,1987-05-25,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"178, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0080,UP00080,Ramesh Verma,,1988-10-09,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"200, Near Hazratganj PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0081,UP00081,Manoj Siddiqui,Manoj Siddiqui @ Chacha,1996-01-06,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"227, Near Chinhat PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0082,UP00082,Ramesh Pandey,,1996-04-17,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"37, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0083,UP00083,Anil Mishra,,1984-06-14,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"64, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0084,UP00084,Guddu Nishad,,1983-05-19,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"125, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0085,UP00085,Munna Verma,,2001-05-26,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"139, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0086,UP00086,Guddu Srivastav,,1987-11-20,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"189, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0087,UP00087,Alok Tyagi,,1975-05-17,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"111, Near Cantt PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0088,UP00088,Pankaj Tomar,,1990-05-24,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"127, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0089,UP00089,Santosh Siddiqui,Santosh Siddiqui @ Netaji,1983-06-02,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"102, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0090,UP00090,Mukhtar Dubey,,1975-08-28,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"89, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0091,UP00091,Rakesh Pal,,1990-08-11,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"39, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0092,UP00092,Vikram Rawat,,1980-12-24,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"52, Near Cantt PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0093,UP00093,Abhay Nishad,Abhay Nishad @ Fauji,1991-07-15,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"67, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0094,UP00094,Dharmendra Shukla,,2002-10-02,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"31, Near Cantt PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0095,UP00095,Akhilesh Tomar,,1986-12-15,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"246, Near Tajganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0096,UP00096,Chhotu Dubey,,2000-08-12,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"248, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0097,UP00097,Atiq Pandey,Atiq Pandey @ Don,2001-02-01,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"25, Near Phase 2 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0098,UP00098,Sonu Qureshi,,1979-10-19,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"112, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0099,UP00099,Alok Tomar,,2000-04-14,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"93, Near Kavi Nagar PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0100,UP00100,Rakesh Srivastav,,1989-07-13,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"55, Near Sector 20 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0101,UP00101,Abhay Ansari,,1985-03-02,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"213, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0102,UP00102,Deepak Gautam,,1980-01-22,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"234, Near Cantt PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0103,UP00103,Mukhtar Tripathi,,2003-11-13,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"64, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0104,UP00104,Alok Nagar,Alok Nagar @ Fauji,1983-02-07,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"156, Near Cantt PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0105,UP00105,Rizwan Tiwari,,1986-11-16,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"250, Near Hazratganj PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0106,UP00106,Mahesh Chauhan,,1989-03-19,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"25, Near Hari Parbat PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0107,UP00107,Ravindra Jaiswal,Ravindra Jaiswal @ Pandit,1995-06-19,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"133, Near Govind Nagar PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0108,UP00108,Deepak Pandey,,1981-04-18,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"195, Near Naini PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0109,UP00109,Satish Ansari,,1984-12-08,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"21, Near Naini PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0110,UP00110,Manoj Khan,,1998-06-28,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"166, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0111,UP00111,Deepak Yadav,,1994-09-11,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"24, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0112,UP00112,Sunil Srivastav,,1977-03-13,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"14, Near Alambagh PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0113,UP00113,Imran Siddiqui,Imran Siddiqui @ Babu,1999-09-24,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"14, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0114,UP00114,Atiq Chaudhary,,1985-01-21,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"12, Near Kavi Nagar PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0115,UP00115,Virendra Tripathi,,1984-09-13,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"208, Near Tajganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0116,UP00116,Tariq Gautam,,1997-05-02,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"95, Near Kotwali PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0117,UP00117,Munna Gurjar,Munna Gurjar @ Kabadi,1979-05-15,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"221, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0118,UP00118,Tariq Qureshi,,1991-06-23,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"71, Near Shahpur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0119,UP00119,Alok Gupta,,1991-09-17,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"34, Near Shivpur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0120,UP00120,Alok Srivastav,,2001-11-10,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"17, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0121,UP00121,Anil Tiwari,,1988-03-11,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"79, Near Sikandra PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0122,UP00122,Neeraj Gurjar,,1984-05-19,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"60, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0123,UP00123,Manoj Rajput,,1982-10-14,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"145, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0124,UP00124,Chhotu Chaudhary,,1983-11-10,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"156, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0125,UP00125,Babloo Gupta,,1983-11-24,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"186, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0126,UP00126,Tariq Pandey,,1996-08-16,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"72, Near Kalyanpur PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0127,UP00127,Akhilesh Pandey,,1987-05-18,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"35, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0128,UP00128,Atiq Siddiqui,,1997-09-13,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"85, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0129,UP00129,Amit Srivastav,,1988-11-28,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"179, Near Knowledge Park PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0130,UP00130,Brijesh Nagar,,1986-10-02,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"35, Near Hari Parbat PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0131,UP00131,Tariq Nishad,,1975-07-27,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"201, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0132,UP00132,Chhotu Singh,,1987-07-03,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"73, Near Sadar Bazar PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0133,UP00133,Anil Nishad,Anil Nishad @ Bhaiya,1979-09-01,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"115, Near Tajganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0134,UP00134,Chhotu Tripathi,,1986-02-09,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"58, Near Sadar Bazar PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0135,UP00135,Sunil Shukla,,1988-12-11,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"32, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0136,UP00136,Anil Qureshi,,1979-09-13,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"227, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0137,UP00137,Deepak Jaiswal,Deepak Jaiswal @ Don,2003-10-26,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"92, Near Cantt PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0138,UP00138,Deepak Tiwari,,1989-09-16,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"210, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0139,UP00139,Manoj Bind,,1986-03-17,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"151, Near Sector 20 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0140,UP00140,Chhotu Gupta,Chhotu Gupta @ Fauji,1978-08-17,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"204, Near Nauchandi PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0141,UP00141,Mahesh Dubey,,1981-04-09,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"105, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0142,UP00142,Sonu Chaudhary,,1976-07-01,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"76, Near Chowk PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0143,UP00143,Vikram Pal,,1985-11-28,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"94, Near Indirapuram PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0144,UP00144,Rakesh Rajput,Rakesh Rajput @ Pandit,2003-07-07,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"70, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0145,UP00145,Akhilesh Shukla,Akhilesh Shukla @ Urf Chhotu,1982-10-16,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"145, Near Gorakhnath PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0146,UP00146,Abhay Rajput,,1979-01-26,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"76, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0147,UP00147,Suresh Pal,,1987-12-18,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"243, Near Nawabad PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0148,UP00148,Pappu Gupta,,1995-04-04,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"186, Near Nawabad PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0149,UP00149,Neeraj Khan,,1991-01-10,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"141, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0150,UP00150,Virendra Yadav,Virendra Yadav @ Urf Chhotu,1990-12-09,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"131, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0151,UP00151,Dharmendra Nishad,Dharmendra Nishad @ Raja,2002-12-20,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"130, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0152,UP00152,Sonu Rajput,Sonu Rajput @ Babu,1991-03-16,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"37, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0153,UP00153,Sunil Shukla,Sunil Shukla @ Pandit,2003-10-11,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"55, Near Sector 24 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0154,UP00154,Santosh Gupta,,1982-09-10,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"44, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0155,UP00155,Satish Tyagi,,1986-03-02,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"175, Near Hazratganj PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0156,UP00156,Imran Verma,,1990-08-15,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"178, Near Shahganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0157,UP00157,Imran Singh,,1996-04-03,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"38, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0158,UP00158,Rakesh Pal,,1992-09-04,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"207, Near Shivpur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0159,UP00159,Santosh Pandey,,1982-08-16,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"250, Near Sigra PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0160,UP00160,Deepak Gautam,,2000-02-21,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"60, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0161,UP00161,Rajesh Nagar,,1976-10-09,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"19, Near Nauchandi PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0162,UP00162,Deepak Pal,,1977-05-14,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"188, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0163,UP00163,Rakesh Dubey,,1996-08-16,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"126, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0164,UP00164,Akhilesh Yadav,Akhilesh Yadav @ Kabadi,1986-10-19,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"88, Near Phase 2 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0165,UP00165,Mukhtar Nagar,,1989-10-01,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"92, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0166,UP00166,Guddu Shukla,,1984-01-26,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"172, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0167,UP00167,Sunil Kushwaha,Sunil Kushwaha @ Netaji,1998-03-19,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"180, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0168,UP00168,Ravindra Srivastav,Ravindra Srivastav @ Raja,1982-12-05,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"10, Near Indirapuram PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0169,UP00169,Atiq Qureshi,Atiq Qureshi @ Pandit,1995-06-14,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"15, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0170,UP00170,Rakesh Srivastav,,1978-04-01,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"167, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0171,UP00171,Babloo Qureshi,,1977-09-15,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"221, Near Kalyanpur PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0172,UP00172,Sonu Chauhan,,1977-01-06,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"42, Near Kareli PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0173,UP00173,Sonu Dubey,,1984-07-05,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"177, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0174,UP00174,Ramesh Kushwaha,Ramesh Kushwaha @ Fauji,1980-08-02,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"198, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0175,UP00175,Munna Rajput,,1986-10-21,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"115, Near Sector 20 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0176,UP00176,Amit Tiwari,Amit Tiwari @ Netaji,1989-04-21,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"140, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0177,UP00177,Imran Srivastav,,1996-04-05,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"194, Near Sikandra PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0178,UP00178,Rizwan Siddiqui,,1985-03-28,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"225, Near Kavi Nagar PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0179,UP00179,Pramod Gurjar,Pramod Gurjar @ Vakil,1978-10-09,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"143, Near Kavi Nagar PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0180,UP00180,Aslam Tyagi,,1998-12-21,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"11, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0181,UP00181,Sanjay Yadav,,1998-03-14,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"92, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0182,UP00182,Bablu Pandey,,2001-05-23,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"143, Near George Town PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0183,UP00183,Vikram Tripathi,,1991-06-27,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"165, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0184,UP00184,Imran Nishad,,2003-02-22,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"139, Near Naini PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0185,UP00185,Akhilesh Pal,,1988-06-19,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"186, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0186,UP00186,Sunil Rajput,,1998-03-19,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"156, Near Alambagh PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0187,UP00187,Rakesh Mishra,Rakesh Mishra @ Babu,1986-12-18,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"114, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0188,UP00188,Pankaj Yadav,,2000-02-06,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"204, Near Sahibabad PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0189,UP00189,Anil Jaiswal,,2001-03-22,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"63, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0190,UP00190,Pappu Rawat,,2003-07-23,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"168, Near Mahanagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0191,UP00191,Suresh Pal,Suresh Pal @ Shooter,1998-09-20,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"31, Near Shahpur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0192,UP00192,Gufran Chauhan,,1975-11-10,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"28, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0193,UP00193,Rizwan Pal,,1996-08-22,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"86, Near Sadar Bazar PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0194,UP00194,Santosh Jaiswal,,2000-10-05,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"165, Near Brahmpuri PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0195,UP00195,Pramod Siddiqui,,2003-09-03,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"153, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0196,UP00196,Gufran Jaiswal,,1993-04-06,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"197, Near Shahganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0197,UP00197,Rajesh Nagar,,1995-12-08,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"92, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0198,UP00198,Tariq Bind,,1994-05-02,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"116, Near Knowledge Park PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0199,UP00199,Rizwan Yadav,Rizwan Yadav @ Pandit,2001-03-23,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"111, Near Kavi Nagar PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0200,UP00200,Sonu Khan,Sonu Khan @ Chacha,1986-09-12,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"54, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0201,UP00201,Chhotu Maurya,,1995-03-21,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"117, Near Cantt PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0202,UP00202,Pramod Tiwari,,2002-08-26,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"51, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0203,UP00203,Tariq Siddiqui,,1989-06-05,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"212, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0204,UP00204,Atiq Tomar,,2002-10-27,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"41, Near Gorakhnath PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0205,UP00205,Anil Dubey,Anil Dubey @ Babu,2001-06-08,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"28, Near Tajganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0206,UP00206,Pramod Yadav,,1985-11-12,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"45, Near Tajganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0207,UP00207,Dhananjay Pandey,,2002-08-09,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"228, Near Brahmpuri PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0208,UP00208,Akhilesh Mishra,Akhilesh Mishra @ Don,1991-01-22,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"171, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0209,UP00209,Satish Pal,,1975-02-18,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"148, Near Knowledge Park PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0210,UP00210,Rizwan Nishad,,1987-01-11,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"140, Near Phase 2 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0211,UP00211,Satish Shukla,,1981-01-05,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"109, Near Sadar Bazar PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0212,UP00212,Akhilesh Nagar,Akhilesh Nagar @ Kabadi,2002-01-07,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"127, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0213,UP00213,Neeraj Maurya,,1975-02-27,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"244, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0214,UP00214,Imran Yadav,,1987-08-13,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"69, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0215,UP00215,Guddu Khan,,2002-03-02,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"34, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0216,UP00216,Gufran Chauhan,,1975-05-26,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"69, Near Knowledge Park PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0217,UP00217,Abhay Bind,,1979-10-14,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"68, Near Sigra PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0218,UP00218,Dharmendra Gupta,,1989-01-03,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"210, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0219,UP00219,Abhay Shukla,Abhay Shukla @ Raja,1989-02-11,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"120, Near Rakabganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0220,UP00220,Vikram Shukla,,1996-11-23,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"143, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0221,UP00221,Deepak Kushwaha,,1996-08-13,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"245, Near Sadar Bazar PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0222,UP00222,Babloo Siddiqui,,1975-06-18,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"32, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0223,UP00223,Rakesh Bind,,1982-11-27,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"220, Near Ramgarh Tal PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0224,UP00224,Neeraj Pandey,,1984-07-11,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"55, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0225,UP00225,Abhay Tripathi,,1979-08-21,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"61, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0226,UP00226,Ramesh Rawat,,1976-03-14,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"48, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0227,UP00227,Santosh Gupta,,1975-10-20,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"43, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0228,UP00228,Manoj Verma,,1979-01-19,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"113, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0229,UP00229,Satish Verma,Satish Verma @ Pandit,1997-03-03,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"150, Near Kotwali PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0230,UP00230,Tariq Qureshi,,2003-03-09,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"175, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0231,UP00231,Vikram Chauhan,,1992-07-19,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"88, Near Prem Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0232,UP00232,Ajay Tripathi,Ajay Tripathi @ Netaji,1992-07-02,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"137, Near Chinhat PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0233,UP00233,Pappu Tripathi,,1982-04-18,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"103, Near Cantt PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0234,UP00234,Virendra Nagar,,1998-08-02,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"250, Near Kalyanpur PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0235,UP00235,Imran Srivastav,,2002-01-26,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"32, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0236,UP00236,Pankaj Mishra,,1977-07-04,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"149, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0237,UP00237,Sunil Gupta,,1996-08-01,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"151, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0238,UP00238,Virendra Tiwari,,1996-10-26,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"186, Near Kotwali PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0239,UP00239,Pappu Rajput,Pappu Rajput @ Raja,1975-02-15,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"68, Near Civil Lines PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0240,UP00240,Deepak Bind,,1992-08-18,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"93, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0241,UP00241,Guddu Srivastav,,1988-11-09,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"138, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0242,UP00242,Abhay Maurya,,1981-02-22,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"54, Near Sigra PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0243,UP00243,Dharmendra Chaudhary,,2001-04-18,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"32, Near Kareli PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0244,UP00244,Satish Bind,,1981-10-27,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"31, Near George Town PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0245,UP00245,Babloo Ansari,,1998-01-20,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"135, Near Shivpur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0246,UP00246,Rakesh Shukla,Rakesh Shukla @ Bhaiya,1978-08-19,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"35, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0247,UP00247,Vikram Khan,,1981-11-18,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"132, Near Mahanagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0248,UP00248,Manoj Gupta,,1975-08-11,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"100, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0249,UP00249,Neeraj Pandey,,1999-04-27,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"207, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0250,UP00250,Rajesh Gurjar,Rajesh Gurjar @ Kabadi,1979-07-05,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"46, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0251,UP00251,Santosh Rajput,,2001-06-22,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"154, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0252,UP00252,Atiq Dubey,,2000-01-14,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"222, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0253,UP00253,Mahesh Chaudhary,,1988-09-22,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"30, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0254,UP00254,Gufran Ansari,,1988-08-14,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"83, Near Alambagh PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0255,UP00255,Gufran Tomar,,1998-10-11,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"11, Near Chowk PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0256,UP00256,Alok Pandey,,1986-09-19,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"175, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0257,UP00257,Abhay Dubey,,1991-05-09,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"22, Near Shahpur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0258,UP00258,Suresh Pal,Suresh Pal @ Netaji,2000-02-02,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"106, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0259,UP00259,Amit Chauhan,,1984-12-02,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"86, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0260,UP00260,Munna Rajput,,1998-02-25,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"27, Near Gorakhnath PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0261,UP00261,Rajesh Verma,,1994-03-26,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"45, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0262,UP00262,Tariq Tiwari,,1976-05-24,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"152, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0263,UP00263,Ajay Gautam,,1976-12-02,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"248, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0264,UP00264,Imran Gupta,,1984-11-13,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"16, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0265,UP00265,Santosh Yadav,,2003-04-08,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"55, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0266,UP00266,Gufran Khan,,1982-12-11,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"106, Near Hari Parbat PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0267,UP00267,Aslam Rawat,Aslam Rawat @ Fauji,2001-05-05,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"168, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0268,UP00268,Abhay Bind,,1992-11-20,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"241, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0269,UP00269,Rajesh Tripathi,,1980-06-07,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"70, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0270,UP00270,Bablu Ansari,,1984-02-14,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"204, Near Chowk PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0271,UP00271,Atiq Yadav,,1996-12-18,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"168, Near Rakabganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0272,UP00272,Neeraj Chauhan,Neeraj Chauhan @ Raja,2003-04-12,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"244, Near Chinhat PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0273,UP00273,Deepak Pandey,,1999-03-13,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"17, Near Raunahi PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0274,UP00274,Ajay Singh,,2003-10-03,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"34, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0275,UP00275,Sanjay Ansari,,2003-02-07,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"19, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0276,UP00276,Alok Gupta,,1989-07-24,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"228, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0277,UP00277,Dharmendra Gautam,Dharmendra Gautam @ Babu,1981-11-20,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"241, Near Brahmpuri PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0278,UP00278,Babloo Gautam,,1990-07-20,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"179, Near Brahmpuri PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0279,UP00279,Ravindra Chaudhary,Ravindra Chaudhary @ Netaji,1979-05-23,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"144, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0280,UP00280,Pappu Gupta,,1987-02-26,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"65, Near Phase 2 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0281,UP00281,Abhay Yadav,,1983-08-05,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"14, Near Nauchandi PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0282,UP00282,Tariq Dubey,,1994-12-05,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"23, Near Ramgarh Tal PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0283,UP00283,Akhilesh Shukla,,1977-05-24,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"224, Near Kalyanpur PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0284,UP00284,Brijesh Kushwaha,,1992-06-06,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"102, Near Chinhat PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0285,UP00285,Abhay Yadav,,2003-06-16,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"64, Near Sikandra PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0286,UP00286,Abhay Jaiswal,Abhay Jaiswal @ Vakil,1983-09-12,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"118, Near Sector 24 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0287,UP00287,Rajesh Gautam,Rajesh Gautam @ Chacha,1987-04-11,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"50, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0288,UP00288,Bablu Qureshi,,2000-02-16,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"68, Near Knowledge Park PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0289,UP00289,Dharmendra Dubey,,1985-04-27,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"230, Near Cantt PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0290,UP00290,Pramod Yadav,,1998-01-22,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"76, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0291,UP00291,Rakesh Rawat,,1981-10-16,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"58, Near Katra PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0292,UP00292,Rakesh Rajput,Rakesh Rajput @ Fauji,2002-09-11,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"189, Near Rakabganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0293,UP00293,Imran Singh,,1982-09-05,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"51, Near Kotwali PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0294,UP00294,Akhilesh Mishra,,1977-05-06,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"39, Near Raunahi PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0295,UP00295,Neeraj Bind,,2001-11-03,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"66, Near Chowk PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0296,UP00296,Imran Bind,Imran Bind @ Kabadi,1976-11-03,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"15, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0297,UP00297,Vikram Yadav,,1997-01-15,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"118, Near Kareli PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0298,UP00298,Munna Gurjar,Munna Gurjar @ Pahalwan,2003-09-22,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"195, Near Shahpur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0299,UP00299,Santosh Maurya,,1981-01-12,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"88, Near Kavi Nagar PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0300,UP00300,Aslam Dubey,,1992-05-22,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"54, Near Katra PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0301,UP00301,Mukhtar Siddiqui,,1983-06-05,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"112, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0302,UP00302,Dharmendra Dubey,,2001-12-05,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"73, Near Chowk PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0303,UP00303,Ravindra Chaudhary,,1994-04-28,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"113, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0304,UP00304,Rajesh Mishra,,2003-07-16,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"186, Near Hari Parbat PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0305,UP00305,Abhay Tyagi,,1989-08-21,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"62, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0306,UP00306,Imran Rawat,,1988-08-01,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"104, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0307,UP00307,Neeraj Shukla,,1992-12-24,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"21, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0308,UP00308,Imran Jaiswal,,1986-09-04,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"214, Near Prem Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0309,UP00309,Suresh Gupta,,1981-05-20,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"121, Near Shahpur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0310,UP00310,Sanjay Dubey,Sanjay Dubey @ Babu,1989-08-25,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"167, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0311,UP00311,Babloo Ansari,,1990-06-12,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"175, Near Kavi Nagar PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0312,UP00312,Dharmendra Singh,,1986-05-19,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"217, Near Mahanagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0313,UP00313,Satish Gurjar,,1989-09-11,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"28, Near Raunahi PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0314,UP00314,Chhotu Rajput,,1994-03-22,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"148, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0315,UP00315,Pramod Gautam,,2001-02-08,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"24, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0316,UP00316,Satish Pal,,1988-09-19,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"180, Near Shivpur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0317,UP00317,Satish Tiwari,,1980-08-18,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"28, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0318,UP00318,Abhay Rawat,,1983-12-21,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"195, Near Sikandra PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0319,UP00319,Vikram Chauhan,,1987-09-10,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"120, Near Knowledge Park PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0320,UP00320,Ramesh Nagar,Ramesh Nagar @ Pahalwan,1993-07-05,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"137, Near Mahanagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0321,UP00321,Imran Dubey,,2002-01-16,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"203, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0322,UP00322,Rajesh Verma,,1977-09-28,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"226, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0323,UP00323,Rajesh Siddiqui,,1996-08-08,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"144, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0324,UP00324,Abhay Gupta,,2002-01-09,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"79, Near Ramgarh Tal PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0325,UP00325,Guddu Siddiqui,,1976-06-18,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"12, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0326,UP00326,Abhay Pal,,1996-06-04,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"60, Near Nawabad PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0327,UP00327,Guddu Tomar,,1977-06-13,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"130, Near Cantt PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0328,UP00328,Atiq Chauhan,Atiq Chauhan @ Pandit,1997-09-03,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"129, Near Kavi Nagar PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0329,UP00329,Amit Kushwaha,Amit Kushwaha @ Babu,1981-07-15,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"44, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0330,UP00330,Akhilesh Yadav,,1981-12-24,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"139, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0331,UP00331,Sanjay Dubey,Sanjay Dubey @ Bhaiya,1981-02-07,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"78, Near Brahmpuri PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0332,UP00332,Pankaj Qureshi,,1992-01-17,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"201, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0333,UP00333,Satish Chauhan,,1989-11-08,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"133, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0334,UP00334,Sonu Mishra,Sonu Mishra @ Raja,2003-07-22,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"140, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0335,UP00335,Pankaj Srivastav,,1984-01-05,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"173, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0336,UP00336,Dhananjay Rawat,,1981-02-19,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"125, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0337,UP00337,Ravindra Pal,Ravindra Pal @ Kabadi,1990-03-23,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"140, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0338,UP00338,Sonu Shukla,,1988-04-01,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"203, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0339,UP00339,Atiq Pal,,1984-04-17,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"125, Near Indirapuram PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0340,UP00340,Akhilesh Tomar,,1988-05-07,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"114, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0341,UP00341,Mahesh Siddiqui,,1988-07-28,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"214, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0342,UP00342,Pramod Yadav,,1988-12-01,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"78, Near Bhelupur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0343,UP00343,Tariq Kushwaha,,1992-07-13,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"10, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0344,UP00344,Neeraj Kushwaha,,1995-11-01,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"111, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0345,UP00345,Vikram Dubey,,1993-02-06,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"130, Near Gorakhnath PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0346,UP00346,Tariq Verma,,1984-04-22,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"57, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0347,UP00347,Babloo Tripathi,,1996-06-07,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"120, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0348,UP00348,Rakesh Pal,Rakesh Pal @ Don,1976-02-08,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"69, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0349,UP00349,Dharmendra Ansari,,1999-12-06,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"218, Near Gorakhnath PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0350,UP00350,Aslam Pandey,,1998-10-11,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"149, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0351,UP00351,Deepak Qureshi,,1984-02-05,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"38, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0352,UP00352,Chhotu Tomar,,1999-03-09,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"167, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0353,UP00353,Brijesh Dubey,,2002-03-25,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"111, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0354,UP00354,Akhilesh Rajput,,1989-06-09,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"102, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0355,UP00355,Santosh Chauhan,,1989-02-18,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"101, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0356,UP00356,Alok Gautam,,1982-01-24,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"221, Near Prem Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0357,UP00357,Amit Shukla,Amit Shukla @ Kabadi,1976-07-23,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"200, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0358,UP00358,Akhilesh Nagar,,1998-07-23,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"92, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0359,UP00359,Atiq Qureshi,,1977-02-06,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"209, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0360,UP00360,Atiq Chaudhary,,2001-10-23,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"120, Near Naini PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0361,UP00361,Chhotu Nishad,,1975-07-16,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"166, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0362,UP00362,Neeraj Gautam,,1988-01-27,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"32, Near Sahibabad PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0363,UP00363,Munna Tomar,,1998-11-28,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"131, Near Sikandra PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0364,UP00364,Akhilesh Gautam,Akhilesh Gautam @ Chacha,1996-01-27,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"179, Near Nauchandi PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0365,UP00365,Brijesh Yadav,Brijesh Yadav @ Netaji,1988-01-20,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"29, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0366,UP00366,Mukhtar Tripathi,,1985-03-04,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"196, Near Brahmpuri PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0367,UP00367,Abhay Srivastav,,2002-07-14,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"82, Near Knowledge Park PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0368,UP00368,Brijesh Chauhan,,1980-04-11,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"203, Near Shahganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0369,UP00369,Sonu Gautam,,1977-11-14,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"212, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0370,UP00370,Neeraj Chaudhary,,1994-07-08,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"204, Near Indirapuram PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0371,UP00371,Rizwan Pandey,Rizwan Pandey @ Pahalwan,1999-05-23,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"12, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0372,UP00372,Alok Bind,Alok Bind @ Urf Chhotu,1989-10-04,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"179, Near Lisari Gate PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0373,UP00373,Mukhtar Dubey,,1981-01-03,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"241, Near Chinhat PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0374,UP00374,Ramesh Rajput,,1992-12-26,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"44, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0375,UP00375,Santosh Jaiswal,,1986-12-19,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"113, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0376,UP00376,Gufran Pal,,1993-05-16,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"121, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0377,UP00377,Santosh Singh,,1996-09-03,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"248, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0378,UP00378,Abhay Rawat,,1990-08-07,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"115, Near Mahanagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0379,UP00379,Ajay Qureshi,Ajay Qureshi @ Shooter,1978-09-22,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"104, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0380,UP00380,Brijesh Gurjar,,1985-08-14,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"169, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0381,UP00381,Chhotu Gurjar,,1983-04-08,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"146, Near Govind Nagar PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0382,UP00382,Atiq Nagar,,1982-05-23,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"13, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0383,UP00383,Alok Khan,Alok Khan @ Don,1980-06-15,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"118, Near Sigra PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0384,UP00384,Dharmendra Singh,,1997-01-19,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"96, Near Phase 2 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0385,UP00385,Rajesh Kushwaha,,2003-10-07,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"191, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0386,UP00386,Guddu Pal,,1993-11-21,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"246, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0387,UP00387,Ravindra Rajput,Ravindra Rajput @ Pandit,1986-01-16,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"197, Near Sahibabad PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0388,UP00388,Mahesh Tripathi,,1977-11-10,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"144, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0389,UP00389,Atiq Yadav,,1982-01-09,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"46, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0390,UP00390,Guddu Siddiqui,,1981-10-04,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"201, Near Chowk PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0391,UP00391,Dhananjay Pandey,,1992-02-24,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"122, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0392,UP00392,Brijesh Tyagi,Brijesh Tyagi @ Chacha,1989-11-24,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"158, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0393,UP00393,Rajesh Pal,,2001-05-23,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"236, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0394,UP00394,Manoj Siddiqui,,1993-10-17,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"199, Near Shahpur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0395,UP00395,Ramesh Pal,,2002-08-18,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"63, Near Gorakhnath PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0396,UP00396,Munna Gurjar,,1994-05-17,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"84, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0397,UP00397,Dhananjay Nagar,,1981-10-12,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"176, Near Tajganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0398,UP00398,Manoj Nishad,,1975-02-16,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"153, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0399,UP00399,Mukhtar Kushwaha,,1986-08-13,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"115, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0400,UP00400,Abhay Nagar,,1996-02-04,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"66, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0401,UP00401,Akhilesh Kushwaha,Akhilesh Kushwaha @ Pandit,1987-08-22,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"180, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0402,UP00402,Ajay Dubey,,1975-09-27,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"198, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0403,UP00403,Imran Verma,Imran Verma @ Raja,1991-05-01,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"74, Near Raunahi PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0404,UP00404,Imran Srivastav,,1990-04-12,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"182, Near Nauchandi PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0405,UP00405,Sonu Gautam,,1981-01-23,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"137, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0406,UP00406,Satish Shukla,,1981-12-06,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"20, Near Nawabad PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0407,UP00407,Guddu Tomar,,1997-11-12,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"127, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0408,UP00408,Mahesh Mishra,,1986-04-19,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"116, Near Hari Parbat PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0409,UP00409,Anil Nishad,,1979-06-14,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"106, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0410,UP00410,Amit Maurya,,1983-04-03,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"235, Near Hari Parbat PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0411,UP00411,Amit Rajput,,1990-07-20,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"197, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0412,UP00412,Atiq Qureshi,,1992-11-13,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"36, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0413,UP00413,Pramod Nagar,,1993-11-25,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"45, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0414,UP00414,Suresh Shukla,,1984-10-25,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"222, Near Gorakhnath PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0415,UP00415,Deepak Pandey,Deepak Pandey @ Pandit,1995-08-06,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"245, Near Sector 20 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0416,UP00416,Satish Jaiswal,Satish Jaiswal @ Chacha,1986-04-27,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"106, Near Mahanagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0417,UP00417,Amit Verma,,1996-03-18,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"194, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0418,UP00418,Ajay Maurya,,1992-10-05,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"184, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0419,UP00419,Gufran Dubey,,1996-12-13,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"248, Near Civil Lines PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0420,UP00420,Munna Yadav,,1983-07-07,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"126, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0421,UP00421,Akhilesh Mishra,,1989-11-14,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"235, Near Cantt PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0422,UP00422,Alok Shukla,Alok Shukla @ Contractor,1988-10-23,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"249, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0423,UP00423,Pramod Kushwaha,,1995-04-16,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"162, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0424,UP00424,Atiq Bind,,1988-11-27,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"151, Near Sector 24 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0425,UP00425,Brijesh Tomar,Brijesh Tomar @ Kabadi,1986-11-12,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"180, Near Sector 20 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0426,UP00426,Rakesh Khan,,1976-01-12,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"48, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0427,UP00427,Mahesh Mishra,Mahesh Mishra @ Pahalwan,1988-06-11,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"65, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0428,UP00428,Vikram Shukla,Vikram Shukla @ Contractor,1979-07-27,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"26, Near Ramgarh Tal PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0429,UP00429,Suresh Rawat,,1985-08-19,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"99, Near Chinhat PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0430,UP00430,Satish Gurjar,,1981-07-10,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"37, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0431,UP00431,Dhananjay Bind,Dhananjay Bind @ Pahalwan,1999-07-20,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"245, Near Sigra PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0432,UP00432,Manoj Qureshi,,1997-03-20,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"24, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0433,UP00433,Sanjay Mishra,,1994-05-21,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"234, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0434,UP00434,Brijesh Srivastav,,1985-08-26,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"153, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0435,UP00435,Sanjay Tomar,,1998-05-26,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"214, Near Hazratganj PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0436,UP00436,Tariq Verma,,2000-07-17,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"62, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0437,UP00437,Satish Verma,,1993-04-26,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"102, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0438,UP00438,Satish Jaiswal,,1983-09-18,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"174, Near Sigra PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0439,UP00439,Tariq Maurya,,2001-01-28,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"111, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0440,UP00440,Guddu Mishra,Guddu Mishra @ Contractor,1987-01-09,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"200, Near Katra PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0441,UP00441,Bablu Pandey,,1998-02-08,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"18, Near Prem Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0442,UP00442,Dhananjay Gupta,,1983-10-09,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"196, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0443,UP00443,Imran Shukla,,1979-01-06,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"208, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0444,UP00444,Virendra Mishra,,1997-11-10,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"114, Near Sikandra PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0445,UP00445,Manoj Chauhan,Manoj Chauhan @ Vakil,1980-01-15,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"161, Near Indirapuram PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0446,UP00446,Pramod Khan,,1994-06-13,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"63, Near Rakabganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0447,UP00447,Deepak Tripathi,,2000-05-10,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"220, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0448,UP00448,Babloo Pandey,,1983-06-10,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"144, Near Hari Parbat PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0449,UP00449,Tariq Verma,,2001-03-21,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"158, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0450,UP00450,Neeraj Nagar,,1989-02-24,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"36, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0451,UP00451,Alok Chaudhary,,1998-10-05,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"75, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0452,UP00452,Imran Nagar,,1980-10-21,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"11, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0453,UP00453,Ravindra Tripathi,,1976-06-21,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"93, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0454,UP00454,Tariq Shukla,,1990-07-23,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"32, Near Bhelupur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0455,UP00455,Sonu Jaiswal,,1994-06-20,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"12, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0456,UP00456,Rajesh Srivastav,,1978-09-22,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"84, Near Bhelupur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0457,UP00457,Dharmendra Gupta,,1980-02-15,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"36, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0458,UP00458,Rizwan Pandey,,1996-07-18,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"68, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0459,UP00459,Alok Chauhan,,1981-06-19,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"24, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0460,UP00460,Brijesh Nagar,,1999-10-27,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"131, Near Prem Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0461,UP00461,Ajay Rawat,Ajay Rawat @ Don,1988-08-07,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"159, Near Naini PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0462,UP00462,Mahesh Srivastav,,1983-11-17,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"148, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0463,UP00463,Suresh Tripathi,,1977-10-03,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"116, Near Prem Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0464,UP00464,Dhananjay Ansari,,1999-08-03,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"18, Near Shahganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0465,UP00465,Abhay Nagar,Abhay Nagar @ Raja,1982-04-14,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"79, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0466,UP00466,Aslam Tripathi,Aslam Tripathi @ Vakil,1997-11-24,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"250, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0467,UP00467,Mahesh Pal,,1998-04-17,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"69, Near Raunahi PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0468,UP00468,Mukhtar Verma,,2003-07-25,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"149, Near Bhelupur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0469,UP00469,Dhananjay Dubey,,1995-08-12,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"180, Near Hazratganj PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0470,UP00470,Tariq Chaudhary,,2000-05-01,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"11, Near Brahmpuri PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0471,UP00471,Imran Gupta,Imran Gupta @ Chacha,1983-02-09,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"135, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0472,UP00472,Rajesh Jaiswal,,2000-08-14,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"227, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0473,UP00473,Chhotu Srivastav,,1986-08-23,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"49, Near Alambagh PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0474,UP00474,Neeraj Pal,,1999-11-16,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"100, Near Cantt PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0475,UP00475,Pramod Gupta,,1990-11-06,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"92, Near Prem Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0476,UP00476,Sonu Siddiqui,Sonu Siddiqui @ Urf Chhotu,1990-10-14,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"10, Near Shivpur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0477,UP00477,Chhotu Rajput,,1995-08-15,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"175, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0478,UP00478,Rakesh Chauhan,,1976-11-19,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"156, Near Sikandra PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0479,UP00479,Manoj Singh,,1988-03-22,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"179, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0480,UP00480,Rakesh Nishad,,1993-11-11,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"234, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0481,UP00481,Ajay Ansari,,1999-10-08,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"37, Near Shahganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0482,UP00482,Munna Singh,,1990-01-01,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"193, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0483,UP00483,Abhay Yadav,,1984-07-16,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"229, Near Shivpur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0484,UP00484,Dhananjay Nishad,Dhananjay Nishad @ Vakil,1980-01-01,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"79, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0485,UP00485,Sonu Singh,,1977-10-25,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"70, Near Hazratganj PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0486,UP00486,Deepak Rawat,Deepak Rawat @ Vakil,1985-01-02,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"162, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0487,UP00487,Ajay Rajput,,1982-03-09,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"60, Near Sahibabad PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0488,UP00488,Suresh Pandey,Suresh Pandey @ Chacha,2000-07-09,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"78, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0489,UP00489,Pramod Srivastav,Pramod Srivastav @ Don,1996-04-21,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"191, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0490,UP00490,Mukhtar Mishra,Mukhtar Mishra @ Vakil,1999-02-03,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"177, Near Kalyanpur PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0491,UP00491,Anil Rawat,,1988-01-14,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"204, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0492,UP00492,Virendra Nagar,Virendra Nagar @ Pahalwan,1980-08-10,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"181, Near Gomti Nagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0493,UP00493,Imran Tomar,,1997-07-05,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"188, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0494,UP00494,Amit Gautam,,2002-05-14,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"14, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0495,UP00495,Tariq Chaudhary,,1993-11-23,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"172, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0496,UP00496,Ravindra Yadav,,1981-10-07,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"137, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0497,UP00497,Munna Rajput,,2001-02-24,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"56, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0498,UP00498,Imran Pandey,,1985-04-10,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"220, Near Nauchandi PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0499,UP00499,Akhilesh Bind,,1992-01-02,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"136, Near Sadar Bazar PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0500,UP00500,Vikram Gurjar,Vikram Gurjar @ Babu,1986-02-28,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"106, Near Govind Nagar PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0501,UP00501,Ravindra Maurya,,1980-06-19,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"95, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0502,UP00502,Neeraj Qureshi,,1984-09-28,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"53, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0503,UP00503,Ajay Kushwaha,,1984-12-21,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"100, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0504,UP00504,Anil Tiwari,Anil Tiwari @ Fauji,1981-05-22,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"161, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0505,UP00505,Rakesh Siddiqui,,1993-08-01,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"23, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0506,UP00506,Ravindra Shukla,,1998-09-25,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"184, Near Chinhat PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0507,UP00507,Amit Singh,,1984-06-17,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"76, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0508,UP00508,Babloo Maurya,,1984-03-01,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"99, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0509,UP00509,Manoj Shukla,,1989-02-03,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"125, Near Civil Lines PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0510,UP00510,Rajesh Qureshi,,2003-02-14,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"91, Near Shivpur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0511,UP00511,Munna Jaiswal,,1998-12-08,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"59, Near Civil Lines PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0512,UP00512,Dhananjay Srivastav,,1980-03-17,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"217, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0513,UP00513,Satish Shukla,,2002-02-11,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"34, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0514,UP00514,Akhilesh Maurya,,1995-02-13,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"198, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0515,UP00515,Aslam Shukla,,1993-04-24,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"180, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0516,UP00516,Imran Dubey,Imran Dubey @ Babu,1984-06-20,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"115, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0517,UP00517,Gufran Bind,,1980-06-11,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"242, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0518,UP00518,Babloo Bind,,1977-12-15,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"10, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0519,UP00519,Deepak Gautam,Deepak Gautam @ Pahalwan,2000-02-13,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"224, Near Govind Nagar PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0520,UP00520,Bablu Gurjar,,1978-07-10,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-East-Ring,"227, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0521,UP00521,Rizwan Kushwaha,,1992-08-24,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"137, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0522,UP00522,Pankaj Srivastav,Pankaj Srivastav @ Kabadi,1984-10-06,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"188, Near Prem Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0523,UP00523,Imran Shukla,,1997-01-04,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"216, Near Brahmpuri PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0524,UP00524,Pankaj Nagar,,1996-02-25,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"44, Near Kotwali PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0525,UP00525,Abhay Verma,,2001-11-13,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"245, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0526,UP00526,Rajesh Nishad,Rajesh Nishad @ Urf Chhotu,1979-11-17,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"10, Near Hazratganj PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0527,UP00527,Suresh Pandey,,1991-06-25,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"182, Near Partapur PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0528,UP00528,Rakesh Rawat,Rakesh Rawat @ Urf Chhotu,1998-02-11,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"105, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0529,UP00529,Dhananjay Kushwaha,Dhananjay Kushwaha @ Netaji,1994-01-17,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"81, Near Alambagh PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0530,UP00530,Amit Nagar,,1998-01-10,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"242, Near Katra PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0531,UP00531,Atiq Siddiqui,,1975-06-10,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"124, Near Chetganj PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0532,UP00532,Amit Qureshi,Amit Qureshi @ Netaji,1984-07-24,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"64, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0533,UP00533,Manoj Jaiswal,,1980-03-04,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"180, Near Sigra PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0534,UP00534,Imran Jaiswal,,1993-09-25,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"173, Near Kotwali PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0535,UP00535,Mahesh Srivastav,Mahesh Srivastav @ Urf Chhotu,1989-08-21,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"156, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0536,UP00536,Brijesh Gautam,,1995-06-14,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"121, Near Shahganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0537,UP00537,Guddu Srivastav,,2000-04-03,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"220, Near Ramgarh Tal PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0538,UP00538,Suresh Pal,Suresh Pal @ Kabadi,1995-02-01,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"146, Near Sikandra PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0539,UP00539,Akhilesh Pandey,,1993-01-10,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"12, Near Kotwali PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0540,UP00540,Ramesh Khan,,2001-06-12,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"85, Near Kotwali PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0541,UP00541,Sonu Tiwari,,1978-12-28,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"162, Near George Town PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0542,UP00542,Virendra Kushwaha,Virendra Kushwaha @ Bhaiya,1989-05-03,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"171, Near Alambagh PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0543,UP00543,Mahesh Jaiswal,,1984-03-05,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"83, Near Tajganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0544,UP00544,Deepak Verma,,1986-05-19,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"218, Near Prem Nagar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0545,UP00545,Ravindra Qureshi,Ravindra Qureshi @ Urf Chhotu,2001-09-26,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"186, Near Knowledge Park PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0546,UP00546,Chhotu Rawat,Chhotu Rawat @ Urf Chhotu,1993-01-03,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"148, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0547,UP00547,Aslam Dubey,,1991-04-02,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"108, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0548,UP00548,Aslam Tiwari,,1990-06-22,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"24, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0549,UP00549,Mahesh Tyagi,,1981-02-26,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"240, Near Mahanagar PS, Lucknow, Uttar Pradesh",core_gang
+UP-CRIM-0550,UP00550,Babloo Maurya,Babloo Maurya @ Shooter,1980-04-02,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"147, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0551,UP00551,Rajesh Gupta,,1979-03-16,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"224, Near Sector 24 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0552,UP00552,Abhay Khan,Abhay Khan @ Bhaiya,1995-04-24,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"104, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0553,UP00553,Pramod Chaudhary,,1988-08-28,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"31, Near Collectorganj PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0554,UP00554,Satish Rawat,,2001-02-28,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"104, Near Ramgarh Tal PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0555,UP00555,Anil Srivastav,,1995-11-17,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"149, Near George Town PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0556,UP00556,Aslam Pal,,1988-06-03,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-East-Ring,"217, Near Kotwali PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0557,UP00557,Neeraj Pandey,,1981-06-18,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-West-Ring,"12, Near George Town PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0558,UP00558,Sunil Chauhan,,1990-06-12,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-Central-Ring,"56, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0559,UP00559,Sunil Nishad,,1986-08-17,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-East-Ring,"20, Near Kalyanpur PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0560,UP00560,Guddu Verma,Guddu Verma @ Babu,1988-11-08,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"196, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0561,UP00561,Rizwan Verma,,1977-09-21,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"191, Near Sector 20 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0562,UP00562,Anil Bind,,2003-10-07,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-East-Ring,"77, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0563,UP00563,Guddu Chauhan,,1984-11-19,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"62, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0564,UP00564,Sanjay Chauhan,,1975-12-04,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"195, Near Subhash Nagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0565,UP00565,Ravindra Tomar,,1978-10-11,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"221, Near Kotwali PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0566,UP00566,Ajay Rajput,,1981-01-25,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"55, Near Kavi Nagar PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0567,UP00567,Tariq Pandey,Tariq Pandey @ Don,1994-09-19,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-Central-Ring,"233, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0568,UP00568,Brijesh Gautam,,1989-04-28,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"13, Near Sikandra PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0569,UP00569,Neeraj Qureshi,,1980-01-11,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"185, Near Phase 2 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0570,UP00570,Mahesh Bind,,1991-06-24,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"162, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0571,UP00571,Abhay Srivastav,,1991-12-02,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"217, Near Sadar Bazar PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0572,UP00572,Rakesh Ansari,Rakesh Ansari @ Pahalwan,1997-06-27,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"99, Near Kareli PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0573,UP00573,Imran Dubey,,1989-09-28,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"148, Near Dhoomanganj PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0574,UP00574,Chhotu Rajput,,1987-10-02,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"238, Near Ramgarh Tal PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0575,UP00575,Suresh Gautam,,1992-06-28,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"209, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0576,UP00576,Babloo Shukla,,1977-06-06,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-Central-Ring,"247, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0577,UP00577,Pappu Pandey,,1978-03-08,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-East-Ring,"226, Near Raunahi PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0578,UP00578,Santosh Yadav,,1984-02-21,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"61, Near Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0579,UP00579,Mukhtar Tripathi,Mukhtar Tripathi @ Pahalwan,1978-05-04,2022 - IPC 420/467/468 (Cheating & Forgery); 2023 - UP Gangsters Act,UP-Central-Ring,"121, Near Shahganj PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0580,UP00580,Sunil Bind,,1991-12-26,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"95, Near Gorakhnath PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0581,UP00581,Ravindra Chauhan,Ravindra Chauhan @ Bhaiya,2000-08-15,2022 - IPC 395 / BNS 310 (Dacoity); 2023 - UP Gangsters Act,UP-West-Ring,"211, Near Dashashwamedh PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0582,UP00582,Imran Kushwaha,,1977-01-13,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"54, Near Sector 39 PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0583,UP00583,Vikram Gurjar,,1984-07-06,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"119, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0584,UP00584,Alok Pandey,,1977-10-05,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-West-Ring,"172, Near Sihani Gate PS, Ghaziabad, Uttar Pradesh",core_gang
+UP-CRIM-0585,UP00585,Satish Tyagi,,1980-12-17,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"63, Near Baradari PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0586,UP00586,Mahesh Srivastav,,1977-11-09,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-East-Ring,"132, Near Sipri Bazar PS, Jhansi, Uttar Pradesh",core_gang
+UP-CRIM-0587,UP00587,Mukhtar Yadav,,1998-04-05,2022 - Arms Act Sec 25/27; 2023 - UP Gangsters Act,UP-West-Ring,"202, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0588,UP00588,Mukhtar Kushwaha,,1989-12-18,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-Central-Ring,"107, Near Tiwaripur PS, Gorakhpur, Uttar Pradesh",core_gang
+UP-CRIM-0589,UP00589,Babloo Pandey,,1991-02-07,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"12, Near Etmadpur PS, Agra, Uttar Pradesh",core_gang
+UP-CRIM-0590,UP00590,Atiq Jaiswal,Atiq Jaiswal @ Urf Chhotu,1978-11-20,2022 - IPC 302 / BNS 103 (Murder); 2023 - UP Gangsters Act,UP-West-Ring,"232, Near Shivpur PS, Varanasi, Uttar Pradesh",core_gang
+UP-CRIM-0591,UP00591,Anil Ansari,Anil Ansari @ Contractor,1979-04-19,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"24, Near Surajpur PS, Gautam Buddha Nagar (Noida), Uttar Pradesh",core_gang
+UP-CRIM-0592,UP00592,Guddu Gurjar,Guddu Gurjar @ Contractor,1985-12-06,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"122, Near Sadar Bazar PS, Meerut, Uttar Pradesh",core_gang
+UP-CRIM-0593,UP00593,Vikram Dubey,Vikram Dubey @ Pandit,1994-11-11,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-West-Ring,"141, Near Izzatnagar PS, Bareilly, Uttar Pradesh",core_gang
+UP-CRIM-0594,UP00594,Alok Gurjar,,1981-01-18,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-Central-Ring,"150, Near Barra PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0595,UP00595,Aslam Maurya,,1982-01-19,2022 - NDPS Act Sec 8/20/21; 2023 - UP Gangsters Act,UP-East-Ring,"165, Near Ayodhya Kotwali PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0596,UP00596,Neeraj Shukla,,1975-04-05,2022 - IPC 307 / BNS 109 (Attempt to Murder); 2023 - UP Gangsters Act,UP-West-Ring,"246, Near Chakeri PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0597,UP00597,Anil Ansari,,1997-04-07,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"57, Near Cantt PS, Ayodhya, Uttar Pradesh",core_gang
+UP-CRIM-0598,UP00598,Virendra Mishra,,1999-04-12,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-East-Ring,"219, Near Naini PS, Prayagraj, Uttar Pradesh",core_gang
+UP-CRIM-0599,UP00599,Sanjay Gupta,,1978-10-25,2022 - Sec 2/3 UP Gangsters Act 1986; 2023 - UP Gangsters Act,UP-West-Ring,"39, Near Kotwali PS, Kanpur Nagar, Uttar Pradesh",core_gang
+UP-CRIM-0600,UP00600,Imran Chaudhary,,1985-04-13,2022 - IPC 386 / BNS 308 (Extortion); 2023 - UP Gangsters Act,UP-Central-Ring,"245, Near Kotwali PS, Gorakhpur, Uttar Pradesh",core_gang

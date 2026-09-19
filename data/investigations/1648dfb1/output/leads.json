@@ -1,0 +1,1252 @@
+[
+  {
+    "entity_id": "UP00277",
+    "entity_type": "Person",
+    "label": "Dharmendra Gautam",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 37,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.613,
+      "betweenness": 1.0,
+      "degree": 1.0,
+      "centrality": 1.0,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.769,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Bridge score 0.613 rank 1"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (37/100): Bridge score 0.613 rank 1"
+  },
+  {
+    "entity_id": "UP00572",
+    "entity_type": "Person",
+    "label": "Rakesh Ansari",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 32,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.501,
+      "betweenness": 0.815,
+      "degree": 0.625,
+      "centrality": 0.72,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.785,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Bridge score 0.501 rank 2"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (32/100): Bridge score 0.501 rank 2"
+  },
+  {
+    "entity_id": "UP00167",
+    "entity_type": "Person",
+    "label": "Sunil Kushwaha",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 31,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.335,
+      "betweenness": 0.537,
+      "degree": 0.5,
+      "centrality": 0.518,
+      "financial_anomaly": 0.312,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.778,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (31/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00290",
+    "entity_type": "Person",
+    "label": "Pramod Yadav",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 30,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.184,
+      "betweenness": 0.286,
+      "degree": 0.675,
+      "centrality": 0.481,
+      "financial_anomaly": 0.262,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.99,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (30/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00492",
+    "entity_type": "Person",
+    "label": "Virendra Nagar",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 29,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.391,
+      "betweenness": 0.63,
+      "degree": 0.3,
+      "centrality": 0.465,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.963,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (29/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00270",
+    "entity_type": "Person",
+    "label": "Bablu Ansari",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 28,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.425,
+      "betweenness": 0.687,
+      "degree": 0.65,
+      "centrality": 0.669,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.724,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (28/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00348",
+    "entity_type": "Person",
+    "label": "Rakesh Pal",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 28,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.322,
+      "betweenness": 0.515,
+      "degree": 0.875,
+      "centrality": 0.695,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.882,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (28/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00247",
+    "entity_type": "Person",
+    "label": "Vikram Khan",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 27,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.372,
+      "betweenness": 0.599,
+      "degree": 0.475,
+      "centrality": 0.537,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.847,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00183",
+    "entity_type": "Person",
+    "label": "Vikram Tripathi",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 27,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.301,
+      "betweenness": 0.48,
+      "degree": 0.65,
+      "centrality": 0.565,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.911,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00433",
+    "entity_type": "Person",
+    "label": "Sanjay Mishra",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 27,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.332,
+      "betweenness": 0.533,
+      "degree": 0.525,
+      "centrality": 0.529,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.878,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00490",
+    "entity_type": "Person",
+    "label": "Mukhtar Mishra",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 27,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.303,
+      "betweenness": 0.485,
+      "degree": 0.725,
+      "centrality": 0.605,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.87,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00832",
+    "entity_type": "Person",
+    "label": "Vikram Shukla",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 27,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.345,
+      "betweenness": 0.564,
+      "degree": 0.1,
+      "centrality": 0.332,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.983,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00354",
+    "entity_type": "Person",
+    "label": "Akhilesh Rajput",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 26,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.264,
+      "betweenness": 0.419,
+      "degree": 0.55,
+      "centrality": 0.485,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.987,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (26/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00337",
+    "entity_type": "Person",
+    "label": "Ravindra Pal",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 26,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.287,
+      "betweenness": 0.458,
+      "degree": 0.675,
+      "centrality": 0.567,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.848,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (26/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00541",
+    "entity_type": "Person",
+    "label": "Sonu Tiwari",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 26,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.287,
+      "betweenness": 0.458,
+      "degree": 0.575,
+      "centrality": 0.516,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.922,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (26/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00328",
+    "entity_type": "Person",
+    "label": "Atiq Chauhan",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 26,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.293,
+      "betweenness": 0.467,
+      "degree": 0.65,
+      "centrality": 0.558,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.871,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (26/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00445",
+    "entity_type": "Person",
+    "label": "Manoj Chauhan",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 26,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.266,
+      "betweenness": 0.423,
+      "degree": 0.8,
+      "centrality": 0.612,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.854,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (26/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00097",
+    "entity_type": "Person",
+    "label": "Atiq Pandey",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 26,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.317,
+      "betweenness": 0.507,
+      "degree": 0.5,
+      "centrality": 0.504,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.841,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (26/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00007",
+    "entity_type": "Person",
+    "label": "Gufran Siddiqui",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 26,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.301,
+      "betweenness": 0.48,
+      "degree": 0.675,
+      "centrality": 0.578,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.837,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (26/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00465",
+    "entity_type": "Person",
+    "label": "Abhay Nagar",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 26,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.256,
+      "betweenness": 0.405,
+      "degree": 0.625,
+      "centrality": 0.515,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.987,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (26/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00151",
+    "entity_type": "Person",
+    "label": "Dharmendra Nishad",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.253,
+      "betweenness": 0.401,
+      "degree": 0.55,
+      "centrality": 0.476,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.903,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00480",
+    "entity_type": "Person",
+    "label": "Rakesh Nishad",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.25,
+      "betweenness": 0.396,
+      "degree": 0.4,
+      "centrality": 0.398,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.977,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00198",
+    "entity_type": "Person",
+    "label": "Tariq Bind",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.269,
+      "betweenness": 0.427,
+      "degree": 0.725,
+      "centrality": 0.576,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.815,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00403",
+    "entity_type": "Person",
+    "label": "Imran Verma",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.303,
+      "betweenness": 0.485,
+      "degree": 0.625,
+      "centrality": 0.555,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.76,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00033",
+    "entity_type": "Person",
+    "label": "Aslam Tomar",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.277,
+      "betweenness": 0.441,
+      "degree": 0.825,
+      "centrality": 0.633,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.806,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00552",
+    "entity_type": "Person",
+    "label": "Abhay Khan",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.322,
+      "betweenness": 0.515,
+      "degree": 0.55,
+      "centrality": 0.532,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.755,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00305",
+    "entity_type": "Person",
+    "label": "Abhay Tyagi",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.245,
+      "betweenness": 0.388,
+      "degree": 0.475,
+      "centrality": 0.431,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.993,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00028",
+    "entity_type": "Person",
+    "label": "Akhilesh Kushwaha",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.057,
+      "betweenness": 0.075,
+      "degree": 0.35,
+      "centrality": 0.212,
+      "financial_anomaly": 0.325,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.994,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00423",
+    "entity_type": "Person",
+    "label": "Pramod Kushwaha",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.301,
+      "betweenness": 0.48,
+      "degree": 0.575,
+      "centrality": 0.527,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.812,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00226",
+    "entity_type": "Person",
+    "label": "Ramesh Rawat",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.229,
+      "betweenness": 0.361,
+      "degree": 0.425,
+      "centrality": 0.393,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.995,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00241",
+    "entity_type": "Person",
+    "label": "Guddu Srivastav",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.248,
+      "betweenness": 0.392,
+      "degree": 0.425,
+      "centrality": 0.408,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.979,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00228",
+    "entity_type": "Person",
+    "label": "Manoj Verma",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.308,
+      "betweenness": 0.493,
+      "degree": 0.5,
+      "centrality": 0.496,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.829,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00475",
+    "entity_type": "Person",
+    "label": "Pramod Gupta",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.229,
+      "betweenness": 0.361,
+      "degree": 0.475,
+      "centrality": 0.418,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.991,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00587",
+    "entity_type": "Person",
+    "label": "Mukhtar Yadav",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.068,
+      "betweenness": 0.093,
+      "degree": 0.5,
+      "centrality": 0.296,
+      "financial_anomaly": 0.293,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.944,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00351",
+    "entity_type": "Person",
+    "label": "Deepak Qureshi",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.285,
+      "betweenness": 0.454,
+      "degree": 0.525,
+      "centrality": 0.49,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.847,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00605",
+    "entity_type": "Person",
+    "label": "Mahesh Kushwaha",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.36,
+      "betweenness": 0.59,
+      "degree": 0.125,
+      "centrality": 0.357,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.806,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00072",
+    "entity_type": "Person",
+    "label": "Chhotu Nagar",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.298,
+      "betweenness": 0.476,
+      "degree": 0.575,
+      "centrality": 0.525,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.806,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00088",
+    "entity_type": "Person",
+    "label": "Pankaj Tomar",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 25,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.317,
+      "betweenness": 0.507,
+      "degree": 0.625,
+      "centrality": 0.566,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.785,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (25/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00238",
+    "entity_type": "Person",
+    "label": "Virendra Tiwari",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.277,
+      "betweenness": 0.441,
+      "degree": 0.525,
+      "centrality": 0.483,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.818,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00109",
+    "entity_type": "Person",
+    "label": "Satish Ansari",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.203,
+      "betweenness": 0.317,
+      "degree": 0.725,
+      "centrality": 0.521,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.895,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00547",
+    "entity_type": "Person",
+    "label": "Aslam Dubey",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.245,
+      "betweenness": 0.388,
+      "degree": 0.625,
+      "centrality": 0.506,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.842,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00194",
+    "entity_type": "Person",
+    "label": "Santosh Jaiswal",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.229,
+      "betweenness": 0.361,
+      "degree": 0.375,
+      "centrality": 0.368,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.975,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00384",
+    "entity_type": "Person",
+    "label": "Dharmendra Singh",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.261,
+      "betweenness": 0.414,
+      "degree": 0.6,
+      "centrality": 0.507,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.855,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00365",
+    "entity_type": "Person",
+    "label": "Brijesh Yadav",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.203,
+      "betweenness": 0.317,
+      "degree": 0.45,
+      "centrality": 0.384,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.983,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00357",
+    "entity_type": "Person",
+    "label": "Amit Shukla",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.232,
+      "betweenness": 0.366,
+      "degree": 0.425,
+      "centrality": 0.395,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.982,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00190",
+    "entity_type": "Person",
+    "label": "Pappu Rawat",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.213,
+      "betweenness": 0.335,
+      "degree": 0.4,
+      "centrality": 0.368,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.982,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00600",
+    "entity_type": "Person",
+    "label": "Imran Chaudhary",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.237,
+      "betweenness": 0.374,
+      "degree": 0.35,
+      "centrality": 0.362,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.982,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00105",
+    "entity_type": "Person",
+    "label": "Rizwan Tiwari",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.256,
+      "betweenness": 0.405,
+      "degree": 0.475,
+      "centrality": 0.44,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.859,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00099",
+    "entity_type": "Person",
+    "label": "Alok Tomar",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.28,
+      "betweenness": 0.445,
+      "degree": 0.55,
+      "centrality": 0.498,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.799,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  },
+  {
+    "entity_id": "UP00103",
+    "entity_type": "Person",
+    "label": "Mukhtar Tripathi",
+    "cell": "Unknown",
+    "role": "Unknown (auto-bootstrapped)",
+    "lead_score": 24,
+    "priority": "LOW",
+    "signals": {
+      "bridge_score": 0.232,
+      "betweenness": 0.366,
+      "degree": 0.25,
+      "centrality": 0.308,
+      "financial_anomaly": 0.0,
+      "communication_anomaly": 0.0,
+      "temporal_correlation": 0.0,
+      "evidence_quality": 0.977,
+      "cross_case": 0.0
+    },
+    "reasons": [
+      "Low anomaly signals; review degree/evidence"
+    ],
+    "evidence_refs": [],
+    "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+  }
+]

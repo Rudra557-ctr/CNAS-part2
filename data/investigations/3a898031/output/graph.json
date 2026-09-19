@@ -1,0 +1,524 @@
+{
+  "nodes": [
+    {
+      "id": "9820098200",
+      "label": "9820098200",
+      "kind": "Person",
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "phone": "9820098200",
+      "account": "",
+      "degree": 7
+    },
+    {
+      "id": "PHONE_9820098200",
+      "label": "9820098200",
+      "kind": "Phone",
+      "cell": "Phone",
+      "degree": 2
+    },
+    {
+      "id": "9811198111",
+      "label": "9811198111",
+      "kind": "Person",
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "phone": "9811198111",
+      "account": "",
+      "degree": 6
+    },
+    {
+      "id": "PHONE_9811198111",
+      "label": "9811198111",
+      "kind": "Phone",
+      "cell": "Phone",
+      "degree": 2
+    },
+    {
+      "id": "9890198901",
+      "label": "9890198901",
+      "kind": "Person",
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "phone": "9890198901",
+      "account": "",
+      "degree": 5
+    },
+    {
+      "id": "PHONE_9890198901",
+      "label": "9890198901",
+      "kind": "Phone",
+      "cell": "Phone",
+      "degree": 2
+    },
+    {
+      "id": "9769097690",
+      "label": "9769097690",
+      "kind": "Person",
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "phone": "9769097690",
+      "account": "",
+      "degree": 5
+    },
+    {
+      "id": "PHONE_9769097690",
+      "label": "9769097690",
+      "kind": "Phone",
+      "cell": "Phone",
+      "degree": 2
+    },
+    {
+      "id": "AUTO-001",
+      "label": "AUTO-001",
+      "kind": "Person",
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "phone": "",
+      "account": "HDFC00012345678901",
+      "degree": 1
+    },
+    {
+      "id": "ACCT_HDFC00012345678901",
+      "label": "HDFC00012345678901",
+      "kind": "Account",
+      "cell": "Account",
+      "degree": 3
+    },
+    {
+      "id": "AUTO-002",
+      "label": "AUTO-002",
+      "kind": "Person",
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "phone": "",
+      "account": "521402010009876",
+      "degree": 1
+    },
+    {
+      "id": "ACCT_521402010009876",
+      "label": "521402010009876",
+      "kind": "Account",
+      "cell": "Account",
+      "degree": 3
+    },
+    {
+      "id": "AUTO-003",
+      "label": "AUTO-003",
+      "kind": "Person",
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "phone": "",
+      "account": "ICIC00099887766554",
+      "degree": 1
+    },
+    {
+      "id": "ACCT_ICIC00099887766554",
+      "label": "ICIC00099887766554",
+      "kind": "Account",
+      "cell": "Account",
+      "degree": 3
+    },
+    {
+      "id": "0214/2024",
+      "label": "FIR 0214/2024",
+      "kind": "FIR",
+      "cell": "FIR",
+      "day": null,
+      "location": "",
+      "degree": 0
+    },
+    {
+      "id": "Andheri West, Mumbai",
+      "label": "Andheri West, Mumbai",
+      "kind": "Location",
+      "cell": "Location",
+      "degree": 1
+    },
+    {
+      "id": "Kothrud, Pune \u0096 near Karve Putala",
+      "label": "Kothrud, Pune \u0096 near Karve Putala",
+      "kind": "Location",
+      "cell": "Location",
+      "degree": 1
+    },
+    {
+      "id": "Nashik Road, Nashik",
+      "label": "Nashik Road, Nashik",
+      "kind": "Location",
+      "cell": "Location",
+      "degree": 1
+    },
+    {
+      "id": "Bandra East, Mumbai",
+      "label": "Bandra East, Mumbai",
+      "kind": "Location",
+      "cell": "Location",
+      "degree": 1
+    },
+    {
+      "id": "Viman Nagar, Pune",
+      "label": "Viman Nagar, Pune",
+      "kind": "Location",
+      "cell": "Location",
+      "degree": 1
+    }
+  ],
+  "edges": [
+    {
+      "src": "9820098200",
+      "dst": "PHONE_9820098200",
+      "kind": "OWNS_PHONE",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "9820098200 owns phone 9820098200",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "9820098200",
+      "dst": "9811198111",
+      "kind": "CALLED",
+      "source": "GEN-CDR00001",
+      "source_type": "cdr",
+      "day": 1,
+      "confidence": 1.0,
+      "supporting_text": "9820098200 -> 9811198111 day1 tower Andheri West, Mumbai",
+      "evidence_hash": "c2fbf40a469e6dfa",
+      "extractor": "cdr_structured",
+      "meta": {
+        "duration_sec": 407,
+        "tower": "Andheri West, Mumbai",
+        "call_type": "voice"
+      }
+    },
+    {
+      "src": "9820098200",
+      "dst": "9890198901",
+      "kind": "CALLED",
+      "source": "GEN-CDR00002",
+      "source_type": "cdr",
+      "day": 2,
+      "confidence": 1.0,
+      "supporting_text": "9820098200 -> 9890198901 day2 tower Kothrud, Pune \u0096 near Karve Putala",
+      "evidence_hash": "7b298475b80194d0",
+      "extractor": "cdr_structured",
+      "meta": {
+        "duration_sec": 89,
+        "tower": "Kothrud, Pune \u0096 near Karve Putala",
+        "call_type": "voice"
+      }
+    },
+    {
+      "src": "9820098200",
+      "dst": "Andheri West, Mumbai",
+      "kind": "LOCATED_AT",
+      "source": "GEN-CDR00001",
+      "source_type": "cdr",
+      "day": 1,
+      "confidence": 0.9,
+      "supporting_text": "9820098200 observed at Andheri West, Mumbai day1 (GEN-CDR00001)",
+      "evidence_hash": "b21af8bd9fd71790",
+      "extractor": "cdr_tower",
+      "meta": {
+        "tower": "Andheri West, Mumbai"
+      }
+    },
+    {
+      "src": "9820098200",
+      "dst": "Kothrud, Pune \u0096 near Karve Putala",
+      "kind": "LOCATED_AT",
+      "source": "GEN-CDR00002",
+      "source_type": "cdr",
+      "day": 2,
+      "confidence": 0.9,
+      "supporting_text": "9820098200 observed at Kothrud, Pune \u0096 near Karve Putala day2 (GEN-CDR00002)",
+      "evidence_hash": "4112f91ebdd3401d",
+      "extractor": "cdr_tower",
+      "meta": {
+        "tower": "Kothrud, Pune \u0096 near Karve Putala"
+      }
+    },
+    {
+      "src": "PHONE_9820098200",
+      "dst": "9820098200",
+      "kind": "OWNED_BY",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "phone 9820098200 owned by 9820098200",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "9811198111",
+      "dst": "PHONE_9811198111",
+      "kind": "OWNS_PHONE",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "9811198111 owns phone 9811198111",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "9811198111",
+      "dst": "9769097690",
+      "kind": "CALLED",
+      "source": "GEN-CDR00003",
+      "source_type": "cdr",
+      "day": 2,
+      "confidence": 1.0,
+      "supporting_text": "9811198111 -> 9769097690 day2 tower Nashik Road, Nashik",
+      "evidence_hash": "9bbb6de7f7b08b23",
+      "extractor": "cdr_structured",
+      "meta": {
+        "duration_sec": 1240,
+        "tower": "Nashik Road, Nashik",
+        "call_type": "voice"
+      }
+    },
+    {
+      "src": "9811198111",
+      "dst": "Nashik Road, Nashik",
+      "kind": "LOCATED_AT",
+      "source": "GEN-CDR00003",
+      "source_type": "cdr",
+      "day": 2,
+      "confidence": 0.9,
+      "supporting_text": "9811198111 observed at Nashik Road, Nashik day2 (GEN-CDR00003)",
+      "evidence_hash": "64edf55e0e68a9bb",
+      "extractor": "cdr_tower",
+      "meta": {
+        "tower": "Nashik Road, Nashik"
+      }
+    },
+    {
+      "src": "PHONE_9811198111",
+      "dst": "9811198111",
+      "kind": "OWNED_BY",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "phone 9811198111 owned by 9811198111",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "9890198901",
+      "dst": "PHONE_9890198901",
+      "kind": "OWNS_PHONE",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "9890198901 owns phone 9890198901",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "9890198901",
+      "dst": "9820098200",
+      "kind": "CALLED",
+      "source": "GEN-CDR00004",
+      "source_type": "cdr",
+      "day": 3,
+      "confidence": 1.0,
+      "supporting_text": "9890198901 -> 9820098200 day3 tower Bandra East, Mumbai",
+      "evidence_hash": "b62108fabace3a91",
+      "extractor": "cdr_structured",
+      "meta": {
+        "duration_sec": 65,
+        "tower": "Bandra East, Mumbai",
+        "call_type": "voice"
+      }
+    },
+    {
+      "src": "9890198901",
+      "dst": "Bandra East, Mumbai",
+      "kind": "LOCATED_AT",
+      "source": "GEN-CDR00004",
+      "source_type": "cdr",
+      "day": 3,
+      "confidence": 0.9,
+      "supporting_text": "9890198901 observed at Bandra East, Mumbai day3 (GEN-CDR00004)",
+      "evidence_hash": "6631b9fa76d69251",
+      "extractor": "cdr_tower",
+      "meta": {
+        "tower": "Bandra East, Mumbai"
+      }
+    },
+    {
+      "src": "PHONE_9890198901",
+      "dst": "9890198901",
+      "kind": "OWNED_BY",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "phone 9890198901 owned by 9890198901",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "9769097690",
+      "dst": "PHONE_9769097690",
+      "kind": "OWNS_PHONE",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "9769097690 owns phone 9769097690",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "9769097690",
+      "dst": "9811198111",
+      "kind": "CALLED",
+      "source": "GEN-CDR00005",
+      "source_type": "cdr",
+      "day": 4,
+      "confidence": 1.0,
+      "supporting_text": "9769097690 -> 9811198111 day4 tower Viman Nagar, Pune",
+      "evidence_hash": "1a424682469ae295",
+      "extractor": "cdr_structured",
+      "meta": {
+        "duration_sec": 312,
+        "tower": "Viman Nagar, Pune",
+        "call_type": "voice"
+      }
+    },
+    {
+      "src": "9769097690",
+      "dst": "Viman Nagar, Pune",
+      "kind": "LOCATED_AT",
+      "source": "GEN-CDR00005",
+      "source_type": "cdr",
+      "day": 4,
+      "confidence": 0.9,
+      "supporting_text": "9769097690 observed at Viman Nagar, Pune day4 (GEN-CDR00005)",
+      "evidence_hash": "54b5c96d80d2c917",
+      "extractor": "cdr_tower",
+      "meta": {
+        "tower": "Viman Nagar, Pune"
+      }
+    },
+    {
+      "src": "PHONE_9769097690",
+      "dst": "9769097690",
+      "kind": "OWNED_BY",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "phone 9769097690 owned by 9769097690",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "AUTO-001",
+      "dst": "ACCT_HDFC00012345678901",
+      "kind": "OWNS_ACCOUNT",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "AUTO-001 owns account HDFC00012345678901",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "ACCT_HDFC00012345678901",
+      "dst": "ACCT_521402010009876",
+      "kind": "TRANSACTED",
+      "source": "SBIN424071234567",
+      "source_type": "transaction",
+      "day": 1,
+      "confidence": 1.0,
+      "supporting_text": "ACCT_HDFC00012345678901 -> ACCT_521402010009876 INR48000 RTGS",
+      "evidence_hash": "91a6800502009531",
+      "extractor": "txn_structured",
+      "meta": {
+        "amount": 48000,
+        "txn_type": "RTGS"
+      }
+    },
+    {
+      "src": "AUTO-002",
+      "dst": "ACCT_521402010009876",
+      "kind": "OWNS_ACCOUNT",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "AUTO-002 owns account 521402010009876",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "ACCT_521402010009876",
+      "dst": "ACCT_ICIC00099887766554",
+      "kind": "TRANSACTED",
+      "source": "SBIN424071234568",
+      "source_type": "transaction",
+      "day": 2,
+      "confidence": 1.0,
+      "supporting_text": "ACCT_521402010009876 -> ACCT_ICIC00099887766554 INR49000 IMPS",
+      "evidence_hash": "1d29371b1abc48a5",
+      "extractor": "txn_structured",
+      "meta": {
+        "amount": 49000,
+        "txn_type": "IMPS"
+      }
+    },
+    {
+      "src": "AUTO-003",
+      "dst": "ACCT_ICIC00099887766554",
+      "kind": "OWNS_ACCOUNT",
+      "source": "people_directory",
+      "source_type": "people_directory",
+      "day": null,
+      "confidence": 1.0,
+      "supporting_text": "AUTO-003 owns account ICIC00099887766554",
+      "evidence_hash": "",
+      "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "ACCT_ICIC00099887766554",
+      "dst": "ACCT_HDFC00012345678901",
+      "kind": "TRANSACTED",
+      "source": "SBIN424071234569",
+      "source_type": "transaction",
+      "day": 3,
+      "confidence": 1.0,
+      "supporting_text": "ACCT_ICIC00099887766554 -> ACCT_HDFC00012345678901 INR47500 NEFT",
+      "evidence_hash": "d4f3c81d71feba8a",
+      "extractor": "txn_structured",
+      "meta": {
+        "amount": 47500,
+        "txn_type": "NEFT"
+      }
+    }
+  ],
+  "stats": {
+    "node_count": 20,
+    "edge_count": 24
+  }
+}

@@ -1,0 +1,2 @@
+row_no,source_file,reason,confidence
+0,entity_bootstrapper,"Auto-created profiles: {'phones_bootstrapped': 63, 'accounts_bootstrapped': 0, 'names_bootstrapped': 0}",0.5

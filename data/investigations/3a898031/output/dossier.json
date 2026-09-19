@@ -1,0 +1,43 @@
+{
+  "blocks": [
+    {
+      "id": "51651d36",
+      "kind": "note",
+      "created_by": "vibhu123",
+      "created_at": "2026-09-09T16:40:29.593643+00:00",
+      "title": "Hypothesis",
+      "text": "Courier structure between cells."
+    },
+    {
+      "id": "32232cf4",
+      "kind": "entity",
+      "created_by": "vibhu123",
+      "created_at": "2026-09-09T16:40:29.627545+00:00",
+      "title": "Key holder",
+      "entity_id": "9820098200",
+      "snapshot": {
+        "label": "9820098200",
+        "cell": "Unknown"
+      }
+    },
+    {
+      "id": "61352eb5",
+      "kind": "stats",
+      "created_by": "vibhu123",
+      "created_at": "2026-09-09T16:40:29.664503+00:00",
+      "title": "Case snapshot",
+      "snapshot": {
+        "node_count": 20,
+        "edge_count": 24
+      }
+    },
+    {
+      "id": "96bfe714",
+      "kind": "explainer",
+      "created_by": "vibhu123",
+      "created_at": "2026-09-09T16:40:42.522047+00:00",
+      "src": "9820098200",
+      "dst": "9811198111"
+    }
+  ]
+}

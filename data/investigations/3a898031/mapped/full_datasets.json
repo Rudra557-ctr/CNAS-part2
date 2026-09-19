@@ -1,0 +1,193 @@
+{
+  "firs": [
+    {
+      "fir_id": "0214/2024",
+      "date": "",
+      "day": null,
+      "station": "",
+      "location": "",
+      "ipc_sections": "",
+      "narrative": "FIR No. 0214/2024, Andheri Police Station, Mumbai. Complainant states that accused\nRaju Shinde (mobile 9820098200) was seen meeting an associate near Andheri station before\ntravelling to Pune by vehicle MH-12-AB-1234. Call records show frequent contact with\n9811198111. Offence registered under BNS Section 318 (cheating) and 336 (forgery).\nWitness Kavita Deshmukh of Kothrud, Pune confirms the meeting at Nashik Road.",
+      "accused_name": "",
+      "complainant_name": ""
+    }
+  ],
+  "cdrs": [
+    {
+      "call_id": "GEN-CDR00001",
+      "caller_id": "9820098200",
+      "caller_name": "",
+      "caller_phone": "9820098200",
+      "callee_id": "9811198111",
+      "callee_name": "",
+      "callee_phone": "9811198111",
+      "timestamp": "2024-03-12 21:34:11",
+      "day": 1,
+      "call_type": "voice",
+      "duration_sec": 407,
+      "cell_tower_location": "Andheri West, Mumbai"
+    },
+    {
+      "call_id": "GEN-CDR00002",
+      "caller_id": "9820098200",
+      "caller_name": "",
+      "caller_phone": "9820098200",
+      "callee_id": "9890198901",
+      "callee_name": "",
+      "callee_phone": "9890198901",
+      "timestamp": "2024-03-13 09:02:44",
+      "day": 2,
+      "call_type": "voice",
+      "duration_sec": 89,
+      "cell_tower_location": "Kothrud, Pune \u0096 near Karve Putala"
+    },
+    {
+      "call_id": "GEN-CDR00003",
+      "caller_id": "9811198111",
+      "caller_name": "",
+      "caller_phone": "9811198111",
+      "callee_id": "9769097690",
+      "callee_name": "",
+      "callee_phone": "9769097690",
+      "timestamp": "2024-03-13 22:15:02",
+      "day": 2,
+      "call_type": "voice",
+      "duration_sec": 1240,
+      "cell_tower_location": "Nashik Road, Nashik"
+    },
+    {
+      "call_id": "GEN-CDR00004",
+      "caller_id": "9890198901",
+      "caller_name": "",
+      "caller_phone": "9890198901",
+      "callee_id": "9820098200",
+      "callee_name": "",
+      "callee_phone": "9820098200",
+      "timestamp": "2024-03-14 18:40:30",
+      "day": 3,
+      "call_type": "voice",
+      "duration_sec": 65,
+      "cell_tower_location": "Bandra East, Mumbai"
+    },
+    {
+      "call_id": "GEN-CDR00005",
+      "caller_id": "9769097690",
+      "caller_name": "",
+      "caller_phone": "9769097690",
+      "callee_id": "9811198111",
+      "callee_name": "",
+      "callee_phone": "9811198111",
+      "timestamp": "2024-03-15 11:05:19",
+      "day": 4,
+      "call_type": "voice",
+      "duration_sec": 312,
+      "cell_tower_location": "Viman Nagar, Pune"
+    }
+  ],
+  "transactions": [
+    {
+      "txn_id": "SBIN424071234567",
+      "sender_id": "UNK0",
+      "sender_name": "",
+      "sender_account": "HDFC00012345678901",
+      "receiver_id": "UNK0",
+      "receiver_name": "",
+      "receiver_account": "521402010009876",
+      "amount_inr": 48000,
+      "timestamp": "2024-03-12 00:00:00",
+      "day": 1,
+      "txn_type": "RTGS"
+    },
+    {
+      "txn_id": "SBIN424071234568",
+      "sender_id": "UNK1",
+      "sender_name": "",
+      "sender_account": "521402010009876",
+      "receiver_id": "UNK1",
+      "receiver_name": "",
+      "receiver_account": "ICIC00099887766554",
+      "amount_inr": 49000,
+      "timestamp": "2024-03-13 00:00:00",
+      "day": 2,
+      "txn_type": "IMPS"
+    },
+    {
+      "txn_id": "SBIN424071234569",
+      "sender_id": "UNK2",
+      "sender_name": "",
+      "sender_account": "ICIC00099887766554",
+      "receiver_id": "UNK2",
+      "receiver_name": "",
+      "receiver_account": "HDFC00012345678901",
+      "amount_inr": 47500,
+      "timestamp": "2024-03-14 00:00:00",
+      "day": 3,
+      "txn_type": "NEFT"
+    }
+  ],
+  "social_posts": [],
+  "criminal_history": [],
+  "intelligence_reports": [],
+  "surveillance_reports": [],
+  "people_directory": {
+    "network_people": [
+      {
+        "id": "9820098200",
+        "name": "9820098200",
+        "role": "Unknown (auto-bootstrapped)",
+        "cell": "Unknown",
+        "phone": "9820098200",
+        "account": ""
+      },
+      {
+        "id": "9811198111",
+        "name": "9811198111",
+        "role": "Unknown (auto-bootstrapped)",
+        "cell": "Unknown",
+        "phone": "9811198111",
+        "account": ""
+      },
+      {
+        "id": "9890198901",
+        "name": "9890198901",
+        "role": "Unknown (auto-bootstrapped)",
+        "cell": "Unknown",
+        "phone": "9890198901",
+        "account": ""
+      },
+      {
+        "id": "9769097690",
+        "name": "9769097690",
+        "role": "Unknown (auto-bootstrapped)",
+        "cell": "Unknown",
+        "phone": "9769097690",
+        "account": ""
+      },
+      {
+        "id": "AUTO-001",
+        "name": "AUTO-001",
+        "role": "Unknown (auto-bootstrapped)",
+        "cell": "Unknown",
+        "phone": "",
+        "account": "HDFC00012345678901"
+      },
+      {
+        "id": "AUTO-002",
+        "name": "AUTO-002",
+        "role": "Unknown (auto-bootstrapped)",
+        "cell": "Unknown",
+        "phone": "",
+        "account": "521402010009876"
+      },
+      {
+        "id": "AUTO-003",
+        "name": "AUTO-003",
+        "role": "Unknown (auto-bootstrapped)",
+        "cell": "Unknown",
+        "phone": "",
+        "account": "ICIC00099887766554"
+      }
+    ],
+    "noise_people": []
+  }
+}

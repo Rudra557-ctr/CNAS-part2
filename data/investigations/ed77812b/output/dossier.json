@@ -1,0 +1,30 @@
+{
+  "blocks": [
+    {
+      "id": "a3827cfe",
+      "kind": "entity",
+      "created_by": "admin",
+      "created_at": "2026-09-19T19:20:48.843917+00:00",
+      "title": "Salim Pathan",
+      "entity_id": "B2",
+      "snapshot": {
+        "label": "Salim Pathan",
+        "cell": "B",
+        "role": "Lieutenant"
+      }
+    },
+    {
+      "id": "bafaa848",
+      "kind": "entity",
+      "created_by": "admin",
+      "created_at": "2026-09-19T19:20:49.847082+00:00",
+      "title": "Salim Pathan",
+      "entity_id": "B2",
+      "snapshot": {
+        "label": "Salim Pathan",
+        "cell": "B",
+        "role": "Lieutenant"
+      }
+    }
+  ]
+}
