@@ -1,6 +1,34 @@
-import { useEffect, useState } from 'react'
-import { ShieldCheck, Award, SearchCheck, Link2, Copy, Check } from 'lucide-react'
-import { fetchLedger, fetchCertificate, verifyEvidenceHash } from '../api/client'
+import { useEffect, useMemo, useState } from 'react'
+import { ShieldCheck, Award, SearchCheck, Link2, Copy, Check, Users } from 'lucide-react'
+import { fetchLedger, fetchCertificate, verifyEvidenceHash, fetchResolution } from '../api/client'
+
+interface ResolutionRow {
+  mention: string
+  romanised: string | null
+  master_id: string
+  master_label: string
+  rejected: boolean
+  confidence: string
+  name_score: string
+  method_family: string
+  script: 'devanagari' | 'latin'
+  source_id: string
+  source_type: string
+}
+
+interface ResolutionPayload {
+  rows: ResolutionRow[]
+  summary: { total: number; merged: number; rejected: number; cross_script: number }
+}
+
+const METHOD_LABEL: Record<string, string> = {
+  fuzzy_translit: 'transliteration',
+  fuzzy_initials: 'initials',
+  fuzzy_partial: 'partial name',
+  fuzzy_reject: 'below threshold',
+  exact_name: 'exact',
+  fuzzy: 'fuzzy name',
+}
 
 function Hash({ v }: { v?: string }) {
   const [copied, setCopied] = useState(false)
@@ -28,15 +56,23 @@ export default function Trust() {
   const [result, setResult] = useState<any | null>(null)
   const [verifying, setVerifying] = useState(false)
   const [verifyErr, setVerifyErr] = useState('')
+  const [res, setRes] = useState<ResolutionPayload | null>(null)
+  const [crossOnly, setCrossOnly] = useState(false)
 
   useEffect(() => {
     setLoading(true)
     Promise.all([
       fetchLedger(caseId || undefined).then(r => r.data).catch(() => null),
       fetchCertificate(caseId || undefined).then(r => r.data).catch(() => null),
-    ]).then(([l, c]) => { setLedger(l); setCert(c) })
+      fetchResolution(caseId || undefined).then(r => r.data).catch(() => null),
+    ]).then(([l, c, m]) => { setLedger(l); setCert(c); setRes(m) })
       .finally(() => setLoading(false))
   }, [caseId])
+
+  const resRows = useMemo(
+    () => (res?.rows || []).filter(r => !crossOnly || r.script === 'devanagari'),
+    [res, crossOnly],
+  )
 
   const verify = async () => {
     if (!query.trim()) return
@@ -180,6 +216,106 @@ export default function Trust() {
             </button>
           )}
         </div>
+      </div>
+
+      {/* Identity matches — the resolver's working, shown rather than claimed */}
+      <div className="gov-card p-4">
+        <div className="flex items-start justify-between gap-3 mb-1">
+          <h2 className="text-sm font-bold text-gov-ink flex items-center gap-2">
+            <Users size={14} className="text-gov-navy" />
+            Identity Matches ({res?.summary.total ?? 0})
+          </h2>
+          {(res?.summary.cross_script ?? 0) > 0 && (
+            <button
+              onClick={() => setCrossOnly(v => !v)}
+              className={`text-[10px] px-2 py-1 rounded-full border transition-colors ${
+                crossOnly
+                  ? 'bg-gov-navy text-white border-gov-navy'
+                  : 'border-gov-border text-gov-muted hover:border-gov-navy'}`}
+            >
+              Cross-script only ({res!.summary.cross_script})
+            </button>
+          )}
+        </div>
+        <p className="text-[11px] text-gov-muted mb-3">
+          How each name found in a document was matched to a person on file — original text on
+          the left, exactly as it was written.
+          {(res?.summary.rejected ?? 0) > 0 && (
+            <> {res!.summary.rejected} candidate{res!.summary.rejected === 1 ? ' was' : 's were'}{' '}
+            deliberately <strong>not</strong> merged for scoring below the threshold.</>
+          )}
+        </p>
+
+        {!resRows.length ? (
+          <p className="text-[11px] text-gov-faint">
+            No identity matches recorded for this scope.
+          </p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs">
+              <thead className="bg-gray-50 text-gov-muted">
+                <tr className="text-left">
+                  {['Found in document', 'Script', '', 'Matched to', 'Score', 'Method', 'Source'].map((h, i) => (
+                    <th key={i} className="px-3 py-2 font-semibold whitespace-nowrap">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="text-gov-ink">
+                {resRows.map((r, i) => (
+                  <tr
+                    key={i}
+                    className={`${i % 2 ? 'bg-gray-50/60' : ''} ${
+                      r.script === 'devanagari' ? 'border-l-4 border-l-gov-saffron' : ''}`}
+                  >
+                    <td className="px-3 py-2">
+                      <span className="text-sm font-medium">{r.mention}</span>
+                      {r.romanised && (
+                        <span className="block text-[10px] text-gov-faint font-mono">
+                          reads as “{r.romanised}”
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2">
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded border ${
+                        r.script === 'devanagari'
+                          ? 'bg-orange-50 text-orange-700 border-orange-200'
+                          : 'bg-gray-50 text-gov-muted border-gov-border'}`}>
+                        {r.script === 'devanagari' ? 'Devanagari' : 'Latin'}
+                      </span>
+                    </td>
+                    <td className="px-2 py-2 text-center">
+                      {r.rejected
+                        ? <span className="text-gov-red font-bold">✕</span>
+                        : <span className="text-gov-igreen font-bold">→</span>}
+                    </td>
+                    <td className="px-3 py-2 whitespace-nowrap">
+                      {r.rejected ? (
+                        <span className="text-gov-muted">
+                          {r.master_label} <span className="font-mono text-gov-faint">{r.master_id}</span>
+                          <span className="block text-[10px] text-gov-red">not merged</span>
+                        </span>
+                      ) : (
+                        <>
+                          <span className="font-medium">{r.master_label}</span>{' '}
+                          <span className="font-mono text-gov-faint">{r.master_id}</span>
+                        </>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 font-mono">{r.name_score ?? '—'}</td>
+                    <td className="px-3 py-2">
+                      <span className="text-[10px] font-mono text-gov-muted">
+                        {METHOD_LABEL[r.method_family] || r.method_family}
+                      </span>
+                    </td>
+                    <td className="px-3 py-2 font-mono text-[10px] text-gov-faint whitespace-nowrap">
+                      {r.source_id}{r.source_type ? ` · ${r.source_type}` : ''}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       {/* Ledger blocks */}

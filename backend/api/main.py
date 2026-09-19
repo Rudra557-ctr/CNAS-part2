@@ -1270,6 +1270,87 @@ def get_anomalies(iid: Optional[str] = Query(None), user: dict = Depends(get_cur
     audit_log("/anomalies", [a["entity_id"] for a in anoms[:10]])
     return anoms
 
+# -------------------------------------------------------------
+# Identity matches. The resolver already records every mention it merged and
+# every candidate it refused, with the original text intact — but nothing read
+# the file back, so a Hindi mention resolved to "Ramesh Yadav" and the Hindi
+# vanished from the product. There was no screen on which entity resolution
+# could be seen working at all. This serves that record.
+# -------------------------------------------------------------
+METHOD_FAMILIES = ("fuzzy_translit", "fuzzy_initials", "fuzzy_partial",
+                   "fuzzy_reject", "exact_name", "fuzzy")
+
+
+def _method_family(method: str) -> str:
+    head = (method or "").split("(")[0].strip()
+    for fam in METHOD_FAMILIES:          # ordered: specific before the bare "fuzzy"
+        if head.startswith(fam):
+            return fam
+    return head or "unknown"
+
+
+@app.get("/resolution")
+def get_resolution(iid: Optional[str] = Query(None), user: dict = Depends(CAN_VIEW_GRAPH)):
+    import csv as _csv
+    from backend.extraction.devanagari import has_devanagari, transliterate
+
+    if iid:
+        if not (INV_ROOT / iid).exists():
+            raise HTTPException(status_code=404, detail=f"Unknown investigation {iid}")
+        path = INV_ROOT / iid / "output" / "resolution.csv"
+    else:
+        path = PROJECT_ROOT / "output" / "resolution.csv"
+    _, serial = _get_inv_datasets_and_serial(iid)
+    if not path.exists():
+        return {"rows": [], "summary": {"total": 0, "merged": 0, "rejected": 0,
+                                        "cross_script": 0, "by_method": {}}}
+
+    labels = {n["id"]: (n.get("label") or n["id"]) for n in serial.get("nodes", [])}
+    rows, by_method = [], {}
+    with open(path, encoding="utf-8") as fh:
+        for r in _csv.DictReader(fh):
+            mention = r.get("merged_ids") or ""
+            family = _method_family(r.get("method", ""))
+            rejected = family == "fuzzy_reject"
+            # A rejection stores the candidate in merged_ids and the unresolved
+            # mention in master_id; a merge stores them the other way round.
+            master = r.get("master_id") or ""
+            if rejected:
+                target = mention.replace("candidate->", "").split(" score ")[0].strip()
+                mention = master
+                master = target
+            devanagari = has_devanagari(mention)
+            by_method[family] = by_method.get(family, 0) + 1
+            rows.append({
+                "mention": mention,
+                "romanised": transliterate(mention) if devanagari else None,
+                "master_id": master,
+                "master_label": labels.get(master, master),
+                "rejected": rejected,
+                "confidence": r.get("confidence"),
+                "name_score": r.get("name_score"),
+                "method": r.get("method"),
+                "method_family": family,
+                "script": "devanagari" if devanagari else "latin",
+                "source_id": r.get("source_id"),
+                "source_type": r.get("source_type"),
+                "evidence_snippet": (r.get("evidence_snippet") or "")[:200],
+                "evidence_hash": r.get("evidence_hash"),
+            })
+
+    # Cross-script and refused rows carry the most explanatory weight — lead with them.
+    rows.sort(key=lambda x: (x["script"] != "devanagari", not x["rejected"]))
+    summary = {
+        "total": len(rows),
+        "merged": sum(1 for x in rows if not x["rejected"]),
+        "rejected": sum(1 for x in rows if x["rejected"]),
+        "cross_script": sum(1 for x in rows if x["script"] == "devanagari"),
+        "by_method": by_method,
+    }
+    audit_log("/resolution", [x["master_id"] for x in rows[:20] if x["master_id"]])
+    return {"rows": rows, "summary": summary, "iid": iid}
+
+
 @app.get("/cross-case")
 def get_cross_case(iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
     datasets, serial = _get_inv_datasets_and_serial(iid)

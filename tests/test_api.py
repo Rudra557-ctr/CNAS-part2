@@ -124,3 +124,62 @@ def test_towers_schematic():
     assert t0["tower_id"].startswith("TWR-")
     assert sum(t["call_count"] for t in body["towers"]) == sum(
         1 for e in client.get("/graph", headers=H).json()["edges"] if e["kind"] == "CALLED")
+
+def test_resolution_exposes_identity_matches():
+    # The resolver's record of what it merged is the only place the pipeline's
+    # identity decisions are visible — it must be readable, not just written to disk.
+    assert client.get("/resolution").status_code == 401
+    r = client.get("/resolution", headers=H)
+    assert r.status_code == 200, r.text
+    body = r.json()
+    s = body["summary"]
+    assert s["total"] == len(body["rows"])
+    assert s["merged"] + s["rejected"] == s["total"]
+    row = body["rows"][0]
+    assert {"mention", "master_id", "master_label", "script",
+            "method_family", "rejected", "source_id"} <= set(row)
+
+
+def test_resolution_distinguishes_refusals_from_merges():
+    rows = client.get("/resolution", headers=H).json()["rows"]
+    rejected = [r for r in rows if r["rejected"]]
+    assert rejected, "demo data contains candidates scored below the merge threshold"
+    for r in rejected:
+        assert r["method_family"] == "fuzzy_reject"
+        # A refusal must still name the candidate it declined, or an analyst
+        # cannot review the decision.
+        assert r["master_id"] and not r["master_id"].startswith("candidate->")
+
+
+def test_resolution_flags_cross_script_matches():
+    from backend.config import PROJECT_ROOT
+
+    inv = client.post("/investigations", headers=H, json={"name": "nlq-hindi-res"}).json()
+    iid = inv["id"]
+    try:
+        # Demo fast path first: without an existing identity registry there is
+        # nothing for a Devanagari mention to resolve against.
+        assert client.post(f"/investigations/{iid}/process", headers=H).status_code == 200
+        with open(PROJECT_ROOT / "data" / "_real_samples" / "fir_0231_hindi_narrative.txt",
+                  "rb") as fh:
+            up = client.post(f"/investigations/{iid}/upload", headers=H,
+                             files={"files": ("fir_hindi.txt", fh, "text/plain")})
+        assert up.status_code == 200, up.text
+        assert client.post(f"/investigations/{iid}/process", headers=H).status_code == 200
+
+        body = client.get("/resolution", params={"iid": iid}, headers=H).json()
+        cross = [r for r in body["rows"] if r["script"] == "devanagari"]
+        assert cross, "Hindi mentions were not recorded as cross-script matches"
+        assert body["summary"]["cross_script"] == len(cross)
+        for r in cross:
+            assert r["method_family"] == "fuzzy_translit"
+            assert r["romanised"], "the romanised reading is what makes the match auditable"
+            assert not r["rejected"]
+        # The point of the feature: Hindi text resolved to an English person record.
+        assert any(r["master_label"] == "Ramesh Yadav" for r in cross)
+    finally:
+        client.delete(f"/investigations/{iid}", headers=H)
+
+
+def test_resolution_unknown_case_404s():
+    assert client.get("/resolution", params={"iid": "nope"}, headers=H).status_code == 404

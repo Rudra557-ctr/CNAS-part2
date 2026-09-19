@@ -128,6 +128,12 @@ export const fetchCertificate = (iid?: string) =>
 export const verifyEvidenceHash = (query: string, iid?: string) =>
   api.post('/verify-evidence-hash', { query, ...(iid ? { iid } : {}) })
 
+// Identity matches: every mention the resolver merged (or refused), with the
+// original text preserved — including Devanagari, so cross-script matching is
+// visible rather than asserted.
+export const fetchResolution = (iid?: string) =>
+  api.get('/resolution', { params: _iid(iid) })
+
 // ── Annotations + activity (collaboration-lite) ────────────────────────────
 export const fetchAnnotations = (o?: { target_type?: string; target_id?: string; iid?: string }) =>
   api.get('/annotations', { params: o })
