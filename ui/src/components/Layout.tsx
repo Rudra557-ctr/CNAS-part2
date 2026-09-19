@@ -3,7 +3,7 @@ import { useAuth } from './AuthContext'
 import {
   LayoutDashboard, Network, Map, Clock, Bell,
   Crosshair, FolderOpen, Plug, LogOut, Shield, Share2, Search, ShieldCheck,
-  Lightbulb, Layers, MessageSquareText,
+  Lightbulb, Layers, MessageSquareText, MicVocal,
 } from 'lucide-react'
 import GlobalSearch from './GlobalSearch'
 import { useLang, LanguageToggle } from '../i18n/LanguageContext'
@@ -19,6 +19,9 @@ const NAV = [
   { to: '/explain',    icon: Share2,           key: 'nav.explain' },
   { to: '/search',     icon: Search,           key: 'nav.search' },
   { to: '/ask',        icon: MessageSquareText, key: 'nav.ask' },
+  // Reading the case and writing to it are separate jobs with separate risk,
+  // so they get separate pages — Ask never writes, Ingest never queries.
+  { to: '/ingest',     icon: MicVocal,         key: 'nav.ingest', writeOnly: true },
   { to: '/trust',      icon: ShieldCheck,      key: 'nav.trust' },
   { to: '/key-insights', icon: Lightbulb,   key: 'nav.insights' },
   { to: '/cases',      icon: FolderOpen,       key: 'nav.cases' },
@@ -60,7 +63,13 @@ export default function Layout() {
 
         {/* Nav */}
         <nav className="flex-1 px-2.5 py-3 space-y-0.5 overflow-y-auto">
-          {NAV.filter(item => !(item as any).adminOnly || role === 'admin').map(({ to, icon: Icon, key, badge }) => (
+          {NAV
+            .filter(item => !(item as any).adminOnly || role === 'admin')
+            // Ingestion writes to the case record, so analysts (read-only)
+            // never see the entry point — the API refuses them anyway.
+            .filter(item => !(item as any).writeOnly
+                            || role === 'admin' || role === 'investigator')
+            .map(({ to, icon: Icon, key, badge }) => (
             <NavLink
               key={to}
               to={to}

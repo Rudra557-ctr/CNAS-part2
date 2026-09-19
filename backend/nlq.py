@@ -227,7 +227,9 @@ def _parse_relation(q: str, c: _Consumer, intent: Intent) -> None:
 def _parse_amount(q: str, c: _Consumer, intent: Intent) -> None:
     pattern = re.compile(
         r"(over|above|more than|greater than|exceeding|under|below|less than|upto|up to)?"
-        r"\s*(?:₹|rs\.?|inr)?\s*([\d,]+(?:\.\d+)?)\s*(lakhs?|lacs?|crores?|thousand|k)?\b",
+        # "$" is here because Whisper writes a primed number as "$50,000";
+        # the money is the same money whichever glyph the decoder chose.
+        r"\s*(?:₹|\$|rs\.?|inr|rupees)?\s*([\d,]+(?:\.\d+)?)\s*(lakhs?|lacs?|crores?|thousand|k)?\b",
         re.IGNORECASE)
     # Scan every numeric candidate: an entity ID like "A1" matches first but is
     # not an amount, and bailing on it would lose the real "over 5 lakh" later.
@@ -240,7 +242,7 @@ def _parse_amount(q: str, c: _Consumer, intent: Intent) -> None:
         if re.match(r"[A-Za-z]", q[max(0, m.start(2) - 1):m.start(2)]):
             continue          # the "1" inside "A1"
         unit = (m.group(3) or "").lower().rstrip("s")
-        has_currency = bool(re.search(r"₹|rs\.?|inr", m.group(0), re.I))
+        has_currency = bool(re.search(r"₹|\$|rs\.?|inr|rupees", m.group(0), re.I))
         if not m.group(1) and not unit and not has_currency:
             continue          # a lone number with no comparator or unit is ambiguous
 

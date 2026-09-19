@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import {
   MessageSquareText, Check, AlertTriangle, Code2, ChevronDown, ChevronRight, Loader2,
+  Mic, Square, AudioLines,
 } from 'lucide-react'
-import { fetchAsk } from '../api/client'
+import { fetchAsk, postVoiceCommand } from '../api/client'
+import { useVoiceRecorder } from '../lib/useVoiceRecorder'
 import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
 import { useLang } from '../i18n/LanguageContext'
 
@@ -31,6 +33,50 @@ interface AskResult {
   cypher_params: Record<string, unknown>
   cypher_note: string
   disclaimer: string
+}
+
+interface VoiceResponse {
+  success: boolean
+  transcription: string
+  parsed_command: {
+    intent: string | null
+    person_name: string | null
+    entity_ids: string[]
+    case_id: string | null
+    relation: string | null
+  } | null
+  filters: Record<string, unknown>
+  answer?: string
+  results?: AskResult['results']
+  result_count?: number
+  understood?: string[]
+  ignored?: Ignored[]
+  cypher?: string
+  cypher_params?: Record<string, unknown>
+  cypher_note?: string
+  disclaimer?: string
+  message?: string
+}
+
+// The voice endpoint runs the same nlq path as /ask and returns the same
+// answer/understood/ignored/results fields, so a spoken query renders through
+// the existing result UI untouched — only `query`, `relation` and `subjects`
+// need lifting out of parsed_command.
+function askResultFromVoice(v: VoiceResponse): AskResult {
+  return {
+    query: v.transcription,
+    answer: v.answer || '',
+    understood: v.understood || [],
+    ignored: v.ignored || [],
+    relation: v.parsed_command?.relation ?? null,
+    subjects: v.parsed_command?.entity_ids ?? [],
+    results: v.results || [],
+    result_count: v.result_count ?? 0,
+    cypher: v.cypher || '',
+    cypher_params: v.cypher_params || {},
+    cypher_note: v.cypher_note || '',
+    disclaimer: v.disclaimer || '',
+  }
 }
 
 const EXAMPLES_EN = [
@@ -76,11 +122,41 @@ export default function Ask() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [showCypher, setShowCypher] = useState(false)
+  const [heard, setHeard] = useState('')
+
+  // Recording is browser-side; the server has no microphone and needs none.
+  const onCapture = async (file: File) => {
+    setError(''); setData(null); setHeard('')
+    try {
+      const { data } = await postVoiceCommand(file, iid || undefined)
+      const body = data as VoiceResponse
+      setHeard(body.transcription || '')
+      if (!body.success) {
+        setError(body.message || 'No speech detected in the recording.')
+        return
+      }
+      setQ(body.transcription || '')
+      setData(askResultFromVoice(body))
+    } catch (e: any) {
+      const status = e.response?.status
+      const detail = e.response?.data?.detail
+      setError(
+        typeof detail === 'string' ? detail
+        : status === 413 ? 'Recording too long — keep it under 25 MB.'
+        : status === 422 ? 'The audio could not be transcribed. Try again, closer to the mic.'
+        : status >= 500 ? 'The transcription service failed on the server.'
+        : 'Voice command failed.',
+      )
+    }
+  }
+
+  const voice = useVoiceRecorder(onCapture)
+  const busy = loading || voice.state === 'processing'
 
   const run = async (text?: string) => {
     const query = (text ?? q).trim()
-    if (!query) return
-    setQ(query); setLoading(true); setError(''); setData(null)
+    if (!query || busy) return
+    setQ(query); setLoading(true); setError(''); setData(null); setHeard('')
     try {
       const { data } = await fetchAsk(query, iid || undefined)
       setData(data)
@@ -119,10 +195,65 @@ export default function Ask() {
               className="gov-input w-full pl-9 text-sm py-2"
             />
           </div>
-          <button onClick={() => run()} disabled={loading} className="gov-btn px-4 text-sm disabled:opacity-60">
+          {voice.supported && (
+            voice.state === 'recording' ? (
+              <button
+                onClick={voice.stop}
+                title={t('ask.voice.stop')}
+                className="px-4 text-sm rounded-lg border border-red-300 bg-red-50 text-gov-red
+                           font-semibold flex items-center gap-2 flex-shrink-0"
+              >
+                <Square size={13} className="fill-current" />
+                {t('ask.voice.stop')} · {voice.seconds}s
+                <span className="w-2 h-2 rounded-full bg-gov-red animate-pulse" />
+              </button>
+            ) : (
+              <button
+                onClick={voice.start}
+                disabled={busy}
+                title={t('ask.voice.start')}
+                className="px-3 text-sm rounded-lg border border-gov-border bg-white text-gov-navy
+                           hover:border-gov-navy flex items-center gap-2 flex-shrink-0
+                           disabled:opacity-60"
+              >
+                {voice.state === 'processing'
+                  ? <Loader2 size={14} className="animate-spin" />
+                  : <Mic size={15} />}
+                <span className="hidden sm:inline">
+                  {voice.state === 'processing' ? t('ask.voice.processing') : t('ask.voice.start')}
+                </span>
+              </button>
+            )
+          )}
+          <button onClick={() => run()} disabled={busy} className="gov-btn px-4 text-sm disabled:opacity-60">
             {loading ? <Loader2 size={14} className="animate-spin" /> : t('ask.button')}
           </button>
         </div>
+        {voice.state === 'recording' && (
+          <div className="flex items-center gap-2 text-xs text-gov-red">
+            <AudioLines size={14} className="animate-pulse" />
+            {t('ask.voice.recording')} — {voice.seconds}s
+          </div>
+        )}
+        {voice.state === 'processing' && (
+          <div className="flex items-center gap-2 text-xs text-gov-muted">
+            <Loader2 size={14} className="animate-spin" />
+            {t('ask.voice.transcribing')}
+          </div>
+        )}
+        {voice.error && (
+          <div className="flex items-start gap-2 text-xs text-gov-red">
+            <AlertTriangle size={14} className="flex-shrink-0 mt-0.5" />
+            <span>{voice.error.message}</span>
+            <button onClick={voice.clearError} className="underline text-gov-muted ml-1">
+              {t('ask.voice.dismiss')}
+            </button>
+          </div>
+        )}
+        {!voice.supported && (
+          <p className="text-[10px] text-gov-faint">{t('ask.voice.unsupported')}</p>
+        )}
+
         <div className="flex flex-wrap gap-1.5">
           {(lang === 'hi' ? EXAMPLES_HI : EXAMPLES_EN).map(ex => (
             <button
@@ -145,6 +276,15 @@ export default function Ask() {
 
       {data && (
         <>
+          {heard && (
+            <div className="gov-card p-3 flex items-start gap-2">
+              <Mic size={14} className="text-gov-navy flex-shrink-0 mt-0.5" />
+              <p className="text-xs text-gov-muted">
+                {t('ask.voice.heard')} <span className="text-gov-ink font-medium">“{heard}”</span>
+              </p>
+            </div>
+          )}
+
           {/* The finding, stated. A row count makes the officer do the reading. */}
           <div className="gov-card p-4 border-l-4 border-l-gov-navy">
             <p className="text-sm text-gov-ink leading-relaxed">{data.answer}</p>

@@ -12,6 +12,7 @@ import Cases       from './pages/Cases'
 import CaseDetail  from './pages/CaseDetail'
 import Search      from './pages/Search'
 import Ask         from './pages/Ask'
+import Ingest      from './pages/Ingest'
 import Trust       from './pages/Trust'
 import KeyInsights from './pages/KeyInsights'
 import Connectors  from './pages/Connectors'
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="cases/:iid" element={<CaseDetail />} />
         <Route path="search"     element={<Search />} />
         <Route path="ask"        element={<Ask />} />
+        <Route path="ingest"     element={<Ingest />} />
         <Route path="trust"      element={<Trust />} />
         <Route path="key-insights" element={<KeyInsights />} />
         <Route path="finance"    element={<Navigate to="/key-insights?tab=finance" replace />} />

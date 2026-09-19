@@ -33,6 +33,45 @@ _ARTEFACTS = re.compile(
 )
 
 
+# Whisper's initial_prompt is capped near 224 tokens, and Indian names run
+# ~3 tokens each, so only a slice of a large case can be primed. Highest-degree
+# people first: the most connected are the ones an officer is most likely to
+# name out loud.
+MAX_VOCABULARY_TERMS = 55
+
+
+def names_from_graph(serial: dict, limit: int = MAX_VOCABULARY_TERMS) -> list:
+    """Person labels from a graph serial, most-connected first."""
+    people = [n for n in (serial or {}).get("nodes", []) if n.get("kind") == "Person"]
+    people.sort(key=lambda n: -(n.get("degree") or 0))
+    out, seen = [], set()
+    for n in people:
+        label = (n.get("label") or "").strip()
+        if label and label.lower() not in seen:
+            seen.add(label.lower())
+            out.append(label)
+        if len(out) >= limit:
+            break
+    return out
+
+
+def build_vocabulary_prompt(names) -> Optional[str]:
+    """
+    Turn known entity names into a Whisper priming prompt.
+
+    Whisper mishears proper nouns it has no reason to expect — "Ravindra
+    Chaudhary" decodes as "Revenger Chartery", "Ramesh Yadav" as "Reimesh
+    Yadav". Seeding the decoder with the names actually on file corrects both,
+    and costs nothing at run time. This is applied to every caller of
+    transcribe_audio, so the query and data-entry paths hear the same words.
+    """
+    terms = [str(n).strip() for n in (names or []) if str(n).strip()]
+    if not terms:
+        return None
+    return ("Indian police investigation. Names on file: "
+            + ", ".join(terms[:MAX_VOCABULARY_TERMS]) + ".")
+
+
 class TranscriptionError(RuntimeError):
     """Audio could not be transcribed. Message is safe to show a caller."""
 
@@ -103,13 +142,18 @@ def _validate_wav(path: Path) -> None:
 
 def transcribe_audio(audio_path: str = "input_audio.wav",
                      language: str = "en",
-                     model_size: str = DEFAULT_MODEL_SIZE) -> str:
+                     model_size: str = DEFAULT_MODEL_SIZE,
+                     vocabulary=None) -> str:
     """
     Transcribe a local audio file to text. Returns "" when nothing was said.
 
     `language="en"` covers Indian English and the English side of Hinglish;
     Devanagari place and person names that come through in Roman script still
     resolve downstream, because the parser fuzzy-matches names across scripts.
+
+    `vocabulary` is an optional list of names already on file for this case;
+    see build_vocabulary_prompt. Everything else about the decode is fixed, so
+    every caller gets identical behaviour on identical audio.
     """
     path = Path(audio_path)
     _validate_wav(path)
@@ -122,6 +166,7 @@ def transcribe_audio(audio_path: str = "input_audio.wav",
             beam_size=5,
             vad_filter=True,               # drop leading/trailing silence
             condition_on_previous_text=False,  # stops it inventing continuations
+            initial_prompt=build_vocabulary_prompt(vocabulary),
         )
         text = " ".join(seg.text for seg in segments)
     except Exception as exc:

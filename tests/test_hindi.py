@@ -119,9 +119,13 @@ def test_person_register_carries_both_scripts():
     # Hindi name is stored, never generated.
     pd = _people()
     people = pd["network_people"] + pd["noise_people"]
-    missing = [p["id"] for p in people if not p.get("name_hi")]
+    # Records dictated in English through voice ingestion have no Hindi
+    # spelling on file, and inventing one by machine transliteration was
+    # rejected earlier as worse than leaving it blank.
+    seeded = [p for p in people if p.get("source") != "voice_ingestion"]
+    missing = [p["id"] for p in seeded if not p.get("name_hi")]
     assert not missing, f"no Hindi name on record for {missing}"
-    for p in people:
+    for p in seeded:
         assert has_devanagari(p["name_hi"]), f"{p['id']} name_hi is not Devanagari"
 
 
@@ -136,6 +140,7 @@ def test_graph_nodes_expose_the_hindi_name():
         nodes = _js.load(f)["nodes"]
     persons = [n for n in nodes if n.get("kind") == "Person"]
     assert persons
-    assert all(n.get("label_hi") for n in persons), "person nodes must carry label_hi"
+    seeded = [n for n in persons if not str(n["id"]).startswith("V")]
+    assert all(n.get("label_hi") for n in seeded), "person nodes must carry label_hi"
     a1 = next(n for n in persons if n["id"] == "A1")
     assert a1["label"] == "Anwar Sheikh" and a1["label_hi"] == "अनवर शेख"

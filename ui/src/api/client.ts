@@ -128,6 +128,27 @@ export const fetchCertificate = (iid?: string) =>
 export const verifyEvidenceHash = (query: string, iid?: string) =>
   api.post('/verify-evidence-hash', { query, ...(iid ? { iid } : {}) })
 
+// Voice command: the browser records, we upload the file. The backend
+// transcribes locally (faster-whisper) and runs the SAME nlq path as /ask, so
+// the response carries the same answer/understood/ignored/results shape.
+export const postVoiceCommand = (file: File, iid?: string) => {
+  const form = new FormData()
+  form.append('file', file)
+  return api.post('/api/voice-command', form, { params: _iid(iid) })
+}
+
+// Voice data ingestion (Stage 2). Two calls on purpose: the preview only
+// interprets and resolves — it never writes — and the commit is the single
+// place that modifies source data and re-runs the pipeline.
+export const postVoiceIngest = (input: File | string, iid?: string) => {
+  const form = new FormData()
+  if (typeof input === 'string') form.append('text', input)
+  else form.append('file', input)
+  return api.post('/api/voice-ingest', form, { params: _iid(iid) })
+}
+export const commitVoiceIngest = (command: object, iid?: string) =>
+  api.post('/api/voice-ingest/commit', { command, ...(iid ? { iid } : {}) })
+
 // Identity matches: every mention the resolver merged (or refused), with the
 // original text preserved — including Devanagari, so cross-script matching is
 // visible rather than asserted.

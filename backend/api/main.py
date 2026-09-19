@@ -2150,7 +2150,8 @@ async def voice_command(file: UploadFile = File(...),
                         iid: Optional[str] = Query(None),
                         user: dict = Depends(CAN_VIEW_GRAPH)):
     from backend.voice.parser import parse_voice_command, to_nlq_intent
-    from backend.voice.transcriber import TranscriptionError, transcribe_audio
+    from backend.voice.transcriber import (
+        TranscriptionError, names_from_graph, transcribe_audio)
 
     suffix = Path(file.filename or "").suffix.lower()
     if suffix and suffix not in ALLOWED_AUDIO_SUFFIXES:
@@ -2170,8 +2171,13 @@ async def voice_command(file: UploadFile = File(...),
             tmp.write(payload)
             tmp_path = Path(tmp.name)
 
+        # The graph is loaded before transcription, not after, so the decoder
+        # can be primed with the names already on file — Whisper renders an
+        # unexpected proper noun as whatever it sounds like otherwise.
+        _, serial = _get_inv_datasets_and_serial(iid)
         try:
-            transcript = transcribe_audio(str(tmp_path))
+            transcript = transcribe_audio(str(tmp_path),
+                                          vocabulary=names_from_graph(serial))
         except TranscriptionError as exc:
             # Message is authored for callers; the stack stays in the log.
             logger.warning("voice transcription failed: %s", exc)
@@ -2187,7 +2193,6 @@ async def voice_command(file: UploadFile = File(...),
                 "message": "No speech detected in the audio.",
             }
 
-        _, serial = _get_inv_datasets_and_serial(iid)
         try:
             command = parse_voice_command(transcript, serial)
         except Exception as exc:
@@ -2226,3 +2231,128 @@ async def voice_command(file: UploadFile = File(...),
                 tmp_path.unlink(missing_ok=True)
             except OSError:
                 logger.warning("could not remove temp audio %s", tmp_path)
+
+
+# ── Voice data ingestion (Stage 2) ────────────────────────────────────────
+# Speaking a *change* to the case record is a different risk class from
+# speaking a question, so it gets its own two-step route: /api/voice-ingest
+# only ever interprets and resolves, and /api/voice-ingest/commit is the one
+# place that writes. Nothing is persisted without an explicit confirmation
+# carrying a command the server re-validates and re-plans from scratch.
+#
+# Transcription reuses backend/voice/transcriber.py — the same local
+# faster-whisper model the query path uses. There is no second voice stack.
+
+class VoiceIngestConfirm(BaseModel):
+    """The confirmed command, exactly as the preview returned it."""
+    command: dict
+    iid: Optional[str] = None
+
+
+def _ingest_transcript(payload: bytes, suffix: str, vocabulary=None) -> str:
+    """Bytes → transcript, through the existing transcriber."""
+    from backend.voice.transcriber import TranscriptionError, transcribe_audio
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=suffix or ".wav") as tmp:
+            tmp.write(payload)
+            tmp_path = Path(tmp.name)
+        try:
+            return transcribe_audio(str(tmp_path), vocabulary=vocabulary)
+        except TranscriptionError as exc:
+            logger.warning("ingest transcription failed: %s", exc)
+            raise HTTPException(status_code=422, detail=str(exc))
+    finally:
+        if tmp_path is not None:
+            try:
+                tmp_path.unlink(missing_ok=True)
+            except OSError:
+                logger.warning("could not remove temp audio %s", tmp_path)
+
+
+@app.post("/api/voice-ingest")
+async def voice_ingest_preview(file: Optional[UploadFile] = File(None),
+                               text: Optional[str] = Form(None),
+                               iid: Optional[str] = Query(None),
+                               user: dict = Depends(CAN_WRITE)):
+    """
+    Interpret a spoken (or typed) data-entry command. Writes nothing.
+
+    `text` exists so the same interpretation can be exercised without audio —
+    by tests, and by an officer on a machine with no working microphone.
+    """
+    from backend.ingestion.voice_writer import plan_ingest
+    from backend.voice.ingest_parser import parse_ingest_command
+
+    transcript = (text or "").strip()
+    if file is not None and file.filename:
+        suffix = Path(file.filename).suffix.lower()
+        if suffix and suffix not in ALLOWED_AUDIO_SUFFIXES:
+            raise HTTPException(status_code=400,
+                                detail=f"Unsupported audio format {suffix} — "
+                                       f"use one of {sorted(ALLOWED_AUDIO_SUFFIXES)}")
+        payload = await file.read()
+        if not payload:
+            raise HTTPException(status_code=400, detail="Uploaded audio file is empty")
+        if len(payload) > MAX_AUDIO_BYTES:
+            raise HTTPException(status_code=413, detail="Audio file too large (limit 25 MB)")
+        # Same helper, same names, same decoder settings as the query path.
+        from backend.ingestion.voice_writer import load_universe, scope_for
+        from backend.voice.transcriber import names_from_graph
+        try:
+            known = [p["name"] for p in load_universe(scope_for(iid))[:400]]
+        except Exception:  # noqa: BLE001 — priming is an optimisation
+            known = []
+        _, _serial = _get_inv_datasets_and_serial(iid)
+        transcript = _ingest_transcript(payload, suffix,
+                                        vocabulary=names_from_graph(_serial) or known)
+
+    if not transcript:
+        return {"success": False, "transcription": "", "status": "empty",
+                "message": "No speech detected in the audio.",
+                "requires_confirmation": False}
+
+    try:
+        command = parse_ingest_command(transcript)
+        # Entities live per case: resolve against the same graph the officer is
+        # looking at, or the shared one when no case is selected.
+        plan = plan_ingest(command, iid)
+    except Exception as exc:  # noqa: BLE001
+        logger.exception("ingest parse/plan failed on %r", transcript)
+        raise HTTPException(status_code=422,
+                            detail=f"Could not interpret the command: {exc}")
+
+    audit_log(f"/api/voice-ingest preview [{plan['scope']}] {transcript!r} "
+              f"-> {plan['status']}", [])
+    return {"success": plan["status"] == "ready", "transcription": transcript,
+            "understood": command.understood, "ignored": command.ignored, **plan}
+
+
+@app.post("/api/voice-ingest/commit")
+def voice_ingest_commit(body: VoiceIngestConfirm, user: dict = Depends(CAN_WRITE)):
+    """
+    Apply a confirmed command: source data → existing pipeline → graph.
+
+    The command is re-parsed through the Pydantic model and re-planned inside
+    commit_ingest, so a client cannot hand back an operation, a field or a
+    target that the preview never offered.
+    """
+    from backend.ingestion.voice_writer import IngestError, commit_ingest
+    from backend.voice.ingest_parser import IngestCommand
+
+    try:
+        command = IngestCommand(**body.command)
+    except Exception as exc:  # noqa: BLE001 — validation refusals are 400s
+        raise HTTPException(status_code=400, detail=f"Invalid command: {exc}")
+
+    try:
+        result = commit_ingest(command, operator=user.get("username", AUDIT_USER),
+                               iid=body.iid)
+    except IngestError as exc:
+        logger.exception("voice ingestion rolled back")
+        raise HTTPException(status_code=500, detail=str(exc))
+
+    audit_log(f"/api/voice-ingest/commit [{result.get('scope')}] "
+              f"{command.describe()!r} -> {result['status']}",
+              result.get("entity_ids") or [])
+    return {"success": bool(result.get("committed")), **result}

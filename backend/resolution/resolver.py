@@ -135,8 +135,13 @@ def resolve_entities(struct_entities: List[Dict], unstruct_entities: List[Dict],
     # For unstructured Person_mention, attempt resolution with multi-signal confidence
     for e in unstruct_entities:
         if e.get("entity_type") not in ("Person_mention","Person_alias"):
-            # phones/accounts/locations pass through as themselves
-            mention_to_canonical[e["value"]] = e.get("canonical_id") or e["value"]
+            # phones/accounts/locations pass through as themselves — but never
+            # over a canonical ID a structured source already established.
+            # spaCy tags some person names as Organization ("Ramesh Yadav"),
+            # and an unguarded write here replaced A7 with the bare string,
+            # silently dropping every narrative edge that named that person.
+            if e["value"] not in mention_to_canonical:
+                mention_to_canonical[e["value"]] = e.get("canonical_id") or e["value"]
             continue
         mention = e["value"].strip()
         if mention in mention_to_canonical:
