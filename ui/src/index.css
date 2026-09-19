@@ -33,11 +33,12 @@
            transition-colors w-full;
   }
   .gov-nav {
-    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gov-muted
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] text-gov-muted
            hover:text-gov-ink hover:bg-gov-wash transition-all cursor-pointer;
   }
   .gov-nav.active {
-    @apply text-white bg-gov-navy;
+    @apply text-white bg-gov-navy font-bold;
+    box-shadow: inset 3px 0 0 #3b82f6;
   }
   .gov-stat {
     @apply gov-card p-4 flex flex-col gap-1;

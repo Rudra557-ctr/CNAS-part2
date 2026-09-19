@@ -15,6 +15,9 @@ import {
 } from 'lucide-react'
 import { useAuth, useCanWrite } from '../components/AuthContext'
 import { useLang } from '../i18n/LanguageContext'
+import Fusion from './Fusion'
+import Takedown from './Takedown'
+import Explainer from './Explainer'
 
 // Node colour by type (Palantir colour convention, matches previous UI)
 const KIND_COLOR: Record<string, string> = {
@@ -105,6 +108,16 @@ export default function GraphView() {
     setGraphData(null); setCommunities([]); setCommLoaded(false); setBridges(new Set())
     fitted.current = false
   }
+
+  // ── Network section sub-tabs (fusion / takedown / explain live here now,
+  // not in the sidebar). Routes stay mounted — this only switches the view.
+  const [subview, setSubview] = useState<'graph' | 'fusion' | 'takedown' | 'explain'>('graph')
+  const SUBVIEWS = [
+    { id: 'graph', label: 'Network Graph' },
+    { id: 'fusion', label: 'Fusion Reveal' },
+    { id: 'takedown', label: 'Takedown Sim' },
+    { id: 'explain', label: 'Why Connected' },
+  ]
 
   // ── Community mode ────────────────────────────────────────────────────────
   const [mode, setMode]             = useState<'network' | 'community'>('network')
@@ -786,7 +799,27 @@ export default function GraphView() {
   const Graph3D: any = use3D ? ForceGraph3D : ForceGraph2D
 
   return (
-    <div className={`flex gap-4 ${fullscreen ? '' : 'h-[calc(100vh-7rem)]'}`}>
+    <div className="space-y-3">
+      {/* Section sub-tabs — hidden while the canvas owns the screen */}
+      {!fullscreen && (
+        <div className="flex gap-1.5 flex-wrap items-center">
+          {SUBVIEWS.map(v => (
+            <button
+              key={v.id}
+              onClick={() => { setSubview(v.id as typeof subview); setFullscreen(false) }}
+              className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${
+                subview === v.id
+                  ? 'bg-gov-navy border-gov-navy text-white'
+                  : 'bg-white border-gov-border text-gov-muted hover:text-gov-ink'
+              }`}
+            >
+              {v.label}
+            </button>
+          ))}
+        </div>
+      )}
+      {(subview === 'graph' || fullscreen) && (
+      <div className={`flex gap-4 ${fullscreen ? '' : 'h-[calc(100vh-10rem)]'}`}>
 
       {/* Graph container */}
       <div
@@ -1134,6 +1167,11 @@ export default function GraphView() {
           <p className="text-xs text-gov-muted mt-1">profile · or any link for its source record</p>
         </div>
       )}
+      </div>
+      )}
+      {!fullscreen && subview === 'fusion' && <Fusion />}
+      {!fullscreen && subview === 'takedown' && <Takedown />}
+      {!fullscreen && subview === 'explain' && <Explainer />}
     </div>
   )
 }
