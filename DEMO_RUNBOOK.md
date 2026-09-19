@@ -96,9 +96,17 @@ guilt — the system says so on every screen."*
 narrative. Foreign schemas, Windows encoding, real-format numbers. Auto-detected, mapped,
 graphed."
 
-Then the Hindi sample: "This is a Hindi FIR — Devanagari prose, Devanagari numerals in the
-phone number. **रमेश यादव** resolves to the canonical **Ramesh Yadav**, same person record.
-Offline, no translation service."
+Then **Cases → Hindi Resolution Demo → Open case graph**: "This case has a Hindi FIR in it —
+Devanagari prose, Devanagari numerals in the phone number. **रमेश यादव** resolves to the
+canonical **Ramesh Yadav**, **सुरेश राणे** to **Suresh Rane**, and the system drew an
+association between them from that document. Offline, no translation service. Not one node in
+this graph is labelled in Devanagari — they all resolved to existing person records."
+
+> **Order matters if you rebuild this case.** Run the analysis on an empty case *first* so
+> the demo people directory loads, *then* upload the Hindi FIR, *then* re-run. A brand-new
+> case with only a narrative in it has no canonical identities to resolve against, so the
+> mentions stay unresolved and no person nodes appear. Don't discover this on stage —
+> the case is already built and saved.
 
 **Data Connectors**: "Seven upload pipelines live today. The locked rows — CCTNS, TRAI,
 FIU-IND, NATGRID — need agency authorization tokens. **We built the platform. We just need
