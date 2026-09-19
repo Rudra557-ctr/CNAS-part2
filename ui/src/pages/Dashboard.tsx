@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Network, AlertTriangle, Users, TrendingUp, Activity, GitBranch, Eye, ArrowRight } from 'lucide-react'
-import { fetchGraph, fetchInvGraph, fetchLeads, fetchBridges, fetchAnomalies } from '../api/client'
+import { Network, AlertTriangle, Users, TrendingUp, Activity, GitBranch, Eye, ArrowRight, FileDown } from 'lucide-react'
+import {
+  fetchGraph, fetchInvGraph, fetchLeads, fetchBridges, fetchAnomalies,
+  fetchBursts, fetchWhy, fetchInvWhy,
+} from '../api/client'
+import { useAuth } from '../components/AuthContext'
 import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
+import { exportCaseFilePdf, type WhyPayload } from '../lib/caseFilePdf'
 import type { Lead, Bridge, Anomaly } from '../types'
 
 export default function Dashboard() {
   const navigate = useNavigate()
+  const { username } = useAuth()
   const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [stats,     setStats]     = useState({ nodes: 0, edges: 0 })
   const [leads,     setLeads]     = useState<Lead[]>([])
   const [bridges,   setBridges]   = useState<Bridge[]>([])
   const [anomalies, setAnomalies] = useState<Anomaly[]>([])
   const [loading,   setLoading]   = useState(true)
+  const [exporting, setExporting] = useState(false)
 
   useEffect(() => {
     // Independent fetches: one forbidden endpoint (e.g. /graph for analysts)
@@ -33,6 +40,43 @@ export default function Dashboard() {
       })
       .finally(() => setLoading(false))
   }, [scopeKey])
+
+  // One-click case file — pulls the full (unsliced) analytics set plus per-entity
+  // evidence from /why, then renders the PDF client-side. Nothing to pin first.
+  const exportCaseFile = async () => {
+    setExporting(true)
+    try {
+      const safe = <T,>(p: Promise<T>): Promise<T | null> => p.catch(() => null)
+      const [l, b, a, bu] = await Promise.all([
+        safe(fetchLeads(iid)), safe(fetchBridges(iid)),
+        safe(fetchAnomalies(iid)), safe(fetchBursts(iid)),
+      ])
+      const unwrap = (r: any, key: string): any[] => r?.data?.[key] || r?.data || []
+      const allLeads = unwrap(l, 'leads').slice(0, 10)
+
+      const whys: Record<string, WhyPayload> = {}
+      await Promise.all(
+        allLeads.slice(0, 5).map(x => x.entity_id).filter(Boolean).map(async (id: string) => {
+          const r = await safe(iid ? fetchInvWhy(iid, id) : fetchWhy(id))
+          if (r?.data) whys[id] = r.data as WhyPayload
+        }),
+      )
+
+      exportCaseFilePdf({
+        caseName: caseName || 'Consolidated network (shared graph)',
+        iid: iid || undefined,
+        username: username || 'analyst',
+        stats,
+        leads: allLeads,
+        bridges: unwrap(b, 'bridges'),
+        bursts: unwrap(bu, 'bursts'),
+        anomalies: unwrap(a, 'anomalies'),
+        whys,
+      })
+    } finally {
+      setExporting(false)
+    }
+  }
 
   // Backend may return lowercase severity/priority; normalize before comparing.
   const prio = (level?: string) => (level || '').toUpperCase()
@@ -65,6 +109,15 @@ export default function Dashboard() {
         </div>
         <div className="flex items-center gap-2">
           {iid && <CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} />}
+          <button
+            onClick={exportCaseFile}
+            disabled={exporting}
+            title="Generate a full case file PDF: leads, evidence basis, bridges, bursts and method"
+            className="flex items-center gap-2 gov-card px-3 py-1.5 text-xs font-semibold text-gov-navy hover:border-gov-navy hover:shadow-gov transition-all disabled:opacity-60"
+          >
+            <FileDown size={13} />
+            {exporting ? 'Building case file…' : 'Export case file'}
+          </button>
           <div className="flex items-center gap-2 gov-card px-3 py-1.5">
             <span className="w-2 h-2 rounded-full bg-gov-igreen animate-pulse" />
             <span className="text-xs text-gov-igreen font-semibold">All systems nominal</span>
