@@ -1,0 +1,10 @@
+.git
+__pycache__
+.pytest_cache
+node_modules
+ui/node_modules
+ui/dist
+third_party
+legacy-frontend
+.gstack
+.DS_Store

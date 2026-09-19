@@ -9,7 +9,7 @@ GET /ask?q=STRING → {template_id, cypher, params}
 
 All reads + loader append to audit.jsonl {ts,user="demo-operator",query,result_ids}
 """
-from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from typing import Optional, List, Dict
@@ -81,8 +81,40 @@ def audit_log(query: str, result_ids: list):
 
 @app.get("/")
 def root():
+    # Single-service deploy: `/` is the analyst UI when the baked build exists
+    # (local dev/CI has no dist, so the JSON contract is unchanged there).
+    dist_index = PROJECT_ROOT / "ui" / "dist" / "index.html"
+    if dist_index.exists():
+        from fastapi.responses import FileResponse
+        return FileResponse(str(dist_index))
     return {"status": "ok", "message": "Fusion API — TASK 1 core pipeline", "docs": "/docs",
             "endpoints": ["/graph?day=58", "/bridges", "/bursts", "/why/{id}", "/ask?q=", "/health", "/stats"]}
+
+
+@app.middleware("http")
+async def _strip_api_prefix(request, call_next):
+    # The UI calls `/api/*`; vite strips that prefix in dev, so the single-
+    # service container does the same — one rule, both environments.
+    # `was_api` lets the SPA fallback below keep returning JSON 404s for
+    # unknown API paths instead of silently serving the UI.
+    path = request.scope.get("path", "")
+    if path == "/api" or path.startswith("/api/"):
+        stripped = path[4:] or "/"
+        request.scope["path"] = stripped
+        request.scope["raw_path"] = stripped.encode("utf-8")
+        request.scope["was_api"] = True
+        return await call_next(request)
+    # `/graph` and `/ask` are BOTH an API endpoint and a UI page. A browser
+    # loading the page (Accept: text/html — refresh, deep link, first paint)
+    # gets the SPA; API clients (Accept: application/json, curl, tests) keep
+    # the JSON endpoint. In-app navigation never hits the server at all.
+    if (request.scope.get("method") == "GET"
+            and request.scope.get("path") in ("/graph", "/ask")):
+        accept = request.headers.get("accept", "")
+        if "text/html" in accept:
+            request.scope["path"] = "/__spa__" + request.scope["path"]
+            request.scope["raw_path"] = request.scope["path"].encode("utf-8")
+    return await call_next(request)
 
 from pydantic import BaseModel
 # --- Investigations — generic ingestion workflow (dataset-agnostic) ---
@@ -2356,3 +2388,29 @@ def voice_ingest_commit(body: VoiceIngestConfirm, user: dict = Depends(CAN_WRITE
               f"{command.describe()!r} -> {result['status']}",
               result.get("entity_ids") or [])
     return {"success": bool(result.get("committed")), **result}
+
+
+# ── Single-service deploy: serve the built UI ─────────────────────────────
+# The Dockerfile bakes `ui/dist` into the image; one Render service then
+# serves API + UI on a single URL (no CORS, no split domains). This catch-all
+# is registered LAST so every API route above wins; anything else serves a
+# real asset when it exists, else index.html (SPA routes like /graph,
+# /cases). Unknown `/api/*` paths keep their JSON 404 via `was_api`. In
+# local dev there is no dist (vite serves :5173), so this stays inert.
+@app.get("/{full_path:path}")
+def _spa_fallback(request: Request, full_path: str):
+    from fastapi.responses import FileResponse
+    if request.scope.get("was_api"):
+        raise HTTPException(status_code=404, detail="Not found")
+    dist = PROJECT_ROOT / "ui" / "dist"
+    index = dist / "index.html"
+    if not index.exists():
+        raise HTTPException(status_code=404, detail="Not found")
+    candidate = dist / full_path
+    try:
+        candidate.resolve().relative_to(dist.resolve())
+    except ValueError:
+        raise HTTPException(status_code=404, detail="Not found")
+    if candidate.is_file():
+        return FileResponse(str(candidate))
+    return FileResponse(str(index))

@@ -1,0 +1,37 @@
+# Render Blueprint — https://dashboard.render.com/blueprints
+# One Docker web service serves API + UI on a single URL.
+#
+# RAM WARNING: faster-whisper "small" needs ~2GB RAM. Use plan `standard`
+# (or higher). On a smaller plan, set WHISPER_MODEL_SIZE to `base`/`tiny`
+# (must match the Docker build-arg; rebuild after changing it).
+#
+# Neo4j is optional: create a free Aura instance (https://console.neo4j.io),
+# then fill NEO4J_URI/USER/PASSWORD in the dashboard. Left empty, the app
+# runs file-mode — every feature works, /health reports "neo4j": false.
+#
+# NOTE: uploads, new investigations and audit log are ephemeral (lost on
+# redeploy/restart) unless you attach a paid disk mounted at /app/data.
+
+services:
+  - type: web
+    name: cnas-api
+    runtime: docker
+    plan: standard
+    healthCheckPath: /health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: WHISPER_MODEL_SIZE
+        value: small
+      - key: WHISPER_DEVICE
+        value: cpu
+      - key: WHISPER_COMPUTE_TYPE
+        value: int8
+      - key: NEO4J_URI
+        sync: false
+      - key: NEO4J_USER
+        sync: false
+      - key: NEO4J_PASSWORD
+        sync: false
+      - key: NEO4J_DATABASE
+        value: neo4j
