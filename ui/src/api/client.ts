@@ -60,7 +60,8 @@ export const adminAuditTrail = (p?: { limit?: number; q?: string }) =>
 // ── Graph ──────────────────────────────────────────────────────────────────
 export const fetchGraph   = (day?: number)    => api.get('/graph', { params: day ? { day } : {} })
 export const fetchWhy     = (id: string)      => api.get(`/why/${id}`)
-export const fetchAsk     = (q: string)       => api.get('/ask', { params: { q } })
+export const fetchAsk     = (q: string, iid?: string) =>
+  api.get('/ask', { params: { q, ...(iid ? { iid } : {}) } })
 
 // ── People search (entity lookup by name / ID / phone / account) ───────────
 // Backend: GET /people/search?q=… → {query, results: [{id,name,cell,role,phone,account,photo}], count}

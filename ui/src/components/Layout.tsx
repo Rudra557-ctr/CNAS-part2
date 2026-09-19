@@ -3,19 +3,21 @@ import { useAuth } from './AuthContext'
 import {
   LayoutDashboard, Network, Map, Clock, Bell,
   Crosshair, FolderOpen, Plug, LogOut, Shield, Share2, Search, ShieldCheck,
-  Lightbulb,
+  Lightbulb, Layers, MessageSquareText,
 } from 'lucide-react'
 import GlobalSearch from './GlobalSearch'
 
 const NAV = [
   { to: '/',           icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/graph',      icon: Network,          label: 'Network Graph' },
+  { to: '/fusion',     icon: Layers,           label: 'Fusion Reveal' },
   { to: '/map',        icon: Map,              label: 'Map View' },
   { to: '/timeline',   icon: Clock,            label: 'Timeline' },
   { to: '/alerts',     icon: Bell,             label: 'Alerts',    badge: true },
   { to: '/takedown',   icon: Crosshair,        label: 'Takedown Sim' },
   { to: '/explain',    icon: Share2,           label: 'Why Connected' },
   { to: '/search',     icon: Search,           label: 'Search All' },
+  { to: '/ask',        icon: MessageSquareText, label: 'Ask the Case' },
   { to: '/trust',      icon: ShieldCheck,      label: 'Evidence Trust' },
   { to: '/key-insights', icon: Lightbulb,   label: 'Key Insights' },
   { to: '/cases',      icon: FolderOpen,       label: 'Cases' },

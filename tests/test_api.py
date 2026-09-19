@@ -51,15 +51,22 @@ def test_why_404():
     r = client.get("/why/UNKNOWN123", headers=H)
     assert r.status_code == 404
 
-def test_ask_bridges():
-    r = client.get("/ask", params={"q": "Who connects Cell A and Cell B"}, headers=H)
+def test_ask_reports_what_it_understood():
+    r = client.get("/ask", params={"q": "calls from A1 on day 61"}, headers=H)
     assert r.status_code == 200
-    assert r.json()["template_id"] == 1
+    body = r.json()
+    assert body["relation"] == "CALLED"
+    assert body["subjects"] == ["A1"]
+    assert any("day 61" in u for u in body["understood"])
 
-def test_ask_unknown():
+def test_ask_unknown_returns_empty_not_error():
+    # Partial or zero understanding is the normal case, not an HTTP error — but
+    # it must never come back as a confident answer drawn from the whole graph.
     r = client.get("/ask", params={"q": "blabla unknown gibberish"}, headers=H)
-    assert r.status_code == 400
-    assert "templates" in r.json()["detail"]
+    assert r.status_code == 200
+    body = r.json()
+    assert body["results"] == []
+    assert body["ignored"], "unparsed terms must be reported, not dropped"
 
 def _whatif_iid():
     r = client.post("/investigations", headers=H, json={"name": "whatif-test"})

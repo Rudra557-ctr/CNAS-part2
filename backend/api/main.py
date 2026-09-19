@@ -51,6 +51,7 @@ from backend.auth import (
     authenticate, create_token, get_current_user,
 )
 from backend.loader import load_all
+from backend import nlq
 from backend.config import DATA_DIR, PROJECT_ROOT
 from backend.ingestion.detector import detect_schema, detect_format
 from backend.ingestion.mapper import suggest_mapping, validate_mapping, apply_mapping, REQUIRED
@@ -1954,52 +1955,48 @@ def create_inv_operation_order_endpoint(iid: str, payload: OperationOrderRequest
     audit_log(f"/investigations/{iid}/takedown/operation-order", [data["operation_order_id"]])
     return data
 
-# --- /ask templates --- ordered by specificity (longer triggers first, per design 8 templates)
-ASK_TEMPLATES = [
-    {"id": 1, "trigger": "bridges", "keywords": ["bridge","connects","connect"], "description": "Who connects Cell A and Cell B? / bridges-between", "cypher": "MATCH (p:Person)-[r]-(q:Person) WHERE p.cell<>q.cell RETURN p, r, q ORDER BY p.bridge_score DESC LIMIT 10"},
-    {"id": 7, "trigger": "structuring", "keywords": ["structuring","smurf","fan"], "description": "Structuring around ID", "cypher": "MATCH (a:Person {id:$id})<-[r:TRANSACTED]-(b:Person) WHERE r.amount < 50000 RETURN b,r"},
-    {"id": 5, "trigger": "transactions", "keywords": ["transaction","transact","amount","lakh","hawala"], "description": "Transactions over amount", "cypher": "MATCH (a:Person)-[r:TRANSACTED]->(b:Person) WHERE r.amount > $amt RETURN a,b,r ORDER BY r.amount DESC"},
-    {"id": 4, "trigger": "path", "keywords": ["path","between","to"], "description": "Path from ID to ID", "cypher": "MATCH p=shortestPath((a:Person {id:$src})-[:CALLED|TRANSACTED*..4]-(b:Person {id:$dst})) RETURN p"},
-    {"id": 2, "trigger": "burst", "keywords": ["burst","spike","activity"], "description": "Show bursts on day", "cypher": "MATCH (p:Person)-[r:CALLED]->(q:Person) WHERE r.day=$day RETURN p,q,r"},
-    {"id": 6, "trigger": "calls", "keywords": ["calls","called","phone"], "description": "Calls from ID", "cypher": "MATCH (a:Person {id:$id})-[r:CALLED]-(b:Person) RETURN b, r ORDER BY r.day"},
-    {"id": 3, "trigger": "why", "keywords": ["why","evidence","support"], "description": "What evidence supports relationship X?", "cypher": "MATCH (a {id:$id})-[r]-(b) RETURN r.source, r.source_type, r.confidence, r.day LIMIT 20"},
-    {"id": 8, "trigger": "cell", "keywords": ["cell of"], "description": "Cell of ID", "cypher": "MATCH (p:Person {id:$id}) RETURN p.cell, p.role"},
-]
-
+# -------------------------------------------------------------
+# Natural-language query. The old version matched a keyword to one of 8 Cypher
+# templates and returned it — which meant a query carrying constraints the
+# templates did not model (a place, a date, a subject) came back as a
+# confident answer to a different question. backend/nlq.py instead reports
+# what it understood and what it ignored, and only filters on the former.
+# -------------------------------------------------------------
 @app.get("/ask")
-def ask(q: str = Query(..., description="Natural language query"), user: dict = Depends(CAN_VIEW_GRAPH)):
-    qlow = q.lower().strip()
-    # intent extraction: match any keyword in template's keywords list (ordered by specificity)
-    for t in ASK_TEMPLATES:
-        if any(kw in qlow for kw in t.get("keywords", [t["trigger"]])):
-            # try extract entity ids like X1, A11 etc
-            import re
-            m = re.findall(r"\b([A-Z]\d{1,2}|X\d)\b", q)
-            params = {}
-            if m:
-                params["id"] = m[0]
-                if len(m) >= 2:
-                    params["src"] = m[0]; params["dst"] = m[1]
-            # amount extraction
-            amt_m = re.search(r"(\d+)\s*(lakh|k)", qlow)
-            if amt_m:
-                # crude: 1 lakh = 100000
-                val = int(amt_m.group(1))
-                if "lakh" in amt_m.group(2):
-                    val *= 100000
-                elif "k" in amt_m.group(2):
-                    val *= 1000
-                params["amt"] = val
-            # day extraction
-            day_m = re.search(r"day\s*(\d+)", qlow)
-            if day_m:
-                params["day"] = int(day_m.group(1))
-            audit_log(f"/ask?q={q}", [t["id"]])
-            return {"template_id": t["id"], "description": t["description"], "cypher": t["cypher"], "params": params, "query": q}
-    # unknown template
-    audit_log(f"/ask?q={q} (unknown)", [])
-    raise HTTPException(status_code=400, detail={
-        "error": "Unknown template — try one of the 8 supported intents",
-        "examples": [t["description"] + f" (try: '{t['trigger']} ...')" for t in ASK_TEMPLATES[:3]],
-        "templates": ASK_TEMPLATES
-    })
+def ask(q: str = Query(..., description="Natural language query"),
+        iid: Optional[str] = Query(None),
+        user: dict = Depends(CAN_VIEW_GRAPH)):
+    import json as js
+    scope = scope_dir_for(iid)
+    if iid and (INV_ROOT / iid / "output" / "graph.json").exists():
+        serial = apply_overrides(js.loads((INV_ROOT / iid / "output" / "graph.json").read_text()), scope)
+    else:
+        serial = apply_overrides(load_graph_serial(), scope)
+
+    intent = nlq.parse(q, serial)
+    rows = nlq.execute(intent, serial)
+    rendered = nlq.to_cypher(intent)
+    answer = nlq.summarise(intent, rows, serial)
+
+    audit_log(f"/ask?q={q}", [r.get("source") for r in rows[:20] if r.get("source")])
+    return {
+        "query": q,
+        "answer": answer,
+        "understood": intent.understood,
+        "ignored": intent.ignored,
+        "relation": intent.relation,
+        "subjects": intent.subjects,
+        "filters": {
+            "amount_op": intent.amount_op, "amount_value": intent.amount_value,
+            "day_from": intent.day_from, "day_to": intent.day_to,
+            "location": intent.location,
+        },
+        "results": rows,
+        "result_count": len(rows),
+        "cypher": rendered["cypher"],
+        "cypher_params": rendered["params"],
+        "cypher_note": "Equivalent Cypher — runs when Neo4j is attached. "
+                       "Results above were computed on the in-memory graph.",
+        "disclaimer": "Investigative leads only — not determinations of guilt. "
+                      "Constraints listed under 'ignored' were NOT applied.",
+    }
