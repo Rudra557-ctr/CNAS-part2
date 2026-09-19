@@ -36,14 +36,21 @@ except ImportError:
     HAS_RAPIDFUZZ = False
 
 from backend.config import RESOLUTION_FUZZY_THRESHOLD, DATA_DIR
+from backend.extraction.devanagari import has_devanagari, romanize_for_match
 
-def name_similarity(a: str, b: str) -> float:
-    a = a.strip().lower()
-    b = b.strip().lower()
+def _ratio(a: str, b: str) -> float:
     if HAS_RAPIDFUZZ:
         return fuzz.ratio(a, b)  # 0-100
-    else:
-        return difflib.SequenceMatcher(None, a, b).ratio() * 100
+    return difflib.SequenceMatcher(None, a, b).ratio() * 100
+
+def name_similarity(a: str, b: str) -> float:
+    score = _ratio(a.strip().lower(), b.strip().lower())
+    # Cross-script: a Hindi mention shares no characters with a Latin canonical,
+    # so raw ratio is ~0. Compare romanised + phonetically folded forms instead
+    # ("अनवर शेख" → anavar shekh ≈ anvar sheikh).
+    if has_devanagari(a) or has_devanagari(b):
+        score = max(score, _ratio(romanize_for_match(a), romanize_for_match(b)))
+    return score
 
 def _initials_form(name: str) -> str:
     """Normalize 'R. Kumar' / 'Rahul K.' style to comparable tokens."""
@@ -158,11 +165,16 @@ def resolve_entities(struct_entities: List[Dict], unstruct_entities: List[Dict],
                 ordered_cids.extend(cell_to_ids[cell])
             ordered_cids.extend([cid for cid in id_to_name if cid not in ordered_cids])
             candidates = [(cid, id_to_name[cid]) for cid in ordered_cids]
+            # Hindi mentions are compared in romanised+folded space on both sides,
+            # otherwise partial_ratio scores 0 against Latin canonicals.
+            hindi_mention = has_devanagari(mention)
+            mention_cmp = romanize_for_match(mention) if hindi_mention else mention.lower()
             for cid, cname in candidates:
                 score = name_similarity(mention, cname)
                 partial = 0
                 if HAS_RAPIDFUZZ:
-                    partial = fuzz.partial_ratio(mention.lower(), cname.lower())
+                    cname_cmp = romanize_for_match(cname) if hindi_mention else cname.lower()
+                    partial = fuzz.partial_ratio(mention_cmp, cname_cmp)
                     # Use max, but keep partial for nickname like "Farhan" → "Farhan Qureshi"
                     score = max(score, partial * 0.95)
                 # Initial-aware: "R. Kumar" → "Rahul Kumar", "Rahul K." → "Rahul Kumar"
@@ -179,7 +191,10 @@ def resolve_entities(struct_entities: List[Dict], unstruct_entities: List[Dict],
                         best_name_score = init_score
                     best_partial = partial
                     best_id = cid
-                    best_method = "fuzzy_initials" if best_method_hint else ("fuzzy" if score < 99 else "fuzzy_partial")
+                    if hindi_mention:
+                        best_method = "fuzzy_translit"
+                    else:
+                        best_method = "fuzzy_initials" if best_method_hint else ("fuzzy" if score < 99 else "fuzzy_partial")
 
         # Multi-signal confidence breakdown
         if best_id:
@@ -213,7 +228,10 @@ def resolve_entities(struct_entities: List[Dict], unstruct_entities: List[Dict],
             # Compute weighted confidence
             resolution_conf = _multi_signal_confidence(best_name_score, phone_match, context_match)
             # Also compute partial-aware variant for nickname: if single token mention like "Farhan" with high partial, treat name as partial score
-            if best_partial > 85 and len(mention.split())==1:
+            # Nickname boost only for real name-length tokens — a 2-3 char
+            # fragment (Hindi particle, initial) hits partial_ratio 100 on any
+            # canonical that contains it and would merge on nothing.
+            if best_partial > 85 and len(mention.split())==1 and len(mention.strip()) >= 4:
                 # Nickname case: boost name_score to partial
                 resolution_conf = _multi_signal_confidence(best_partial, phone_match, context_match)
                 best_name_score = best_partial

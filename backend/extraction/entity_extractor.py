@@ -29,6 +29,10 @@ except ImportError:
     HAS_SPACY = False
 
 from backend.config import DATA_DIR
+from backend.extraction.devanagari import (
+    has_devanagari, normalize_digits, infer_hindi_relation,
+    extract_person_mentions as extract_hindi_persons,
+)
 
 # ---------------------------------------------------------------------------
 # Regex patterns — support BOTH synthetic demo data AND real authorized data
@@ -198,6 +202,9 @@ def extract_unstructured_entities(datasets: Dict, known_people_names: List[str] 
     def extract_from_text(text: str, source_id: str, source_type: str, day):
         if not text:
             return
+        # Devanagari numerals are a 1:1 char swap, so spans stay valid while the
+        # phone/account/vehicle regexes below start matching Hindi-typed records.
+        text = normalize_digits(text)
         # 1. Regex for phones/accounts/vehicles/locations — high precision, Task2 provenance: supporting snippet (30 chars window) + hash
         def snippet_for(match_str, text, span_start=None, span_end=None):
             if span_start is not None:
@@ -229,6 +236,10 @@ def extract_unstructured_entities(datasets: Dict, known_people_names: List[str] 
             for ent in doc.ents:
                 txt = ent.text.strip()
                 if len(txt) < 3:
+                    continue
+                # The English model mislabels Devanagari spans (postpositions come
+                # back as ORG); the Hindi pass below handles that script instead.
+                if has_devanagari(txt):
                     continue
                 snip = text[max(0, ent.start_char-30): min(len(text), ent.end_char+30)].strip().replace("\n"," ")
                 h = _hash_evidence(snip or txt)
@@ -269,6 +280,17 @@ def extract_unstructured_entities(datasets: Dict, known_people_names: List[str] 
                             snip = sent.strip()[:120].replace("\n"," ")
                             entities.append({"entity_type": "Person_mention", "value": w, "canonical_id": None, "source_id": source_id, "source_type": source_type, "day": day, "confidence": 0.40, "raw_text": w, "evidence_snippet": snip, "evidence_hash": _hash_evidence(snip), "extractor": "fallback_single", "spacy_label": "FALLBACK_SINGLE"})
 
+        # 3. Hindi / code-mixed narratives. en_core_web_sm tags nothing in
+        # Devanagari, so mentions are pulled by cue word + gazetteer here and
+        # carry their romanised form for the resolver.
+        for hit in extract_hindi_persons(text, known_people_names):
+            snip = snippet_for(hit["value"], text)
+            entities.append({"entity_type": "Person_mention", "value": hit["value"], "canonical_id": None,
+                             "source_id": source_id, "source_type": source_type, "day": day,
+                             "confidence": hit["confidence"], "raw_text": hit["value"], "roman": hit["roman"],
+                             "evidence_snippet": snip, "evidence_hash": _hash_evidence(snip),
+                             "extractor": hit["extractor"], "spacy_label": "DEVANAGARI"})
+
     for row in datasets.get("firs", []):
         extract_from_text(row.get("narrative",""), row.get("fir_id"), "fir", row.get("day"))
         # also IPC sections as organization-like (with full provenance like other entities)
@@ -292,6 +314,9 @@ def _hash_rel(s: str) -> str:
     return hashlib.sha256(s.encode('utf-8')).hexdigest()[:16]
 
 def _infer_relation_kind(sentence: str) -> Tuple[str, float]:
+    hindi = infer_hindi_relation(sentence)
+    if hindi:
+        return hindi
     low = sentence.lower()
     if any(k in low for k in ["frequent contact", "contact to", "phone with"]):
         return "CALLS", 0.75
@@ -406,7 +431,8 @@ def extract_relationships(datasets: Dict) -> List[Dict]:
     def extract_rels_from_text(text: str, source_id: str, source_type: str, day, timestamp):
         if not text:
             return
-        sentences = re.split(r"[.!?]\s+", text)
+        # Hindi sentences end with a danda (।), not a full stop.
+        sentences = re.split(r"(?:[.!?]\s+|।\s*)", text)
         for sent in sentences:
             if len(sent.strip()) < 10:
                 continue
@@ -429,13 +455,24 @@ def extract_relationships(datasets: Dict) -> List[Dict]:
             for w in singles:
                 if w in known_first and w not in [x.split()[0] for x in cands]:
                     cands.append(w)
+            # Hindi mentions in the same sentence become relationship endpoints too;
+            # the resolver maps them onto canonical IDs downstream.
+            if has_devanagari(sent):
+                for hit in extract_hindi_persons(sent, known_names):
+                    if hit["value"] not in cands:
+                        cands.append(hit["value"])
             # Deduplicate, need at least 2 persons to form relationship
             uniq = []
             seen_low = set()
             for c in cands:
-                if c.lower() not in seen_low:
-                    seen_low.add(c.lower())
-                    uniq.append(c)
+                if c.lower() in seen_low:
+                    continue
+                # "यादव" next to "रमेश यादव" is the same person — pairing them
+                # would emit a self-loop once both resolve to one canonical ID.
+                if any(c.lower() in u.lower() or u.lower() in c.lower() for u in uniq):
+                    continue
+                seen_low.add(c.lower())
+                uniq.append(c)
             if len(uniq) >= 2:
                 kind, conf = _infer_relation_kind(sent)
                 # Create pairwise relationships (first with second, first with others) — keep modest
