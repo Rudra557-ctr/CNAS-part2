@@ -34,9 +34,12 @@ export default function Dashboard() {
           nodes: s.node_count ?? s.nodes ?? g?.data?.nodes?.length ?? 0,
           edges: s.edge_count ?? s.edges ?? g?.data?.edges?.length ?? 0,
         })
-        setLeads(    ((l?.data as any)?.leads      || (l?.data as any) || []).slice(0, 5))
-        setBridges(  ((b?.data as any)?.bridges    || (b?.data as any) || []).slice(0, 5))
-        setAnomalies(((a?.data as any)?.anomalies  || (a?.data as any) || []).slice(0, 5))
+        // Keep the full lists — the stat cards count them. Truncating here made
+        // "Active Anomalies" report the length of the display list (5) while the
+        // API held 26. Slicing happens at render instead.
+        setLeads(    ((l?.data as any)?.leads      || (l?.data as any) || []))
+        setBridges(  ((b?.data as any)?.bridges    || (b?.data as any) || []))
+        setAnomalies(((a?.data as any)?.anomalies  || (a?.data as any) || []))
       })
       .finally(() => setLoading(false))
   }, [scopeKey])
@@ -159,7 +162,7 @@ export default function Dashboard() {
             </button>
           </div>
           <div className="space-y-2">
-            {leads.map((l, i) => (
+            {leads.slice(0, 5).map((l, i) => (
               <div key={l.entity_id} className={`flex items-center gap-3 p-2.5 rounded-lg border ${prioBox(l.priority)}`}>
                 <span className="text-xs font-mono text-gov-faint w-4">#{i + 1}</span>
                 <div className="flex-1 min-w-0">
@@ -184,7 +187,7 @@ export default function Dashboard() {
             Entities holding multiple criminal cells together. Removing a bridge fragments the network.
           </p>
           <div className="space-y-2">
-            {bridges.map((b) => (
+            {bridges.slice(0, 5).map((b) => (
               <div key={b.id} className="flex items-center gap-3 p-2.5 rounded-lg gov-well">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-gov-ink font-medium truncate">{b.name || b.id}</p>
@@ -211,7 +214,7 @@ export default function Dashboard() {
             </button>
           </div>
           <div className="space-y-2">
-            {anomalies.map((a, i) => (
+            {anomalies.slice(0, 5).map((a, i) => (
               <div key={i} className={`p-2.5 rounded-lg border ${prioBox(a.severity)}`}>
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">

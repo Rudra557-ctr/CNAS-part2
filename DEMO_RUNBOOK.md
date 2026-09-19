@@ -7,6 +7,11 @@ Log in as `vibhu123` / `Vibhu@2026` **(investigator)**. The LIVE badge should pu
 All numbers below were read from the live API on 2026-09-19. If any screen differs,
 re-read it aloud instead of quoting this file — never argue with the screen.
 
+**Screen load times, measured on rehearsal hardware:** Fusion Reveal ~9s, Network Graph ~10s
+(the 3D layout has to settle), everything else 4–6s. That is a long silence on stage. Click
+into the next screen *while you are still talking about the current one*, or open Network
+Graph once during setup so it is warm.
+
 **One card to steer around:** the dashboard's *High-Risk Leads* tile reads **0**. Lead
 priority and anomaly severity use different scales, so "0 high-risk leads" sits next to
 "16 high-severity anomalies" and looks contradictory to anyone reading fast. Don't point
@@ -100,8 +105,8 @@ FIU-IND, NATGRID — need agency authorization tokens. **We built the platform. 
 the key.**"
 
 ### 7:30 — Close with the artifact (30s)
-Back to **Dashboard** → **Export case file**. It takes ~18 seconds, so start it and keep
-talking through the build.
+Back to **Dashboard** → **Export case file**. Measured at **20–25 seconds** on rehearsal
+hardware, so click it first and deliver the line while it builds.
 > "Everything you just saw, as a court-format case file: priority suspects, the evidence
 > basis behind every flag, bridge and burst tables, and the detection thresholds we used —
 > so it can be audited without access to this system."
