@@ -3,6 +3,7 @@ import ForceGraph2D from 'react-force-graph-2d'
 import { Play, Pause, RotateCcw, Layers, Eye, GitBranch } from 'lucide-react'
 import { fetchGraph, fetchInvGraph, fetchBridges } from '../api/client'
 import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
+import { useLang } from '../i18n/LanguageContext'
 import type { GraphData, GraphEdge } from '../types'
 
 // Blindness vs fusion: the same investigation rendered twice from one data pull.
@@ -57,6 +58,7 @@ const visibleOnDay = (e: GraphEdge, day: number) => e.day == null || e.day <= da
 
 export default function Fusion() {
   const { iid, caseName, scopeKey, clear } = useCaseScope()
+  const { t } = useLang()
   const [graph, setGraph]     = useState<GraphData | null>(null)
   const [bridges, setBridges] = useState<Set<string>>(new Set())
   const [loading, setLoading] = useState(true)
@@ -160,7 +162,7 @@ export default function Fusion() {
           tone === 'live'
             ? 'bg-green-50 text-gov-igreen border-green-200'
             : 'bg-gray-50 text-gov-muted border-gov-border'}`}>
-          {tone === 'live' ? 'ALL SOURCES FUSED' : 'SINGLE SOURCE'}
+          {tone === 'live' ? t('fusion.all_fused') : t('fusion.single_source')}
         </span>
       </div>
 
@@ -192,7 +194,7 @@ export default function Fusion() {
         />
         {!data.nodes.length && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <p className="text-xs text-gray-500 font-mono">no data visible by day {day}</p>
+            <p className="text-xs text-gray-500 font-mono">{t('fusion.empty')} {day}</p>
           </div>
         )}
       </div>
@@ -202,15 +204,15 @@ export default function Fusion() {
             someone without giving you the structure that identifies them as a
             bridge. Links is the metric that carries that distinction. */}
         {[
-          { k: 'Persons',       v: data.nodes.length },
-          { k: 'Links',         v: data.links.length },
-          { k: 'Sources',       v: data.sources },
-          { k: 'Bridge persons', v: data.bridgesSeen },
+          { k: t('fusion.metric.persons'), v: data.nodes.length },
+          { k: t('fusion.metric.links'), v: data.links.length },
+          { k: t('fusion.metric.sources'), v: data.sources },
+          { k: t('fusion.metric.bridges'), v: data.bridgesSeen },
         ].map(m => (
           <div key={m.k} className="px-3 py-2">
             <p className="text-[9px] uppercase tracking-wide text-gov-faint">{m.k}</p>
             <p className={`text-base font-bold ${
-              m.k === 'Links' ? (tone === 'live' ? 'text-gov-igreen' : 'text-gov-red')
+              m.k === t('fusion.metric.links') ? (tone === 'live' ? 'text-gov-igreen' : 'text-gov-red')
                               : 'text-gov-ink'}`}>{m.v}</p>
           </div>
         ))}
@@ -226,7 +228,7 @@ export default function Fusion() {
 
   if (error) return (
     <div className="gov-card p-6">
-      <p className="text-sm text-gov-ink font-semibold">Fusion view unavailable</p>
+      <p className="text-sm text-gov-ink font-semibold">{t('fusion.unavailable')}</p>
       <p className="text-xs text-gov-muted mt-1">{error}</p>
     </div>
   )
@@ -246,9 +248,9 @@ export default function Fusion() {
     <div className="space-y-4" ref={wrapRef}>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-gov-ink">Blindness vs Fusion</h1>
+          <h1 className="text-xl font-bold text-gov-ink">{t('fusion.title')}</h1>
           <p className="text-xs text-gov-muted mt-0.5">
-            One investigation, two viewpoints — a single agency's feed against every source combined
+            {t('fusion.subtitle')}
           </p>
         </div>
         {iid && <CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} />}
@@ -257,7 +259,7 @@ export default function Fusion() {
       {/* Controls */}
       <div className="gov-card p-3 flex flex-wrap items-center gap-4">
         <div className="flex items-center gap-2">
-          <label className="text-xs font-semibold text-gov-ink">Siloed source</label>
+          <label className="text-xs font-semibold text-gov-ink">{t('fusion.siloed_source')}</label>
           <select
             value={source}
             onChange={e => setSource(e.target.value)}
@@ -273,12 +275,12 @@ export default function Fusion() {
             className="gov-btn text-xs flex items-center gap-1.5 px-3 py-1"
           >
             {playing ? <Pause size={12} /> : <Play size={12} />}
-            {playing ? 'Pause' : 'Play burst week'}
+            {playing ? t('fusion.pause') : t('fusion.play')}
           </button>
           <button
             onClick={() => { setPlaying(false); setDay(DAY_MIN) }}
             className="gov-ghost text-xs flex items-center gap-1.5 px-2 py-1"
-            title="Rewind to day 50"
+            title={t('fusion.rewind')}
           >
             <RotateCcw size={12} />
           </button>
@@ -290,7 +292,7 @@ export default function Fusion() {
             onChange={e => { setPlaying(false); setDay(Number(e.target.value)) }}
             className="flex-1 accent-gov-navy"
           />
-          <span className="text-xs font-mono font-bold text-gov-navy w-16">Day {day}</span>
+          <span className="text-xs font-mono font-bold text-gov-navy w-16">{t('fusion.day')} {day}</span>
         </div>
       </div>
 
@@ -304,8 +306,8 @@ export default function Fusion() {
           fgRef={singleRef}
         />
         <Panel
-          title="CNAS fused graph"
-          subtitle="Telecom, banking, FIRs, surveillance and social resolved into one identity graph · person-to-person links"
+          title={t('fusion.fused_title')}
+          subtitle={t('fusion.fused_sub')}
           data={fused}
           tone="live"
           fgRef={fusedRef}
@@ -314,7 +316,7 @@ export default function Fusion() {
 
       {/* Legend */}
       <div className="flex items-center gap-4 px-1 text-[10px] text-gov-muted">
-        {[['A', 'Cell A'], ['B', 'Cell B'], ['C', 'Cell C'], ['Noise', 'Unaffiliated']].map(([k, label]) => (
+        {[['A', `${t('fusion.legend.cell')} A`], ['B', `${t('fusion.legend.cell')} B`], ['C', `${t('fusion.legend.cell')} C`], ['Noise', t('fusion.legend.unaffiliated')]].map(([k, label]) => (
           <span key={k} className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full" style={{ background: CELL_COLOR[k] }} />
             {label}
@@ -322,7 +324,7 @@ export default function Fusion() {
         ))}
         <span className="flex items-center gap-1.5">
           <span className="w-3 h-3 rounded-full" style={{ background: BRIDGE_GOLD }} />
-          Bridge entity (flagged by analytics)
+          {t('fusion.legend.bridge')}
         </span>
       </div>
 

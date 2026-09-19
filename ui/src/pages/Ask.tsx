@@ -4,6 +4,7 @@ import {
 } from 'lucide-react'
 import { fetchAsk } from '../api/client'
 import { useCaseScope, CaseScopeBar } from '../components/CaseScope'
+import { useLang } from '../i18n/LanguageContext'
 
 // The point of this screen is not that it answers questions — it is that it
 // says which parts of the question it could not apply. A narrow answer and a
@@ -31,7 +32,7 @@ interface AskResult {
   disclaimer: string
 }
 
-const EXAMPLES = [
+const EXAMPLES_EN = [
   'Show me all associates of A1 who made transactions over 5 lakh in North Delhi during July',
   'who did Anwar Sheikh call between day 55 and 62',
   'transactions over 2 lakh',
@@ -39,11 +40,21 @@ const EXAMPLES = [
   'calls at Dockside Ward',
 ]
 
+// The parser resolves Devanagari names through the same path as Latin ones, so
+// an officer can type the question in Hindi. Leading with that in Hindi mode.
+const EXAMPLES_HI = [
+  'रमेश यादव के कॉल रिकॉर्ड',
+  'सुरेश राणे',
+  'transactions over 2 lakh',
+  'who did Anwar Sheikh call between day 55 and 62',
+]
+
 const inr = (n: number | null) =>
   n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`
 
 export default function Ask() {
   const { iid, caseName, clear } = useCaseScope()
+  const { t, lang } = useLang()
   const [q, setQ] = useState('')
   const [data, setData] = useState<AskResult | null>(null)
   const [loading, setLoading] = useState(false)
@@ -68,10 +79,9 @@ export default function Ask() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-gov-ink">Ask the case</h1>
+          <h1 className="text-xl font-bold text-gov-ink">{t('ask.title')}</h1>
           <p className="text-xs text-gov-muted mt-0.5">
-            Plain-language questions over the evidence graph — with every constraint it could
-            not apply listed back to you
+            {t('ask.subtitle')}
           </p>
         </div>
         {iid && <CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} />}
@@ -89,16 +99,16 @@ export default function Ask() {
               value={q}
               onChange={e => setQ(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && run()}
-              placeholder="e.g. who did Anwar Sheikh call between day 55 and 62"
+              placeholder={t('ask.placeholder')}
               className="gov-input w-full pl-9 text-sm py-2"
             />
           </div>
           <button onClick={() => run()} disabled={loading} className="gov-btn px-4 text-sm disabled:opacity-60">
-            {loading ? <Loader2 size={14} className="animate-spin" /> : 'Ask'}
+            {loading ? <Loader2 size={14} className="animate-spin" /> : t('ask.button')}
           </button>
         </div>
         <div className="flex flex-wrap gap-1.5">
-          {EXAMPLES.map(ex => (
+          {(lang === 'hi' ? EXAMPLES_HI : EXAMPLES_EN).map(ex => (
             <button
               key={ex}
               onClick={() => run(ex)}
@@ -129,7 +139,7 @@ export default function Ask() {
             <div className="gov-card p-4">
               <h2 className="text-sm font-bold text-gov-ink flex items-center gap-2 mb-2">
                 <Check size={14} className="text-gov-igreen" />
-                Applied to this search
+                {t('ask.applied')}
               </h2>
               <div className="flex flex-wrap gap-1.5">
                 {data.understood.map((u, i) => (
@@ -144,7 +154,7 @@ export default function Ask() {
             <div className={`gov-card p-4 ${data.ignored.length ? 'border-amber-300' : ''}`}>
               <h2 className="text-sm font-bold text-gov-ink flex items-center gap-2 mb-2">
                 <AlertTriangle size={14} className={data.ignored.length ? 'text-amber-600' : 'text-gov-faint'} />
-                Not applied
+                {t('ask.not_applied')}
                 {data.ignored.length > 0 && (
                   <span className="text-[10px] font-mono bg-amber-50 text-amber-700
                                    border border-amber-200 px-1.5 py-0.5 rounded-full">
@@ -154,7 +164,7 @@ export default function Ask() {
               </h2>
               {data.ignored.length === 0 ? (
                 <p className="text-xs text-gov-muted">
-                  Every part of the question was understood and applied.
+                  {t('ask.all_understood')}
                 </p>
               ) : (
                 <ul className="space-y-1.5">
@@ -173,7 +183,7 @@ export default function Ask() {
           <div className="gov-card overflow-hidden">
             <div className="px-4 py-2.5 border-b border-gov-border flex items-center justify-between">
               <h2 className="text-sm font-bold text-gov-ink">
-                {data.result_count} matching record{data.result_count === 1 ? '' : 's'}
+                {data.result_count} {t('ask.records')}
               </h2>
               {data.relation && (
                 <span className="text-[10px] font-mono text-gov-muted">{data.relation}</span>
@@ -182,11 +192,11 @@ export default function Ask() {
 
             {data.result_count === 0 ? (
               <div className="p-6 text-center">
-                <p className="text-sm text-gov-ink font-semibold">No records match</p>
+                <p className="text-sm text-gov-ink font-semibold">{t('ask.no_match')}</p>
                 <p className="text-xs text-gov-muted mt-1">
                   {data.ignored.length
-                    ? 'This answer covers only the constraints listed as applied — the ones above were not.'
-                    : 'Nothing in this case matches the filters applied.'}
+                    ? t('ask.no_match_partial')
+                    : t('ask.no_match_full')}
                 </p>
               </div>
             ) : (
@@ -194,7 +204,7 @@ export default function Ask() {
                 <table className="w-full text-xs">
                   <thead className="bg-gray-50 text-gov-muted">
                     <tr className="text-left">
-                      {['From', 'To', 'Type', 'Day', 'Amount', 'Source', 'Evidence hash'].map(h => (
+                      {[t('ask.col.from'), t('ask.col.to'), t('ask.col.type'), t('ask.col.day'), t('ask.col.amount'), t('ask.col.source'), t('ask.col.hash')].map(h => (
                         <th key={h} className="px-3 py-2 font-semibold whitespace-nowrap">{h}</th>
                       ))}
                     </tr>
@@ -233,7 +243,7 @@ export default function Ask() {
             >
               {showCypher ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
               <Code2 size={14} className="text-gov-navy" />
-              Equivalent Cypher
+              {t('ask.cypher')}
             </button>
             {showCypher && (
               <div className="px-4 pb-4 space-y-2">

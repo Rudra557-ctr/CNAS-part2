@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, X } from 'lucide-react'
 import { searchPeople } from '../api/client'
+import { useLang } from '../i18n/LanguageContext'
 
 interface Hit {
   id: string
@@ -13,6 +14,7 @@ interface Hit {
 }
 
 export default function GlobalSearch() {
+  const { t } = useLang()
   const navigate = useNavigate()
   const [q,       setQ]       = useState('')
   const [results, setResults] = useState<Hit[]>([])
@@ -44,7 +46,7 @@ export default function GlobalSearch() {
         <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gov-faint" />
         <input
           className="gov-input pl-8 pr-8 !py-1.5 text-xs"
-          placeholder="Search suspects, phones, accounts, locations…  (Enter for all sources)"
+          placeholder={t('common.search_placeholder')}
           value={q}
           onChange={e => search(e.target.value)}
           onFocus={() => { if (results.length) setOpen(true) }}

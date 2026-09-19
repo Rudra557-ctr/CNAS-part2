@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ShieldCheck, Award, SearchCheck, Link2, Copy, Check, Users } from 'lucide-react'
 import { fetchLedger, fetchCertificate, verifyEvidenceHash, fetchResolution } from '../api/client'
+import { useLang } from '../i18n/LanguageContext'
 
 interface ResolutionRow {
   mention: string
@@ -21,15 +22,6 @@ interface ResolutionPayload {
   summary: { total: number; merged: number; rejected: number; cross_script: number }
 }
 
-const METHOD_LABEL: Record<string, string> = {
-  fuzzy_translit: 'transliteration',
-  fuzzy_initials: 'initials',
-  fuzzy_partial: 'partial name',
-  fuzzy_reject: 'below threshold',
-  exact_name: 'exact',
-  fuzzy: 'fuzzy name',
-}
-
 function Hash({ v }: { v?: string }) {
   const [copied, setCopied] = useState(false)
   if (!v) return <span className="text-gov-faint">—</span>
@@ -47,6 +39,7 @@ function Hash({ v }: { v?: string }) {
 }
 
 export default function Trust() {
+  const { t } = useLang()
   const [caseId] = useState<string | null>(() => sessionStorage.getItem('caseId'))
   const [caseName] = useState<string>(() => sessionStorage.getItem('caseName') || '')
   const [ledger, setLedger] = useState<any | null>(null)
@@ -98,7 +91,7 @@ export default function Trust() {
       <div>
         <h1 className="text-xl font-bold text-gov-ink flex items-center gap-2">
           <ShieldCheck size={20} className="text-gov-igreen" />
-          Evidence Trust
+          {t('trust.title')}
         </h1>
         <p className="text-xs text-gov-muted mt-0.5">
           Cryptographic ledger, chain-of-custody certificate and hash verifier
@@ -223,7 +216,7 @@ export default function Trust() {
         <div className="flex items-start justify-between gap-3 mb-1">
           <h2 className="text-sm font-bold text-gov-ink flex items-center gap-2">
             <Users size={14} className="text-gov-navy" />
-            Identity Matches ({res?.summary.total ?? 0})
+            {t('trust.identity')} ({res?.summary.total ?? 0})
           </h2>
           {(res?.summary.cross_script ?? 0) > 0 && (
             <button
@@ -233,13 +226,12 @@ export default function Trust() {
                   ? 'bg-gov-navy text-white border-gov-navy'
                   : 'border-gov-border text-gov-muted hover:border-gov-navy'}`}
             >
-              Cross-script only ({res!.summary.cross_script})
+              {t('trust.cross_only')} ({res!.summary.cross_script})
             </button>
           )}
         </div>
         <p className="text-[11px] text-gov-muted mb-3">
-          How each name found in a document was matched to a person on file — original text on
-          the left, exactly as it was written.
+          {t('trust.identity_help')}
           {(res?.summary.rejected ?? 0) > 0 && (
             <> {res!.summary.rejected} candidate{res!.summary.rejected === 1 ? ' was' : 's were'}{' '}
             deliberately <strong>not</strong> merged for scoring below the threshold.</>
@@ -248,14 +240,14 @@ export default function Trust() {
 
         {!resRows.length ? (
           <p className="text-[11px] text-gov-faint">
-            No identity matches recorded for this scope.
+            {t('trust.no_matches')}
           </p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
               <thead className="bg-gray-50 text-gov-muted">
                 <tr className="text-left">
-                  {['Found in document', 'Script', '', 'Matched to', 'Score', 'Method', 'Source'].map((h, i) => (
+                  {[t('trust.col.found'), t('trust.col.script'), '', t('trust.col.matched'), t('trust.col.score'), t('trust.col.method'), t('trust.col.source')].map((h, i) => (
                     <th key={i} className="px-3 py-2 font-semibold whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
@@ -271,7 +263,7 @@ export default function Trust() {
                       <span className="text-sm font-medium">{r.mention}</span>
                       {r.romanised && (
                         <span className="block text-[10px] text-gov-faint font-mono">
-                          reads as “{r.romanised}”
+                          {t('trust.reads_as')} “{r.romanised}”
                         </span>
                       )}
                     </td>
@@ -280,7 +272,7 @@ export default function Trust() {
                         r.script === 'devanagari'
                           ? 'bg-orange-50 text-orange-700 border-orange-200'
                           : 'bg-gray-50 text-gov-muted border-gov-border'}`}>
-                        {r.script === 'devanagari' ? 'Devanagari' : 'Latin'}
+                        {r.script === 'devanagari' ? t('trust.script.devanagari') : t('trust.script.latin')}
                       </span>
                     </td>
                     <td className="px-2 py-2 text-center">
@@ -292,7 +284,7 @@ export default function Trust() {
                       {r.rejected ? (
                         <span className="text-gov-muted">
                           {r.master_label} <span className="font-mono text-gov-faint">{r.master_id}</span>
-                          <span className="block text-[10px] text-gov-red">not merged</span>
+                          <span className="block text-[10px] text-gov-red">{t('trust.not_merged')}</span>
                         </span>
                       ) : (
                         <>
@@ -304,7 +296,7 @@ export default function Trust() {
                     <td className="px-3 py-2 font-mono">{r.name_score ?? '—'}</td>
                     <td className="px-3 py-2">
                       <span className="text-[10px] font-mono text-gov-muted">
-                        {METHOD_LABEL[r.method_family] || r.method_family}
+                        {t(`trust.method.${r.method_family}`)}
                       </span>
                     </td>
                     <td className="px-3 py-2 font-mono text-[10px] text-gov-faint whitespace-nowrap">

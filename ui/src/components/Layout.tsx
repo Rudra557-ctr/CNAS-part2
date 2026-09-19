@@ -6,27 +6,29 @@ import {
   Lightbulb, Layers, MessageSquareText,
 } from 'lucide-react'
 import GlobalSearch from './GlobalSearch'
+import { useLang, LanguageToggle } from '../i18n/LanguageContext'
 
 const NAV = [
-  { to: '/',           icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/graph',      icon: Network,          label: 'Network Graph' },
-  { to: '/fusion',     icon: Layers,           label: 'Fusion Reveal' },
-  { to: '/map',        icon: Map,              label: 'Map View' },
-  { to: '/timeline',   icon: Clock,            label: 'Timeline' },
-  { to: '/alerts',     icon: Bell,             label: 'Alerts',    badge: true },
-  { to: '/takedown',   icon: Crosshair,        label: 'Takedown Sim' },
-  { to: '/explain',    icon: Share2,           label: 'Why Connected' },
-  { to: '/search',     icon: Search,           label: 'Search All' },
-  { to: '/ask',        icon: MessageSquareText, label: 'Ask the Case' },
-  { to: '/trust',      icon: ShieldCheck,      label: 'Evidence Trust' },
-  { to: '/key-insights', icon: Lightbulb,   label: 'Key Insights' },
-  { to: '/cases',      icon: FolderOpen,       label: 'Cases' },
-  { to: '/connectors', icon: Plug,             label: 'Data Connectors' },
-  { to: '/admin',      icon: ShieldCheck,      label: 'Administration', adminOnly: true },
+  { to: '/',           icon: LayoutDashboard, key: 'nav.dashboard' },
+  { to: '/graph',      icon: Network,          key: 'nav.graph' },
+  { to: '/fusion',     icon: Layers,           key: 'nav.fusion' },
+  { to: '/map',        icon: Map,              key: 'nav.map' },
+  { to: '/timeline',   icon: Clock,            key: 'nav.timeline' },
+  { to: '/alerts',     icon: Bell,             key: 'nav.alerts', badge: true },
+  { to: '/takedown',   icon: Crosshair,        key: 'nav.takedown' },
+  { to: '/explain',    icon: Share2,           key: 'nav.explain' },
+  { to: '/search',     icon: Search,           key: 'nav.search' },
+  { to: '/ask',        icon: MessageSquareText, key: 'nav.ask' },
+  { to: '/trust',      icon: ShieldCheck,      key: 'nav.trust' },
+  { to: '/key-insights', icon: Lightbulb,   key: 'nav.insights' },
+  { to: '/cases',      icon: FolderOpen,       key: 'nav.cases' },
+  { to: '/connectors', icon: Plug,             key: 'nav.connectors' },
+  { to: '/admin',      icon: ShieldCheck,      key: 'nav.admin', adminOnly: true },
 ]
 
 export default function Layout() {
   const { username, role, logout } = useAuth()
+  const { t } = useLang()
   const navigate = useNavigate()
 
   return (
@@ -58,7 +60,7 @@ export default function Layout() {
 
         {/* Nav */}
         <nav className="flex-1 px-2.5 py-3 space-y-0.5 overflow-y-auto">
-          {NAV.filter(item => !(item as any).adminOnly || role === 'admin').map(({ to, icon: Icon, label, badge }) => (
+          {NAV.filter(item => !(item as any).adminOnly || role === 'admin').map(({ to, icon: Icon, key, badge }) => (
             <NavLink
               key={to}
               to={to}
@@ -68,7 +70,7 @@ export default function Layout() {
               }
             >
               <Icon size={16} className="flex-shrink-0" />
-              <span className="flex-1">{label}</span>
+              <span className="flex-1">{t(key)}</span>
               {badge && (
                 <span className="w-2 h-2 rounded-full bg-gov-saffron animate-pulse" />
               )}
@@ -89,7 +91,7 @@ export default function Layout() {
             <button
               onClick={() => { logout(); navigate('/login') }}
               className="text-gov-faint hover:text-gov-red transition-colors"
-              title="Sign out"
+              title={t('nav.signout')}
             >
               <LogOut size={15} />
             </button>
@@ -104,6 +106,7 @@ export default function Layout() {
         <header className="h-14 bg-white border-b border-gov-border flex items-center px-4 gap-4 flex-shrink-0">
           <GlobalSearch />
           <div className="ml-auto flex items-center gap-3">
+            <LanguageToggle />
             <span className="flex items-center gap-1.5 text-xs text-gov-igreen font-semibold">
               <span className="w-2 h-2 rounded-full bg-gov-igreen animate-pulse" />
               LIVE
@@ -122,7 +125,7 @@ export default function Layout() {
         {/* Footer strip */}
         <footer className="flex-shrink-0 border-t border-gov-border bg-white px-4 py-1.5">
           <p className="text-[10px] text-gov-faint text-center font-medium">
-            CNAS · National Crime Records Bureau · Restricted access — all actions are audit-logged
+            {t('common.footer')}
           </p>
         </footer>
       </div>
