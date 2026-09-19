@@ -45,7 +45,10 @@ def build_in_memory_graph(datasets: Dict, entities: List[Dict], relationships: L
     # 1. People from people_directory
     pd = datasets.get("people_directory", {})
     for p in pd.get("network_people", []) + pd.get("noise_people", []):
-        G.add_node(p["id"], label=p["name"], kind="Person", cell=p.get("cell"), role=p.get("role"),
+        # label_hi mirrors how Indian police registers actually store a person:
+        # both scripts on the record, not one derived from the other.
+        G.add_node(p["id"], label=p["name"], label_hi=p.get("name_hi"), kind="Person",
+                   cell=p.get("cell"), role=p.get("role"),
                    phone=p.get("phone"), account=p.get("account"), degree=0)
         # Phone/Account nodes + OWN edges (with provenance like all other edges)
         if p.get("phone"):

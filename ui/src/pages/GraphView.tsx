@@ -14,6 +14,7 @@ import {
   MessageSquare, Trash2, Scale,
 } from 'lucide-react'
 import { useAuth, useCanWrite } from '../components/AuthContext'
+import { useLang } from '../i18n/LanguageContext'
 
 // Node colour by type (Palantir colour convention, matches previous UI)
 const KIND_COLOR: Record<string, string> = {
@@ -62,6 +63,8 @@ const idOf = (v: unknown): string =>
 export default function GraphView() {
   const canWrite = useCanWrite()
   const { username } = useAuth()
+  const { lang } = useLang()
+  const displayLabel = (n: any) => (lang === 'hi' && (n?.label_hi || n?.name_hi) ? (n.label_hi || n.name_hi) : (n?.label || n?.name || n?.id || ''))
   const fgRef   = useRef<any>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
   const fitted  = useRef(false)
@@ -284,13 +287,13 @@ export default function GraphView() {
     const nodes = (filter === 'all'
       ? graphData.nodes
       : graphData.nodes.filter(n => (n.kind || '').toLowerCase() === filter)
-    ).map(n => ({ ...n, name: n.label || n.id }))
+    ).map(n => ({ ...n, name: displayLabel(n) }))
     const keep = new Set(nodes.map(n => n.id))
     const links = graphData.edges
       .filter(e => keep.has(e.src) && keep.has(e.dst))
       .map(e => ({ ...e, source: e.src, target: e.dst }))
     return { nodes, links }
-  }, [graphData, filter])
+  }, [graphData, filter, lang])
 
   // ── Focus neighbourhood ────────────────────────────────────────────────────
   const focusSet = useMemo(() => {
@@ -369,7 +372,10 @@ export default function GraphView() {
     } catch { /* ignore */ }
   }
 
-  const labelOf = (id: string) => graphData?.nodes.find(n => n.id === id)?.label || id
+  const labelOf = (id: string) => {
+    const n: any = graphData?.nodes.find(x => x.id === id)
+    return n ? displayLabel(n) : id
+  }
 
   const edgeSourceDoc = (e: GraphEdge) => {
     const st = (e.source_type || '').toLowerCase()
@@ -391,11 +397,13 @@ export default function GraphView() {
   }
 
   const onNodeClick = (n: any) => {
+    const bilingual = n.name || displayLabel(n)
+    const romanFallback = n.label_hi && lang !== 'hi' ? ` (${n.label_hi})` : ''
     selectNode({
-      id: String(n.id), label: n.name || n.label || String(n.id),
+      id: String(n.id), label: bilingual, label_hi: n.label_hi || n.name_hi, roman: romanFallback,
       kind: n.kind, cell: n.cell, role: n.role, risk_score: n.risk_score,
       analyst_edited: n.analyst_edited, analyst_override: n.analyst_override,
-    })
+    } as any)
   }
 
   const onLinkClick = (l: any) => {
@@ -524,6 +532,12 @@ export default function GraphView() {
             <p className="text-[10px] text-gov-muted">Click a node for profile · click a link for its source record</p>
           )}
         </div>
+        {/* Hindi names hint — only when graph carries Devanagari and UI is in English */}
+        {lang === 'en' && graphData?.nodes?.some((n: any) => n.label_hi && /[\u0900-\u097F]/.test(n.label_hi)) && (
+          <div className="absolute top-12 right-3 z-10 gov-card px-2.5 py-1.5 flex items-center gap-2 border-amber-200 bg-amber-50/90">
+            <span className="text-[10px] text-amber-800 font-medium">हिंदी नाम उपलब्ध — switch to हिं for Devanagari labels</span>
+          </div>
+        )}
 
         {/* Focus bar */}
         {focus && (
@@ -645,7 +659,10 @@ export default function GraphView() {
                 className="w-11 h-11 rounded-lg object-cover border border-gov-border flex-shrink-0 bg-gov-wash"
               />
               <div>
-                <h3 className="text-base font-bold text-gov-ink">{selected.label}</h3>
+                <h3 className="text-base font-bold text-gov-ink">{displayLabel(selected as any) || selected.label}</h3>
+                {(selected as any).label_hi && (selected as any).label_hi !== selected.label && (
+                  <p className="text-[11px] font-mono text-gov-faint mt-0.5">{lang === 'hi' ? selected.label : (selected as any).label_hi}</p>
+                )}
                 <span className="flex items-center gap-1.5 mt-1 flex-wrap">
                   <span className={`badge-${(selected.kind || 'person').toLowerCase()} inline-block`}>
                     {selected.kind}
@@ -934,14 +951,14 @@ export default function GraphView() {
           </div>
           <div className="space-y-1.5">
             {(communities.find(c => String(c.community_id) === String(activeComm))?.members || []).map(id => {
-              const n = graphData?.nodes.find(x => x.id === id)
+              const n: any = graphData?.nodes.find(x => x.id === id)
               return (
                 <button
                   key={id}
                   onClick={() => n && selectNode(n)}
                   className="w-full text-left px-3 py-2 rounded-lg gov-well hover:border-gov-navy transition-colors"
                 >
-                  <p className="text-xs text-gov-ink font-semibold truncate">{n?.label || id}</p>
+                  <p className="text-xs text-gov-ink font-semibold truncate">{n ? displayLabel(n) : id}</p>
                   <p className="text-[10px] text-gov-muted font-mono">{id}{n?.kind ? ` · ${n.kind}` : ''}{n?.cell ? ` · Cell ${n.cell}` : ''}</p>
                 </button>
               )

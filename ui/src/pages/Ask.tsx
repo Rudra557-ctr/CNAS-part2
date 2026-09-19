@@ -20,7 +20,8 @@ interface AskResult {
   relation: string | null
   subjects: string[]
   results: Array<{
-    src: string; src_label: string; dst: string; dst_label: string
+    src: string; src_label: string; src_label_hi: string | null
+    dst: string; dst_label: string; dst_label_hi: string | null
     kind: string; day: number | null; amount: number | null
     source: string; source_type: string; confidence: number
     supporting_text: string; evidence_hash: string
@@ -48,6 +49,21 @@ const EXAMPLES_HI = [
   'transactions over 2 lakh',
   'who did Anwar Sheikh call between day 55 and 62',
 ]
+
+// In Hindi mode the register's Hindi name leads and the Roman form stays
+// underneath — an officer needs to match what they read against the file, and
+// the English name is what every other system keys on.
+function PersonName({ en, hi, id }: { en: string; hi: string | null; id: string }) {
+  const { lang } = useLang()
+  const showHi = lang === 'hi' && !!hi
+  return (
+    <span>
+      <span className="font-medium">{showHi ? hi : en}</span>{' '}
+      <span className="text-gov-faint font-mono">{id}</span>
+      {showHi && <span className="block text-[10px] text-gov-faint">{en}</span>}
+    </span>
+  )
+}
 
 const inr = (n: number | null) =>
   n == null ? '—' : `₹${n.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`
@@ -213,12 +229,10 @@ export default function Ask() {
                     {data.results.map((r, i) => (
                       <tr key={i} className={i % 2 ? 'bg-gray-50/60' : ''}>
                         <td className="px-3 py-1.5 whitespace-nowrap">
-                          <span className="font-medium">{r.src_label}</span>{' '}
-                          <span className="text-gov-faint font-mono">{r.src}</span>
+                          <PersonName en={r.src_label} hi={r.src_label_hi} id={r.src} />
                         </td>
                         <td className="px-3 py-1.5 whitespace-nowrap">
-                          <span className="font-medium">{r.dst_label}</span>{' '}
-                          <span className="text-gov-faint font-mono">{r.dst}</span>
+                          <PersonName en={r.dst_label} hi={r.dst_label_hi} id={r.dst} />
                         </td>
                         <td className="px-3 py-1.5 font-mono text-[10px]">{r.kind}</td>
                         <td className="px-3 py-1.5">{r.day ?? '—'}</td>

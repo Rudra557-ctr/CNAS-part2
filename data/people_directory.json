@@ -7,7 +7,8 @@
       "cell": "A",
       "phone": "7000000001",
       "account": "AC0009000001",
-      "photo": "/mugshots/A1.jpg"
+      "photo": "/mugshots/A1.jpg",
+      "name_hi": "अनवर शेख"
     },
     {
       "id": "A2",
@@ -16,7 +17,8 @@
       "cell": "A",
       "phone": "7000000002",
       "account": "AC0009000002",
-      "photo": "/mugshots/A2.jpg"
+      "photo": "/mugshots/A2.jpg",
+      "name_hi": "सुरेश राणे"
     },
     {
       "id": "A3",
@@ -25,7 +27,8 @@
       "cell": "A",
       "phone": "7000000003",
       "account": "AC0009000003",
-      "photo": "/mugshots/A3.jpg"
+      "photo": "/mugshots/A3.jpg",
+      "name_hi": "फरहान कुरैशी"
     },
     {
       "id": "A4",
@@ -34,7 +37,8 @@
       "cell": "A",
       "phone": "7000000004",
       "account": "AC0009000004",
-      "photo": "/mugshots/A4.jpg"
+      "photo": "/mugshots/A4.jpg",
+      "name_hi": "विकास चौहान"
     },
     {
       "id": "A5",
@@ -43,7 +47,8 @@
       "cell": "A",
       "phone": "7000000005",
       "account": "AC0009000005",
-      "photo": "/mugshots/A5.jpg"
+      "photo": "/mugshots/A5.jpg",
+      "name_hi": "गणेश पवार"
     },
     {
       "id": "A6",
@@ -52,7 +57,8 @@
       "cell": "A",
       "phone": "7000000006",
       "account": "AC0009000006",
-      "photo": "/mugshots/A6.jpg"
+      "photo": "/mugshots/A6.jpg",
+      "name_hi": "इक़बाल खान"
     },
     {
       "id": "A13",
@@ -61,7 +67,8 @@
       "cell": "A",
       "phone": "7000000007",
       "account": "AC0009000007",
-      "photo": "/mugshots/A13.jpg"
+      "photo": "/mugshots/A13.jpg",
+      "name_hi": "करण मेहरा"
     },
     {
       "id": "A7",
@@ -70,7 +77,8 @@
       "cell": "A",
       "phone": "7000000008",
       "account": "AC0009000008",
-      "photo": "/mugshots/A7.jpg"
+      "photo": "/mugshots/A7.jpg",
+      "name_hi": "रमेश यादव"
     },
     {
       "id": "A8",
@@ -79,7 +87,8 @@
       "cell": "A",
       "phone": "7000000009",
       "account": "AC0009000009",
-      "photo": "/mugshots/A8.jpg"
+      "photo": "/mugshots/A8.jpg",
+      "name_hi": "संजय मोरे"
     },
     {
       "id": "A9",
@@ -88,7 +97,8 @@
       "cell": "A",
       "phone": "7000000010",
       "account": "AC0009000010",
-      "photo": "/mugshots/A9.jpg"
+      "photo": "/mugshots/A9.jpg",
+      "name_hi": "तारिक अंसारी"
     },
     {
       "id": "A10",
@@ -97,7 +107,8 @@
       "cell": "A",
       "phone": "7000000011",
       "account": "AC0009000011",
-      "photo": "/mugshots/A10.jpg"
+      "photo": "/mugshots/A10.jpg",
+      "name_hi": "फैसल शाह"
     },
     {
       "id": "A11",
@@ -106,7 +117,8 @@
       "cell": "A",
       "phone": "7000000012",
       "account": "AC0009000012",
-      "photo": "/mugshots/A11.jpg"
+      "photo": "/mugshots/A11.jpg",
+      "name_hi": "मीना जोशी"
     },
     {
       "id": "A12",
@@ -115,7 +127,8 @@
       "cell": "A",
       "phone": "7000000013",
       "account": "AC0009000013",
-      "photo": "/mugshots/A12.jpg"
+      "photo": "/mugshots/A12.jpg",
+      "name_hi": "रोहित भट्ट"
     },
     {
       "id": "B1",
@@ -124,7 +137,8 @@
       "cell": "B",
       "phone": "7000000014",
       "account": "AC0009000014",
-      "photo": "/mugshots/B1.jpg"
+      "photo": "/mugshots/B1.jpg",
+      "name_hi": "राजन नाइक"
     },
     {
       "id": "B2",
@@ -133,7 +147,8 @@
       "cell": "B",
       "phone": "7000000015",
       "account": "AC0009000015",
-      "photo": "/mugshots/B2.jpg"
+      "photo": "/mugshots/B2.jpg",
+      "name_hi": "सलीम पठान"
     },
     {
       "id": "B3",
@@ -142,7 +157,8 @@
       "cell": "B",
       "phone": "7000000016",
       "account": "AC0009000016",
-      "photo": "/mugshots/B3.jpg"
+      "photo": "/mugshots/B3.jpg",
+      "name_hi": "विनोद चव्हाण"
     },
     {
       "id": "B4",
@@ -151,7 +167,8 @@
       "cell": "B",
       "phone": "7000000017",
       "account": "AC0009000017",
-      "photo": "/mugshots/B4.jpg"
+      "photo": "/mugshots/B4.jpg",
+      "name_hi": "नितिन कांबले"
     },
     {
       "id": "B5",
@@ -160,7 +177,8 @@
       "cell": "B",
       "phone": "7000000018",
       "account": "AC0009000018",
-      "photo": "/mugshots/B5.jpg"
+      "photo": "/mugshots/B5.jpg",
+      "name_hi": "अशोक गायकवाड़"
     },
     {
       "id": "B6",
@@ -169,7 +187,8 @@
       "cell": "B",
       "phone": "7000000019",
       "account": "AC0009000019",
-      "photo": "/mugshots/B6.jpg"
+      "photo": "/mugshots/B6.jpg",
+      "name_hi": "इमरान बेग"
     },
     {
       "id": "B13",
@@ -178,7 +197,8 @@
       "cell": "B",
       "phone": "7000000020",
       "account": "AC0009000020",
-      "photo": "/mugshots/B13.jpg"
+      "photo": "/mugshots/B13.jpg",
+      "name_hi": "समीर जाधव"
     },
     {
       "id": "B7",
@@ -187,7 +207,8 @@
       "cell": "B",
       "phone": "7000000021",
       "account": "AC0009000021",
-      "photo": "/mugshots/B7.jpg"
+      "photo": "/mugshots/B7.jpg",
+      "name_hi": "दीपक सावंत"
     },
     {
       "id": "B8",
@@ -196,7 +217,8 @@
       "cell": "B",
       "phone": "7000000022",
       "account": "AC0009000022",
-      "photo": "/mugshots/B8.jpg"
+      "photo": "/mugshots/B8.jpg",
+      "name_hi": "वसीम अली"
     },
     {
       "id": "B9",
@@ -205,7 +227,8 @@
       "cell": "B",
       "phone": "7000000023",
       "account": "AC0009000023",
-      "photo": "/mugshots/B9.jpg"
+      "photo": "/mugshots/B9.jpg",
+      "name_hi": "रफीक शेख"
     },
     {
       "id": "B10",
@@ -214,7 +237,8 @@
       "cell": "B",
       "phone": "7000000024",
       "account": "AC0009000024",
-      "photo": "/mugshots/B10.jpg"
+      "photo": "/mugshots/B10.jpg",
+      "name_hi": "गणेश पंडित"
     },
     {
       "id": "B11",
@@ -223,7 +247,8 @@
       "cell": "B",
       "phone": "7000000025",
       "account": "AC0009000025",
-      "photo": "/mugshots/B11.jpg"
+      "photo": "/mugshots/B11.jpg",
+      "name_hi": "कविता देसाई"
     },
     {
       "id": "B12",
@@ -232,7 +257,8 @@
       "cell": "B",
       "phone": "7000000026",
       "account": "AC0009000026",
-      "photo": "/mugshots/B12.jpg"
+      "photo": "/mugshots/B12.jpg",
+      "name_hi": "मोहसिन कुरैशी"
     },
     {
       "id": "C1",
@@ -241,7 +267,8 @@
       "cell": "C",
       "phone": "7000000027",
       "account": "AC0009000027",
-      "photo": "/mugshots/C1.jpg"
+      "photo": "/mugshots/C1.jpg",
+      "name_hi": "प्रकाश शेट्टी"
     },
     {
       "id": "C2",
@@ -250,7 +277,8 @@
       "cell": "C",
       "phone": "7000000028",
       "account": "AC0009000028",
-      "photo": "/mugshots/C2.jpg"
+      "photo": "/mugshots/C2.jpg",
+      "name_hi": "नासिर मलिक"
     },
     {
       "id": "C3",
@@ -259,7 +287,8 @@
       "cell": "C",
       "phone": "7000000029",
       "account": "AC0009000029",
-      "photo": "/mugshots/C3.jpg"
+      "photo": "/mugshots/C3.jpg",
+      "name_hi": "रवि कदम"
     },
     {
       "id": "C4",
@@ -268,7 +297,8 @@
       "cell": "C",
       "phone": "7000000030",
       "account": "AC0009000030",
-      "photo": "/mugshots/C4.jpg"
+      "photo": "/mugshots/C4.jpg",
+      "name_hi": "बबन सुर्वे"
     },
     {
       "id": "C5",
@@ -277,7 +307,8 @@
       "cell": "C",
       "phone": "7000000031",
       "account": "AC0009000031",
-      "photo": "/mugshots/C5.jpg"
+      "photo": "/mugshots/C5.jpg",
+      "name_hi": "यूसुफ अली"
     },
     {
       "id": "C6",
@@ -286,7 +317,8 @@
       "cell": "C",
       "phone": "7000000032",
       "account": "AC0009000032",
-      "photo": "/mugshots/C6.jpg"
+      "photo": "/mugshots/C6.jpg",
+      "name_hi": "संतोष भोसले"
     },
     {
       "id": "C13",
@@ -295,7 +327,8 @@
       "cell": "C",
       "phone": "7000000033",
       "account": "AC0009000033",
-      "photo": "/mugshots/C13.jpg"
+      "photo": "/mugshots/C13.jpg",
+      "name_hi": "रमेश चौगुले"
     },
     {
       "id": "C7",
@@ -304,7 +337,8 @@
       "cell": "C",
       "phone": "7000000034",
       "account": "AC0009000034",
-      "photo": "/mugshots/C7.jpg"
+      "photo": "/mugshots/C7.jpg",
+      "name_hi": "असलम पठान"
     },
     {
       "id": "C8",
@@ -313,7 +347,8 @@
       "cell": "C",
       "phone": "7000000035",
       "account": "AC0009000035",
-      "photo": "/mugshots/C8.jpg"
+      "photo": "/mugshots/C8.jpg",
+      "name_hi": "महेश गुप्ता"
     },
     {
       "id": "C9",
@@ -322,7 +357,8 @@
       "cell": "C",
       "phone": "7000000036",
       "account": "AC0009000036",
-      "photo": "/mugshots/C9.jpg"
+      "photo": "/mugshots/C9.jpg",
+      "name_hi": "इरफान शेख"
     },
     {
       "id": "C10",
@@ -331,7 +367,8 @@
       "cell": "C",
       "phone": "7000000037",
       "account": "AC0009000037",
-      "photo": "/mugshots/C10.jpg"
+      "photo": "/mugshots/C10.jpg",
+      "name_hi": "विजय सालुंखे"
     },
     {
       "id": "C11",
@@ -340,7 +377,8 @@
       "cell": "C",
       "phone": "7000000038",
       "account": "AC0009000038",
-      "photo": "/mugshots/C11.jpg"
+      "photo": "/mugshots/C11.jpg",
+      "name_hi": "नेहा कुलकर्णी"
     },
     {
       "id": "C12",
@@ -349,7 +387,8 @@
       "cell": "C",
       "phone": "7000000039",
       "account": "AC0009000039",
-      "photo": "/mugshots/C12.jpg"
+      "photo": "/mugshots/C12.jpg",
+      "name_hi": "सुनील पिल्लई"
     },
     {
       "id": "X1",
@@ -358,7 +397,8 @@
       "cell": "Bridge",
       "phone": "7000000040",
       "account": "AC0009000040",
-      "photo": "/mugshots/X1.jpg"
+      "photo": "/mugshots/X1.jpg",
+      "name_hi": "दिनेश मेहता"
     },
     {
       "id": "X2",
@@ -367,7 +407,8 @@
       "cell": "Bridge",
       "phone": "7000000041",
       "account": "AC0009000041",
-      "photo": "/mugshots/X2.jpg"
+      "photo": "/mugshots/X2.jpg",
+      "name_hi": "जावेद अंसारी"
     },
     {
       "id": "X3",
@@ -376,7 +417,8 @@
       "cell": "Bridge",
       "phone": "7000000042",
       "account": "AC0009000042",
-      "photo": "/mugshots/X3.jpg"
+      "photo": "/mugshots/X3.jpg",
+      "name_hi": "अरविंद कपूर"
     },
     {
       "id": "X4",
@@ -385,7 +427,8 @@
       "cell": "Bridge",
       "phone": "7000000043",
       "account": "AC0009000043",
-      "photo": "/mugshots/WhatsApp Image 2026-09-07 at 02.46.17.jpeg"
+      "photo": "/mugshots/WhatsApp Image 2026-09-07 at 02.46.17.jpeg",
+      "name_hi": "आर.के. वर्मा"
     }
   ],
   "noise_people": [
@@ -396,7 +439,8 @@
       "cell": "Noise",
       "phone": "7000000100",
       "account": "AC0009000100",
-      "photo": "/mugshots/N1.jpg"
+      "photo": "/mugshots/N1.jpg",
+      "name_hi": "सुनीता मिश्रा"
     },
     {
       "id": "N2",
@@ -405,7 +449,8 @@
       "cell": "Noise",
       "phone": "7000000101",
       "account": "AC0009000101",
-      "photo": "/mugshots/N2.jpg"
+      "photo": "/mugshots/N2.jpg",
+      "name_hi": "अनीता कुलकर्णी"
     },
     {
       "id": "N3",
@@ -414,7 +459,8 @@
       "cell": "Noise",
       "phone": "7000000102",
       "account": "AC0009000102",
-      "photo": "/mugshots/N3.jpg"
+      "photo": "/mugshots/N3.jpg",
+      "name_hi": "विनय नायडू"
     },
     {
       "id": "N4",
@@ -423,7 +469,8 @@
       "cell": "Noise",
       "phone": "7000000103",
       "account": "AC0009000103",
-      "photo": "/mugshots/N4.jpg"
+      "photo": "/mugshots/N4.jpg",
+      "name_hi": "सुनीता नायर"
     },
     {
       "id": "N5",
@@ -432,7 +479,8 @@
       "cell": "Noise",
       "phone": "7000000104",
       "account": "AC0009000104",
-      "photo": "/mugshots/N5.jpg"
+      "photo": "/mugshots/N5.jpg",
+      "name_hi": "अमित रेड्डी"
     },
     {
       "id": "N6",
@@ -441,7 +489,8 @@
       "cell": "Noise",
       "phone": "7000000105",
       "account": "AC0009000105",
-      "photo": "/mugshots/N6.jpg"
+      "photo": "/mugshots/N6.jpg",
+      "name_hi": "पूनम मेनन"
     },
     {
       "id": "N7",
@@ -450,7 +499,8 @@
       "cell": "Noise",
       "phone": "7000000106",
       "account": "AC0009000106",
-      "photo": "/mugshots/N7.jpg"
+      "photo": "/mugshots/N7.jpg",
+      "name_hi": "प्रिया मिश्रा"
     },
     {
       "id": "N8",
@@ -459,7 +509,8 @@
       "cell": "Noise",
       "phone": "7000000107",
       "account": "AC0009000107",
-      "photo": "/mugshots/N8.jpg"
+      "photo": "/mugshots/N8.jpg",
+      "name_hi": "मनोज कुलकर्णी"
     },
     {
       "id": "N9",
@@ -468,7 +519,8 @@
       "cell": "Noise",
       "phone": "7000000108",
       "account": "AC0009000108",
-      "photo": "/mugshots/N9.jpg"
+      "photo": "/mugshots/N9.jpg",
+      "name_hi": "विनय दत्ता"
     },
     {
       "id": "N10",
@@ -477,7 +529,8 @@
       "cell": "Noise",
       "phone": "7000000109",
       "account": "AC0009000109",
-      "photo": "/mugshots/N10.jpg"
+      "photo": "/mugshots/N10.jpg",
+      "name_hi": "आलोक मिश्रा"
     },
     {
       "id": "N11",
@@ -486,7 +539,8 @@
       "cell": "Noise",
       "phone": "7000000110",
       "account": "AC0009000110",
-      "photo": "/mugshots/N11.jpg"
+      "photo": "/mugshots/N11.jpg",
+      "name_hi": "अमित कुलकर्णी"
     },
     {
       "id": "N12",
@@ -495,7 +549,8 @@
       "cell": "Noise",
       "phone": "7000000111",
       "account": "AC0009000111",
-      "photo": "/mugshots/N12.jpg"
+      "photo": "/mugshots/N12.jpg",
+      "name_hi": "अमित मेनन"
     },
     {
       "id": "N13",
@@ -504,7 +559,8 @@
       "cell": "Noise",
       "phone": "7000000112",
       "account": "AC0009000112",
-      "photo": "/mugshots/N13.jpg"
+      "photo": "/mugshots/N13.jpg",
+      "name_hi": "विनय चटर्जी"
     },
     {
       "id": "N14",
@@ -513,7 +569,8 @@
       "cell": "Noise",
       "phone": "7000000113",
       "account": "AC0009000113",
-      "photo": "/mugshots/N14.jpg"
+      "photo": "/mugshots/N14.jpg",
+      "name_hi": "पूनम भाटिया"
     },
     {
       "id": "N15",
@@ -522,7 +579,8 @@
       "cell": "Noise",
       "phone": "7000000114",
       "account": "AC0009000114",
-      "photo": "/mugshots/N15.jpg"
+      "photo": "/mugshots/N15.jpg",
+      "name_hi": "राकेश मल्होत्रा"
     },
     {
       "id": "N16",
@@ -531,7 +589,8 @@
       "cell": "Noise",
       "phone": "7000000115",
       "account": "AC0009000115",
-      "photo": "/mugshots/N16.jpg"
+      "photo": "/mugshots/N16.jpg",
+      "name_hi": "पूजा सिन्हा"
     },
     {
       "id": "N17",
@@ -540,7 +599,8 @@
       "cell": "Noise",
       "phone": "7000000116",
       "account": "AC0009000116",
-      "photo": "/mugshots/N17.jpg"
+      "photo": "/mugshots/N17.jpg",
+      "name_hi": "नवीन अय्यर"
     },
     {
       "id": "N18",
@@ -549,7 +609,8 @@
       "cell": "Noise",
       "phone": "7000000117",
       "account": "AC0009000117",
-      "photo": "/mugshots/N18.jpg"
+      "photo": "/mugshots/N18.jpg",
+      "name_hi": "अनीता नायडू"
     },
     {
       "id": "N19",
@@ -558,7 +619,8 @@
       "cell": "Noise",
       "phone": "7000000118",
       "account": "AC0009000118",
-      "photo": "/mugshots/N19.jpg"
+      "photo": "/mugshots/N19.jpg",
+      "name_hi": "दीपा मल्होत्रा"
     },
     {
       "id": "N20",
@@ -567,7 +629,8 @@
       "cell": "Noise",
       "phone": "7000000119",
       "account": "AC0009000119",
-      "photo": "/mugshots/N20.jpg"
+      "photo": "/mugshots/N20.jpg",
+      "name_hi": "स्नेहा रेड्डी"
     }
   ]
 }

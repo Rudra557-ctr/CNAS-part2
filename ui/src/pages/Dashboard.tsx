@@ -14,7 +14,7 @@ import type { Lead, Bridge, Anomaly } from '../types'
 export default function Dashboard() {
   const navigate = useNavigate()
   const { username } = useAuth()
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const { iid, caseName, scopeKey, clear } = useCaseScope()
   const [stats,     setStats]     = useState({ nodes: 0, edges: 0 })
   const [leads,     setLeads]     = useState<Lead[]>([])
@@ -168,7 +168,9 @@ export default function Dashboard() {
               <div key={l.entity_id} className={`flex items-center gap-3 p-2.5 rounded-lg border ${prioBox(l.priority)}`}>
                 <span className="text-xs font-mono text-gov-faint w-4">#{i + 1}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-gov-ink font-semibold truncate">{l.label}</p>
+                  <p className="text-sm text-gov-ink font-semibold truncate">
+                    {lang === 'hi' && (l as any).label_hi ? (l as any).label_hi : l.label}
+                  </p>
                   <p className="text-[10px] text-gov-muted">{l.cell ? `${t('dash.cell')} ${l.cell}` : t('dash.unknown_cell')}{l.role ? ` · ${l.role}` : ''}</p>
                 </div>
                 <span className={`text-xs font-mono font-bold ${prioText(l.priority)}`}>

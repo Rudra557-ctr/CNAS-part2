@@ -28,12 +28,13 @@ def clean_header(col: str) -> str:
     """Normalize a raw header: strip, collapse whitespace, unify separators.
 
     'Caller Phone ' -> 'caller_phone'; 'CALLER-PHONE' -> 'caller_phone'.
+    Preserves Devanagari so Hindi headers like 'आरोपी का नाम' remain matchable.
     """
     if col is None:
         return ""
     s = str(col).strip()
     s = re.sub(r"[\s\-./]+", "_", s)      # spaces/dashes/dots -> underscore
-    s = re.sub(r"[^a-zA-Z0-9_]", "", s)   # drop stray symbols (keeps _)
+    s = re.sub(r"[^a-zA-Z0-9_\u0900-\u097F]", "", s)   # drop stray symbols (keeps _ and Devanagari)
     s = re.sub(r"_+", "_", s).strip("_")
     return s.lower()
 
@@ -102,27 +103,35 @@ ALIASES = {
                  "txn_mode", "channel", "transfer_type"],
     # ---- firs / free text ----
     "fir_id": ["fir_id", "case_id", "id", "report_id", "fir id", "fir_no", "fir_number",
-               "case_no", "case_number", "crime_no", "complaint_no"],
+               "case_no", "case_number", "crime_no", "complaint_no",
+               "प्राथमिकी संख्या", "एफआईआर संख्या", "केस संख्या", "प्राथमिकी_संख्या"],
     "date": ["date", "timestamp", "event_time", "incident_date", "date_of_incident",
              "fir_date", "report_date", "occurrence_date", "incident_time",
              "call_date", "cdr_date", "value_date", "txn_date", "transaction_date",
-             "calldate", "valuedate"],
+             "calldate", "valuedate",
+             "दिनांक", "तारीख", "घटना दिनांक", "घटना_दिनांक", "दिनांक_समय"],
     "station": ["station", "police_station", "station_name", "ps", "thana", "police_chowki",
-                "outpost", "reporting_station"],
+                "outpost", "reporting_station",
+                "थाना", "पुलिस थाना", "पुलिस_थाना", "चौकी", "थाना_नाम"],
     "location": ["location", "place", "area", "ward", "site", "spot", "venue",
-                 "place_of_occurrence", "incident_location", "crime_location"],
+                 "place_of_occurrence", "incident_location", "crime_location",
+                 "स्थान", "जगह", "क्षेत्र", "गाँव", "शहर", "घटना_स्थान", "अपराध_स्थान"],
     "ipc_sections": ["ipc_sections", "ipc", "sections", "act", "law", "bns_sections",
                      " Sections".strip(), "charges", "legal_sections", "offence_sections",
-                     "crime_type", "crime", "category"],
+                     "crime_type", "crime", "category",
+                     "धारा", "आईपीसी", "बीएनएस", "अपराध_धारा", "धारा_संख्या"],
     "narrative": ["narrative", "description", "details", "text", "story", "incident",
                   "report", "facts", "brief_facts", "fact_summary", "allegation",
                   "allegations", "incident_summary", "incident_details", "brief_facts",
                   "complaint", "complaint_details", "crime_details", "case_details",
                   "fir_details", "summary", "remarks", "narration", "particulars",
-                  "post_text", "content", "activity_notes"],
-    "accused_name": ["accused_name", "accused", "accused_person", "suspect_name", "suspect"],
+                  "post_text", "content", "activity_notes",
+                  "नैरेटिव", "विवरण", "कहानी", "तथ्य", "घटना", "बयान", "घटना_विवरण", "प्राथमिकी_विवरण", "रिपोर्ट_विवरण"],
+    "accused_name": ["accused_name", "accused", "accused_person", "suspect_name", "suspect",
+                     "आरोपी", "आरोपी का नाम", "आरोपी_का_नाम", "अभियुक्त", "अभियुक्त का नाम", "संदिग्ध का नाम"],
     "complainant_name": ["complainant_name", "complainant", "victim_name", "victim",
-                         "informant", "informant_name", "petitioner"],
+                         "informant", "informant_name", "petitioner",
+                         "शिकायतकर्ता", "फरियादी", "पीड़ित", "शिकायतकर्ता का नाम", "पीड़ित का नाम"],
     # ---- social_posts ----
     "post_id": ["post_id", "post id", "id", "social_id", "tweet_id", "message_id"],
     "handle": ["handle", "username", "user", "author_handle", "author", "screen_name",
@@ -160,6 +169,7 @@ ALIASES = {
     # ---- people directory ----
     "id": ["id", "person_id", "suspect_id", "pid", "code"],
     "name": ["name", "person_name", "full_name", "suspect_name", "individual_name"],
+    "name_hi": ["name_hi", "hindi_name", "hindi name", "नाम", "पूरा_नाम", "व्यक्ति_नाम"],
     "phone": ["phone", "phone_number", "mobile", "contact", "msisdn", "contact_number",
               "mobile_number"],
     "account": ["account", "account_number", "acc_no", "bank_account", "ac_no"],
@@ -183,7 +193,7 @@ REQUIRED = {
 }
 
 def _norm(s: str) -> str:
-    return re.sub(r'[^a-z0-9]', '', str(s).lower())
+    return re.sub(r'[^a-z0-9\u0900-\u097F]', '', str(s).lower())
 
 def suggest_mapping(columns: List[str], detected_type: str) -> Dict[str, str]:
     """
@@ -199,7 +209,7 @@ def suggest_mapping(columns: List[str], detected_type: str) -> Dict[str, str]:
         "criminal_history": ["record_id","person_id","name","alias","dob","prior_offences","gang_affiliation","known_address"],
         "intelligence_reports": ["report_id","date","day","source_reliability","narrative","mentioned_entity_ids"],
         "surveillance_reports": ["report_id","date","day","team","location","confidence","activity_notes"],
-        "people_directory": ["id","name","phone","account","cell","role"],
+        "people_directory": ["id","name","name_hi","phone","account","cell","role"],
     }
     targets = targets_by_type.get(detected_type)
     if targets is None:

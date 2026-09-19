@@ -77,7 +77,8 @@ _MIN_NAME_CHARS = 3
 
 # Words that introduce a person in Hindi police prose.
 _PERSON_CUES = ('आरोपी', 'अभियुक्त', 'संदिग्ध', 'शिकायतकर्ता', 'फरियादी',
-                'श्री', 'श्रीमती', 'नामक', 'मुखबिर')
+                'श्री', 'श्रीमती', 'नामक', 'मुखबिर',
+                'गवाह', 'साक्षी', 'परिवादी', 'परिवादिनी', 'पीड़ित', 'विटनेस')
 
 # Hindi verb cues → the relationship kinds the extractor already emits.
 RELATION_CUES = (
@@ -180,12 +181,16 @@ def infer_hindi_relation(sentence: str) -> Optional[tuple]:
 
 def extract_person_mentions(text: str, known_names: Optional[List[str]] = None) -> List[dict]:
     """
-    Candidate person mentions from Hindi text, via two passes:
+    Candidate person mentions from Hindi text, via three passes:
 
-      cue    — a Devanagari token run directly after आरोपी / श्री / नामक …
-               (high precision, works for people absent from the directory)
-      gazette— a token run whose romanised form matches a known canonical name
-               token (catches mentions that carry no cue word)
+      cue      — a Devanagari token run directly after आरोपी / श्री / नामक …
+                 (high precision, works for people absent from the directory)
+      gazette  — a token run whose romanised form matches a known canonical name
+                 token (catches mentions that carry no cue word)
+      fallback — any remaining ≥3-char Devanagari token not in STOP_TOKENS.
+                 Low confidence (0.45) so the resolver decides; prevents silent
+                 drops when a Hindi narrative uses no cue word (e.g.
+                 "रमेश यादव ने सुरेश राणे को …" without आरोपी).
 
     Returns [{value, roman, confidence, extractor}]. Identity is NOT decided
     here — the resolver still has to clear its own threshold.
@@ -207,8 +212,9 @@ def extract_person_mentions(text: str, known_names: Optional[List[str]] = None) 
             continue
         cue_before = idx > 0 and any(tokens[idx - 1][0].startswith(c) for c in _PERSON_CUES)
         nxt = tokens[idx + 1] if idx + 1 < len(tokens) else None
+        # Allow newline / dash / "—" between given name and surname (was 2, now 4)
         pair_ok = bool(nxt and nxt[0] not in _STOP_TOKENS
-                       and len(nxt[0]) >= _MIN_NAME_CHARS and nxt[1] - end <= 2)
+                       and len(nxt[0]) >= _MIN_NAME_CHARS and nxt[1] - end <= 4)
 
         # Prefer the two-token form (given name + surname) when available.
         value = f'{tok} {nxt[0]}' if (cue_before and pair_ok) else tok
@@ -222,4 +228,61 @@ def extract_person_mentions(text: str, known_names: Optional[List[str]] = None) 
             pair = f'{tok} {nxt[0]}' if pair_ok else tok
             found.setdefault(pair, {'value': pair, 'roman': transliterate(pair),
                                     'confidence': 0.55, 'extractor': 'devanagari_gazetteer'})
+    # Fallback: surface any Devanagari token not already emitted so the resolver
+    # can evaluate it, rather than silently dropping a person whose name carried
+    # no cue and whose spelling variant missed the gazetteer (e.g. रमेश्वर vs रमेश).
+    # These are 0.45 and will only merge if the resolver clears ≥85 + ≥0.65;
+    # otherwise they log as fuzzy_reject and create no graph node/edge.
+    if not found:
+        # No cue/gazetteer hit at all → this document likely uses plain names
+        # without honorifics; emit pair-aware low-conf candidates.
+        idx = 0
+        while idx < len(tokens):
+            tok, start, end = tokens[idx]
+            if tok in _STOP_TOKENS or len(tok) < _MIN_NAME_CHARS:
+                idx += 1
+                continue
+            nxt = tokens[idx + 1] if idx + 1 < len(tokens) else None
+            pair_ok = bool(nxt and nxt[0] not in _STOP_TOKENS
+                           and len(nxt[0]) >= _MIN_NAME_CHARS and nxt[1] - end <= 4)
+            if pair_ok:
+                pair = f'{tok} {nxt[0]}'
+                if pair not in found:
+                    found[pair] = {'value': pair, 'roman': transliterate(pair),
+                                   'confidence': 0.45, 'extractor': 'devanagari_fallback'}
+                idx += 2
+            else:
+                if tok not in found:
+                    found[tok] = {'value': tok, 'roman': transliterate(tok),
+                                  'confidence': 0.45, 'extractor': 'devanagari_fallback'}
+                idx += 1
+    else:
+        # At least one cue/gazetteer hit → only emit fallback for tokens not
+        # already covered and not adjacent to a cue pair (prevents double-counting
+        # the surname of a cue pair as a separate person).
+        covered = set()
+        for v in found:
+            covered.update(v.split())
+        for idx, (tok, start, end) in enumerate(tokens):
+            if tok in covered or tok in _STOP_TOKENS or len(tok) < _MIN_NAME_CHARS:
+                continue
+            # Only fallback tokens whose romanised form is phonetically close to a
+            # known name token are worth surfacing when a cue already exists;
+            # otherwise they'd be pure noise (e.g. "कोतवाली" already in STOP, but
+            # "कोतवाली" missed -> skip). This keeps the fallback precise.
+            if known_tokens and fold_phonetic(transliterate(tok)) not in known_tokens:
+                continue
+            nxt = tokens[idx + 1] if idx + 1 < len(tokens) else None
+            pair_ok = bool(nxt and nxt[0] not in _STOP_TOKENS
+                           and nxt[0] not in covered
+                           and len(nxt[0]) >= _MIN_NAME_CHARS and nxt[1] - end <= 4
+                           and (not known_tokens or fold_phonetic(transliterate(nxt[0])) in known_tokens))
+            if pair_ok:
+                pair = f'{tok} {nxt[0]}'
+                if pair not in found:
+                    found[pair] = {'value': pair, 'roman': transliterate(pair),
+                                   'confidence': 0.45, 'extractor': 'devanagari_fallback'}
+            else:
+                found.setdefault(tok, {'value': tok, 'roman': transliterate(tok),
+                                       'confidence': 0.45, 'extractor': 'devanagari_fallback'})
     return list(found.values())

@@ -39,21 +39,25 @@ ENCODING_SEQUENCE = ["utf-8-sig", "utf-8", "cp1252", "latin-1", "iso-8859-1"]
 # Pillar 3.B — delimiter candidates (plan line 102)
 DELIMITERS = [",", ";", "\t", "|"]
 
-# Heuristic keywords per normalized dataset type
+# Heuristic keywords per normalized dataset type (English + Hindi)
 TYPE_KEYWORDS = {
     "cdrs": ["caller", "callee", "phone", "call", "duration", "tower", "caller_phone", "callee_phone",
-             "msisdn", "cell_id", "imei", "imsi", "cdr"],
+             "msisdn", "cell_id", "imei", "imsi", "cdr",
+             "कॉलर", "फोन", "कॉल", "टावर"],
     "transactions": ["sender", "receiver", "amount", "account", "txn", "transfer", "balance",
-                     "remitter", "beneficiary", "payer", "payee", "debit", "credit", "utr"],
+                     "remitter", "beneficiary", "payer", "payee", "debit", "credit", "utr",
+                     "राशि", "खाता", "प्रेषक", "प्राप्तकर्ता", "रुपये"],
     "firs": ["fir", "ipc", "narrative", "station", "complainant", "accused", "facts",
-             "allegation", "incident"],
+             "allegation", "incident", "प्राथमिकी", "नैरेटिव", "विवरण", "थाना", "धारा",
+             "आरोपी", "शिकायतकर्ता", "फरियादी", "स्थान", "घटना", "बयान"],
     "social_posts": ["post", "handle", "hashtag", "social", "tweet", "caption", "message"],
     "criminal_history": ["criminal", "history", "offence", "offense", "gang", "alias", "dob",
-                         "prior", "affiliation"],
-    "intelligence_reports": ["intelligence", "source_reliability", "informant", "source"],
+                         "prior", "affiliation", "अपराध", "इतिहास"],
+    "intelligence_reports": ["intelligence", "source_reliability", "informant", "source", "खुफिया"],
     "surveillance_reports": ["surveillance", "team", "activity_notes", "vehicle", "activity",
-                             "observations"],
-    "people_directory": ["person", "people", "directory", "role", "cell", "phone", "account"],
+                             "observations", "निगरानी"],
+    "people_directory": ["person", "people", "directory", "role", "cell", "phone", "account",
+                         "व्यक्ति", "नाम", "फोन", "खाता"],
 }
 
 FIR_NO_RE = re.compile(r"\b(?:FIR\s*(?:No\.?|Number)?\s*[:#-]?\s*(\d+[\w\-/]*))\b", re.IGNORECASE)
@@ -411,12 +415,12 @@ def detect_dataset_type(columns: List[str]) -> Tuple[str, float]:
     for dtype, keywords in TYPE_KEYWORDS.items():
         hits = sum(1 for kw in keywords if kw in col_low)
         scores[dtype] = hits / len(keywords) if keywords else 0
-        # bonus for exact canonical columns
+        # bonus for exact canonical columns (English or Hindi)
         if dtype == "cdrs" and any(x in col_low for x in ["caller_phone", "callee_phone"]):
             scores[dtype] += 0.3
-        if dtype == "transactions" and "amount" in col_low:
+        if dtype == "transactions" and any(x in col_low for x in ["amount", "राशि"]):
             scores[dtype] += 0.2
-        if dtype == "firs" and "narrative" in col_low:
+        if dtype == "firs" and any(x in col_low for x in ["narrative", "नैरेटिव", "विवरण"]):
             scores[dtype] += 0.3
         if dtype == "people_directory" and all(x in col_low for x in ["phone", "account"]):
             scores[dtype] += 0.3

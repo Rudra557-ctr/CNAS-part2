@@ -3,6 +3,7 @@
     {
       "id": "A1",
       "label": "Anwar Sheikh",
+      "label_hi": "\u0905\u0928\u0935\u0930 \u0936\u0947\u0916",
       "kind": "Person",
       "cell": "A",
       "role": "Kingpin",
@@ -27,6 +28,7 @@
     {
       "id": "A2",
       "label": "Suresh Rane",
+      "label_hi": "\u0938\u0941\u0930\u0947\u0936 \u0930\u093e\u0923\u0947",
       "kind": "Person",
       "cell": "A",
       "role": "Lieutenant",
@@ -51,6 +53,7 @@
     {
       "id": "A3",
       "label": "Farhan Qureshi",
+      "label_hi": "\u092b\u0930\u0939\u093e\u0928 \u0915\u0941\u0930\u0948\u0936\u0940",
       "kind": "Person",
       "cell": "A",
       "role": "Lieutenant",
@@ -75,6 +78,7 @@
     {
       "id": "A4",
       "label": "Vikas Chauhan",
+      "label_hi": "\u0935\u093f\u0915\u093e\u0938 \u091a\u094c\u0939\u093e\u0928",
       "kind": "Person",
       "cell": "A",
       "role": "Lieutenant",
@@ -99,6 +103,7 @@
     {
       "id": "A5",
       "label": "Ganesh Pawar",
+      "label_hi": "\u0917\u0923\u0947\u0936 \u092a\u0935\u093e\u0930",
       "kind": "Person",
       "cell": "A",
       "role": "Associate",
@@ -123,6 +128,7 @@
     {
       "id": "A6",
       "label": "Iqbal Khan",
+      "label_hi": "\u0907\u0915\u093c\u092c\u093e\u0932 \u0916\u093e\u0928",
       "kind": "Person",
       "cell": "A",
       "role": "Associate",
@@ -147,6 +153,7 @@
     {
       "id": "A13",
       "label": "Karan Mehra",
+      "label_hi": "\u0915\u0930\u0923 \u092e\u0947\u0939\u0930\u093e",
       "kind": "Person",
       "cell": "A",
       "role": "Associate",
@@ -171,6 +178,7 @@
     {
       "id": "A7",
       "label": "Ramesh Yadav",
+      "label_hi": "\u0930\u092e\u0947\u0936 \u092f\u093e\u0926\u0935",
       "kind": "Person",
       "cell": "A",
       "role": "Associate",
@@ -195,6 +203,7 @@
     {
       "id": "A8",
       "label": "Sanjay More",
+      "label_hi": "\u0938\u0902\u091c\u092f \u092e\u094b\u0930\u0947",
       "kind": "Person",
       "cell": "A",
       "role": "Associate",
@@ -219,6 +228,7 @@
     {
       "id": "A9",
       "label": "Tariq Ansari",
+      "label_hi": "\u0924\u093e\u0930\u093f\u0915 \u0905\u0902\u0938\u093e\u0930\u0940",
       "kind": "Person",
       "cell": "A",
       "role": "Associate",
@@ -243,6 +253,7 @@
     {
       "id": "A10",
       "label": "Faisal Shah",
+      "label_hi": "\u092b\u0948\u0938\u0932 \u0936\u093e\u0939",
       "kind": "Person",
       "cell": "A",
       "role": "Associate",
@@ -267,6 +278,7 @@
     {
       "id": "A11",
       "label": "Meena Joshi",
+      "label_hi": "\u092e\u0940\u0928\u093e \u091c\u094b\u0936\u0940",
       "kind": "Person",
       "cell": "A",
       "role": "Accountant",
@@ -291,6 +303,7 @@
     {
       "id": "A12",
       "label": "Rohit Bhatt",
+      "label_hi": "\u0930\u094b\u0939\u093f\u0924 \u092d\u091f\u094d\u091f",
       "kind": "Person",
       "cell": "A",
       "role": "Safehouse keeper",
@@ -315,6 +328,7 @@
     {
       "id": "B1",
       "label": "Rajan Naik",
+      "label_hi": "\u0930\u093e\u091c\u0928 \u0928\u093e\u0907\u0915",
       "kind": "Person",
       "cell": "B",
       "role": "Kingpin",
@@ -339,6 +353,7 @@
     {
       "id": "B2",
       "label": "Salim Pathan",
+      "label_hi": "\u0938\u0932\u0940\u092e \u092a\u0920\u093e\u0928",
       "kind": "Person",
       "cell": "B",
       "role": "Lieutenant",
@@ -363,6 +378,7 @@
     {
       "id": "B3",
       "label": "Vinod Chavan",
+      "label_hi": "\u0935\u093f\u0928\u094b\u0926 \u091a\u0935\u094d\u0939\u093e\u0923",
       "kind": "Person",
       "cell": "B",
       "role": "Lieutenant",
@@ -387,6 +403,7 @@
     {
       "id": "B4",
       "label": "Nitin Kamble",
+      "label_hi": "\u0928\u093f\u0924\u093f\u0928 \u0915\u093e\u0902\u092c\u0932\u0947",
       "kind": "Person",
       "cell": "B",
       "role": "Lieutenant",
@@ -411,6 +428,7 @@
     {
       "id": "B5",
       "label": "Ashok Gaikwad",
+      "label_hi": "\u0905\u0936\u094b\u0915 \u0917\u093e\u092f\u0915\u0935\u093e\u0921\u093c",
       "kind": "Person",
       "cell": "B",
       "role": "Courier",
@@ -435,6 +453,7 @@
     {
       "id": "B6",
       "label": "Imran Baig",
+      "label_hi": "\u0907\u092e\u0930\u093e\u0928 \u092c\u0947\u0917",
       "kind": "Person",
       "cell": "B",
       "role": "Courier",
@@ -459,6 +478,7 @@
     {
       "id": "B13",
       "label": "Sameer Jadhav",
+      "label_hi": "\u0938\u092e\u0940\u0930 \u091c\u093e\u0927\u0935",
       "kind": "Person",
       "cell": "B",
       "role": "Courier",
@@ -483,6 +503,7 @@
     {
       "id": "B7",
       "label": "Deepak Sawant",
+      "label_hi": "\u0926\u0940\u092a\u0915 \u0938\u093e\u0935\u0902\u0924",
       "kind": "Person",
       "cell": "B",
       "role": "Courier",
@@ -507,6 +528,7 @@
     {
       "id": "B8",
       "label": "Waseem Ali",
+      "label_hi": "\u0935\u0938\u0940\u092e \u0905\u0932\u0940",
       "kind": "Person",
       "cell": "B",
       "role": "Courier",
@@ -531,6 +553,7 @@
     {
       "id": "B9",
       "label": "Rafiq Shaikh",
+      "label_hi": "\u0930\u092b\u0940\u0915 \u0936\u0947\u0916",
       "kind": "Person",
       "cell": "B",
       "role": "Courier",
@@ -555,6 +578,7 @@
     {
       "id": "B10",
       "label": "Ganesh Pandit",
+      "label_hi": "\u0917\u0923\u0947\u0936 \u092a\u0902\u0921\u093f\u0924",
       "kind": "Person",
       "cell": "B",
       "role": "Courier",
@@ -579,6 +603,7 @@
     {
       "id": "B11",
       "label": "Kavita Desai",
+      "label_hi": "\u0915\u0935\u093f\u0924\u093e \u0926\u0947\u0938\u093e\u0908",
       "kind": "Person",
       "cell": "B",
       "role": "Financier",
@@ -603,6 +628,7 @@
     {
       "id": "B12",
       "label": "Mohsin Qureshi",
+      "label_hi": "\u092e\u094b\u0939\u0938\u093f\u0928 \u0915\u0941\u0930\u0948\u0936\u0940",
       "kind": "Person",
       "cell": "B",
       "role": "Cache keeper",
@@ -627,6 +653,7 @@
     {
       "id": "C1",
       "label": "Prakash Shetty",
+      "label_hi": "\u092a\u094d\u0930\u0915\u093e\u0936 \u0936\u0947\u091f\u094d\u091f\u0940",
       "kind": "Person",
       "cell": "C",
       "role": "Kingpin",
@@ -651,6 +678,7 @@
     {
       "id": "C2",
       "label": "Nasir Malik",
+      "label_hi": "\u0928\u093e\u0938\u093f\u0930 \u092e\u0932\u093f\u0915",
       "kind": "Person",
       "cell": "C",
       "role": "Lieutenant",
@@ -675,6 +703,7 @@
     {
       "id": "C3",
       "label": "Ravi Kadam",
+      "label_hi": "\u0930\u0935\u093f \u0915\u0926\u092e",
       "kind": "Person",
       "cell": "C",
       "role": "Lieutenant",
@@ -699,6 +728,7 @@
     {
       "id": "C4",
       "label": "Baban Surve",
+      "label_hi": "\u092c\u092c\u0928 \u0938\u0941\u0930\u094d\u0935\u0947",
       "kind": "Person",
       "cell": "C",
       "role": "Lieutenant",
@@ -723,6 +753,7 @@
     {
       "id": "C5",
       "label": "Yusuf Ali",
+      "label_hi": "\u092f\u0942\u0938\u0941\u092b \u0905\u0932\u0940",
       "kind": "Person",
       "cell": "C",
       "role": "Enforcer",
@@ -747,6 +778,7 @@
     {
       "id": "C6",
       "label": "Santosh Bhosale",
+      "label_hi": "\u0938\u0902\u0924\u094b\u0937 \u092d\u094b\u0938\u0932\u0947",
       "kind": "Person",
       "cell": "C",
       "role": "Enforcer",
@@ -771,6 +803,7 @@
     {
       "id": "C13",
       "label": "Ramesh Chougule",
+      "label_hi": "\u0930\u092e\u0947\u0936 \u091a\u094c\u0917\u0941\u0932\u0947",
       "kind": "Person",
       "cell": "C",
       "role": "Enforcer",
@@ -795,6 +828,7 @@
     {
       "id": "C7",
       "label": "Aslam Pathan",
+      "label_hi": "\u0905\u0938\u0932\u092e \u092a\u0920\u093e\u0928",
       "kind": "Person",
       "cell": "C",
       "role": "Enforcer",
@@ -819,6 +853,7 @@
     {
       "id": "C8",
       "label": "Mahesh Gupta",
+      "label_hi": "\u092e\u0939\u0947\u0936 \u0917\u0941\u092a\u094d\u0924\u093e",
       "kind": "Person",
       "cell": "C",
       "role": "Enforcer",
@@ -843,6 +878,7 @@
     {
       "id": "C9",
       "label": "Irfan Sheikh",
+      "label_hi": "\u0907\u0930\u092b\u093e\u0928 \u0936\u0947\u0916",
       "kind": "Person",
       "cell": "C",
       "role": "Enforcer",
@@ -867,6 +903,7 @@
     {
       "id": "C10",
       "label": "Vijay Salunkhe",
+      "label_hi": "\u0935\u093f\u091c\u092f \u0938\u093e\u0932\u0941\u0902\u0916\u0947",
       "kind": "Person",
       "cell": "C",
       "role": "Enforcer",
@@ -891,6 +928,7 @@
     {
       "id": "C11",
       "label": "Neha Kulkarni",
+      "label_hi": "\u0928\u0947\u0939\u093e \u0915\u0941\u0932\u0915\u0930\u094d\u0923\u0940",
       "kind": "Person",
       "cell": "C",
       "role": "Accountant",
@@ -915,6 +953,7 @@
     {
       "id": "C12",
       "label": "Sunil Pillai",
+      "label_hi": "\u0938\u0941\u0928\u0940\u0932 \u092a\u093f\u0932\u094d\u0932\u0908",
       "kind": "Person",
       "cell": "C",
       "role": "Collection agent",
@@ -939,6 +978,7 @@
     {
       "id": "X1",
       "label": "Dinesh Mehta",
+      "label_hi": "\u0926\u093f\u0928\u0947\u0936 \u092e\u0947\u0939\u0924\u093e",
       "kind": "Person",
       "cell": "Bridge",
       "role": "Hawala operator",
@@ -963,6 +1003,7 @@
     {
       "id": "X2",
       "label": "Javed Ansari",
+      "label_hi": "\u091c\u093e\u0935\u0947\u0926 \u0905\u0902\u0938\u093e\u0930\u0940",
       "kind": "Person",
       "cell": "Bridge",
       "role": "Weapons supplier",
@@ -987,6 +1028,7 @@
     {
       "id": "X3",
       "label": "Arvind Kapoor",
+      "label_hi": "\u0905\u0930\u0935\u093f\u0902\u0926 \u0915\u092a\u0942\u0930",
       "kind": "Person",
       "cell": "Bridge",
       "role": "Logistics broker",
@@ -1011,6 +1053,7 @@
     {
       "id": "X4",
       "label": "R.K. Verma",
+      "label_hi": "\u0906\u0930.\u0915\u0947. \u0935\u0930\u094d\u092e\u093e",
       "kind": "Person",
       "cell": "Bridge",
       "role": "Corrupt police contact",
@@ -1035,6 +1078,7 @@
     {
       "id": "N1",
       "label": "Sunita Mishra",
+      "label_hi": "\u0938\u0941\u0928\u0940\u0924\u093e \u092e\u093f\u0936\u094d\u0930\u093e",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1059,6 +1103,7 @@
     {
       "id": "N2",
       "label": "Anita Kulkarni",
+      "label_hi": "\u0905\u0928\u0940\u0924\u093e \u0915\u0941\u0932\u0915\u0930\u094d\u0923\u0940",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1083,6 +1128,7 @@
     {
       "id": "N3",
       "label": "Vinay Naidu",
+      "label_hi": "\u0935\u093f\u0928\u092f \u0928\u093e\u092f\u0921\u0942",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1107,6 +1153,7 @@
     {
       "id": "N4",
       "label": "Sunita Nair",
+      "label_hi": "\u0938\u0941\u0928\u0940\u0924\u093e \u0928\u093e\u092f\u0930",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1131,6 +1178,7 @@
     {
       "id": "N5",
       "label": "Amit Reddy",
+      "label_hi": "\u0905\u092e\u093f\u0924 \u0930\u0947\u0921\u094d\u0921\u0940",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1155,6 +1203,7 @@
     {
       "id": "N6",
       "label": "Poonam Menon",
+      "label_hi": "\u092a\u0942\u0928\u092e \u092e\u0947\u0928\u0928",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1179,6 +1228,7 @@
     {
       "id": "N7",
       "label": "Priya Mishra",
+      "label_hi": "\u092a\u094d\u0930\u093f\u092f\u093e \u092e\u093f\u0936\u094d\u0930\u093e",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1203,6 +1253,7 @@
     {
       "id": "N8",
       "label": "Manoj Kulkarni",
+      "label_hi": "\u092e\u0928\u094b\u091c \u0915\u0941\u0932\u0915\u0930\u094d\u0923\u0940",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1227,6 +1278,7 @@
     {
       "id": "N9",
       "label": "Vinay Dutta",
+      "label_hi": "\u0935\u093f\u0928\u092f \u0926\u0924\u094d\u0924\u093e",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1251,6 +1303,7 @@
     {
       "id": "N10",
       "label": "Alok Mishra",
+      "label_hi": "\u0906\u0932\u094b\u0915 \u092e\u093f\u0936\u094d\u0930\u093e",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1275,6 +1328,7 @@
     {
       "id": "N11",
       "label": "Amit Kulkarni",
+      "label_hi": "\u0905\u092e\u093f\u0924 \u0915\u0941\u0932\u0915\u0930\u094d\u0923\u0940",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1299,6 +1353,7 @@
     {
       "id": "N12",
       "label": "Amit Menon",
+      "label_hi": "\u0905\u092e\u093f\u0924 \u092e\u0947\u0928\u0928",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1323,6 +1378,7 @@
     {
       "id": "N13",
       "label": "Vinay Chatterjee",
+      "label_hi": "\u0935\u093f\u0928\u092f \u091a\u091f\u0930\u094d\u091c\u0940",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1347,6 +1403,7 @@
     {
       "id": "N14",
       "label": "Poonam Bhatia",
+      "label_hi": "\u092a\u0942\u0928\u092e \u092d\u093e\u091f\u093f\u092f\u093e",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1371,6 +1428,7 @@
     {
       "id": "N15",
       "label": "Rakesh Malhotra",
+      "label_hi": "\u0930\u093e\u0915\u0947\u0936 \u092e\u0932\u094d\u0939\u094b\u0924\u094d\u0930\u093e",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1395,6 +1453,7 @@
     {
       "id": "N16",
       "label": "Pooja Sinha",
+      "label_hi": "\u092a\u0942\u091c\u093e \u0938\u093f\u0928\u094d\u0939\u093e",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1419,6 +1478,7 @@
     {
       "id": "N17",
       "label": "Naveen Iyer",
+      "label_hi": "\u0928\u0935\u0940\u0928 \u0905\u092f\u094d\u092f\u0930",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1443,6 +1503,7 @@
     {
       "id": "N18",
       "label": "Anita Naidu",
+      "label_hi": "\u0905\u0928\u0940\u0924\u093e \u0928\u093e\u092f\u0921\u0942",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1467,6 +1528,7 @@
     {
       "id": "N19",
       "label": "Deepa Malhotra",
+      "label_hi": "\u0926\u0940\u092a\u093e \u092e\u0932\u094d\u0939\u094b\u0924\u094d\u0930\u093e",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",
@@ -1491,6 +1553,7 @@
     {
       "id": "N20",
       "label": "Sneha Reddy",
+      "label_hi": "\u0938\u094d\u0928\u0947\u0939\u093e \u0930\u0947\u0921\u094d\u0921\u0940",
       "kind": "Person",
       "cell": "Noise",
       "role": "Unrelated/background",

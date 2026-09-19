@@ -101,7 +101,7 @@ def compute_lead_scores(datasets: Dict = None, graph_serial: Dict = None) -> Lis
     people_list = pd.get("network_people", []) + pd.get("noise_people", [])
     if not people_list and graph_serial:
         people_list = [
-            {"id": n["id"], "name": n.get("label", n["id"]), "cell": n.get("cell", "Unknown"), "role": n.get("role", "Suspect")}
+            {"id": n["id"], "name": n.get("label", n["id"]), "name_hi": n.get("label_hi"), "cell": n.get("cell", "Unknown"), "role": n.get("role", "Suspect")}
             for n in graph_serial.get("nodes", []) if n.get("kind") in ("Person", None)
         ]
     for p in people_list:
@@ -165,6 +165,7 @@ def compute_lead_scores(datasets: Dict = None, graph_serial: Dict = None) -> Lis
             "entity_id": pid,
             "entity_type": "Person",
             "label": p["name"],
+            "label_hi": p.get("name_hi"),
             "cell": p.get("cell"),
             "role": p.get("role"),
             "lead_score": lead_score,

@@ -625,17 +625,39 @@ def people_search(q: str = Query(..., description="Search person by name, ID, ph
     qlow = q.strip().lower()
     hits = []
     import json as js
+    from backend.extraction.devanagari import romanize_for_match as _rom
+    # Romanised query so a Latin "ramesh" matches a Devanagari "रमेश यादव"
+    # and a Devanagari "रमेश" matches a Latin "Ramesh Yadav".
+    q_roman = _rom(qlow) if qlow else ""
+    def _matches(label: str, label_hi: str, nid: str, phone: str, acct: str) -> bool:
+        low_label = (label or "").lower()
+        low_hi = (label_hi or "").lower()
+        roman_label = _rom(label) if label else ""
+        roman_hi = _rom(label_hi) if label_hi else ""
+        return (
+            qlow in nid.lower()
+            or qlow in low_label
+            or (low_hi and qlow in low_hi)
+            or (phone and qlow in phone.lower())
+            or (acct and qlow in acct.lower())
+            or (roman_label and (qlow in roman_label or q_roman in roman_label))
+            or (roman_hi and (qlow in roman_hi or q_roman in roman_hi))
+            or (low_label and qlow in low_label.split()[0])
+            or (roman_label and q_roman and q_roman.split()[0] in roman_label)
+        )
     if iid and (INV_ROOT / iid / "output" / "graph.json").exists():
         serial = js.loads((INV_ROOT / iid / "output" / "graph.json").read_text())
         for n in serial.get("nodes", []):
             label = str(n.get("label") or n.get("name") or n.get("id"))
+            label_hi = str(n.get("label_hi") or n.get("name_hi") or "")
             phone = str(n.get("phone") or "")
             acct = str(n.get("account") or "")
             nid = str(n.get("id") or "")
-            if qlow in nid.lower() or qlow in label.lower() or (phone and qlow in phone.lower()) or (acct and qlow in acct.lower()):
+            if _matches(label, label_hi, nid, phone, acct):
                 hits.append({
                     "id": n["id"],
                     "name": label,
+                    "name_hi": label_hi or None,
                     "cell": n.get("cell", "Unknown"),
                     "role": n.get("role", ""),
                     "phone": n.get("phone", ""),
@@ -646,17 +668,21 @@ def people_search(q: str = Query(..., description="Search person by name, ID, ph
         pd = js.loads((DATA_DIR / "people_directory.json").read_text())
         allp = pd.get("network_people", []) + pd.get("noise_people", [])
         for p in allp:
-            if qlow in p["id"].lower() or qlow in p["name"].lower() or qlow in p.get("phone","").lower() or qlow in p.get("account","").lower():
+            label_hi = str(p.get("name_hi") or "")
+            if _matches(p.get("name",""), label_hi, p.get("id",""), p.get("phone",""), p.get("account","")):
                 item = dict(p)
                 if "photo" not in item:
                     item["photo"] = f"/mugshots/{p['id']}.jpg"
                 hits.append(item)
-            elif qlow in p["name"].lower().split()[0]:  # first name
-                item = dict(p)
-                if "photo" not in item:
-                    item["photo"] = f"/mugshots/{p['id']}.jpg"
-                hits.append(item)
-    return {"query": q, "results": hits[:15], "count": len(hits)}
+    # Deduplicate by id (romanised matching can double-hit)
+    seen = set()
+    uniq = []
+    for h in hits:
+        hid = h.get("id") or h.get("name")
+        if hid not in seen:
+            seen.add(hid)
+            uniq.append(h)
+    return {"query": q, "results": uniq[:15], "count": len(uniq)}
 
 @app.post("/people/search-image")
 async def people_search_image(
@@ -882,6 +908,13 @@ def inv_process(iid: str, user: dict = Depends(CAN_WRITE)):
                     "phone": str(m.get("phone") or ""),
                     "account": str(m.get("account") or ""),
                 }
+                if m.get("name_hi"):
+                    entry["name_hi"] = str(m["name_hi"])
+                elif m.get("नाम"):
+                    entry["name_hi"] = str(m["नाम"])
+                # Preserve Hindi via extra-field fallback (apply_mapping keeps unmapped keys)
+                elif m.get("hindi_name"):
+                    entry["name_hi"] = str(m["hindi_name"])
                 if m.get("photo"):
                     entry["photo"] = str(m["photo"])
                 inv_datasets["people_directory"]["network_people"].append(entry)

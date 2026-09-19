@@ -334,6 +334,8 @@ def execute(intent: Intent, graph_serial: Dict) -> List[Dict]:
     if not intent.has_filter:
         return []
     labels = {n["id"]: (n.get("label") or n["id"]) for n in graph_serial.get("nodes", [])}
+    labels_hi = {n["id"]: n.get("label_hi")
+                 for n in graph_serial.get("nodes", []) if n.get("label_hi")}
 
     # "Meena Joshi's call records" means edges she is ON. Expanding to her
     # neighbourhood first (hops=1) returned calls between her contacts that she
@@ -375,7 +377,9 @@ def execute(intent: Intent, graph_serial: Dict) -> List[Dict]:
                 continue
         rows.append({
             "src": e.get("src"), "src_label": labels.get(e.get("src"), e.get("src")),
+            "src_label_hi": labels_hi.get(e.get("src")),
             "dst": e.get("dst"), "dst_label": labels.get(e.get("dst"), e.get("dst")),
+            "dst_label_hi": labels_hi.get(e.get("dst")),
             "kind": e.get("kind"), "day": day, "amount": amount,
             "source": e.get("source"), "source_type": e.get("source_type"),
             "confidence": e.get("confidence"),

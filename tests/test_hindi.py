@@ -1,6 +1,8 @@
 """Hindi / Devanagari narrative support — extraction, transliteration, resolution."""
 import json
 
+import pytest
+
 from backend.config import DATA_DIR
 from backend.extraction.devanagari import (
     has_devanagari, normalize_digits, transliterate, fold_phonetic,
@@ -109,3 +111,31 @@ def test_hindi_mentions_resolve_to_canonical_ids():
     # Cross-script merges are labelled so resolution.csv stays auditable
     translit_rows = [r for r in rows if "fuzzy_translit" in r["method"]]
     assert translit_rows and all(r["confidence"] >= 0.65 for r in translit_rows)
+
+
+def test_person_register_carries_both_scripts():
+    # Indian police registers hold the name in both scripts. Deriving Hindi from
+    # Roman loses the information it needs (a vs aa, dental vs retroflex), so the
+    # Hindi name is stored, never generated.
+    pd = _people()
+    people = pd["network_people"] + pd["noise_people"]
+    missing = [p["id"] for p in people if not p.get("name_hi")]
+    assert not missing, f"no Hindi name on record for {missing}"
+    for p in people:
+        assert has_devanagari(p["name_hi"]), f"{p['id']} name_hi is not Devanagari"
+
+
+def test_graph_nodes_expose_the_hindi_name():
+    import json as _js
+    from backend.config import PROJECT_ROOT
+
+    path = PROJECT_ROOT / "output" / "graph.json"
+    if not path.exists():
+        pytest.skip("graph not built")
+    with open(path, encoding="utf-8") as f:
+        nodes = _js.load(f)["nodes"]
+    persons = [n for n in nodes if n.get("kind") == "Person"]
+    assert persons
+    assert all(n.get("label_hi") for n in persons), "person nodes must carry label_hi"
+    a1 = next(n for n in persons if n["id"] == "A1")
+    assert a1["label"] == "Anwar Sheikh" and a1["label_hi"] == "अनवर शेख"
