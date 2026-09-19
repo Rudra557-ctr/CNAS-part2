@@ -15,6 +15,7 @@ from fastapi.responses import JSONResponse
 from typing import Optional, List, Dict
 import json
 import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 from datetime import datetime
 
@@ -62,8 +63,27 @@ import shutil
 import tempfile
 import uuid
 
+@asynccontextmanager
+async def _lifespan(app):
+    # Boot warmup: pay the cold-start cost once here (spaCy load + the hot
+    # global analytics) instead of on the officer's first dashboard/graph
+    # click. Best-effort — a failure only means the first request is slow.
+    try:
+        from backend.extraction.entity_extractor import get_nlp
+        get_nlp()
+    except Exception as exc:  # noqa: BLE001
+        print(f"[warmup] spaCy skipped: {exc}")
+    try:
+        from backend import serve_cache as _sc
+        _sc.warmup()
+    except Exception as exc:  # noqa: BLE001
+        print(f"[warmup] analytics skipped: {exc}")
+    yield
+
+
 app = FastAPI(title="Criminal Network Fusion API", version="0.1.0",
-              description="Evidence-backed AI Criminal Network Analysis — TASK 1 core pipeline")
+              description="Evidence-backed AI Criminal Network Analysis — TASK 1 core pipeline",
+              lifespan=_lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -97,9 +117,16 @@ async def _strip_api_prefix(request, call_next):
     # service container does the same — one rule, both environments.
     # `was_api` lets the SPA fallback below keep returning JSON 404s for
     # unknown API paths instead of silently serving the UI.
+    # The UI calls `/api/*` while every route here is registered WITHOUT the
+    # prefix (vite strips one `/api` level in dev; the two voice helpers in
+    # client.ts even send `/api/api/…`). Strip every leading `/api` segment so
+    # dev, tests and the single-service container all resolve identically.
     path = request.scope.get("path", "")
-    if path == "/api" or path.startswith("/api/"):
-        stripped = path[4:] or "/"
+    stripped, was_api = path, False
+    while stripped == "/api" or stripped.startswith("/api/"):
+        stripped = stripped[4:] or "/"
+        was_api = True
+    if was_api:
         request.scope["path"] = stripped
         request.scope["raw_path"] = stripped.encode("utf-8")
         request.scope["was_api"] = True
@@ -1099,31 +1126,33 @@ def inv_leads(iid: str, limit: int = Query(20, ge=1, le=100), user: dict = Depen
 
 @app.get("/investigations/{iid}/graph")
 def inv_graph(iid: str, day: Optional[int] = Query(None, ge=1, le=90), user: dict = Depends(CAN_VIEW_GRAPH)):
+    from backend import serve_cache as _sc
     out = INV_ROOT / iid / "output" / "graph.json"
     if not out.exists():
         raise HTTPException(status_code=404, detail="Not processed")
-    import json as js
-    serial = apply_overrides(js.loads(out.read_text()), scope_dir_for(iid))
+    serial = _sc.get_serial(iid)
     nodes, edges = serial["nodes"], serial["edges"]
     if day is not None:
-        filtered_edges = [e for e in edges if e.get("day") is None or (isinstance(e.get("day"), int) and e["day"] <= day and e["day"] >= day-6)]
-        incident = set()
-        for e in filtered_edges:
-            incident.add(e["src"]); incident.add(e["dst"])
-        top_bridges = {b["id"] for b in compute_bridges(graph_serial=serial)[:6]}
-        for n in nodes:
-            if n["id"] in top_bridges:
-                incident.add(n["id"])
-        filtered_nodes = [n for n in nodes if n["id"] in incident]
-        for idx, e in enumerate(filtered_edges):
-            e = dict(e)
-            eday = e.get("day")
-            if eday is None or eday == day:
-                e["_opacity"] = 1.0
-            else:
-                e["_opacity"] = round(0.35 + 0.65 * (1 - (day - eday)/6), 2)
-            filtered_edges[idx] = e
-        return {"day": day, "nodes": filtered_nodes, "edges": filtered_edges, "total_nodes": len(nodes), "total_edges": len(edges)}
+        def _build():
+            filtered_edges = [e for e in edges if e.get("day") is None or (isinstance(e.get("day"), int) and e["day"] <= day and e["day"] >= day-6)]
+            incident = set()
+            for e in filtered_edges:
+                incident.add(e["src"]); incident.add(e["dst"])
+            top_bridges = {b["id"] for b in _sc.get_result(iid, "bridges", lambda: compute_bridges(graph_serial=serial))[:6]}
+            for n in nodes:
+                if n["id"] in top_bridges:
+                    incident.add(n["id"])
+            filtered_nodes = [n for n in nodes if n["id"] in incident]
+            for idx, e in enumerate(filtered_edges):
+                e = dict(e)
+                eday = e.get("day")
+                if eday is None or eday == day:
+                    e["_opacity"] = 1.0
+                else:
+                    e["_opacity"] = round(0.35 + 0.65 * (1 - (day - eday)/6), 2)
+                filtered_edges[idx] = e
+            return {"day": day, "nodes": filtered_nodes, "edges": filtered_edges, "total_nodes": len(nodes), "total_edges": len(edges)}
+        return _sc.get_result(iid, f"graph:day:{day}", _build)
     return serial
 
 @app.get("/investigations/{iid}/whatif")
@@ -1182,8 +1211,8 @@ def inv_whatif(iid: str, remove_id: str = Query(..., description="Node ID to sim
 
 @app.get("/stats")
 def stats(user: dict = Depends(get_current_user)):
-    datasets, _ = load_all(DATA_DIR)
-    serial = load_graph_serial()
+    from backend import serve_cache as _sc
+    datasets, serial = _sc.get_datasets_and_serial(None)
     return {
         "datasets": {k: len(v) if isinstance(v,list) else f"{len(v.get('network_people',[]))}+{len(v.get('noise_people',[]))}" for k,v in datasets.items()},
         "graph": serial["stats"],
@@ -1192,61 +1221,61 @@ def stats(user: dict = Depends(get_current_user)):
 
 @app.get("/graph")
 def get_graph(day: Optional[int] = Query(None, ge=1, le=90, description="Day filter 1-90, story slice 50-70"), user: dict = Depends(CAN_VIEW_GRAPH)):
-    serial = apply_overrides(load_graph_serial(), scope_dir_for(None))
+    from backend import serve_cache as _sc
+    serial = _sc.get_serial(None)
     if not serial["nodes"]:
         raise HTTPException(status_code=503, detail="Graph not built yet — run: python -m backend.loader --clean && python -m backend.graph.builder")
     nodes = serial["nodes"]
     edges = serial["edges"]
     # Day snapshot: snapshot N + 6-day ghost per design locks
     if day is not None:
-        # filter edges to day window [day-6, day] for ghost trails, nodes stay all with opacity handling client-side
-        # For API we return filtered edges + all nodes (client will style ghost)
-        filtered_edges = [e for e in edges if e.get("day") is None or (isinstance(e.get("day"), int) and e["day"] <= day and e["day"] >= day-6)]
-        # Also include non-temporal edges (people_directory OWN) always
-        # We already included them as day=None
-        # For demo, also filter nodes to those incident to filtered edges + ensure bridges always visible
-        incident = set()
-        for e in filtered_edges:
-            incident.add(e["src"]); incident.add(e["dst"])
-        # top bridge nodes always visible
-        top_bridges = {b["id"] for b in compute_bridges(graph_serial=serial)[:6]}
-        for n in nodes:
-            if n["id"] in top_bridges:
-                incident.add(n["id"])
-        filtered_nodes = [n for n in nodes if n["id"] in incident]
-        # Attach opacity meta: 1.0 for day==snapshot, 0.3-0.6 for ghost
-        for idx, e in enumerate(filtered_edges):
-            # copy to avoid mutating cached serial
-            e = dict(e)
-            eday = e.get("day")
-            if eday is None:
-                e["_opacity"] = 1.0
-            elif eday == day:
-                e["_opacity"] = 1.0
-            else:
-                # linear fade over 6 days
-                e["_opacity"] = round(0.35 + 0.65 * (1 - (day - eday)/6), 2)
-            filtered_edges[idx] = e
-        audit_log(f"/graph?day={day}", [n["id"] for n in filtered_nodes][:20])
-        return {"day": day, "nodes": filtered_nodes, "edges": filtered_edges, "total_nodes": len(nodes), "total_edges": len(edges)}
+        def _build():
+            # filter edges to day window [day-6, day] for ghost trails, nodes stay all with opacity handling client-side
+            # For API we return filtered edges + all nodes (client will style ghost)
+            filtered_edges = [e for e in edges if e.get("day") is None or (isinstance(e.get("day"), int) and e["day"] <= day and e["day"] >= day-6)]
+            # Also include non-temporal edges (people_directory OWN) always
+            # We already included them as day=None
+            # For demo, also filter nodes to those incident to filtered edges + ensure bridges always visible
+            incident = set()
+            for e in filtered_edges:
+                incident.add(e["src"]); incident.add(e["dst"])
+            # top bridge nodes always visible
+            top_bridges = {b["id"] for b in _sc.get_result(None, "bridges", lambda: compute_bridges(graph_serial=serial))[:6]}
+            for n in nodes:
+                if n["id"] in top_bridges:
+                    incident.add(n["id"])
+            filtered_nodes = [n for n in nodes if n["id"] in incident]
+            # Attach opacity meta: 1.0 for day==snapshot, 0.3-0.6 for ghost
+            for idx, e in enumerate(filtered_edges):
+                # copy to avoid mutating cached serial
+                e = dict(e)
+                eday = e.get("day")
+                if eday is None:
+                    e["_opacity"] = 1.0
+                elif eday == day:
+                    e["_opacity"] = 1.0
+                else:
+                    # linear fade over 6 days
+                    e["_opacity"] = round(0.35 + 0.65 * (1 - (day - eday)/6), 2)
+                filtered_edges[idx] = e
+            return {"day": day, "nodes": filtered_nodes, "edges": filtered_edges, "total_nodes": len(nodes), "total_edges": len(edges)}
+        out = _sc.get_result(None, f"graph:day:{day}", _build)
+        audit_log(f"/graph?day={day}", [n["id"] for n in out["nodes"]][:20])
+        return out
     audit_log("/graph", [n["id"] for n in nodes][:20])
     return {"nodes": nodes, "edges": edges, "stats": serial["stats"]}
 
 def _get_inv_datasets_and_serial(iid: Optional[str] = None):
-    if iid and (INV_ROOT / iid / "output" / "graph.json").exists():
-        import json as js
-        serial = js.loads((INV_ROOT / iid / "output" / "graph.json").read_text())
-        full_ds_path = INV_ROOT / iid / "mapped" / "full_datasets.json"
-        datasets = js.loads(full_ds_path.read_text()) if full_ds_path.exists() else {}
-        return datasets, serial
-    datasets, _ = load_all(DATA_DIR)
-    serial = load_graph_serial()
-    return datasets, serial
+    # Serve-time cache (mtime-keyed): same values, no per-request re-read of
+    # graph.json/CSVs. Writes bust it automatically via file mtimes.
+    from backend import serve_cache as _sc
+    return _sc.get_datasets_and_serial(iid)
 
 @app.get("/bridges")
 def get_bridges(iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend import serve_cache as _sc
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    bridges = compute_bridges(graph_serial=serial)
+    bridges = _sc.get_result(iid, "bridges", lambda: compute_bridges(graph_serial=serial))
     if not bridges:
         raise HTTPException(status_code=503, detail="Graph not built or centrality unavailable")
     # Only return flagged top-6 per spec shape, but include full for why panel
@@ -1255,29 +1284,34 @@ def get_bridges(iid: Optional[str] = Query(None), user: dict = Depends(get_curre
 
 @app.get("/bursts")
 def get_bursts(iid: Optional[str] = Query(None), user: dict = Depends(CAN_VIEW_GRAPH)):
+    from backend import serve_cache as _sc
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    bursts = detect_bursts(datasets)
+    bursts = _sc.get_result(iid, "bursts", lambda: detect_bursts(datasets))
     audit_log("/bursts", [f"{b['cell']}:{b['day']}" for b in bursts])
     return bursts
 
 @app.get("/structuring")
 def get_structuring(iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend import serve_cache as _sc
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    flags = detect_structuring(datasets)
+    flags = _sc.get_result(iid, "structuring", lambda: detect_structuring(datasets))
     audit_log("/structuring", [f["receiver"] for f in flags])
     return flags
 
 @app.get("/communities")
 def get_communities(filter_bridges: bool = True, iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend import serve_cache as _sc
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    comms = detect_communities(filter_bridges=filter_bridges, graph_serial=serial if iid else None)
+    comms = _sc.get_result(iid, f"communities:{filter_bridges}",
+                           lambda: detect_communities(filter_bridges=filter_bridges, graph_serial=serial if iid else None))
     audit_log(f"/communities?filter_bridges={filter_bridges}", [str(c["community_id"]) for c in comms])
     return comms
 
 @app.get("/centrality")
 def get_centrality(iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend import serve_cache as _sc
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    cent = compute_centrality(graph_serial=serial)
+    cent = _sc.get_result(iid, "centrality", lambda: compute_centrality(graph_serial=serial))
     audit_log("/centrality", [c["id"] for c in cent[:10]])
     return cent
 
@@ -1321,8 +1355,11 @@ def get_towers(iid: Optional[str] = Query(None), user: dict = Depends(CAN_VIEW_G
 
 @app.get("/leads")
 def get_leads_endpoint(limit: int = Query(20, ge=1, le=100, description="Top N leads"), priority: Optional[str] = Query(None, description="Filter HIGH/MEDIUM/LOW"), iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend import serve_cache as _sc
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    leads = get_leads(limit=limit, datasets=datasets, graph_serial=serial)
+    # Score once per data version; slice/filter per request (same values as before).
+    all_leads = _sc.get_result(iid, "leads_all", lambda: compute_lead_scores(datasets, serial))
+    leads = list(all_leads[:limit])
     if priority:
         leads = [l for l in leads if l["priority"] == priority.upper()]
     audit_log(f"/leads?limit={limit}", [l["entity_id"] for l in leads[:10]])
@@ -1330,8 +1367,9 @@ def get_leads_endpoint(limit: int = Query(20, ge=1, le=100, description="Top N l
 
 @app.get("/anomalies")
 def get_anomalies(iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend import serve_cache as _sc
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    anoms = get_unified_anomalies(datasets=datasets)
+    anoms = _sc.get_result(iid, "anomalies", lambda: get_unified_anomalies(datasets=datasets))
     audit_log("/anomalies", [a["entity_id"] for a in anoms[:10]])
     return anoms
 
@@ -1418,23 +1456,26 @@ def get_resolution(iid: Optional[str] = Query(None), user: dict = Depends(CAN_VI
 
 @app.get("/cross-case")
 def get_cross_case(iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend import serve_cache as _sc
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    cc = detect_cross_case(datasets)
+    cc = _sc.get_result(iid, "cross_case", lambda: detect_cross_case(datasets))
     audit_log("/cross-case", [c["shared_entity"] for c in cc[:10]])
     return cc
 
 @app.get("/temporal")
 def get_temporal(iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend import serve_cache as _sc
     datasets, serial = _get_inv_datasets_and_serial(iid)
-    ti = get_temporal_intelligence(datasets)
+    ti = _sc.get_result(iid, "temporal", lambda: get_temporal_intelligence(datasets))
     audit_log("/temporal", [f"{g['span']}" for g in ti["correlated_groups"]])
     return ti
 
 @app.get("/temporal/playback")
 def get_playback(iid: Optional[str] = Query(None), user: dict = Depends(get_current_user)):
+    from backend import serve_cache as _sc
     from backend.analytics.temporal import get_playback as build_playback
     datasets, _ = _get_inv_datasets_and_serial(iid)
-    data = build_playback(datasets)
+    data = _sc.get_result(iid, "playback", lambda: build_playback(datasets))
     audit_log(f"/temporal/playback iid={iid or 'demo'}", [f"days:{data['day_start']}-{data['day_end']}"])
     return data
 
@@ -1658,11 +1699,14 @@ def why_flagged(entity_id: str, iid: Optional[str] = Query(None), user: dict = D
     node = next((n for n in serial["nodes"] if n["id"]==entity_id), None)
     if not node:
         raise HTTPException(status_code=404, detail=f"Unknown id {entity_id} — check quarantine.csv or resolution.csv")
-    # Collect top signals dynamically for this graph & dataset
-    centrality = compute_centrality(graph_serial=serial)
-    bridges = compute_bridges(graph_serial=serial)
-    bursts = detect_bursts(datasets)
-    struct = detect_structuring(datasets)
+    # Collect top signals dynamically for this graph & dataset. The full-graph
+    # analytics are cached per data version (same values, computed once) — only
+    # the per-entity filtering below runs per request.
+    from backend import serve_cache as _sc
+    centrality = _sc.get_result(iid, "centrality", lambda: compute_centrality(graph_serial=serial))
+    bridges = _sc.get_result(iid, "bridges", lambda: compute_bridges(graph_serial=serial))
+    bursts = _sc.get_result(iid, "bursts", lambda: detect_bursts(datasets))
+    struct = _sc.get_result(iid, "structuring", lambda: detect_structuring(datasets))
 
     cent_entry = next((c for c in centrality if c["id"]==entity_id), None)
     bridge_entry = next((b for b in bridges if b["id"]==entity_id), None)
@@ -1693,10 +1737,13 @@ def why_flagged(entity_id: str, iid: Optional[str] = Query(None), user: dict = D
             sources.append({"source": row.get("fir_id") or row.get("report_id"), "source_type": "text_mention", "day": row.get("day"), "confidence": 0.6, "supporting_text": snippet, "evidence_hash": h, "extractor": "text_mention"})
 
     # Task3: Lead Score for this entity
-    lead = lead_for_entity(entity_id)
-    cross = [c for c in detect_cross_case(datasets) if c["shared_entity"]==entity_id]
-    anoms = [a for a in get_unified_anomalies(datasets) if a["entity_id"]==entity_id]
-    temporal_info = get_temporal_intelligence(datasets)
+    all_leads = _sc.get_result(iid, "leads_all", lambda: compute_lead_scores(datasets, serial))
+    lead = next((l for l in all_leads if l["entity_id"]==entity_id), None)
+    cross_all = _sc.get_result(iid, "cross_case", lambda: detect_cross_case(datasets))
+    cross = [c for c in cross_all if c["shared_entity"]==entity_id]
+    anoms_all = _sc.get_result(iid, "anomalies", lambda: get_unified_anomalies(datasets=datasets))
+    anoms = [a for a in anoms_all if a["entity_id"]==entity_id]
+    temporal_info = _sc.get_result(iid, "temporal", lambda: get_temporal_intelligence(datasets))
 
     top_signals = []
     if lead and lead["priority"] == "HIGH":
@@ -2164,7 +2211,7 @@ ALLOWED_AUDIO_SUFFIXES = {".wav", ".mp3", ".m4a", ".ogg", ".flac", ".webm", ".mp
 MAX_AUDIO_BYTES = 25 * 1024 * 1024
 
 
-@app.get("/api/voice-command/health")
+@app.get("/voice-command/health")
 def voice_health(user: dict = Depends(CAN_VIEW_GRAPH)):
     """Whether this deployment can transcribe, and whether it can self-record."""
     from backend.voice import recorder, transcriber
@@ -2177,7 +2224,7 @@ def voice_health(user: dict = Depends(CAN_VIEW_GRAPH)):
     }
 
 
-@app.post("/api/voice-command")
+@app.post("/voice-command")
 async def voice_command(file: UploadFile = File(...),
                         iid: Optional[str] = Query(None),
                         user: dict = Depends(CAN_VIEW_GRAPH)):
@@ -2302,7 +2349,7 @@ def _ingest_transcript(payload: bytes, suffix: str, vocabulary=None) -> str:
                 logger.warning("could not remove temp audio %s", tmp_path)
 
 
-@app.post("/api/voice-ingest")
+@app.post("/voice-ingest")
 async def voice_ingest_preview(file: Optional[UploadFile] = File(None),
                                text: Optional[str] = Form(None),
                                iid: Optional[str] = Query(None),
@@ -2360,7 +2407,7 @@ async def voice_ingest_preview(file: Optional[UploadFile] = File(None),
             "understood": command.understood, "ignored": command.ignored, **plan}
 
 
-@app.post("/api/voice-ingest/commit")
+@app.post("/voice-ingest/commit")
 def voice_ingest_commit(body: VoiceIngestConfirm, user: dict = Depends(CAN_WRITE)):
     """
     Apply a confirmed command: source data → existing pipeline → graph.
@@ -2397,10 +2444,12 @@ def voice_ingest_commit(body: VoiceIngestConfirm, user: dict = Depends(CAN_WRITE
 # real asset when it exists, else index.html (SPA routes like /graph,
 # /cases). Unknown `/api/*` paths keep their JSON 404 via `was_api`. In
 # local dev there is no dist (vite serves :5173), so this stays inert.
-@app.get("/{full_path:path}")
+@app.api_route("/{full_path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"])
 def _spa_fallback(request: Request, full_path: str):
     from fastapi.responses import FileResponse
-    if request.scope.get("was_api"):
+    # Non-GET methods never serve the UI — they fall through to JSON 404s,
+    # preserving the pre-SPA behaviour (e.g. traversal probes on DELETE).
+    if request.method != "GET" or request.scope.get("was_api"):
         raise HTTPException(status_code=404, detail="Not found")
     dist = PROJECT_ROOT / "ui" / "dist"
     index = dist / "index.html"
