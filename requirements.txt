@@ -16,5 +16,12 @@ pydantic==2.13.4
 pyjwt==2.13.0
 python-dateutil==2.9.0.post0
 openpyxl==3.1.5
+# Offline speech-to-text for the investigator voice assistant. CPU/int8, no API
+# key; the "small" model (~460MB) downloads once on first use and is then local.
+# PyAudio is deliberately NOT pinned here — it needs a system PortAudio library
+# and is only used for optional server-side microphone capture. Browsers upload
+# recorded audio to /api/voice-command instead.
+faster-whisper==1.2.1
+
 # spaCy NER model (not on PyPI; pinned GitHub release wheel, verified 3.8.0 loads)
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl

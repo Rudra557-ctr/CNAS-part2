@@ -57,6 +57,10 @@ STOPWORDS = {
 
 MAX_RESULTS = 200
 
+# Same bar the entity resolver merges names at. Below this a spoken place name
+# is reported as unknown rather than guessed at.
+LOCATION_FUZZY_THRESHOLD = 85
+
 
 @dataclass
 class Intent:
@@ -294,13 +298,35 @@ def _parse_location(q: str, c: _Consumer, intent: Intent, graph_serial: Dict) ->
             intent.note(f"location {label}")
             return
 
-    # A place was probably named but matches nothing here — say so rather than drop it.
-    m = re.search(r"\b(?:in|at|near|around)\s+((?:[A-Z][\w-]+)(?:\s+[A-Z][\w-]+){0,2})", q)
-    if m:
-        phrase = m.group(1).strip()
-        if phrase.lower() not in STOPWORDS and not re.fullmatch(r"[A-Z]\d{1,2}", phrase):
-            c.take(m.start(1), m.end(1))
-            intent.drop(phrase, "not a location on record in this case")
+    # A place was probably named. Speech recognition mangles proper nouns
+    # ("Dockside Ward" comes back as "Dockside warp"), so try a fuzzy match
+    # before declaring it unknown — but only at the same >=85 bar the resolver
+    # uses, which recovers a misheard place without rescuing one that genuinely
+    # is not on record ("North Delhi" peaks at 52 against this gazetteer).
+    m = re.search(r"\b(?:in|at|near|around)\s+([\w][\w\s-]{2,29}?)(?=[.,;?!]|\s+(?:on|during|between|over|under)\b|$)", q)
+    if not m:
+        m = re.search(r"\b(?:in|at|near|around)\s+((?:[A-Z][\w-]+)(?:\s+[A-Z][\w-]+){0,2})", q)
+    if not m:
+        return
+    phrase = m.group(1).strip()
+    if phrase.lower() in STOPWORDS or re.fullmatch(r"[A-Z]\d{1,2}", phrase):
+        return
+
+    best, best_score = None, 0.0
+    for label in known:
+        score = name_similarity(phrase, label)
+        if score > best_score:
+            best, best_score = label, score
+
+    c.take(m.start(1), m.end(1))
+    if best and best_score >= LOCATION_FUZZY_THRESHOLD:
+        intent.location = best
+        if best.lower() != phrase.lower():
+            intent.note(f"location {best} (heard as “{phrase}”)")
+        else:
+            intent.note(f"location {best}")
+        return
+    intent.drop(phrase, "not a location on record in this case")
 
 
 def parse(q: str, graph_serial: Dict) -> Intent:

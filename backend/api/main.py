@@ -2114,3 +2114,115 @@ def ask(q: str = Query(..., description="Natural language query"),
         "disclaimer": "Investigative leads only — not determinations of guilt. "
                       "Constraints listed under 'ignored' were NOT applied.",
     }
+
+
+# -------------------------------------------------------------
+# Investigator voice assistant.
+#
+# Audio is transcribed locally (faster-whisper, no external API) and the
+# transcript goes through the SAME nlq layer the typed /ask route uses — the
+# voice path owns no graph traversal of its own. Whisper is imported inside the
+# handler so a machine without it still serves every other route.
+# -------------------------------------------------------------
+import logging
+
+logger = logging.getLogger("cnas.voice")
+
+ALLOWED_AUDIO_SUFFIXES = {".wav", ".mp3", ".m4a", ".ogg", ".flac", ".webm", ".mp4"}
+MAX_AUDIO_BYTES = 25 * 1024 * 1024
+
+
+@app.get("/api/voice-command/health")
+def voice_health(user: dict = Depends(CAN_VIEW_GRAPH)):
+    """Whether this deployment can transcribe, and whether it can self-record."""
+    from backend.voice import recorder, transcriber
+    return {
+        "transcription_available": transcriber.is_available(),
+        "model_size": transcriber.DEFAULT_MODEL_SIZE,
+        "microphone_available": recorder.is_available(),
+        "microphone_hint": None if recorder.is_available() else recorder.INSTALL_HINT,
+        "offline": True,
+    }
+
+
+@app.post("/api/voice-command")
+async def voice_command(file: UploadFile = File(...),
+                        iid: Optional[str] = Query(None),
+                        user: dict = Depends(CAN_VIEW_GRAPH)):
+    from backend.voice.parser import parse_voice_command, to_nlq_intent
+    from backend.voice.transcriber import TranscriptionError, transcribe_audio
+
+    suffix = Path(file.filename or "").suffix.lower()
+    if suffix and suffix not in ALLOWED_AUDIO_SUFFIXES:
+        raise HTTPException(status_code=400,
+                            detail=f"Unsupported audio format {suffix} — "
+                                   f"use one of {sorted(ALLOWED_AUDIO_SUFFIXES)}")
+
+    payload = await file.read()
+    if not payload:
+        raise HTTPException(status_code=400, detail="Uploaded audio file is empty")
+    if len(payload) > MAX_AUDIO_BYTES:
+        raise HTTPException(status_code=413, detail="Audio file too large (limit 25 MB)")
+
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=suffix or ".wav") as tmp:
+            tmp.write(payload)
+            tmp_path = Path(tmp.name)
+
+        try:
+            transcript = transcribe_audio(str(tmp_path))
+        except TranscriptionError as exc:
+            # Message is authored for callers; the stack stays in the log.
+            logger.warning("voice transcription failed: %s", exc)
+            raise HTTPException(status_code=422, detail=str(exc))
+
+        if not transcript:
+            return {
+                "success": False,
+                "transcription": "",
+                "parsed_command": None,
+                "filters": {},
+                "results": [],
+                "message": "No speech detected in the audio.",
+            }
+
+        _, serial = _get_inv_datasets_and_serial(iid)
+        try:
+            command = parse_voice_command(transcript, serial)
+        except Exception as exc:
+            logger.exception("voice parser failed on %r", transcript)
+            raise HTTPException(status_code=422,
+                                detail=f"Could not interpret the command: {exc}")
+
+        # Hand straight back to the existing query layer.
+        intent = to_nlq_intent(command)
+        rows = nlq.execute(intent, serial)
+        answer = nlq.summarise(intent, rows, serial)
+        rendered = nlq.to_cypher(intent)
+
+        audit_log(f"/api/voice-command {transcript!r}",
+                  [r.get("source") for r in rows[:20] if r.get("source")])
+        return {
+            "success": True,
+            "transcription": transcript,
+            "parsed_command": command.model_dump(),
+            "filters": command.to_filters(),
+            "answer": answer,
+            "results": rows,
+            "result_count": len(rows),
+            "understood": command.understood,
+            "ignored": command.ignored,
+            "cypher": rendered["cypher"],
+            "cypher_params": rendered["params"],
+            "cypher_note": "Equivalent Cypher — runs when Neo4j is attached. "
+                           "Results above were computed on the in-memory graph.",
+            "disclaimer": "Investigative leads only — not determinations of guilt. "
+                          "Constraints listed under 'ignored' were NOT applied.",
+        }
+    finally:
+        if tmp_path is not None:
+            try:
+                tmp_path.unlink(missing_ok=True)
+            except OSError:
+                logger.warning("could not remove temp audio %s", tmp_path)
