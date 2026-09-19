@@ -54,8 +54,8 @@ const DEMO_PAIRS: Array<{ label: string; sub: string; src: string; dst: string }
 function Synopsis({ text }: { text: string }) {
   const parts = text.split('**')
   return (
-    <p className="text-sm text-gray-200 leading-relaxed whitespace-pre-line">
-      {parts.map((p, i) => (i % 2 === 1 ? <strong key={i} className="text-white">{p}</strong> : <span key={i}>{p}</span>))}
+    <p className="text-sm text-gov-ink leading-relaxed whitespace-pre-line">
+      {parts.map((p, i) => (i % 2 === 1 ? <strong key={i} className="text-gov-ink">{p}</strong> : <span key={i}>{p}</span>))}
     </p>
   )
 }
@@ -86,44 +86,44 @@ function EntityPicker({
 
   return (
     <div className="flex-1">
-      <label className="text-xs text-gray-400 block mb-1.5">{label}</label>
+      <label className="text-xs text-gov-muted block mb-1.5">{label}</label>
       {value ? (
-        <div className="flex items-center gap-3 bg-dark-700 border border-dark-500 rounded-lg px-3 py-2.5">
-          <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">
+        <div className="flex items-center gap-3 bg-gov-wash border border-gov-border rounded-lg px-3 py-2.5">
+          <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center text-sm font-bold flex-shrink-0">
             {(value.name || value.id)[0]}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm text-white font-medium truncate">{value.name || value.id}</p>
-            <p className="text-[11px] text-gray-500 font-mono truncate">
+            <p className="text-sm text-gov-ink font-medium truncate">{value.name || value.id}</p>
+            <p className="text-[11px] text-gov-muted font-mono truncate">
               {value.id}{value.role ? ` · ${value.role}` : ''}{value.cell ? ` · Cell ${value.cell}` : ''}
             </p>
           </div>
-          <button onClick={() => { onPick(null as unknown as Person); setQ('') }} className="text-xs text-gray-500 hover:text-white flex-shrink-0">
+          <button onClick={() => { onPick(null as unknown as Person); setQ('') }} className="text-xs text-gov-muted hover:text-gov-ink flex-shrink-0">
             Change
           </button>
         </div>
       ) : (
         <div className="relative">
           <input
-            className="input-dark"
+            className="gov-input"
             placeholder="Type a name, ID, phone…"
             value={q}
             onChange={e => search(e.target.value)}
           />
           {open && (
-            <div className="absolute top-full mt-1 left-0 right-0 bg-dark-700 border border-dark-500 rounded-lg shadow-2xl z-30 max-h-56 overflow-y-auto">
+            <div className="absolute top-full mt-1 left-0 right-0 bg-white border border-gov-border rounded-lg shadow-gov z-30 max-h-56 overflow-y-auto">
               {busy ? (
-                <p className="px-4 py-3 text-xs text-gray-500">Searching…</p>
+                <p className="px-4 py-3 text-xs text-gov-muted">Searching…</p>
               ) : hits.length === 0 ? (
-                <p className="px-4 py-3 text-xs text-gray-500">No matches</p>
+                <p className="px-4 py-3 text-xs text-gov-muted">No matches</p>
               ) : hits.map(h => (
                 <div
                   key={h.id}
-                  className="px-4 py-2 hover:bg-dark-600 cursor-pointer"
+                  className="px-4 py-2 hover:bg-gov-wash cursor-pointer"
                   onClick={() => { onPick(h); setOpen(false); setQ('') }}
                 >
-                  <p className="text-sm text-white">{h.name || h.id}</p>
-                  <p className="text-[11px] text-gray-500 font-mono">{h.id}{h.role ? ` · ${h.role}` : ''}</p>
+                  <p className="text-sm text-gov-ink">{h.name || h.id}</p>
+                  <p className="text-[11px] text-gov-muted font-mono">{h.id}{h.role ? ` · ${h.role}` : ''}</p>
                 </div>
               ))}
             </div>
@@ -135,10 +135,10 @@ function EntityPicker({
 }
 
 const badgeStyle = (b?: string) =>
-  b === 'green'  ? 'text-green-400 border-green-500/30 bg-green-500/10'
-  : b === 'red'  ? 'text-red-400 border-red-500/30 bg-red-500/10'
-  : b === 'yellow' ? 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10'
-  : 'text-gray-300 border-dark-500 bg-dark-700'
+  b === 'green'  ? 'text-green-700 border-green-200 bg-green-50'
+  : b === 'red'  ? 'text-gov-red border-red-200 bg-red-50'
+  : b === 'yellow' ? 'text-yellow-700 border-yellow-200 bg-yellow-50'
+  : 'text-gov-muted border-gov-border bg-gov-wash'
 
 export default function Explainer() {
   const canWrite = useCanWrite()
@@ -218,11 +218,11 @@ export default function Explainer() {
   return (
     <div className="space-y-5 max-w-5xl">
       <div>
-        <h1 className="text-lg font-bold text-white flex items-center gap-2">
-          <Share2 size={20} className="text-cyan-400" />
+        <h1 className="text-lg font-bold text-gov-ink flex items-center gap-2">
+          <Share2 size={20} className="text-cyan-700" />
           Why Connected?
         </h1>
-        <p className="text-xs text-gray-500 mt-0.5">
+        <p className="text-xs text-gov-muted mt-0.5">
           Select two suspects to reveal the full evidence chain linking them — calls, money, cases, and mutual associates.
         </p>
         {iid && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>}
@@ -230,43 +230,43 @@ export default function Explainer() {
 
       {/* Demo shortcuts */}
       <div className="flex gap-2 flex-wrap">
-        <span className="text-xs text-gray-500 self-center mr-1">Try:</span>
+        <span className="text-xs text-gov-muted self-center mr-1">Try:</span>
         {DEMO_PAIRS.map(p => (
           <button
             key={p.label}
             onClick={() => run(p.src, p.dst)}
-            className="text-xs px-3 py-1.5 rounded-full border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-colors"
+            className="text-xs px-3 py-1.5 rounded-full border border-cyan-300 text-cyan-700 hover:bg-cyan-50 transition-colors"
           >
-            {p.label} <span className="text-gray-500">· {p.sub}</span>
+            {p.label} <span className="text-gov-faint">· {p.sub}</span>
           </button>
         ))}
       </div>
 
       {/* Pickers */}
-      <div className="card p-4">
+      <div className="gov-card p-4">
         <div className="flex gap-3 items-end">
           <EntityPicker label="Entity A" value={src} iid={iid} onPick={p => { setSrc(p); setSrcId(p?.id || '') }} />
-          <button onClick={swap} title="Swap entities" className="btn-ghost p-2.5 mb-0.5 flex-shrink-0">
+          <button onClick={swap} title="Swap entities" className="gov-ghost p-2.5 mb-0.5 flex-shrink-0">
             <ArrowLeftRight size={16} />
           </button>
           <EntityPicker label="Entity B" value={dst} iid={iid} onPick={p => { setDst(p); setDstId(p?.id || '') }} />
         </div>
         {/* Raw-ID fallback (e.g. paste X3 from a mutual-associate chip) */}
         <div className="flex gap-2 mt-3">
-          <input className="input-dark flex-1 font-mono text-xs" placeholder="…or type raw ID (e.g. X3)" value={srcId} onChange={e => setSrcId(e.target.value)} />
-          <input className="input-dark flex-1 font-mono text-xs" placeholder="…or type raw ID (e.g. B1)" value={dstId} onChange={e => setDstId(e.target.value)} />
-          <button onClick={() => run()} disabled={loading} className="btn-primary disabled:opacity-50 flex-shrink-0">
+          <input className="gov-input flex-1 font-mono text-xs" placeholder="…or type raw ID (e.g. X3)" value={srcId} onChange={e => setSrcId(e.target.value)} />
+          <input className="gov-input flex-1 font-mono text-xs" placeholder="…or type raw ID (e.g. B1)" value={dstId} onChange={e => setDstId(e.target.value)} />
+          <button onClick={() => run()} disabled={loading} className="gov-btn disabled:opacity-50 flex-shrink-0">
             {loading ? 'Analysing…' : 'Explain link'}
           </button>
         </div>
-        {err && <p className="text-xs text-red-400 bg-red-500/10 rounded-lg px-3 py-2 mt-3">{err}</p>}
+        {err && <p className="text-xs text-gov-red bg-red-50 border border-red-200 rounded-lg px-3 py-2 mt-3">{err}</p>}
       </div>
 
       {loading && (
         <div className="flex items-center justify-center py-16">
           <div className="text-center">
-            <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-xs text-gray-500 font-mono">Tracing evidence chain…</p>
+            <div className="w-8 h-8 border-2 border-gov-navy border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            <p className="text-xs text-gov-muted font-mono">Tracing evidence chain…</p>
           </div>
         </div>
       )}
@@ -274,40 +274,40 @@ export default function Explainer() {
       {data && (
         <div className="space-y-4">
           {/* Verdict header */}
-          <div className="card p-5 border border-cyan-500/20">
+          <div className="gov-card p-5 border-cyan-200">
             <div className="flex items-center gap-4 flex-wrap">
               <div className="flex items-center gap-3 flex-1 min-w-[200px]">
-                <div className="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center font-bold">
                   {(data.source_person.name || '?')[0]}
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-white">{data.source_person.name}</p>
-                  <p className="text-[11px] text-gray-500 font-mono">{data.source_person.id} · Cell {data.source_person.cell}</p>
+                  <p className="text-sm font-bold text-gov-ink">{data.source_person.name}</p>
+                  <p className="text-[11px] text-gov-muted font-mono">{data.source_person.id} · Cell {data.source_person.cell}</p>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-1">
-                <Network size={18} className="text-cyan-400" />
+                <Network size={18} className="text-cyan-700" />
                 <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${badgeStyle(data.strength_badge)}`}>
                   score {data.evidence_score ?? 0}
                 </span>
               </div>
               <div className="flex items-center gap-3 flex-1 min-w-[200px] justify-end text-right">
                 <div>
-                  <p className="text-sm font-bold text-white">{data.target_person.name}</p>
-                  <p className="text-[11px] text-gray-500 font-mono">{data.target_person.id} · Cell {data.target_person.cell}</p>
+                  <p className="text-sm font-bold text-gov-ink">{data.target_person.name}</p>
+                  <p className="text-[11px] text-gov-muted font-mono">{data.target_person.id} · Cell {data.target_person.cell}</p>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-full bg-purple-50 text-purple-700 flex items-center justify-center font-bold">
                   {(data.target_person.name || '?')[0]}
                 </div>
               </div>
             </div>
-            <div className="mt-4 pt-4 border-t border-dark-600">
+            <div className="mt-4 pt-4 border-t border-gov-border">
               <div className="flex items-center justify-between gap-2 flex-wrap mb-3">
                 <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full border ${badgeStyle(data.strength_badge)}`}>
                   {data.relationship_strength || 'Unknown relationship'}
                 </span>
 {canWrite && (
-                <button onClick={pinExplainer} className="btn-ghost card text-xs py-1.5" title="Pin this analysis into the open case dossier">
+                <button onClick={pinExplainer} className="gov-ghost border border-gov-border bg-white text-xs py-1.5" title="Pin this analysis into the open case dossier">
                   <Pin size={12} /> {pinMsg || 'Pin to dossier'}
                 </button>
               )}
@@ -318,9 +318,9 @@ export default function Explainer() {
 
           {/* Telephony + Financials */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="card p-4">
-              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <Phone size={14} className="text-blue-400" /> Telephony
+            <div className="gov-card p-4">
+              <h3 className="text-sm font-semibold text-gov-ink mb-3 flex items-center gap-2">
+                <Phone size={14} className="text-gov-navy" /> Telephony
               </h3>
               <div className="grid grid-cols-3 gap-2 text-center mb-3">
                 {[
@@ -328,9 +328,9 @@ export default function Explainer() {
                   { v: t?.total_duration_minutes ?? 0, l: 'minutes' },
                   { v: t?.active_days_count ?? 0, l: 'active days' },
                 ].map(s => (
-                  <div key={s.l} className="bg-dark-700 rounded-lg p-2.5">
-                    <p className="text-lg font-mono font-bold text-white">{s.v}</p>
-                    <p className="text-[10px] text-gray-500">{s.l}</p>
+                  <div key={s.l} className="bg-gov-wash border border-gov-border rounded-lg p-2.5">
+                    <p className="text-lg font-mono font-bold text-gov-ink">{s.v}</p>
+                    <p className="text-[10px] text-gov-muted">{s.l}</p>
                   </div>
                 ))}
               </div>
@@ -342,61 +342,61 @@ export default function Explainer() {
               {(t?.sample_records?.length ?? 0) > 0 && (
                 <div className="space-y-1.5">
                   {t!.sample_records!.slice(0, 3).map((c: any) => (
-                    <div key={c.call_id} className="bg-dark-700 rounded-lg px-3 py-2 text-xs font-mono text-gray-300 flex justify-between gap-2">
-                      <span className="text-blue-400">{c.call_id}</span>
+                    <div key={c.call_id} className="bg-gov-wash border border-gov-border rounded-lg px-3 py-2 text-xs font-mono text-gov-ink flex justify-between gap-2">
+                      <span className="text-gov-navy">{c.call_id}</span>
                       <span className="truncate">{c.caller_id} → {c.callee_id}</span>
-                      <span className="text-gray-500 flex-shrink-0">day {c.day} · {c.duration_sec}s</span>
+                      <span className="text-gov-muted flex-shrink-0">day {c.day} · {c.duration_sec}s</span>
                     </div>
                   ))}
                 </div>
               )}
             </div>
 
-            <div className="card p-4">
-              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <Wallet size={14} className="text-green-400" /> Financial trail
+            <div className="gov-card p-4">
+              <h3 className="text-sm font-semibold text-gov-ink mb-3 flex items-center gap-2">
+                <Wallet size={14} className="text-gov-igreen" /> Financial trail
               </h3>
               <div className="grid grid-cols-2 gap-2 text-center mb-3">
-                <div className="bg-dark-700 rounded-lg p-2.5">
-                  <p className="text-lg font-mono font-bold text-white">{f?.total_transactions ?? 0}</p>
-                  <p className="text-[10px] text-gray-500">transactions</p>
+                <div className="bg-gov-wash border border-gov-border rounded-lg p-2.5">
+                  <p className="text-lg font-mono font-bold text-gov-ink">{f?.total_transactions ?? 0}</p>
+                  <p className="text-[10px] text-gov-muted">transactions</p>
                 </div>
-                <div className="bg-dark-700 rounded-lg p-2.5">
-                  <p className="text-lg font-mono font-bold text-white">₹{((f?.total_amount_inr ?? 0) / 100000).toFixed(1)}L</p>
-                  <p className="text-[10px] text-gray-500">total value</p>
+                <div className="bg-gov-wash border border-gov-border rounded-lg p-2.5">
+                  <p className="text-lg font-mono font-bold text-gov-ink">₹{((f?.total_amount_inr ?? 0) / 100000).toFixed(1)}L</p>
+                  <p className="text-[10px] text-gov-muted">total value</p>
                 </div>
               </div>
               {(f?.sample_records?.length ?? 0) > 0 ? (
                 <div className="space-y-1.5">
                   {f!.sample_records!.slice(0, 3).map((tx: any, i: number) => (
-                    <div key={i} className="bg-dark-700 rounded-lg px-3 py-2 text-xs font-mono text-gray-300 flex justify-between gap-2">
-                      <span className="text-green-400">{tx.txn_id || tx.id || 'TXN'}</span>
+                    <div key={i} className="bg-gov-wash border border-gov-border rounded-lg px-3 py-2 text-xs font-mono text-gov-ink flex justify-between gap-2">
+                      <span className="text-gov-igreen">{tx.txn_id || tx.id || 'TXN'}</span>
                       <span className="truncate">{tx.sender_id || tx.src} → {tx.receiver_id || tx.dst}</span>
-                      <span className="text-gray-500 flex-shrink-0">₹{tx.amount_inr ?? tx.amount ?? '—'}</span>
+                      <span className="text-gov-muted flex-shrink-0">₹{tx.amount_inr ?? tx.amount ?? '—'}</span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-xs text-gray-600">No direct transactions between this pair.</p>
+                <p className="text-xs text-gov-faint">No direct transactions between this pair.</p>
               )}
             </div>
           </div>
 
           {/* FIRs */}
           {(data.police_cases?.length ?? 0) > 0 && (
-            <div className="card p-4">
-              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <FileText size={14} className="text-yellow-400" /> Co-named in police cases ({data.police_cases!.length})
+            <div className="gov-card p-4">
+              <h3 className="text-sm font-semibold text-gov-ink mb-3 flex items-center gap-2">
+                <FileText size={14} className="text-yellow-600" /> Co-named in police cases ({data.police_cases!.length})
               </h3>
               <div className="space-y-2">
                 {data.police_cases!.slice(0, 4).map((c: any) => (
-                  <div key={c.fir_id} className="bg-dark-700 rounded-lg p-3 border border-yellow-500/20">
+                  <div key={c.fir_id} className="bg-yellow-50/60 rounded-lg p-3 border border-yellow-200">
                     <div className="flex items-center justify-between gap-2 mb-1">
-                      <span className="text-xs font-mono font-bold text-yellow-400">{c.fir_id}</span>
-                      <span className="text-[10px] text-gray-500">{c.date} · {c.station}</span>
+                      <span className="text-xs font-mono font-bold text-yellow-700">{c.fir_id}</span>
+                      <span className="text-[10px] text-gov-muted">{c.date} · {c.station}</span>
                     </div>
-                    <p className="text-[11px] text-gray-400 font-mono mb-1">{c.ipc_sections} · {c.location}</p>
-                    <p className="text-xs text-gray-300 leading-relaxed">{c.narrative_excerpt}</p>
+                    <p className="text-[11px] text-gov-muted font-mono mb-1">{c.ipc_sections} · {c.location}</p>
+                    <p className="text-xs text-gov-ink leading-relaxed">{c.narrative_excerpt}</p>
                   </div>
                 ))}
               </div>
@@ -407,24 +407,24 @@ export default function Explainer() {
           {((data.surveillance?.length ?? 0) + (data.intelligence?.length ?? 0)) > 0 && (
             <div className="grid grid-cols-2 gap-4">
               {(data.surveillance?.length ?? 0) > 0 && (
-                <div className="card p-4">
-                  <h3 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
-                    <Eye size={14} className="text-orange-400" /> Surveillance ({data.surveillance!.length})
+                <div className="gov-card p-4">
+                  <h3 className="text-sm font-semibold text-gov-ink mb-2 flex items-center gap-2">
+                    <Eye size={14} className="text-orange-700" /> Surveillance ({data.surveillance!.length})
                   </h3>
                   {data.surveillance!.slice(0, 3).map((s: any, i: number) => (
-                    <p key={i} className="text-xs text-gray-300 bg-dark-700 rounded-lg p-2.5 mb-1.5">
+                    <p key={i} className="text-xs text-gov-ink bg-gov-wash border border-gov-border rounded-lg p-2.5 mb-1.5">
                       {s.activity_notes || s.details || JSON.stringify(s).slice(0, 140)}
                     </p>
                   ))}
                 </div>
               )}
               {(data.intelligence?.length ?? 0) > 0 && (
-                <div className="card p-4">
-                  <h3 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
-                    <Brain size={14} className="text-purple-400" /> Intelligence ({data.intelligence!.length})
+                <div className="gov-card p-4">
+                  <h3 className="text-sm font-semibold text-gov-ink mb-2 flex items-center gap-2">
+                    <Brain size={14} className="text-purple-700" /> Intelligence ({data.intelligence!.length})
                   </h3>
                   {data.intelligence!.slice(0, 3).map((s: any, i: number) => (
-                    <p key={i} className="text-xs text-gray-300 bg-dark-700 rounded-lg p-2.5 mb-1.5">
+                    <p key={i} className="text-xs text-gov-ink bg-gov-wash border border-gov-border rounded-lg p-2.5 mb-1.5">
                       {s.narrative || s.details || JSON.stringify(s).slice(0, 140)}
                     </p>
                   ))}
@@ -435,9 +435,9 @@ export default function Explainer() {
 
           {/* Mutual associates */}
           {(data.mutual_associates?.length ?? 0) > 0 && (
-            <div className="card p-4">
-              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <Users size={14} className="text-pink-400" /> Mutual associates ({data.mutual_associates!.length})
+            <div className="gov-card p-4">
+              <h3 className="text-sm font-semibold text-gov-ink mb-3 flex items-center gap-2">
+                <Users size={14} className="text-pink-700" /> Mutual associates ({data.mutual_associates!.length})
               </h3>
               <div className="flex flex-wrap gap-2">
                 {data.mutual_associates!.map(m => (
@@ -445,13 +445,13 @@ export default function Explainer() {
                     key={m.id}
                     title="Explain via this associate"
                     onClick={() => run(data!.source_person.id, m.id)}
-                    className="flex items-center gap-2 bg-dark-700 border border-dark-500 hover:border-pink-500 rounded-full pl-1 pr-3 py-1 transition-colors"
+                    className="flex items-center gap-2 bg-white border border-gov-border hover:border-pink-400 rounded-full pl-1 pr-3 py-1 transition-colors"
                   >
-                    <span className="w-6 h-6 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center text-xs font-bold">
+                    <span className="w-6 h-6 rounded-full bg-pink-50 text-pink-700 flex items-center justify-center text-xs font-bold">
                       {(m.name || m.id)[0]}
                     </span>
-                    <span className="text-xs text-white">{m.name || m.id}</span>
-                    <span className="text-[10px] text-gray-500 font-mono">{m.id}{m.cell ? ` · ${m.cell}` : ''}</span>
+                    <span className="text-xs text-gov-ink">{m.name || m.id}</span>
+                    <span className="text-[10px] text-gov-muted font-mono">{m.id}{m.cell ? ` · ${m.cell}` : ''}</span>
                   </button>
                 ))}
               </div>
@@ -460,27 +460,27 @@ export default function Explainer() {
 
           {/* Evidence chain */}
           {edges.length > 0 && (
-            <div className="card p-4">
-              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <Hash size={14} className="text-gray-400" /> Direct evidence chain ({edges.length} edges)
+            <div className="gov-card p-4">
+              <h3 className="text-sm font-semibold text-gov-ink mb-3 flex items-center gap-2">
+                <Hash size={14} className="text-gov-muted" /> Direct evidence chain ({edges.length} edges)
               </h3>
               <div className="space-y-2">
                 {edges.slice(0, 8).map((e: any, i: number) => (
-                  <div key={i} className="bg-dark-700 rounded-lg p-3 font-mono text-xs">
+                  <div key={i} className="bg-gov-wash border border-gov-border rounded-lg p-3 font-mono text-xs">
                     <div className="flex items-center gap-2 flex-wrap mb-1">
-                      <span className="text-white font-bold">{e.src} → {e.dst}</span>
+                      <span className="text-gov-ink font-bold">{e.src} → {e.dst}</span>
                       <span className="badge-person">{e.kind}</span>
-                      <span className="text-gray-500">src: {e.source} · day {e.day ?? '—'}</span>
-                      <span className="ml-auto text-gray-500">conf {e.confidence ?? '—'}</span>
+                      <span className="text-gov-muted">src: {e.source} · day {e.day ?? '—'}</span>
+                      <span className="ml-auto text-gov-muted">conf {e.confidence ?? '—'}</span>
                     </div>
-                    {e.supporting_text && <p className="text-gray-300 font-sans text-xs">{e.supporting_text}</p>}
+                    {e.supporting_text && <p className="text-gov-ink font-sans text-xs">{e.supporting_text}</p>}
                     {e.evidence_hash && (
-                      <p className="text-[10px] text-gray-600 mt-1">hash {e.evidence_hash} · {e.extractor || 'graph'}</p>
+                      <p className="text-[10px] text-gov-faint mt-1">hash {e.evidence_hash} · {e.extractor || 'graph'}</p>
                     )}
                   </div>
                 ))}
                 {edges.length > 8 && (
-                  <p className="text-xs text-gray-500 text-center">+{edges.length - 8} more edges in chain</p>
+                  <p className="text-xs text-gov-muted text-center">+{edges.length - 8} more edges in chain</p>
                 )}
               </div>
             </div>

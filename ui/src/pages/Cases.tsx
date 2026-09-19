@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { listInvestigations, createInvestigation, uploadFiles } from '../api/client'
+import { listInvestigations, createInvestigation, uploadFiles, deleteInvestigation } from '../api/client'
 import { useCanWrite } from '../components/AuthContext'
 import ReadOnlyBanner from '../components/ReadOnlyBanner'
-import { FolderOpen, Plus, Calendar, Users, Upload } from 'lucide-react'
+import { FolderOpen, Plus, Calendar, Users, Upload, Trash2 } from 'lucide-react'
 
 export default function Cases() {
   const navigate = useNavigate()
@@ -15,6 +15,8 @@ export default function Cases() {
   const [busy,    setBusy]    = useState(false)
   const [uploadingId, setUploadingId] = useState<string | null>(null)
   const [uploadMsg,   setUploadMsg]   = useState<Record<string, string>>({})
+  const [delConfirm,  setDelConfirm]  = useState<string | null>(null)
+  const [delBusy,     setDelBusy]     = useState(false)
 
   const load = () => {
     setLoading(true)
@@ -37,6 +39,22 @@ export default function Cases() {
     finally { setBusy(false) }
   }
 
+  // Delete one case from history. Two clicks: arm, then confirm.
+  const remove = async (iid: string) => {
+    setDelBusy(true)
+    try {
+      await deleteInvestigation(iid)
+      // A deleted case must not linger as the open graph scope.
+      if (sessionStorage.getItem('caseId') === iid) {
+        sessionStorage.removeItem('caseId')
+        sessionStorage.removeItem('caseName')
+      }
+      setDelConfirm(null)
+      load()
+    } catch (e) { console.error(e) }
+    finally { setDelBusy(false) }
+  }
+
   const upload = async (iid: string, files: FileList | null) => {
     if (!files || files.length === 0) return
     setUploadingId(iid)
@@ -51,19 +69,19 @@ export default function Cases() {
   }
 
   const statusColor = (s: string) =>
-    s === 'active' ? 'text-green-400 bg-green-500/10 border-green-500/20'
-    : s === 'closed' ? 'text-gray-400 bg-dark-700 border-dark-500'
-    : 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20'
+    s === 'active' ? 'text-green-700 bg-green-50 border-green-200'
+    : s === 'closed' ? 'text-gov-muted bg-gov-wash border-gov-border'
+    : 'text-yellow-700 bg-yellow-50 border-yellow-200'
 
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold text-white flex items-center gap-2">
-            <FolderOpen size={20} className="text-cyan-400" />
+          <h1 className="text-lg font-bold text-gov-ink flex items-center gap-2">
+            <FolderOpen size={20} className="text-gov-navy" />
             Investigation Cases
           </h1>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <p className="text-xs text-gov-muted mt-0.5">
             Create and manage analyst-led criminal investigations
           </p>
         </div>
@@ -72,11 +90,11 @@ export default function Cases() {
       {/* New case */}
       {!canWrite && <ReadOnlyBanner />}
       {canWrite && (
-      <div className="card p-4">
-        <h2 className="text-sm font-semibold text-white mb-3">Open New Investigation</h2>
+      <div className="gov-card p-4">
+        <h2 className="text-sm font-semibold text-gov-ink mb-3">Open New Investigation</h2>
         <div className="space-y-2">
           <input
-            className="input-dark"
+            className="gov-input"
             placeholder="Investigation name, e.g. Operation Cobra"
             value={name}
             onChange={e => setName(e.target.value)}
@@ -84,13 +102,13 @@ export default function Cases() {
           />
           <div className="flex gap-2">
             <input
-              className="input-dark flex-1"
+              className="gov-input flex-1"
               placeholder="Description (optional)"
               value={desc}
               onChange={e => setDesc(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && create()}
             />
-            <button onClick={create} disabled={busy || !name.trim()} className="btn-primary disabled:opacity-50">
+            <button onClick={create} disabled={busy || !name.trim()} className="gov-btn disabled:opacity-50">
               <Plus size={16} />
               {busy ? 'Creating…' : 'Create'}
             </button>
@@ -102,29 +120,51 @@ export default function Cases() {
       {/* Case list */}
       {loading ? (
         <div className="flex items-center justify-center py-12">
-          <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-6 h-6 border-2 border-gov-navy border-t-transparent rounded-full animate-spin" />
         </div>
       ) : cases.length === 0 ? (
-        <div className="text-center py-16 text-gray-500">
-          <FolderOpen size={40} className="mx-auto mb-3 text-gray-700" />
+        <div className="text-center py-16 text-gov-muted">
+          <FolderOpen size={40} className="mx-auto mb-3 text-gov-faint" />
           <p className="text-sm">No investigations yet</p>
           <p className="text-xs mt-1">Create your first investigation above</p>
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-4">
-          {cases.map((c: any, i) => (
+          {cases.map((c: any, i) => {
+            const cid = c.id || c.investigation_id
+            return (
             <div
               key={c.id || i}
-              onClick={() => { const id = c.id || c.investigation_id; if (id) navigate(`/cases/${id}`) }}
-              className="card p-4 hover:border-dark-400 transition-colors cursor-pointer"
+              onClick={() => { if (cid) navigate(`/cases/${cid}`) }}
+              className="gov-card p-4 hover:border-gov-navy transition-colors cursor-pointer"
             >
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-sm font-semibold text-white">{c.name || c.investigation_name || `Case #${i+1}`}</h3>
-                <span className={`text-[10px] px-2 py-0.5 rounded-full border font-mono ${statusColor(c.status || 'active')}`}>
-                  {c.status || 'active'}
-                </span>
+              <div className="flex items-start justify-between gap-2 mb-3">
+                <h3 className="text-sm font-semibold text-gov-ink">{c.name || c.investigation_name || `Case #${i+1}`}</h3>
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full border font-mono ${statusColor(c.status || 'active')}`}>
+                    {c.status || 'active'}
+                  </span>
+                  {canWrite && cid && (delConfirm === cid ? (
+                    <button
+                      onClick={e => { e.stopPropagation(); remove(cid) }}
+                      disabled={delBusy}
+                      title="Confirm delete — removes the case and its graph"
+                      className="text-[10px] font-semibold px-2 py-0.5 rounded-full border border-red-300 bg-red-50 text-gov-red disabled:opacity-50"
+                    >
+                      {delBusy ? '…' : 'Confirm?'}
+                    </button>
+                  ) : (
+                    <button
+                      onClick={e => { e.stopPropagation(); setDelConfirm(cid) }}
+                      title="Delete this case"
+                      className="p-1 rounded text-gov-faint hover:text-gov-red hover:bg-red-50 transition-colors"
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="space-y-1.5 text-xs text-gray-500">
+              <div className="space-y-1.5 text-xs text-gov-muted">
                 <div className="flex items-center gap-2">
                   <Calendar size={11} />
                   <span>{c.created_at ? new Date(c.created_at).toLocaleDateString('en-IN') : 'Today'}</span>
@@ -135,30 +175,31 @@ export default function Cases() {
                 </div>
               </div>
               {c.description && (
-                <p className="text-xs text-gray-500 mt-2 line-clamp-2">{c.description}</p>
+                <p className="text-xs text-gov-muted mt-2 line-clamp-2">{c.description}</p>
               )}
               {/* Evidence upload */}
               {canWrite && (
-              <div className="mt-3 pt-3 border-t border-dark-600" onClick={e => e.stopPropagation()}>
-                <label className="flex items-center gap-2 text-xs text-gray-400 hover:text-white cursor-pointer">
+              <div className="mt-3 pt-3 border-t border-gov-border" onClick={e => e.stopPropagation()}>
+                <label className="flex items-center gap-2 text-xs text-gov-muted hover:text-gov-ink cursor-pointer">
                   <Upload size={12} />
-                  {uploadingId === (c.id || c.investigation_id) ? 'Uploading…' : 'Upload evidence (CSV / XLSX / PDF / JSON / ZIP)'}
+                  {uploadingId === cid ? 'Uploading…' : 'Upload evidence (CSV / XLSX / PDF / JSON / ZIP)'}
                   <input
                     type="file"
                     multiple
                     accept=".csv,.xlsx,.xls,.json,.zip,.txt,.tsv,.log,.pdf,.docx"
                     className="hidden"
                     disabled={uploadingId != null}
-                    onChange={e => { upload(c.id || c.investigation_id, e.target.files); e.target.value = '' }}
+                    onChange={e => { if (cid) upload(cid, e.target.files); e.target.value = '' }}
                   />
                 </label>
-                {uploadMsg[c.id || c.investigation_id] && (
-                  <p className="text-[11px] text-gray-500 mt-1">{uploadMsg[c.id || c.investigation_id]}</p>
+                {cid && uploadMsg[cid] && (
+                  <p className="text-[11px] text-gov-muted mt-1">{uploadMsg[cid]}</p>
                 )}
               </div>
               )}
             </div>
-          ))}
+            )
+          })}
         </div>
       )}
     </div>

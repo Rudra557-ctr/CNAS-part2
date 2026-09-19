@@ -24,11 +24,11 @@ export default function Connectors() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-lg font-bold text-white flex items-center gap-2">
-          <Plug size={20} className="text-green-400" />
+        <h1 className="text-lg font-bold text-gov-ink flex items-center gap-2">
+          <Plug size={20} className="text-gov-igreen" />
           Data Connectors
         </h1>
-        <p className="text-xs text-gray-500 mt-0.5">
+        <p className="text-xs text-gov-muted mt-0.5">
           Active data ingestion pipelines and feeds awaiting authorization
         </p>
       </div>
@@ -36,27 +36,27 @@ export default function Connectors() {
       {/* Active */}
       <div>
         <div className="flex items-center gap-2 mb-3">
-          <CheckCircle size={14} className="text-green-400" />
-          <h2 className="text-sm font-semibold text-white">Active Connectors</h2>
-          <span className="text-xs font-mono bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-0.5 rounded-full">
+          <CheckCircle size={14} className="text-gov-igreen" />
+          <h2 className="text-sm font-semibold text-gov-ink">Active Connectors</h2>
+          <span className="text-xs font-mono bg-green-50 text-green-700 border border-green-200 px-2 py-0.5 rounded-full">
             {ACTIVE.length} live
           </span>
         </div>
         <div className="grid grid-cols-2 gap-3">
           {ACTIVE.map((a, i) => (
-            <div key={i} className="card p-4 border-green-500/20 hover:border-green-500/40 transition-colors">
+            <div key={i} className="gov-card p-4 border-green-200 hover:border-green-400 transition-colors">
               <div className="flex items-start gap-3">
-                <div className="w-2 h-2 mt-1.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
+                <div className="w-2 h-2 mt-1.5 rounded-full bg-gov-igreen animate-pulse flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-medium text-white">{a.label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{a.detail}</p>
+                  <p className="text-sm font-medium text-gov-ink">{a.label}</p>
+                  <p className="text-xs text-gov-muted mt-0.5">{a.detail}</p>
                 </div>
               </div>
               <div className="mt-3 flex items-center gap-2">
-                <span className="text-[10px] font-mono bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono bg-green-50 text-green-700 border border-green-200 px-2 py-0.5 rounded">
                   CONNECTED
                 </span>
-                <span className="text-[10px] text-gray-600">file upload · auto schema mapping</span>
+                <span className="text-[10px] text-gov-faint">file upload · auto schema mapping</span>
               </div>
             </div>
           ))}
@@ -66,31 +66,31 @@ export default function Connectors() {
       {/* Locked */}
       <div>
         <div className="flex items-center gap-2 mb-3">
-          <Lock size={14} className="text-yellow-400" />
-          <h2 className="text-sm font-semibold text-white">Awaiting Authorization</h2>
-          <span className="text-xs font-mono bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2 py-0.5 rounded-full">
+          <Lock size={14} className="text-yellow-600" />
+          <h2 className="text-sm font-semibold text-gov-ink">Awaiting Authorization</h2>
+          <span className="text-xs font-mono bg-yellow-50 text-yellow-700 border border-yellow-200 px-2 py-0.5 rounded-full">
             {LOCKED.length} pending
           </span>
         </div>
-        <p className="text-xs text-gray-500 mb-3">
+        <p className="text-xs text-gov-muted mb-3">
           These connectors are technically implemented. They require an authorization token from the respective agency.
           Once provided, data flows in automatically with zero code changes.
         </p>
         <div className="grid grid-cols-2 gap-3">
           {LOCKED.map((l, i) => (
-            <div key={i} className="card p-4 border-dark-500 opacity-80 hover:opacity-100 transition-opacity">
+            <div key={i} className="gov-card p-4 opacity-80 hover:opacity-100 transition-opacity">
               <div className="flex items-start gap-3">
-                <Lock size={14} className="text-yellow-400 mt-0.5 flex-shrink-0" />
+                <Lock size={14} className="text-yellow-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-medium text-white">{l.label}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{l.detail}</p>
+                  <p className="text-sm font-medium text-gov-ink">{l.label}</p>
+                  <p className="text-xs text-gov-muted mt-0.5">{l.detail}</p>
                 </div>
               </div>
               <div className="mt-3 flex items-center gap-2">
-                <span className="text-[10px] font-mono bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono bg-yellow-50 text-yellow-700 border border-yellow-200 px-2 py-0.5 rounded">
                   AUTH REQUIRED
                 </span>
-                <span className="text-[10px] text-gray-600">{l.agency}</span>
+                <span className="text-[10px] text-gov-faint">{l.agency}</span>
               </div>
             </div>
           ))}
@@ -98,9 +98,9 @@ export default function Connectors() {
       </div>
 
       {/* CTA */}
-      <div className="card p-5 border border-blue-500/20 bg-blue-500/5">
-        <h3 className="text-sm font-semibold text-white mb-2">Ready for Authorized Data</h3>
-        <p className="text-xs text-gray-400 leading-relaxed">
+      <div className="gov-card p-5 border-blue-200 bg-blue-50/60">
+        <h3 className="text-sm font-semibold text-gov-ink mb-2">Ready for Authorized Data</h3>
+        <p className="text-xs text-gov-muted leading-relaxed">
           This platform's ingestion layer auto-detects schema from any CSV, XLSX, PDF, or JSON file.
           It supports 100+ column name variations across all major Indian telecom, banking, and police systems.
           The moment an agency provides authorized data access, this system processes real criminal records

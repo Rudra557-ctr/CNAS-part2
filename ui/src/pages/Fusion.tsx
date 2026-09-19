@@ -194,7 +194,7 @@ export default function Fusion() {
         />
         {!data.nodes.length && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <p className="text-xs text-gray-500 font-mono">{t('fusion.empty')} {day}</p>
+            <p className="text-xs text-gray-400 font-mono">{t('fusion.empty')} {day}</p>
           </div>
         )}
       </div>

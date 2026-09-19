@@ -42,10 +42,14 @@ export function isRecordingSupported(): boolean {
 /**
  * Records a single utterance and hands back one File.
  *
- * `onCapture` runs after the recorder flushes. State moves
- * idle → recording → processing → idle, and the caller is blocked from
- * starting a second recording until the first finishes, so a double click
- * cannot fire two uploads.
+ * `onCapture` runs after the recorder flushes — but ONLY when the officer
+ * finishes with Done/Stop-and-send. Cancelling discards the audio and goes
+ * straight back to idle without uploading anything, so a misspoken take
+ * never reaches transcription.
+ *
+ * State moves idle → recording → processing → idle, and the caller is
+ * blocked from starting a second recording until the first finishes, so a
+ * double click cannot fire two uploads.
  */
 export function useVoiceRecorder(onCapture: (file: File) => Promise<void> | void) {
   const [state, setState] = useState<RecorderState>('idle')
@@ -56,6 +60,9 @@ export function useVoiceRecorder(onCapture: (file: File) => Promise<void> | void
   const chunksRef = useRef<BlobPart[]>([])
   const streamRef = useRef<MediaStream | null>(null)
   const tickRef = useRef<number | null>(null)
+  // Set by cancel() before stopping the MediaRecorder so onstop knows to
+  // throw the audio away instead of handing it to onCapture.
+  const discardRef = useRef(false)
 
   const releaseStream = useCallback(() => {
     streamRef.current?.getTracks().forEach(track => track.stop())
@@ -106,6 +113,7 @@ export function useVoiceRecorder(onCapture: (file: File) => Promise<void> | void
     const picked = pickMimeType()
     streamRef.current = stream
     chunksRef.current = []
+    discardRef.current = false
 
     let recorder: MediaRecorder
     try {
@@ -130,9 +138,18 @@ export function useVoiceRecorder(onCapture: (file: File) => Promise<void> | void
 
     recorder.onstop = async () => {
       releaseStream()
+      const discard = discardRef.current
+      discardRef.current = false
       const ext = picked?.ext || 'webm'
       const blob = new Blob(chunksRef.current, { type: recorder.mimeType || picked?.mime || '' })
       chunksRef.current = []
+
+      // Cancelled mid-take (wrong statement): throw the audio away and go
+      // back to the initial Speak state. Nothing uploads, nothing transcribes.
+      if (discard) {
+        setState('idle')
+        return
+      }
 
       // A click-and-immediately-stop produces a header-only blob with no audio.
       if (blob.size < 1024) {
@@ -156,11 +173,28 @@ export function useVoiceRecorder(onCapture: (file: File) => Promise<void> | void
     setState('recording')
   }, [state, onCapture, releaseStream])
 
+  // Done: finish the take and send it for transcription.
   const stop = useCallback(() => {
     if (state !== 'recording') return
+    discardRef.current = false
     try {
       recorderRef.current?.stop()
     } catch {
+      releaseStream()
+      setState('idle')
+    }
+  }, [state, releaseStream])
+
+  // Cancel: discard the take and return to the initial Speak state.
+  // Used when the officer misspoke mid-recording and does not want what was
+  // said to be interpreted at all.
+  const cancel = useCallback(() => {
+    if (state !== 'recording') return
+    discardRef.current = true
+    try {
+      recorderRef.current?.stop()
+    } catch {
+      discardRef.current = false
       releaseStream()
       setState('idle')
     }
@@ -172,6 +206,7 @@ export function useVoiceRecorder(onCapture: (file: File) => Promise<void> | void
     seconds,
     start,
     stop,
+    cancel,
     supported: isRecordingSupported(),
     clearError: () => setError(null),
   }

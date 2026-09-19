@@ -135,25 +135,25 @@ export default function MapView() {
     <div className="space-y-4 h-[calc(100vh-7rem)]">
       <div className="flex items-center justify-between flex-shrink-0">
         <div>
-          <h1 className="text-lg font-bold text-white flex items-center gap-2">
-            <MapIcon size={20} className="text-orange-400" />
+          <h1 className="text-lg font-bold text-gov-ink flex items-center gap-2">
+            <MapIcon size={20} className="text-gov-saffron" />
             Geospatial Intelligence
           </h1>
-          <p className="text-xs text-gray-500 mt-0.5">Cell tower data, suspect trajectories, crime hotspots and call-density heatmap</p>
+          <p className="text-xs text-gov-muted mt-0.5">Cell tower data, suspect trajectories, crime hotspots and call-density heatmap</p>
           {iid && <div className="mt-2"><CaseScopeBar caseName={caseName} caseId={iid} onClear={clear} /></div>}
         </div>
         <div className="flex gap-2">
           {[
-            { id: 'towers',       label: `Cell Towers (${towers.length})`,      icon: Navigation, color: 'text-blue-400' },
-            { id: 'trajectories', label: `Trajectories (${trajectories.length})`, icon: Navigation, color: 'text-green-400' },
-            { id: 'hotspots',     label: `Hotspots (${hotspots.length})`,       icon: Flame,      color: 'text-red-400' },
-            { id: 'heatmap',      label: 'Heatmap',                             icon: ThermometerSun, color: 'text-orange-300' },
+            { id: 'towers',       label: `Cell Towers (${towers.length})`,      icon: Navigation, color: 'text-blue-700' },
+            { id: 'trajectories', label: `Trajectories (${trajectories.length})`, icon: Navigation, color: 'text-green-700' },
+            { id: 'hotspots',     label: `Hotspots (${hotspots.length})`,       icon: Flame,      color: 'text-gov-red' },
+            { id: 'heatmap',      label: 'Heatmap',                             icon: ThermometerSun, color: 'text-gov-saffron' },
           ].map(l => (
             <button
               key={l.id}
               onClick={() => setLayer(l.id as typeof layer)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs border transition-all ${
-                layer === l.id ? 'bg-dark-600 border-dark-400 text-white' : 'border-transparent text-gray-400 hover:text-white'
+                layer === l.id ? 'bg-gov-navy border-gov-navy text-white' : 'border-transparent text-gov-muted hover:text-gov-ink'
               }`}
             >
               <l.icon size={12} className={l.color} />
@@ -164,21 +164,21 @@ export default function MapView() {
       </div>
 
       {/* Timeline scrubber — filters trajectories + heat window */}
-      <div className="card p-3 flex items-center gap-4">
-        <span className="text-xs font-mono text-gray-500 whitespace-nowrap">Day window</span>
+      <div className="gov-card p-3 flex items-center gap-4">
+        <span className="text-xs font-mono text-gov-muted whitespace-nowrap">Day window</span>
         <input type="range" min={heatRange[0]} max={heatRange[1]} value={windowDays?.[0] ?? heatRange[0]}
           onChange={e => setWindowDays(w => [Number(e.target.value), w?.[1] ?? heatRange[1]])}
           className="flex-1 accent-blue-500" />
         <input type="range" min={heatRange[0]} max={heatRange[1]} value={windowDays?.[1] ?? heatRange[1]}
           onChange={e => setWindowDays(w => [w?.[0] ?? heatRange[0], Number(e.target.value)])}
           className="flex-1 accent-blue-500" />
-        <span className="text-xs font-mono text-white bg-dark-700 px-2 py-1 rounded">
+        <span className="text-xs font-mono text-white bg-gov-navy px-2 py-1 rounded">
           {windowDays ? `${windowDays[0]}–${windowDays[1]}` : `${heatRange[0]}–${heatRange[1]}`}
         </span>
-        <button onClick={() => setWindowDays(heatRange)} className="btn-ghost card text-xs py-1">Reset</button>
+        <button onClick={() => setWindowDays(heatRange)} className="gov-ghost border border-gov-border bg-white text-xs py-1">Reset</button>
       </div>
 
-      <div className="flex-1 card overflow-hidden" style={{ height: 'calc(100% - 60px)' }}>
+      <div className="flex-1 gov-card overflow-hidden" style={{ height: 'calc(100% - 60px)' }}>
         <MapContainer
           center={INDIA_CENTER}
           zoom={5}

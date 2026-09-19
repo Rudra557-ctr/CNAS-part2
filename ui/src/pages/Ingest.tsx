@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import {
   MicVocal, Mic, Square, AudioLines, Loader2, Check, AlertTriangle,
-  HelpCircle, Database, GitBranch,
+  HelpCircle, Database, GitBranch, X,
 } from 'lucide-react'
 import { postVoiceIngest, commitVoiceIngest } from '../api/client'
 import { useVoiceRecorder } from '../lib/useVoiceRecorder'
@@ -199,16 +199,27 @@ export default function Ingest() {
           </div>
           {voice.supported && (
             voice.state === 'recording' ? (
-              <button
-                onClick={voice.stop}
-                title={t('ingest.voice.stop')}
-                className="px-4 text-sm rounded-lg border border-red-300 bg-red-50 text-gov-red
-                           font-semibold flex items-center gap-2 flex-shrink-0"
-              >
-                <Square size={13} className="fill-current" />
-                {t('ingest.voice.stop')} · {voice.seconds}s
-                <span className="w-2 h-2 rounded-full bg-gov-red animate-pulse" />
-              </button>
+              <div className="flex items-center gap-1.5 flex-shrink-0">
+                <button
+                  onClick={voice.cancel}
+                  title={t('ingest.voice.cancel')}
+                  className="px-3 text-sm rounded-lg border border-gov-border bg-white text-gov-muted
+                             font-semibold flex items-center gap-1.5"
+                >
+                  <X size={13} />
+                  {t('ingest.voice.cancel')}
+                </button>
+                <button
+                  onClick={voice.stop}
+                  title={t('ingest.voice.done')}
+                  className="px-4 text-sm rounded-lg border border-red-300 bg-red-50 text-gov-red
+                             font-semibold flex items-center gap-2"
+                >
+                  <Square size={13} className="fill-current" />
+                  {t('ingest.voice.done')} · {voice.seconds}s
+                  <span className="w-2 h-2 rounded-full bg-gov-red animate-pulse" />
+                </button>
+              </div>
             ) : (
               <button
                 onClick={voice.start}

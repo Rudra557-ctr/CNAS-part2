@@ -88,6 +88,8 @@ export default function GraphView() {
   const [loadError, setLoadError]   = useState('')
   const [filter,    setFilter]      = useState<string>('all')
   const [fullscreen, setFullscreen] = useState(false)
+  // Fullscreen node popup: compact card first, expanded "Full info" on demand.
+  const [fsFull, setFsFull] = useState(false)
   const [size, setSize] = useState({ w: 800, h: 600 })
 
   // ── Optional case scope (set by CaseDetail → "Open case graph") ─────────────
@@ -138,6 +140,18 @@ export default function GraphView() {
     ro.observe(wrapRef.current)
     return () => ro.disconnect()
   }, [fullscreen])
+
+  // ── Fullscreen shell: lock page scroll, Escape exits, popup resets ─────────
+  useEffect(() => {
+    if (!fullscreen) return
+    document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setFullscreen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey) }
+  }, [fullscreen])
+
+  // A newly clicked node always opens the compact popup first.
+  useEffect(() => { setFsFull(false) }, [selected?.id, fullscreen])
 
   const selectNode = useCallback((node: GraphNode) => {
     setSelected(node)
@@ -319,6 +333,46 @@ export default function GraphView() {
     return seen
   }, [focus, fgData])
 
+  // ── k-hop neighbourhood for the fullscreen mini-maps ─────────────────────────
+  // Same adjacency the focus dimmer walks, but returning the actual subgraph so
+  // it can be drawn on its own canvas.
+  const neighborhood = useCallback((id: string, hops: number) => {
+    if (!graphData) return { nodes: [] as any[], links: [] as any[] }
+    const adj = new Map<string, Set<string>>()
+    graphData.edges.forEach(e => {
+      if (!adj.has(e.src)) adj.set(e.src, new Set())
+      if (!adj.has(e.dst)) adj.set(e.dst, new Set())
+      adj.get(e.src)!.add(e.dst)
+      adj.get(e.dst)!.add(e.src)
+    })
+    const seen = new Set([id])
+    let frontier = [id]
+    for (let h = 0; h < hops; h++) {
+      const next: string[] = []
+      frontier.forEach(x => (adj.get(x) || new Set()).forEach(nb => {
+        if (!seen.has(nb)) { seen.add(nb); next.push(nb) }
+      }))
+      frontier = next
+    }
+    const nodes = graphData.nodes
+      .filter(n => seen.has(n.id))
+      .map(n => ({
+        id: n.id,
+        name: displayLabel(n as any),
+        color: KIND_COLOR[(n as any).kind] || '#64748b',
+      }))
+    const links = graphData.edges
+      .filter(e => seen.has(e.src) && seen.has(e.dst))
+      .map(e => ({ source: e.src, target: e.dst }))
+    return { nodes, links }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [graphData, lang])
+
+  const onSubNodeClick = useCallback((n: any) => {
+    const full = graphData?.nodes.find(x => x.id === String(n.id))
+    if (full) selectNode(full as GraphNode)
+  }, [graphData, selectNode])
+
   // ── Colouring ──────────────────────────────────────────────────────────────
   const colorOf = useCallback((n: any): string => {
     if (focusSet && !focusSet.has(String(n.id))) return DIM
@@ -437,6 +491,296 @@ export default function GraphView() {
     }
   }
 
+  // ── Node profile panel (shared) ────────────────────────────────────────────
+  // One definition, two homes: the docked right column and the fullscreen
+  // "Full info" overlay. A node opened full-screen therefore offers every
+  // option the small panel has (1-hop/2-hop, edit, merge, lineage, why
+  // flagged, history, discussion) — no second implementation to drift.
+  const renderNodePanel = (cls: string, node: GraphNode) => (
+    <div className={cls}>
+      <div className="flex items-start justify-between">
+        <div className="flex gap-3 items-center">
+          <img
+            src={`/api/mugshots/${node.id}.jpg`}
+            alt=""
+            onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
+            className="w-11 h-11 rounded-lg object-cover border border-gov-border flex-shrink-0 bg-gov-wash"
+          />
+          <div>
+            <h3 className="text-base font-bold text-gov-ink">{displayLabel(node as any) || node.label}</h3>
+            {(node as any).label_hi && (node as any).label_hi !== node.label && (
+              <p className="text-[11px] font-mono text-gov-faint mt-0.5">{lang === 'hi' ? node.label : (node as any).label_hi}</p>
+            )}
+            <span className="flex items-center gap-1.5 mt-1 flex-wrap">
+              <span className={`badge-${(node.kind || 'person').toLowerCase()} inline-block`}>
+                {node.kind}
+              </span>
+              {node.analyst_edited && (
+                <span className="gov-tag bg-amber-50 text-amber-700 border-amber-200">Analyst-edited</span>
+              )}
+            </span>
+          </div>
+        </div>
+        {canWrite && (
+        <div className="flex gap-2 -mt-2">
+          <button
+            onClick={() => {
+              setEditMode(m => !m); setEditErr('')
+              setEditVals({ label: node.label || '', role: node.role || '', cell: node.cell || '' })
+            }}
+            className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5"
+          >
+            <Pencil size={12} /> {editMode ? 'Cancel edit' : 'Edit entity'}
+          </button>
+          <button
+            onClick={pinEntity}
+            className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5"
+            title="Pin this entity into the open case dossier"
+          >
+            <Pin size={12} /> Pin to dossier
+          </button>
+        </div>
+        )}
+        {pinMsg && (
+          <p className="text-[11px] text-gov-muted -mt-1">{pinMsg}</p>
+        )}
+        {actionMsg && (
+          <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">{actionMsg}</p>
+        )}
+        {editMode && (
+          <div className="gov-well p-3 space-y-2">
+            <div>
+              <label className="text-[11px] font-semibold text-gov-muted">Display name</label>
+              <input className="gov-input mt-0.5" value={editVals.label}
+                onChange={e => setEditVals(v => ({ ...v, label: e.target.value }))} />
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <label className="text-[11px] font-semibold text-gov-muted">Role</label>
+                <input className="gov-input mt-0.5" value={editVals.role}
+                  onChange={e => setEditVals(v => ({ ...v, role: e.target.value }))} />
+              </div>
+              <div>
+                <label className="text-[11px] font-semibold text-gov-muted">Cell</label>
+                <input className="gov-input mt-0.5" value={editVals.cell}
+                  onChange={e => setEditVals(v => ({ ...v, cell: e.target.value }))} />
+              </div>
+            </div>
+            {editErr && <p className="text-[11px] text-gov-red">{editErr}</p>}
+            <button onClick={saveEdits} disabled={editBusy} className="gov-btn w-full justify-center py-1.5 disabled:opacity-50">
+              {editBusy ? 'Saving…' : 'Save changes'}
+            </button>
+            <p className="text-[10px] text-gov-faint">Edits layer over source data — originals are never modified.</p>
+          </div>
+        )}
+        <button onClick={() => { setSelected(null); setWhySignals([]) }} className="text-gov-faint hover:text-gov-ink">
+          <X size={16} />
+        </button>
+      </div>
+
+      {node.risk_score !== undefined && (
+        <div className="gov-well p-3">
+          <p className="text-xs text-gov-muted mb-1">Risk Score</p>
+          <div className="flex items-center gap-3">
+            <div className="flex-1 bg-gov-border rounded-full h-2 overflow-hidden">
+              <div
+                className="h-full rounded-full bg-gov-red transition-all"
+                style={{ width: `${Math.min(node.risk_score, 100)}%` }}
+              />
+            </div>
+            <span className="text-sm font-mono font-bold text-gov-red">{node.risk_score}</span>
+          </div>
+        </div>
+      )}
+
+      {lineage && lineage.lead_score != null && (
+        <div>
+          <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
+            <Scale size={11} /> Score lineage
+            <span className="text-[10px] font-mono text-gov-faint">
+              {lineage.lead_score}/100 · {lineage.priority}
+            </span>
+          </p>
+          <div className="gov-well p-3 space-y-2">
+            {(lineage.contributions || []).map((c: any) => (
+              <div key={c.signal}>
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-gov-ink">{c.label}</span>
+                  <span className="font-mono text-gov-muted">
+                    {c.points}pts <span className="text-gov-faint">· w{c.weight} × {c.value}</span>
+                  </span>
+                </div>
+                <div className="h-1.5 bg-gov-border rounded-full overflow-hidden mt-0.5">
+                  <div
+                    className="h-full rounded-full bg-gov-navy transition-all"
+                    style={{ width: `${Math.min(Math.max(c.value * 100, 0), 100)}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+            <p className="text-[10px] font-mono text-gov-faint pt-1">{lineage.formula}</p>
+          </div>
+          {(lineage.records || []).length > 0 && (
+            <div className="mt-2 space-y-1.5">
+              <p className="text-[11px] font-semibold text-gov-muted">Contributing records</p>
+              {(lineage.records || []).slice(0, 6).map((r: any, i: number) => (
+                <div key={i} className="gov-well px-3 py-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono font-bold text-gov-navy uppercase">{r.kind}</span>
+                    <span className="text-[11px] font-mono text-gov-ink truncate">{r.ref || '—'}</span>
+                    {r.confidence != null && (
+                      <span className="text-[10px] font-mono text-gov-faint ml-auto flex-shrink-0">
+                        {typeof r.confidence === 'number' ? r.confidence.toFixed(2) : r.confidence}
+                      </span>
+                    )}
+                  </div>
+                  {r.detail && <p className="text-[11px] text-gov-muted mt-0.5 truncate">{r.detail}</p>}
+                  {r.evidence_hash && (
+                    <p className="text-[10px] font-mono text-gov-faint mt-0.5">⛓ {String(r.evidence_hash).slice(0, 16)}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {node.cell && (
+        <div>
+          <p className="text-xs text-gov-muted mb-1">Criminal Cell{node.role ? ` · ${node.role}` : ''}</p>
+          <p className="text-sm text-gov-ink font-mono gov-well px-2 py-1">{node.cell}</p>
+        </div>
+      )}
+
+      <div className="flex gap-2">
+        <button onClick={() => setFocus({ id: node.id, hops: 1 })} className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5">1-Hop</button>
+        <button onClick={() => setFocus({ id: node.id, hops: 2 })} className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5">2-Hop</button>
+      </div>
+
+      {canWrite && (
+      <div className="gov-well p-3 space-y-2">
+        <p className="text-xs font-semibold text-gov-muted flex items-center gap-1.5">
+          <GitMerge size={12} /> Merge duplicate into…
+        </p>
+        <div className="flex gap-2">
+          <input
+            className="gov-input flex-1 font-mono !py-1.5"
+            placeholder="Keep ID, e.g. N6"
+            value={mergeTarget}
+            onChange={e => { setMergeTarget(e.target.value); setMergeArmed(false); setMergeMsg('') }}
+          />
+          <button
+            onClick={runMerge}
+            disabled={!mergeTarget.trim()}
+            className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-colors disabled:opacity-50 flex-shrink-0 ${
+              mergeArmed
+                ? 'bg-gov-red text-white border-gov-red'
+                : 'bg-white text-gov-ink border-gov-border hover:border-gov-navy'
+            }`}
+          >
+            {mergeArmed ? 'Confirm?' : 'Merge'}
+          </button>
+        </div>
+        {mergeArmed && (
+          <p className="text-[11px] text-amber-700">
+            {node.id} will be absorbed into {mergeTarget.trim()}. Its links re-point; the record stays in history.
+          </p>
+        )}
+        {mergeMsg && <p className="text-[11px] text-gov-red">{mergeMsg}</p>}
+      </div>
+      )}
+
+      {whySignals.length > 0 && (
+        <div>
+          <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
+            <Info size={11} /> Why flagged
+          </p>
+          <ul className="text-xs text-gov-ink gov-well p-3 leading-relaxed space-y-1.5 list-disc list-inside">
+            {whySignals.map((s, i) => <li key={i}>{s}</li>)}
+          </ul>
+        </div>
+      )}
+
+      <div>
+        <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
+          <History size={11} /> Curation history
+        </p>
+        {history.length === 0 ? (
+          <p className="text-[11px] text-gov-faint">No analyst edits yet — machine values.</p>
+        ) : (
+          <div className="space-y-1.5">
+            {history.map((h, i) => (
+              <div key={i} className="gov-well px-3 py-2 text-[11px]">
+                {h.kind === 'override' ? (
+                  <p className="text-gov-ink">
+                    <span className="font-mono font-semibold">{h.field}</span>
+                    {': '}{String(h.old_value ?? '—')} → <b>{String(h.new_value)}</b>
+                  </p>
+                ) : (
+                  <p className="text-gov-ink">
+                    {h.drop_id === node.id
+                      ? <>Absorbed into <b className="font-mono">{h.keep_id}</b></>
+                      : <>Absorbed <b className="font-mono">{h.drop_id}</b></>}
+                  </p>
+                )}
+                <p className="text-gov-faint font-mono mt-0.5">
+                  {h.updated_by || h.merged_by} · {new Date(h.updated_at || h.merged_at).toLocaleString('en-IN')}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div>
+        <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
+          <MessageSquare size={11} /> Discussion
+          <span className="text-[10px] font-mono text-gov-faint bg-gov-wash px-1.5 py-0.5 rounded-full">{comments.length}</span>
+        </p>
+        {comments.length > 0 && (
+          <div className="space-y-1.5 mb-2">
+            {comments.map(c => (
+              <div key={c.id} className="gov-well px-3 py-2">
+                <p className="text-xs text-gov-ink whitespace-pre-line">{c.text}</p>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[10px] text-gov-faint font-mono">
+                    {c.created_by} · {new Date(c.created_at).toLocaleString('en-IN')}
+                  </p>
+                  {(c.created_by === username) && (
+                    <button onClick={() => removeComment(c.id)} className="text-gov-faint hover:text-gov-red" title="Delete comment">
+                      <Trash2 size={11} />
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="flex gap-1.5">
+          {canWrite ? (
+          <>
+          <input
+            className="gov-input flex-1 !py-1.5 text-xs"
+            placeholder="Discuss this entity… (Enter to post)"
+            value={commentText}
+            onChange={e => setCommentText(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') postComment() }}
+          />
+          <button onClick={postComment} disabled={commentBusy || !commentText.trim()}
+            className="gov-btn !px-3 !py-1.5 text-xs disabled:opacity-50 flex-shrink-0">
+            Post
+          </button>
+          </>
+          ) : (
+          <p className="text-[11px] text-gov-muted bg-gov-wash border border-gov-border rounded-lg px-3 py-2 w-full">
+            Commenting is disabled for the Analyst post.
+          </p>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+
   const kinds = ['all', 'person', 'phone', 'account', 'location', 'vehicle']
   // `any`: 2D and 3D components accept the shared props used below.
   const Graph3D: any = use3D ? ForceGraph3D : ForceGraph2D
@@ -519,7 +863,7 @@ export default function GraphView() {
           )}
         </div>
 
-        {/* Scope / hint */}
+        {/* Scope / hint + fullscreen (top-right corner) */}
         <div className="absolute top-3 right-3 z-10 gov-card px-2.5 py-1 flex items-center gap-2">
           {caseId ? (
             <>
@@ -531,6 +875,13 @@ export default function GraphView() {
           ) : (
             <p className="text-[10px] text-gov-muted">Click a node for profile · click a link for its source record</p>
           )}
+          <button
+            onClick={() => setFullscreen(f => !f)}
+            title={fullscreen ? 'Exit fullscreen (Esc)' : 'Open graph fullscreen'}
+            className="text-gov-faint hover:text-gov-ink border-l border-gov-border pl-2"
+          >
+            {fullscreen ? <Minimize size={12} /> : <Maximize size={12} />}
+          </button>
         </div>
         {/* Hindi names hint — only when graph carries Devanagari and UI is in English */}
         {lang === 'en' && graphData?.nodes?.some((n: any) => n.label_hi && /[\u0900-\u097F]/.test(n.label_hi)) && (
@@ -546,6 +897,98 @@ export default function GraphView() {
             <button onClick={() => setFocus(null)} className="text-gov-faint hover:text-gov-ink">
               <X size={12} />
             </button>
+          </div>
+        )}
+
+        {/* ── Fullscreen node popup: compact card, expandable to Full info ── */}
+        {fullscreen && selected && !fsFull && (
+          <div className="absolute top-24 right-3 z-30 w-80 gov-card p-3 space-y-2.5">
+            <div className="flex items-start gap-2.5">
+              <img
+                src={`/api/mugshots/${selected.id}.jpg`}
+                alt=""
+                onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
+                className="w-10 h-10 rounded-lg object-cover border border-gov-border flex-shrink-0 bg-gov-wash"
+              />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-gov-ink truncate">{displayLabel(selected as any) || selected.label}</p>
+                <p className="text-[10px] font-mono text-gov-faint truncate">{selected.id}{selected.kind ? ` · ${selected.kind}` : ''}</p>
+                {(selected.cell || selected.role) && (
+                  <p className="text-[11px] text-gov-muted mt-0.5 truncate">
+                    {[selected.cell, selected.role].filter(Boolean).join(' · ')}
+                  </p>
+                )}
+              </div>
+              <button onClick={clearSel} title="Close" className="text-gov-faint hover:text-gov-ink flex-shrink-0">
+                <X size={14} />
+              </button>
+            </div>
+            {selected.risk_score !== undefined && (
+              <div className="flex items-center gap-2">
+                <div className="flex-1 bg-gov-border rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full rounded-full bg-gov-red" style={{ width: `${Math.min(selected.risk_score, 100)}%` }} />
+                </div>
+                <span className="text-xs font-mono font-bold text-gov-red">{selected.risk_score}</span>
+              </div>
+            )}
+            <button onClick={() => setFsFull(true)} className="gov-btn w-full justify-center text-xs py-1.5">
+              <Info size={12} /> Full info
+            </button>
+          </div>
+        )}
+
+        {/* ── Fullscreen Full info: every docked-panel option + 1/2-hop subgraphs ── */}
+        {fullscreen && selected && fsFull && (
+          <div className="absolute top-0 right-0 bottom-0 z-30 w-[26rem] max-w-[92vw] bg-white border-l border-gov-border overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-gov-border px-4 py-2.5 flex items-center gap-2 z-10">
+              <p className="text-sm font-bold text-gov-ink flex-1">Node profile</p>
+              <button onClick={() => setFsFull(false)} className="gov-ghost border border-gov-border text-[11px] py-1 px-2">
+                ← Popup
+              </button>
+              <button onClick={clearSel} title="Close" className="text-gov-faint hover:text-gov-ink">
+                <X size={15} />
+              </button>
+            </div>
+            <div className="p-4 space-y-4">
+              {renderNodePanel('space-y-4', selected)}
+              {[1, 2].map(h => {
+                const sg = neighborhood(selected.id, h)
+                return (
+                  <div key={h}>
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <p className="text-xs font-semibold text-gov-muted">
+                        {h}-hop subgraph · {sg.nodes.length} node{sg.nodes.length === 1 ? '' : 's'}
+                      </p>
+                      <button
+                        onClick={() => setFocus({ id: selected.id, hops: h })}
+                        className="gov-ghost border border-gov-border text-[11px] py-1 px-2 flex-shrink-0"
+                      >
+                        Focus {h}-hop on main graph
+                      </button>
+                    </div>
+                    {sg.links.length > 0 ? (
+                      <div className="border border-gov-border rounded-lg overflow-hidden bg-white">
+                        <ForceGraph2D
+                          width={352}
+                          height={200}
+                          graphData={sg}
+                          backgroundColor="#ffffff"
+                          nodeLabel="name"
+                          nodeColor={(n: any) => n.color || '#64748b'}
+                          nodeRelSize={5}
+                          linkColor={() => 'rgba(27,58,107,0.35)'}
+                          linkWidth={1}
+                          cooldownTicks={120}
+                          onNodeClick={onSubNodeClick}
+                        />
+                      </div>
+                    ) : (
+                      <p className="text-[11px] text-gov-faint">No links within {h} hop{h === 2 ? 's' : ''} of this node.</p>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
           </div>
         )}
 
@@ -604,7 +1047,7 @@ export default function GraphView() {
 
       {/* ── Right panel: edge evidence / node profile / community members ── */}
       {selEdge ? (
-        <div className={`w-80 gov-card p-4 overflow-y-auto space-y-4 ${fullscreen ? 'hidden' : ''}`}>
+        <div className={`w-96 gov-card p-4 overflow-y-auto space-y-4 flex-shrink-0 ${fullscreen ? 'hidden' : ''}`}>
           <div className="flex items-start justify-between">
             <div>
               <h3 className="text-base font-bold text-gov-ink flex items-center gap-2">
@@ -649,290 +1092,9 @@ export default function GraphView() {
           </div>
         </div>
       ) : selected ? (
-        <div className={`w-72 gov-card p-4 overflow-y-auto space-y-4 ${fullscreen ? 'hidden' : ''}`}>
-          <div className="flex items-start justify-between">
-            <div className="flex gap-3 items-center">
-              <img
-                src={`/api/mugshots/${selected.id}.jpg`}
-                alt=""
-                onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
-                className="w-11 h-11 rounded-lg object-cover border border-gov-border flex-shrink-0 bg-gov-wash"
-              />
-              <div>
-                <h3 className="text-base font-bold text-gov-ink">{displayLabel(selected as any) || selected.label}</h3>
-                {(selected as any).label_hi && (selected as any).label_hi !== selected.label && (
-                  <p className="text-[11px] font-mono text-gov-faint mt-0.5">{lang === 'hi' ? selected.label : (selected as any).label_hi}</p>
-                )}
-                <span className="flex items-center gap-1.5 mt-1 flex-wrap">
-                  <span className={`badge-${(selected.kind || 'person').toLowerCase()} inline-block`}>
-                    {selected.kind}
-                  </span>
-                  {selected.analyst_edited && (
-                    <span className="gov-tag bg-amber-50 text-amber-700 border-amber-200">Analyst-edited</span>
-                  )}
-                </span>
-              </div>
-            </div>
-            {canWrite && (
-            <div className="flex gap-2 -mt-2">
-              <button
-                onClick={() => {
-                  setEditMode(m => !m); setEditErr('')
-                  setEditVals({ label: selected.label || '', role: selected.role || '', cell: selected.cell || '' })
-                }}
-                className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5"
-              >
-                <Pencil size={12} /> {editMode ? 'Cancel edit' : 'Edit entity'}
-              </button>
-              <button
-                onClick={pinEntity}
-                className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5"
-                title="Pin this entity into the open case dossier"
-              >
-                <Pin size={12} /> Pin to dossier
-              </button>
-            </div>
-            )}
-            {pinMsg && (
-              <p className="text-[11px] text-gov-muted -mt-1">{pinMsg}</p>
-            )}
-            {actionMsg && (
-              <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">{actionMsg}</p>
-            )}
-            {editMode && (
-              <div className="gov-well p-3 space-y-2">
-                <div>
-                  <label className="text-[11px] font-semibold text-gov-muted">Display name</label>
-                  <input className="gov-input mt-0.5" value={editVals.label}
-                    onChange={e => setEditVals(v => ({ ...v, label: e.target.value }))} />
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="text-[11px] font-semibold text-gov-muted">Role</label>
-                    <input className="gov-input mt-0.5" value={editVals.role}
-                      onChange={e => setEditVals(v => ({ ...v, role: e.target.value }))} />
-                  </div>
-                  <div>
-                    <label className="text-[11px] font-semibold text-gov-muted">Cell</label>
-                    <input className="gov-input mt-0.5" value={editVals.cell}
-                      onChange={e => setEditVals(v => ({ ...v, cell: e.target.value }))} />
-                  </div>
-                </div>
-                {editErr && <p className="text-[11px] text-gov-red">{editErr}</p>}
-                <button onClick={saveEdits} disabled={editBusy} className="gov-btn w-full justify-center py-1.5 disabled:opacity-50">
-                  {editBusy ? 'Saving…' : 'Save changes'}
-                </button>
-                <p className="text-[10px] text-gov-faint">Edits layer over source data — originals are never modified.</p>
-              </div>
-            )}
-            <button onClick={() => { setSelected(null); setWhySignals([]) }} className="text-gov-faint hover:text-gov-ink">
-              <X size={16} />
-            </button>
-          </div>
-
-          {selected.risk_score !== undefined && (
-            <div className="gov-well p-3">
-              <p className="text-xs text-gov-muted mb-1">Risk Score</p>
-              <div className="flex items-center gap-3">
-                <div className="flex-1 bg-gov-border rounded-full h-2 overflow-hidden">
-                  <div
-                    className="h-full rounded-full bg-gov-red transition-all"
-                    style={{ width: `${Math.min(selected.risk_score, 100)}%` }}
-                  />
-                </div>
-                <span className="text-sm font-mono font-bold text-gov-red">{selected.risk_score}</span>
-              </div>
-            </div>
-          )}
-
-          {lineage && lineage.lead_score != null && (
-            <div>
-              <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
-                <Scale size={11} /> Score lineage
-                <span className="text-[10px] font-mono text-gov-faint">
-                  {lineage.lead_score}/100 · {lineage.priority}
-                </span>
-              </p>
-              <div className="gov-well p-3 space-y-2">
-                {(lineage.contributions || []).map((c: any) => (
-                  <div key={c.signal}>
-                    <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-gov-ink">{c.label}</span>
-                      <span className="font-mono text-gov-muted">
-                        {c.points}pts <span className="text-gov-faint">· w{c.weight} × {c.value}</span>
-                      </span>
-                    </div>
-                    <div className="h-1.5 bg-gov-border rounded-full overflow-hidden mt-0.5">
-                      <div
-                        className="h-full rounded-full bg-gov-navy transition-all"
-                        style={{ width: `${Math.min(Math.max(c.value * 100, 0), 100)}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-                <p className="text-[10px] font-mono text-gov-faint pt-1">{lineage.formula}</p>
-              </div>
-              {(lineage.records || []).length > 0 && (
-                <div className="mt-2 space-y-1.5">
-                  <p className="text-[11px] font-semibold text-gov-muted">Contributing records</p>
-                  {(lineage.records || []).slice(0, 6).map((r: any, i: number) => (
-                    <div key={i} className="gov-well px-3 py-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono font-bold text-gov-navy uppercase">{r.kind}</span>
-                        <span className="text-[11px] font-mono text-gov-ink truncate">{r.ref || '—'}</span>
-                        {r.confidence != null && (
-                          <span className="text-[10px] font-mono text-gov-faint ml-auto flex-shrink-0">
-                            {typeof r.confidence === 'number' ? r.confidence.toFixed(2) : r.confidence}
-                          </span>
-                        )}
-                      </div>
-                      {r.detail && <p className="text-[11px] text-gov-muted mt-0.5 truncate">{r.detail}</p>}
-                      {r.evidence_hash && (
-                        <p className="text-[10px] font-mono text-gov-faint mt-0.5">⛓ {String(r.evidence_hash).slice(0, 16)}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
-          {selected.cell && (
-            <div>
-              <p className="text-xs text-gov-muted mb-1">Criminal Cell{selected.role ? ` · ${selected.role}` : ''}</p>
-              <p className="text-sm text-gov-ink font-mono gov-well px-2 py-1">{selected.cell}</p>
-            </div>
-          )}
-
-          <div className="flex gap-2">
-            <button onClick={() => setFocus({ id: selected.id, hops: 1 })} className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5">1-Hop</button>
-            <button onClick={() => setFocus({ id: selected.id, hops: 2 })} className="gov-ghost border border-gov-border flex-1 justify-center text-xs py-1.5">2-Hop</button>
-          </div>
-
-          {canWrite && (
-          <div className="gov-well p-3 space-y-2">
-            <p className="text-xs font-semibold text-gov-muted flex items-center gap-1.5">
-              <GitMerge size={12} /> Merge duplicate into…
-            </p>
-            <div className="flex gap-2">
-              <input
-                className="gov-input flex-1 font-mono !py-1.5"
-                placeholder="Keep ID, e.g. N6"
-                value={mergeTarget}
-                onChange={e => { setMergeTarget(e.target.value); setMergeArmed(false); setMergeMsg('') }}
-              />
-              <button
-                onClick={runMerge}
-                disabled={!mergeTarget.trim()}
-                className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-colors disabled:opacity-50 flex-shrink-0 ${
-                  mergeArmed
-                    ? 'bg-gov-red text-white border-gov-red'
-                    : 'bg-white text-gov-ink border-gov-border hover:border-gov-navy'
-                }`}
-              >
-                {mergeArmed ? 'Confirm?' : 'Merge'}
-              </button>
-            </div>
-            {mergeArmed && (
-              <p className="text-[11px] text-amber-700">
-                {selected.id} will be absorbed into {mergeTarget.trim()}. Its links re-point; the record stays in history.
-              </p>
-            )}
-            {mergeMsg && <p className="text-[11px] text-gov-red">{mergeMsg}</p>}
-          </div>
-          )}
-
-          {whySignals.length > 0 && (
-            <div>
-              <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
-                <Info size={11} /> Why flagged
-              </p>
-              <ul className="text-xs text-gov-ink gov-well p-3 leading-relaxed space-y-1.5 list-disc list-inside">
-                {whySignals.map((s, i) => <li key={i}>{s}</li>)}
-              </ul>
-            </div>
-          )}
-
-          <div>
-            <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
-              <History size={11} /> Curation history
-            </p>
-            {history.length === 0 ? (
-              <p className="text-[11px] text-gov-faint">No analyst edits yet — machine values.</p>
-            ) : (
-              <div className="space-y-1.5">
-                {history.map((h, i) => (
-                  <div key={i} className="gov-well px-3 py-2 text-[11px]">
-                    {h.kind === 'override' ? (
-                      <p className="text-gov-ink">
-                        <span className="font-mono font-semibold">{h.field}</span>
-                        {': '}{String(h.old_value ?? '—')} → <b>{String(h.new_value)}</b>
-                      </p>
-                    ) : (
-                      <p className="text-gov-ink">
-                        {h.drop_id === selected.id
-                          ? <>Absorbed into <b className="font-mono">{h.keep_id}</b></>
-                          : <>Absorbed <b className="font-mono">{h.drop_id}</b></>}
-                      </p>
-                    )}
-                    <p className="text-gov-faint font-mono mt-0.5">
-                      {h.updated_by || h.merged_by} · {new Date(h.updated_at || h.merged_at).toLocaleString('en-IN')}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div>
-            <p className="text-xs text-gov-muted mb-1 flex items-center gap-1">
-              <MessageSquare size={11} /> Discussion
-              <span className="text-[10px] font-mono text-gov-faint bg-gov-wash px-1.5 py-0.5 rounded-full">{comments.length}</span>
-            </p>
-            {comments.length > 0 && (
-              <div className="space-y-1.5 mb-2">
-                {comments.map(c => (
-                  <div key={c.id} className="gov-well px-3 py-2">
-                    <p className="text-xs text-gov-ink whitespace-pre-line">{c.text}</p>
-                    <div className="flex items-center justify-between mt-1">
-                      <p className="text-[10px] text-gov-faint font-mono">
-                        {c.created_by} · {new Date(c.created_at).toLocaleString('en-IN')}
-                      </p>
-                      {(c.created_by === username) && (
-                        <button onClick={() => removeComment(c.id)} className="text-gov-faint hover:text-gov-red" title="Delete comment">
-                          <Trash2 size={11} />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="flex gap-1.5">
-              {canWrite ? (
-              <>
-              <input
-                className="gov-input flex-1 !py-1.5 text-xs"
-                placeholder="Discuss this entity… (Enter to post)"
-                value={commentText}
-                onChange={e => setCommentText(e.target.value)}
-                onKeyDown={e => { if (e.key === 'Enter') postComment() }}
-              />
-              <button onClick={postComment} disabled={commentBusy || !commentText.trim()}
-                className="gov-btn !px-3 !py-1.5 text-xs disabled:opacity-50 flex-shrink-0">
-                Post
-              </button>
-              </>
-              ) : (
-              <p className="text-[11px] text-gov-muted bg-gov-wash border border-gov-border rounded-lg px-3 py-2 w-full">
-                Commenting is disabled for the Analyst post.
-              </p>
-              )}
-            </div>
-          </div>
-        </div>
+        renderNodePanel(`w-96 gov-card p-4 overflow-y-auto space-y-4 flex-shrink-0 ${fullscreen ? 'hidden' : ''}`, selected)
       ) : activeComm != null ? (
-        <div className={`w-72 gov-card p-4 overflow-y-auto space-y-3 ${fullscreen ? 'hidden' : ''}`}>
+        <div className={`w-80 gov-card p-4 overflow-y-auto space-y-3 flex-shrink-0 ${fullscreen ? 'hidden' : ''}`}>
           <div className="flex items-start justify-between">
             <div>
               <h3 className="text-base font-bold text-gov-ink flex items-center gap-2">
@@ -966,7 +1128,7 @@ export default function GraphView() {
           </div>
         </div>
       ) : (
-        <div className={`w-72 gov-card p-4 flex flex-col items-center justify-center text-center ${fullscreen ? 'hidden' : ''}`}>
+        <div className={`w-80 gov-card p-4 flex flex-col items-center justify-center text-center flex-shrink-0 ${fullscreen ? 'hidden' : ''}`}>
           <Info size={24} className="mb-2 text-gov-faint" />
           <p className="text-sm text-gov-ink font-medium">Click any node</p>
           <p className="text-xs text-gov-muted mt-1">profile · or any link for its source record</p>
