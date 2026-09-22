@@ -45,7 +45,6 @@ from backend.config import DATA_DIR, PROJECT_ROOT
 from backend.resolution.resolver import name_similarity
 from backend.voice.ingest_parser import IngestCommand
 
-INV_ROOT = DATA_DIR / "investigations"
 GLOBAL_GRAPH = PROJECT_ROOT / "output" / "graph.json"
 
 # Matching thresholds. The 85 mirrors RESOLUTION_FUZZY_THRESHOLD so voice entry
@@ -92,9 +91,21 @@ class Scope:
         return self.iid or "shared graph"
 
 
+def _inv_root() -> Path:
+    """
+    Where cases live — resolved through the same store the API, the serve
+    cache and curation overrides use. A private DATA_DIR/"investigations"
+    path here meant that whenever the store was pointed elsewhere (the test
+    suite does exactly that) ingestion wrote to one case folder while the
+    rebuild read another.
+    """
+    from backend.ingestion import store
+    return store.ROOT
+
+
 def scope_for(iid: Optional[str] = None) -> Scope:
     if iid:
-        base = INV_ROOT / iid
+        base = _inv_root() / iid
         if not base.exists():
             raise IngestError(f"Unknown investigation {iid}")
         return Scope(iid=iid,
@@ -474,7 +485,7 @@ def _ensure_people_registered(scope: Scope) -> Optional[str]:
     """
     if not scope.iid or not scope.people_path.exists():
         return None
-    from backend.api.main import INV_ROOT as _INV, save_meta, _require_meta
+    from backend.api.main import save_meta, _require_meta
     from backend.ingestion.detector import detect_schema
     from backend.ingestion.mapper import suggest_mapping, validate_mapping
 

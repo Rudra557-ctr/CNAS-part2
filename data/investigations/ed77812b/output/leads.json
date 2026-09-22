@@ -1,529 +1,1672 @@
-[
-  {
-    "entity_id": "C12",
-    "entity_type": "Person",
-    "label": "Sunil Pillai",
-    "cell": "C",
-    "role": "Collection agent",
-    "lead_score": 76,
-    "priority": "HIGH",
-    "signals": {
-      "bridge_score": 0.733,
-      "betweenness": 1.0,
-      "degree": 0.905,
-      "centrality": 0.953,
-      "financial_anomaly": 1.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.972,
-      "cross_case": 0.8
+{
+  "complete": true,
+  "leads": [
+    {
+      "entity_id": "B1",
+      "entity_type": "Person",
+      "label": "Rajan Naik",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Kingpin",
+      "lead_score": 78,
+      "priority": "HIGH",
+      "signals": {
+        "bridge_score": 0.745,
+        "betweenness": 0.798,
+        "degree": 0.714,
+        "centrality": 0.756,
+        "financial_anomaly": 0.403,
+        "communication_anomaly": 1.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.949,
+        "cross_case": 0.95
+      },
+      "reasons": [
+        "Bridge score 0.745 rank 1",
+        "Communication burst 1.0",
+        "Temporal correlated burst (multi-cell 7-day)",
+        "Cross-case shared (conf 0.95)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (78/100): Bridge score 0.745 rank 1; Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Bridge score 0.733 rank 2",
-      "Financial anomaly 1.0",
-      "Temporal correlated burst (multi-cell 7-day)",
-      "Cross-case shared (conf 0.8)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (76/100): Bridge score 0.733 rank 2; Financial anomaly 1.0; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "B1",
-    "entity_type": "Person",
-    "label": "Rajan Naik",
-    "cell": "B",
-    "role": "Kingpin",
-    "lead_score": 73,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.745,
-      "betweenness": 0.798,
-      "degree": 0.714,
-      "centrality": 0.756,
-      "financial_anomaly": 0.403,
-      "communication_anomaly": 1.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.949,
-      "cross_case": 0.0
+    {
+      "entity_id": "C12",
+      "entity_type": "Person",
+      "label": "Sunil Pillai",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Collection agent",
+      "lead_score": 76,
+      "priority": "HIGH",
+      "signals": {
+        "bridge_score": 0.733,
+        "betweenness": 1.0,
+        "degree": 0.905,
+        "centrality": 0.953,
+        "financial_anomaly": 1.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.972,
+        "cross_case": 0.8
+      },
+      "reasons": [
+        "Bridge score 0.733 rank 2",
+        "Financial anomaly 1.0",
+        "Temporal correlated burst (multi-cell 7-day)",
+        "Cross-case shared (conf 0.8)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (76/100): Bridge score 0.733 rank 2; Financial anomaly 1.0; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Bridge score 0.745 rank 1",
-      "Communication burst 1.0",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (73/100): Bridge score 0.745 rank 1; Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "B11",
-    "entity_type": "Person",
-    "label": "Kavita Desai",
-    "cell": "B",
-    "role": "Financier",
-    "lead_score": 68,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.699,
-      "betweenness": 0.609,
-      "degree": 0.571,
-      "centrality": 0.59,
-      "financial_anomaly": 0.983,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.987,
-      "cross_case": 0.0
+    {
+      "entity_id": "B11",
+      "entity_type": "Person",
+      "label": "Kavita Desai",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Financier",
+      "lead_score": 68,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.699,
+        "betweenness": 0.609,
+        "degree": 0.571,
+        "centrality": 0.59,
+        "financial_anomaly": 0.983,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.987,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 0.699 rank 3",
+        "Financial anomaly 0.983",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (68/100): Bridge score 0.699 rank 3; Financial anomaly 0.983; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Bridge score 0.699 rank 3",
-      "Financial anomaly 0.983",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (68/100): Bridge score 0.699 rank 3; Financial anomaly 0.983; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "A1",
-    "entity_type": "Person",
-    "label": "Anwar Sheikh",
-    "cell": "A",
-    "role": "Kingpin",
-    "lead_score": 66,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.394,
-      "betweenness": 0.323,
-      "degree": 0.429,
-      "centrality": 0.376,
-      "financial_anomaly": 0.474,
-      "communication_anomaly": 0.894,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.968,
-      "cross_case": 0.95
+    {
+      "entity_id": "A1",
+      "entity_type": "Person",
+      "label": "Anwar Sheikh",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Kingpin",
+      "lead_score": 66,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.394,
+        "betweenness": 0.323,
+        "degree": 0.429,
+        "centrality": 0.376,
+        "financial_anomaly": 0.474,
+        "communication_anomaly": 0.894,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.968,
+        "cross_case": 0.95
+      },
+      "reasons": [
+        "Communication burst 0.894",
+        "Temporal correlated burst (multi-cell 7-day)",
+        "Cross-case shared (conf 0.95)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (66/100): Communication burst 0.894; Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.95)"
     },
-    "reasons": [
-      "Communication burst 0.894",
-      "Temporal correlated burst (multi-cell 7-day)",
-      "Cross-case shared (conf 0.95)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (66/100): Communication burst 0.894; Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.95)"
-  },
-  {
-    "entity_id": "C2",
-    "entity_type": "Person",
-    "label": "Nasir Malik",
-    "cell": "C",
-    "role": "Lieutenant",
-    "lead_score": 62,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.641,
-      "betweenness": 0.735,
-      "degree": 0.571,
-      "centrality": 0.653,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 1.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.981,
-      "cross_case": 0.0
+    {
+      "entity_id": "C2",
+      "entity_type": "Person",
+      "label": "Nasir Malik",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Lieutenant",
+      "lead_score": 62,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.641,
+        "betweenness": 0.735,
+        "degree": 0.571,
+        "centrality": 0.653,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 1.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.981,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 0.641 rank 4",
+        "Communication burst 1.0",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (62/100): Bridge score 0.641 rank 4; Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Bridge score 0.641 rank 4",
-      "Communication burst 1.0",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (62/100): Bridge score 0.641 rank 4; Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "C1",
-    "entity_type": "Person",
-    "label": "Prakash Shetty",
-    "cell": "C",
-    "role": "Kingpin",
-    "lead_score": 56,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.495,
-      "betweenness": 0.491,
-      "degree": 0.476,
-      "centrality": 0.483,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 1.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.95,
-      "cross_case": 0.0
+    {
+      "entity_id": "C1",
+      "entity_type": "Person",
+      "label": "Prakash Shetty",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Kingpin",
+      "lead_score": 61,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.495,
+        "betweenness": 0.491,
+        "degree": 0.476,
+        "centrality": 0.483,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 1.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.95,
+        "cross_case": 0.95
+      },
+      "reasons": [
+        "Communication burst 1.0",
+        "Temporal correlated burst (multi-cell 7-day)",
+        "Cross-case shared (conf 0.95)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (61/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.95)"
     },
-    "reasons": [
-      "Communication burst 1.0",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (56/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "B2",
-    "entity_type": "Person",
-    "label": "Salim Pathan",
-    "cell": "B",
-    "role": "Lieutenant",
-    "lead_score": 55,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.446,
-      "betweenness": 0.41,
-      "degree": 0.476,
-      "centrality": 0.443,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 1.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.981,
-      "cross_case": 0.0
+    {
+      "entity_id": "B2",
+      "entity_type": "Person",
+      "label": "Salim Pathan",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Lieutenant",
+      "lead_score": 55,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.446,
+        "betweenness": 0.41,
+        "degree": 0.476,
+        "centrality": 0.443,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 1.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.981,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Communication burst 1.0",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (55/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Communication burst 1.0",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (55/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "C11",
-    "entity_type": "Person",
-    "label": "Neha Kulkarni",
-    "cell": "C",
-    "role": "Accountant",
-    "lead_score": 55,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.425,
-      "betweenness": 0.375,
-      "degree": 0.429,
-      "centrality": 0.402,
-      "financial_anomaly": 0.8,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.983,
-      "cross_case": 0.0
+    {
+      "entity_id": "C11",
+      "entity_type": "Person",
+      "label": "Neha Kulkarni",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Accountant",
+      "lead_score": 55,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.425,
+        "betweenness": 0.375,
+        "degree": 0.429,
+        "centrality": 0.402,
+        "financial_anomaly": 0.8,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.983,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Financial anomaly 0.8",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (55/100): Financial anomaly 0.8; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Financial anomaly 0.8",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (55/100): Financial anomaly 0.8; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "A2",
-    "entity_type": "Person",
-    "label": "Suresh Rane",
-    "cell": "A",
-    "role": "Lieutenant",
-    "lead_score": 53,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.448,
-      "betweenness": 0.413,
-      "degree": 0.429,
-      "centrality": 0.421,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.894,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.975,
-      "cross_case": 0.0
+    {
+      "entity_id": "A2",
+      "entity_type": "Person",
+      "label": "Suresh Rane",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Lieutenant",
+      "lead_score": 53,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.448,
+        "betweenness": 0.413,
+        "degree": 0.429,
+        "centrality": 0.421,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.894,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.975,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Communication burst 0.894",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (53/100): Communication burst 0.894; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Communication burst 0.894",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (53/100): Communication burst 0.894; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "C4",
-    "entity_type": "Person",
-    "label": "Baban Surve",
-    "cell": "C",
-    "role": "Lieutenant",
-    "lead_score": 53,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.358,
-      "betweenness": 0.375,
-      "degree": 0.429,
-      "centrality": 0.402,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 1.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.983,
-      "cross_case": 0.0
+    {
+      "entity_id": "C4",
+      "entity_type": "Person",
+      "label": "Baban Surve",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Lieutenant",
+      "lead_score": 53,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.358,
+        "betweenness": 0.375,
+        "degree": 0.429,
+        "centrality": 0.402,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 1.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.983,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Communication burst 1.0",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (53/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Communication burst 1.0",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (53/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "C3",
-    "entity_type": "Person",
-    "label": "Ravi Kadam",
-    "cell": "C",
-    "role": "Lieutenant",
-    "lead_score": 52,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.24,
-      "betweenness": 0.178,
-      "degree": 0.429,
-      "centrality": 0.303,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 1.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.944,
-      "cross_case": 0.75
+    {
+      "entity_id": "B4",
+      "entity_type": "Person",
+      "label": "Nitin Kamble",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Lieutenant",
+      "lead_score": 51,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.309,
+        "betweenness": 0.293,
+        "degree": 0.429,
+        "centrality": 0.361,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 1.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.991,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Communication burst 1.0",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (51/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Communication burst 1.0",
-      "Temporal correlated burst (multi-cell 7-day)",
-      "Cross-case shared (conf 0.75)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (52/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.75)"
-  },
-  {
-    "entity_id": "B4",
-    "entity_type": "Person",
-    "label": "Nitin Kamble",
-    "cell": "B",
-    "role": "Lieutenant",
-    "lead_score": 51,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.309,
-      "betweenness": 0.293,
-      "degree": 0.429,
-      "centrality": 0.361,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 1.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.991,
-      "cross_case": 0.0
+    {
+      "entity_id": "B3",
+      "entity_type": "Person",
+      "label": "Vinod Chavan",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Lieutenant",
+      "lead_score": 50,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 0.272,
+        "betweenness": 0.231,
+        "degree": 0.429,
+        "centrality": 0.33,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 1.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.988,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Communication burst 1.0",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (50/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Communication burst 1.0",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (51/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "B3",
-    "entity_type": "Person",
-    "label": "Vinod Chavan",
-    "cell": "B",
-    "role": "Lieutenant",
-    "lead_score": 50,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 0.272,
-      "betweenness": 0.231,
-      "degree": 0.429,
-      "centrality": 0.33,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 1.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.988,
-      "cross_case": 0.0
+    {
+      "entity_id": "A3",
+      "entity_type": "Person",
+      "label": "Farhan Qureshi",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Lieutenant",
+      "lead_score": 49,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.305,
+        "betweenness": 0.286,
+        "degree": 0.381,
+        "centrality": 0.334,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.894,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.966,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Communication burst 0.894",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (49/100): Communication burst 0.894; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Communication burst 1.0",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (50/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "A3",
-    "entity_type": "Person",
-    "label": "Farhan Qureshi",
-    "cell": "A",
-    "role": "Lieutenant",
-    "lead_score": 49,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.305,
-      "betweenness": 0.286,
-      "degree": 0.381,
-      "centrality": 0.334,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.894,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.966,
-      "cross_case": 0.0
+    {
+      "entity_id": "A11",
+      "entity_type": "Person",
+      "label": "Meena Joshi",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Accountant",
+      "lead_score": 49,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.543,
+        "betweenness": 0.46,
+        "degree": 0.476,
+        "centrality": 0.468,
+        "financial_anomaly": 0.312,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.988,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 0.543 rank 7",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (49/100): Bridge score 0.543 rank 7; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Communication burst 0.894",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (49/100): Communication burst 0.894; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "A11",
-    "entity_type": "Person",
-    "label": "Meena Joshi",
-    "cell": "A",
-    "role": "Accountant",
-    "lead_score": 49,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.543,
-      "betweenness": 0.46,
-      "degree": 0.476,
-      "centrality": 0.468,
-      "financial_anomaly": 0.312,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.988,
-      "cross_case": 0.0
+    {
+      "entity_id": "C3",
+      "entity_type": "Person",
+      "label": "Ravi Kadam",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Lieutenant",
+      "lead_score": 48,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.24,
+        "betweenness": 0.178,
+        "degree": 0.429,
+        "centrality": 0.303,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 1.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.944,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Communication burst 1.0",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (48/100): Communication burst 1.0; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Bridge score 0.543 rank 7",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (49/100): Bridge score 0.543 rank 7; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "A4",
-    "entity_type": "Person",
-    "label": "Vikas Chauhan",
-    "cell": "A",
-    "role": "Lieutenant",
-    "lead_score": 47,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.255,
-      "betweenness": 0.202,
-      "degree": 0.381,
-      "centrality": 0.291,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.894,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.979,
-      "cross_case": 0.0
+    {
+      "entity_id": "A4",
+      "entity_type": "Person",
+      "label": "Vikas Chauhan",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Lieutenant",
+      "lead_score": 47,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.255,
+        "betweenness": 0.202,
+        "degree": 0.381,
+        "centrality": 0.291,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.894,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.979,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Communication burst 0.894",
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (47/100): Communication burst 0.894; Temporal correlated burst (multi-cell 7-day)"
     },
-    "reasons": [
-      "Communication burst 0.894",
-      "Temporal correlated burst (multi-cell 7-day)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (47/100): Communication burst 0.894; Temporal correlated burst (multi-cell 7-day)"
-  },
-  {
-    "entity_id": "X1",
-    "entity_type": "Person",
-    "label": "Dinesh Mehta",
-    "cell": "Bridge",
-    "role": "Hawala operator",
-    "lead_score": 42,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.509,
-      "betweenness": 0.293,
-      "degree": 0.238,
-      "centrality": 0.265,
-      "financial_anomaly": 0.6,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 0.0,
-      "evidence_quality": 1.0,
-      "cross_case": 0.0
+    {
+      "entity_id": "X1",
+      "entity_type": "Person",
+      "label": "Dinesh Mehta",
+      "label_hi": null,
+      "cell": "Bridge",
+      "role": "Hawala operator",
+      "lead_score": 42,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.509,
+        "betweenness": 0.293,
+        "degree": 0.238,
+        "centrality": 0.265,
+        "financial_anomaly": 0.6,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 0.509 rank 9",
+        "Financial anomaly 0.6"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (42/100): Bridge score 0.509 rank 9; Financial anomaly 0.6"
     },
-    "reasons": [
-      "Bridge score 0.509 rank 9",
-      "Financial anomaly 0.6"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (42/100): Bridge score 0.509 rank 9; Financial anomaly 0.6"
-  },
-  {
-    "entity_id": "B12",
-    "entity_type": "Person",
-    "label": "Mohsin Qureshi",
-    "cell": "B",
-    "role": "Cache keeper",
-    "lead_score": 39,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.289,
-      "betweenness": 0.26,
-      "degree": 0.381,
-      "centrality": 0.321,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.964,
-      "cross_case": 0.75
+    {
+      "entity_id": "B8",
+      "entity_type": "Person",
+      "label": "Waseem Ali",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Courier",
+      "lead_score": 37,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.296,
+        "betweenness": 0.272,
+        "degree": 0.333,
+        "centrality": 0.302,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.864,
+        "cross_case": 0.8
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)",
+        "Cross-case shared (conf 0.8)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (37/100): Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.8)"
     },
-    "reasons": [
-      "Temporal correlated burst (multi-cell 7-day)",
-      "Cross-case shared (conf 0.75)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (39/100): Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.75)"
-  },
-  {
-    "entity_id": "A10",
-    "entity_type": "Person",
-    "label": "Faisal Shah",
-    "cell": "A",
-    "role": "Associate",
-    "lead_score": 38,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.291,
-      "betweenness": 0.262,
-      "degree": 0.333,
-      "centrality": 0.297,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.914,
-      "cross_case": 0.75
+    {
+      "entity_id": "B10",
+      "entity_type": "Person",
+      "label": "Ganesh Pandit",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Courier",
+      "lead_score": 37,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.283,
+        "betweenness": 0.25,
+        "degree": 0.333,
+        "centrality": 0.291,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.873,
+        "cross_case": 0.8
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)",
+        "Cross-case shared (conf 0.8)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (37/100): Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.8)"
     },
-    "reasons": [
-      "Temporal correlated burst (multi-cell 7-day)",
-      "Cross-case shared (conf 0.75)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (38/100): Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.75)"
-  },
-  {
-    "entity_id": "B8",
-    "entity_type": "Person",
-    "label": "Waseem Ali",
-    "cell": "B",
-    "role": "Courier",
-    "lead_score": 37,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.296,
-      "betweenness": 0.272,
-      "degree": 0.333,
-      "centrality": 0.302,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 1.0,
-      "evidence_quality": 0.864,
-      "cross_case": 0.8
+    {
+      "entity_id": "A13",
+      "entity_type": "Person",
+      "label": "Karan Mehra",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Associate",
+      "lead_score": 36,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.257,
+        "betweenness": 0.205,
+        "degree": 0.238,
+        "centrality": 0.221,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.921,
+        "cross_case": 0.75
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)",
+        "Cross-case shared (conf 0.75)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (36/100): Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.75)"
     },
-    "reasons": [
-      "Temporal correlated burst (multi-cell 7-day)",
-      "Cross-case shared (conf 0.8)"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (37/100): Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.8)"
-  }
-]
+    {
+      "entity_id": "A9",
+      "entity_type": "Person",
+      "label": "Tariq Ansari",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Associate",
+      "lead_score": 36,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.352,
+        "betweenness": 0.365,
+        "degree": 0.381,
+        "centrality": 0.373,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.893,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (36/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "B13",
+      "entity_type": "Person",
+      "label": "Sameer Jadhav",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Courier",
+      "lead_score": 36,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.236,
+        "betweenness": 0.171,
+        "degree": 0.286,
+        "centrality": 0.228,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.898,
+        "cross_case": 0.8
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)",
+        "Cross-case shared (conf 0.8)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (36/100): Temporal correlated burst (multi-cell 7-day); Cross-case shared (conf 0.8)"
+    },
+    {
+      "entity_id": "A12",
+      "entity_type": "Person",
+      "label": "Rohit Bhatt",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Safehouse keeper",
+      "lead_score": 35,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.282,
+        "betweenness": 0.247,
+        "degree": 0.381,
+        "centrality": 0.314,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.964,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (35/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "B7",
+      "entity_type": "Person",
+      "label": "Deepak Sawant",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Courier",
+      "lead_score": 35,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.308,
+        "betweenness": 0.292,
+        "degree": 0.381,
+        "centrality": 0.337,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.907,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (35/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "B12",
+      "entity_type": "Person",
+      "label": "Mohsin Qureshi",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Cache keeper",
+      "lead_score": 35,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.289,
+        "betweenness": 0.26,
+        "degree": 0.381,
+        "centrality": 0.321,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.964,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (35/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "A10",
+      "entity_type": "Person",
+      "label": "Faisal Shah",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Associate",
+      "lead_score": 34,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.291,
+        "betweenness": 0.262,
+        "degree": 0.333,
+        "centrality": 0.297,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.914,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (34/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "C6",
+      "entity_type": "Person",
+      "label": "Santosh Bhosale",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Enforcer",
+      "lead_score": 34,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.292,
+        "betweenness": 0.264,
+        "degree": 0.286,
+        "centrality": 0.275,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.919,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (34/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "A6",
+      "entity_type": "Person",
+      "label": "Iqbal Khan",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Associate",
+      "lead_score": 33,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.273,
+        "betweenness": 0.232,
+        "degree": 0.286,
+        "centrality": 0.259,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.922,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (33/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "B6",
+      "entity_type": "Person",
+      "label": "Imran Baig",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Courier",
+      "lead_score": 33,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.264,
+        "betweenness": 0.218,
+        "degree": 0.238,
+        "centrality": 0.228,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.973,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (33/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "C7",
+      "entity_type": "Person",
+      "label": "Aslam Pathan",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Enforcer",
+      "lead_score": 33,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.275,
+        "betweenness": 0.236,
+        "degree": 0.286,
+        "centrality": 0.261,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.889,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (33/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "X3",
+      "entity_type": "Person",
+      "label": "Arvind Kapoor",
+      "label_hi": null,
+      "cell": "Bridge",
+      "role": "Logistics broker",
+      "lead_score": 33,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.6,
+        "betweenness": 0.334,
+        "degree": 0.286,
+        "centrality": 0.31,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 0.6 rank 5"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (33/100): Bridge score 0.6 rank 5"
+    },
+    {
+      "entity_id": "X4",
+      "entity_type": "Person",
+      "label": "R.K. Verma",
+      "label_hi": null,
+      "cell": "Bridge",
+      "role": "Corrupt police contact",
+      "lead_score": 33,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.595,
+        "betweenness": 0.437,
+        "degree": 0.238,
+        "centrality": 0.338,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 0.595 rank 6"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (33/100): Bridge score 0.595 rank 6"
+    },
+    {
+      "entity_id": "C5",
+      "entity_type": "Person",
+      "label": "Yusuf Ali",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Enforcer",
+      "lead_score": 32,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.225,
+        "betweenness": 0.153,
+        "degree": 0.19,
+        "centrality": 0.171,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.95,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (32/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "C9",
+      "entity_type": "Person",
+      "label": "Irfan Sheikh",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Enforcer",
+      "lead_score": 32,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.227,
+        "betweenness": 0.156,
+        "degree": 0.19,
+        "centrality": 0.173,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.959,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (32/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "C10",
+      "entity_type": "Person",
+      "label": "Vijay Salunkhe",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Enforcer",
+      "lead_score": 32,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.236,
+        "betweenness": 0.171,
+        "degree": 0.238,
+        "centrality": 0.205,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.953,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (32/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "A5",
+      "entity_type": "Person",
+      "label": "Ganesh Pawar",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Associate",
+      "lead_score": 31,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.228,
+        "betweenness": 0.158,
+        "degree": 0.19,
+        "centrality": 0.174,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.922,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (31/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "A7",
+      "entity_type": "Person",
+      "label": "Ramesh Yadav",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Associate",
+      "lead_score": 31,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.24,
+        "betweenness": 0.178,
+        "degree": 0.238,
+        "centrality": 0.208,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.87,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (31/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "A8",
+      "entity_type": "Person",
+      "label": "Sanjay More",
+      "label_hi": null,
+      "cell": "A",
+      "role": "Associate",
+      "lead_score": 31,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.226,
+        "betweenness": 0.155,
+        "degree": 0.238,
+        "centrality": 0.197,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.921,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (31/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "B5",
+      "entity_type": "Person",
+      "label": "Ashok Gaikwad",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Courier",
+      "lead_score": 31,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.225,
+        "betweenness": 0.153,
+        "degree": 0.19,
+        "centrality": 0.171,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.908,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (31/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "B9",
+      "entity_type": "Person",
+      "label": "Rafiq Shaikh",
+      "label_hi": null,
+      "cell": "B",
+      "role": "Courier",
+      "lead_score": 31,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.225,
+        "betweenness": 0.153,
+        "degree": 0.19,
+        "centrality": 0.171,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.913,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (31/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "C13",
+      "entity_type": "Person",
+      "label": "Ramesh Chougule",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Enforcer",
+      "lead_score": 31,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.23,
+        "betweenness": 0.161,
+        "degree": 0.238,
+        "centrality": 0.2,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.91,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (31/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "C8",
+      "entity_type": "Person",
+      "label": "Mahesh Gupta",
+      "label_hi": null,
+      "cell": "C",
+      "role": "Enforcer",
+      "lead_score": 31,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.225,
+        "betweenness": 0.153,
+        "degree": 0.238,
+        "centrality": 0.196,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 1.0,
+        "evidence_quality": 0.908,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Temporal correlated burst (multi-cell 7-day)"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (31/100): Temporal correlated burst (multi-cell 7-day)"
+    },
+    {
+      "entity_id": "X2",
+      "entity_type": "Person",
+      "label": "Javed Ansari",
+      "label_hi": null,
+      "cell": "Bridge",
+      "role": "Weapons supplier",
+      "lead_score": 31,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.517,
+        "betweenness": 0.307,
+        "degree": 0.238,
+        "centrality": 0.272,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 0.517 rank 8"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (31/100): Bridge score 0.517 rank 8"
+    },
+    {
+      "entity_id": "N16",
+      "entity_type": "Person",
+      "label": "Pooja Sinha",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 24,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.727,
+        "degree": 1.0,
+        "centrality": 0.863,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.996,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (24/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N3",
+      "entity_type": "Person",
+      "label": "Vinay Naidu",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 23,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.61,
+        "degree": 0.905,
+        "centrality": 0.758,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.998,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (23/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N5",
+      "entity_type": "Person",
+      "label": "Amit Reddy",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 23,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.626,
+        "degree": 0.952,
+        "centrality": 0.789,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (23/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N2",
+      "entity_type": "Person",
+      "label": "Anita Kulkarni",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 22,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.434,
+        "degree": 1.0,
+        "centrality": 0.717,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.994,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (22/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N8",
+      "entity_type": "Person",
+      "label": "Manoj Kulkarni",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 22,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.517,
+        "degree": 0.81,
+        "centrality": 0.663,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (22/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N9",
+      "entity_type": "Person",
+      "label": "Vinay Dutta",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 22,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.479,
+        "degree": 0.857,
+        "centrality": 0.668,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (22/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N12",
+      "entity_type": "Person",
+      "label": "Amit Menon",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 22,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.51,
+        "degree": 0.952,
+        "centrality": 0.731,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.997,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (22/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N11",
+      "entity_type": "Person",
+      "label": "Amit Kulkarni",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 21,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.37,
+        "degree": 0.905,
+        "centrality": 0.637,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.999,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (21/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N13",
+      "entity_type": "Person",
+      "label": "Vinay Chatterjee",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 21,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.403,
+        "degree": 0.857,
+        "centrality": 0.63,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (21/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N18",
+      "entity_type": "Person",
+      "label": "Anita Naidu",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 21,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.429,
+        "degree": 0.81,
+        "centrality": 0.62,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.997,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (21/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N20",
+      "entity_type": "Person",
+      "label": "Sneha Reddy",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 21,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.436,
+        "degree": 0.81,
+        "centrality": 0.623,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.997,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (21/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N4",
+      "entity_type": "Person",
+      "label": "Sunita Nair",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 20,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.246,
+        "degree": 0.81,
+        "centrality": 0.528,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.998,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (20/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N6",
+      "entity_type": "Person",
+      "label": "Poonam Menon",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 20,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.238,
+        "degree": 0.762,
+        "centrality": 0.5,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.998,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (20/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N7",
+      "entity_type": "Person",
+      "label": "Priya Mishra",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 20,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.173,
+        "degree": 0.762,
+        "centrality": 0.468,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.998,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (20/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N14",
+      "entity_type": "Person",
+      "label": "Poonam Bhatia",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 20,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.285,
+        "degree": 0.714,
+        "centrality": 0.499,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.996,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (20/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N17",
+      "entity_type": "Person",
+      "label": "Naveen Iyer",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 20,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.289,
+        "degree": 0.762,
+        "centrality": 0.525,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (20/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N19",
+      "entity_type": "Person",
+      "label": "Deepa Malhotra",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 20,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.195,
+        "degree": 0.81,
+        "centrality": 0.503,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (20/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N1",
+      "entity_type": "Person",
+      "label": "Sunita Mishra",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 19,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.172,
+        "degree": 0.714,
+        "centrality": 0.443,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.998,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (19/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N10",
+      "entity_type": "Person",
+      "label": "Alok Mishra",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 19,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.186,
+        "degree": 0.667,
+        "centrality": 0.426,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.996,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (19/100): Low anomaly signals; review degree/evidence"
+    },
+    {
+      "entity_id": "N15",
+      "entity_type": "Person",
+      "label": "Rakesh Malhotra",
+      "label_hi": null,
+      "cell": "Noise",
+      "role": "Unrelated/background",
+      "lead_score": 19,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.0,
+        "betweenness": 0.177,
+        "degree": 0.714,
+        "centrality": 0.446,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.998,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (19/100): Low anomaly signals; review degree/evidence"
+    }
+  ]
+}

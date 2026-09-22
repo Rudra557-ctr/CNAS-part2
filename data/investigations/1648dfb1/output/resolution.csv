@@ -1,68 +1,68 @@
 master_id,merged_ids,method,confidence,name_score,phone_score,context_score,source_id,source_type,evidence_snippet,evidence_hash
-UP02023,Imran Nishad @ Don,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0004,criminal_history,Imran Nishad @ Don,1a74d09d1b3387e9
+UP00004,Imran Nishad @ Don,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0004,criminal_history,Imran Nishad @ Don,1a74d09d1b3387e9
 UP00010,Babloo Tiwari @ Pandit,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0010,criminal_history,Babloo Tiwari @ Pandit,aad637a5c7c2ffa3
-UP00438,Satish Jaiswal @ Raja,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0034,criminal_history,Satish Jaiswal @ Raja,78a201d9f6569ddc
+UP00034,Satish Jaiswal @ Raja,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0034,criminal_history,Satish Jaiswal @ Raja,78a201d9f6569ddc
 UP00041,Neeraj Pal @ Bhaiya,fuzzy(name:69/100=0.690+phone:0.0*0.04+ctx:0.5*0.02=0.700),0.7,69.0,0.0,0.5,UP-CRIM-0041,criminal_history,Neeraj Pal @ Bhaiya,2ecfd15e391d6188
 UP00044,Mahesh Pandey @ Contractor,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0044,criminal_history,Mahesh Pandey @ Contractor,0afa31d7ac8ddb59
-UP01315,Imran Maurya @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0048,criminal_history,Imran Maurya @ Pandit,24b155d10a04becb
+UP00048,Imran Maurya @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0048,criminal_history,Imran Maurya @ Pandit,24b155d10a04becb
 UP00049,Virendra Tyagi @ Vakil,fuzzy(name:78/100=0.778+phone:0.0*0.04+ctx:0.5*0.02=0.788),0.788,77.8,0.0,0.5,UP-CRIM-0049,criminal_history,Virendra Tyagi @ Vakil,8b8ff6aa852b1a43
 UP00053,Rajesh Chauhan @ Chacha,fuzzy(name:76/100=0.757+phone:0.0*0.04+ctx:0.5*0.02=0.767),0.767,75.7,0.0,0.5,UP-CRIM-0053,criminal_history,Rajesh Chauhan @ Chacha,49122c48dc867cf3
 UP00057,Akhilesh Chauhan @ Pahalwan,fuzzy(name:74/100=0.744+phone:0.0*0.04+ctx:0.5*0.02=0.754),0.754,74.4,0.0,0.5,UP-CRIM-0057,criminal_history,Akhilesh Chauhan @ Pahalwan,95b0360d4105502b
 UP00074,Rajesh Tripathi @ Don,fuzzy(name:83/100=0.833+phone:0.0*0.04+ctx:0.5*0.02=0.843),0.843,83.3,0.0,0.5,UP-CRIM-0074,criminal_history,Rajesh Tripathi @ Don,851cb2dca359ac8f
 Suresh Khan @ Urf Chhotu,candidate->UP00077 score 95.0,fuzzy_reject(name:63/100=0.629+phone:0.0*0.04+ctx:0.5*0.02=0.639),0.5,62.9,0.0,0.5,UP-CRIM-0077,criminal_history,Suresh Khan @ Urf Chhotu,fb6a72d6c4730cc1
-UP00394,Manoj Siddiqui @ Chacha,fuzzy(name:76/100=0.757+phone:0.0*0.04+ctx:0.5*0.02=0.767),0.767,75.7,0.0,0.5,UP-CRIM-0081,criminal_history,Manoj Siddiqui @ Chacha,cbb84231668b8478
+UP00081,Manoj Siddiqui @ Chacha,fuzzy(name:76/100=0.757+phone:0.0*0.04+ctx:0.5*0.02=0.767),0.767,75.7,0.0,0.5,UP-CRIM-0081,criminal_history,Manoj Siddiqui @ Chacha,cbb84231668b8478
 UP00089,Santosh Siddiqui @ Netaji,fuzzy(name:78/100=0.780+phone:0.0*0.04+ctx:0.5*0.02=0.790),0.79,78.0,0.0,0.5,UP-CRIM-0089,criminal_history,Santosh Siddiqui @ Netaji,d0f4ec5bae98146c
 UP00093,Abhay Nishad @ Fauji,fuzzy(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.76,75.0,0.0,0.5,UP-CRIM-0093,criminal_history,Abhay Nishad @ Fauji,066b008c037a6720
 UP00097,Atiq Pandey @ Don,fuzzy(name:79/100=0.786+phone:0.0*0.04+ctx:0.5*0.02=0.796),0.796,78.6,0.0,0.5,UP-CRIM-0097,criminal_history,Atiq Pandey @ Don,a0def3135763e97b
 UP00064,Alok Nagar @ Fauji,fuzzy(name:71/100=0.714+phone:0.0*0.04+ctx:0.5*0.02=0.724),0.724,71.4,0.0,0.5,UP-CRIM-0104,criminal_history,Alok Nagar @ Fauji,315ca46ea04d9fce
 UP00107,Ravindra Jaiswal @ Pandit,fuzzy(name:78/100=0.780+phone:0.0*0.04+ctx:0.5*0.02=0.790),0.79,78.0,0.0,0.5,UP-CRIM-0107,criminal_history,Ravindra Jaiswal @ Pandit,4da568b0b0217646
 UP00113,Imran Siddiqui @ Babu,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0113,criminal_history,Imran Siddiqui @ Babu,575d82062221872f
-UP01496,Munna Gurjar @ Kabadi,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0117,criminal_history,Munna Gurjar @ Kabadi,dd6064f2b069aecd
+UP00117,Munna Gurjar @ Kabadi,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0117,criminal_history,Munna Gurjar @ Kabadi,dd6064f2b069aecd
 UP00133,Anil Nishad @ Bhaiya,fuzzy(name:71/100=0.710+phone:0.0*0.04+ctx:0.5*0.02=0.720),0.72,71.0,0.0,0.5,UP-CRIM-0133,criminal_history,Anil Nishad @ Bhaiya,3bfbfe08f0d83b23
 UP00137,Deepak Jaiswal @ Don,fuzzy(name:82/100=0.824+phone:0.0*0.04+ctx:0.5*0.02=0.834),0.834,82.4,0.0,0.5,UP-CRIM-0137,criminal_history,Deepak Jaiswal @ Don,65389ee83e8d360d
-UP00140,Chhotu Gupta @ Fauji,fuzzy(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.76,75.0,0.0,0.5,UP-CRIM-0140,criminal_history,Chhotu Gupta @ Fauji,503969c03ad1203c
+UP00011,Chhotu Gupta @ Fauji,fuzzy(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.76,75.0,0.0,0.5,UP-CRIM-0140,criminal_history,Chhotu Gupta @ Fauji,503969c03ad1203c
 UP00144,Rakesh Rajput @ Pandit,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0144,criminal_history,Rakesh Rajput @ Pandit,41830e948cbbdd79
-UP00283,Akhilesh Shukla @ Urf Chhotu,fuzzy(name:70/100=0.698+phone:0.0*0.04+ctx:0.5*0.02=0.708),0.708,69.8,0.0,0.5,UP-CRIM-0145,criminal_history,Akhilesh Shukla @ Urf Chhotu,a879437e8d1e366d
+UP00145,Akhilesh Shukla @ Urf Chhotu,fuzzy(name:70/100=0.698+phone:0.0*0.04+ctx:0.5*0.02=0.708),0.708,69.8,0.0,0.5,UP-CRIM-0145,criminal_history,Akhilesh Shukla @ Urf Chhotu,a879437e8d1e366d
 UP00150,Virendra Yadav @ Urf Chhotu,fuzzy(name:68/100=0.683+phone:0.0*0.04+ctx:0.5*0.02=0.693),0.693,68.3,0.0,0.5,UP-CRIM-0150,criminal_history,Virendra Yadav @ Urf Chhotu,3a58aef1230b4531
 UP00151,Dharmendra Nishad @ Raja,fuzzy(name:83/100=0.829+phone:0.0*0.04+ctx:0.5*0.02=0.839),0.839,82.9,0.0,0.5,UP-CRIM-0151,criminal_history,Dharmendra Nishad @ Raja,487bf43ea1d75632
 UP00152,Sonu Rajput @ Babu,fuzzy(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.769,75.9,0.0,0.5,UP-CRIM-0152,criminal_history,Sonu Rajput @ Babu,adf2fe270ed97e55
-UP00971,Sunil Shukla @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0153,criminal_history,Sunil Shukla @ Pandit,d848ff32b38e4d3e
+UP00135,Sunil Shukla @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0153,criminal_history,Sunil Shukla @ Pandit,d848ff32b38e4d3e
 UP00164,Akhilesh Yadav @ Kabadi,fuzzy(name:76/100=0.757+phone:0.0*0.04+ctx:0.5*0.02=0.767),0.767,75.7,0.0,0.5,UP-CRIM-0164,criminal_history,Akhilesh Yadav @ Kabadi,ed4362038fcd7274
 UP00167,Sunil Kushwaha @ Netaji,fuzzy(name:76/100=0.757+phone:0.0*0.04+ctx:0.5*0.02=0.767),0.767,75.7,0.0,0.5,UP-CRIM-0167,criminal_history,Sunil Kushwaha @ Netaji,f28f3e8c0f8f421c
 UP00168,Ravindra Srivastav @ Raja,fuzzy(name:84/100=0.837+phone:0.0*0.04+ctx:0.5*0.02=0.847),0.847,83.7,0.0,0.5,UP-CRIM-0168,criminal_history,Ravindra Srivastav @ Raja,b88b2551143b7213
-UP00359,Atiq Qureshi @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0169,criminal_history,Atiq Qureshi @ Pandit,3e94a753b66ac9c6
-UP01828,Ramesh Kushwaha @ Fauji,fuzzy(name:79/100=0.789+phone:0.0*0.04+ctx:0.5*0.02=0.799),0.799,78.9,0.0,0.5,UP-CRIM-0174,criminal_history,Ramesh Kushwaha @ Fauji,f4d31cbe133502ce
-UP01387,Amit Tiwari @ Netaji,fuzzy(name:71/100=0.710+phone:0.0*0.04+ctx:0.5*0.02=0.720),0.72,71.0,0.0,0.5,UP-CRIM-0176,criminal_history,Amit Tiwari @ Netaji,8c301d77b0c853e4
-UP00907,Pramod Gurjar @ Vakil,fuzzy(name:76/100=0.765+phone:0.0*0.04+ctx:0.5*0.02=0.775),0.775,76.5,0.0,0.5,UP-CRIM-0179,criminal_history,Pramod Gurjar @ Vakil,f572336ab8703d1a
-UP00187,Rakesh Mishra @ Babu,fuzzy(name:79/100=0.788+phone:0.0*0.04+ctx:0.5*0.02=0.798),0.798,78.8,0.0,0.5,UP-CRIM-0187,criminal_history,Rakesh Mishra @ Babu,e88e7cbcee180253
-UP00538,Suresh Pal @ Shooter,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0191,criminal_history,Suresh Pal @ Shooter,4c81666abac0e37e
+UP00169,Atiq Qureshi @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0169,criminal_history,Atiq Qureshi @ Pandit,3e94a753b66ac9c6
+UP00174,Ramesh Kushwaha @ Fauji,fuzzy(name:79/100=0.789+phone:0.0*0.04+ctx:0.5*0.02=0.799),0.799,78.9,0.0,0.5,UP-CRIM-0174,criminal_history,Ramesh Kushwaha @ Fauji,f4d31cbe133502ce
+UP00176,Amit Tiwari @ Netaji,fuzzy(name:71/100=0.710+phone:0.0*0.04+ctx:0.5*0.02=0.720),0.72,71.0,0.0,0.5,UP-CRIM-0176,criminal_history,Amit Tiwari @ Netaji,8c301d77b0c853e4
+UP00179,Pramod Gurjar @ Vakil,fuzzy(name:76/100=0.765+phone:0.0*0.04+ctx:0.5*0.02=0.775),0.775,76.5,0.0,0.5,UP-CRIM-0179,criminal_history,Pramod Gurjar @ Vakil,f572336ab8703d1a
+UP00067,Rakesh Mishra @ Babu,fuzzy(name:79/100=0.788+phone:0.0*0.04+ctx:0.5*0.02=0.798),0.798,78.8,0.0,0.5,UP-CRIM-0187,criminal_history,Rakesh Mishra @ Babu,e88e7cbcee180253
+UP00147,Suresh Pal @ Shooter,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0191,criminal_history,Suresh Pal @ Shooter,4c81666abac0e37e
 UP00199,Rizwan Yadav @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0199,criminal_history,Rizwan Yadav @ Pandit,42ee2e2dd029351e
-UP00200,Sonu Khan @ Chacha,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0200,criminal_history,Sonu Khan @ Chacha,417a0d5e55363e57
+UP00061,Sonu Khan @ Chacha,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0200,criminal_history,Sonu Khan @ Chacha,417a0d5e55363e57
 UP00205,Anil Dubey @ Babu,fuzzy(name:74/100=0.741+phone:0.0*0.04+ctx:0.5*0.02=0.751),0.751,74.1,0.0,0.5,UP-CRIM-0205,criminal_history,Anil Dubey @ Babu,d423f6d0d219a54f
-UP02110,Akhilesh Mishra @ Don,fuzzy(name:83/100=0.833+phone:0.0*0.04+ctx:0.5*0.02=0.843),0.843,83.3,0.0,0.5,UP-CRIM-0208,criminal_history,Akhilesh Mishra @ Don,745ce59195716dc5
-UP00358,Akhilesh Nagar @ Kabadi,fuzzy(name:76/100=0.757+phone:0.0*0.04+ctx:0.5*0.02=0.767),0.767,75.7,0.0,0.5,UP-CRIM-0212,criminal_history,Akhilesh Nagar @ Kabadi,f2574b65708202fb
+UP00208,Akhilesh Mishra @ Don,fuzzy(name:83/100=0.833+phone:0.0*0.04+ctx:0.5*0.02=0.843),0.843,83.3,0.0,0.5,UP-CRIM-0208,criminal_history,Akhilesh Mishra @ Don,745ce59195716dc5
+UP00012,Akhilesh Nagar @ Kabadi,fuzzy(name:76/100=0.757+phone:0.0*0.04+ctx:0.5*0.02=0.767),0.767,75.7,0.0,0.5,UP-CRIM-0212,criminal_history,Akhilesh Nagar @ Kabadi,f2574b65708202fb
 UP00219,Abhay Shukla @ Raja,fuzzy(name:77/100=0.774+phone:0.0*0.04+ctx:0.5*0.02=0.784),0.784,77.4,0.0,0.5,UP-CRIM-0219,criminal_history,Abhay Shukla @ Raja,74e6a05a997e9c9c
-UP00437,Satish Verma @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0229,criminal_history,Satish Verma @ Pandit,6b4cf695076e0d3d
+UP00229,Satish Verma @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0229,criminal_history,Satish Verma @ Pandit,6b4cf695076e0d3d
 UP00232,Ajay Tripathi @ Netaji,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0232,criminal_history,Ajay Tripathi @ Netaji,f99621e1d87918cd
-UP02484,Pappu Rajput @ Raja,fuzzy(name:77/100=0.774+phone:0.0*0.04+ctx:0.5*0.02=0.784),0.784,77.4,0.0,0.5,UP-CRIM-0239,criminal_history,Pappu Rajput @ Raja,6aa50d135f39f665
+UP00239,Pappu Rajput @ Raja,fuzzy(name:77/100=0.774+phone:0.0*0.04+ctx:0.5*0.02=0.784),0.784,77.4,0.0,0.5,UP-CRIM-0239,criminal_history,Pappu Rajput @ Raja,6aa50d135f39f665
 UP00246,Rakesh Shukla @ Bhaiya,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0246,criminal_history,Rakesh Shukla @ Bhaiya,875eaa19895cff9a
 UP00250,Rajesh Gurjar @ Kabadi,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0250,criminal_history,Rajesh Gurjar @ Kabadi,be1a9519db3eb448
-UP00538,Suresh Pal @ Netaji,fuzzy(name:69/100=0.690+phone:0.0*0.04+ctx:0.5*0.02=0.700),0.7,69.0,0.0,0.5,UP-CRIM-0258,criminal_history,Suresh Pal @ Netaji,1c86af3e47513b35
+UP00147,Suresh Pal @ Netaji,fuzzy(name:69/100=0.690+phone:0.0*0.04+ctx:0.5*0.02=0.700),0.7,69.0,0.0,0.5,UP-CRIM-0258,criminal_history,Suresh Pal @ Netaji,1c86af3e47513b35
 UP00267,Aslam Rawat @ Fauji,fuzzy(name:73/100=0.733+phone:0.0*0.04+ctx:0.5*0.02=0.743),0.743,73.3,0.0,0.5,UP-CRIM-0267,criminal_history,Aslam Rawat @ Fauji,9456f9f12bb79981
 UP00272,Neeraj Chauhan @ Raja,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0272,criminal_history,Neeraj Chauhan @ Raja,7e58d4261599d8b9
 UP00277,Dharmendra Gautam @ Babu,fuzzy(name:83/100=0.829+phone:0.0*0.04+ctx:0.5*0.02=0.839),0.839,82.9,0.0,0.5,UP-CRIM-0277,criminal_history,Dharmendra Gautam @ Babu,1f104731d9e6b552
-UP00303,Ravindra Chaudhary @ Netaji,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0279,criminal_history,Ravindra Chaudhary @ Netaji,e0f7390a6969ed0b
+UP00279,Ravindra Chaudhary @ Netaji,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0279,criminal_history,Ravindra Chaudhary @ Netaji,e0f7390a6969ed0b
 UP00286,Abhay Jaiswal @ Vakil,fuzzy(name:76/100=0.765+phone:0.0*0.04+ctx:0.5*0.02=0.775),0.775,76.5,0.0,0.5,UP-CRIM-0286,criminal_history,Abhay Jaiswal @ Vakil,678e98173faae012
-UP00718,Rajesh Gautam @ Chacha,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0287,criminal_history,Rajesh Gautam @ Chacha,84f5683b5147999f
+UP00287,Rajesh Gautam @ Chacha,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0287,criminal_history,Rajesh Gautam @ Chacha,84f5683b5147999f
 UP00144,Rakesh Rajput @ Fauji,fuzzy(name:76/100=0.765+phone:0.0*0.04+ctx:0.5*0.02=0.775),0.775,76.5,0.0,0.5,UP-CRIM-0292,criminal_history,Rakesh Rajput @ Fauji,496f9b7c6b277e7e
 UP00296,Imran Bind @ Kabadi,fuzzy(name:69/100=0.690+phone:0.0*0.04+ctx:0.5*0.02=0.700),0.7,69.0,0.0,0.5,UP-CRIM-0296,criminal_history,Imran Bind @ Kabadi,b193606bcd1004b2
-UP01496,Munna Gurjar @ Pahalwan,fuzzy(name:69/100=0.686+phone:0.0*0.04+ctx:0.5*0.02=0.696),0.696,68.6,0.0,0.5,UP-CRIM-0298,criminal_history,Munna Gurjar @ Pahalwan,9f41f1ba2e8fc0c1
+UP00117,Munna Gurjar @ Pahalwan,fuzzy(name:69/100=0.686+phone:0.0*0.04+ctx:0.5*0.02=0.696),0.696,68.6,0.0,0.5,UP-CRIM-0298,criminal_history,Munna Gurjar @ Pahalwan,9f41f1ba2e8fc0c1
 UP00310,Sanjay Dubey @ Babu,fuzzy(name:77/100=0.774+phone:0.0*0.04+ctx:0.5*0.02=0.784),0.784,77.4,0.0,0.5,UP-CRIM-0310,criminal_history,Sanjay Dubey @ Babu,ff901916d5d4c9e2
 UP00320,Ramesh Nagar @ Pahalwan,fuzzy(name:69/100=0.686+phone:0.0*0.04+ctx:0.5*0.02=0.696),0.696,68.6,0.0,0.5,UP-CRIM-0320,criminal_history,Ramesh Nagar @ Pahalwan,919d79be3f439d46
 UP00328,Atiq Chauhan @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0328,criminal_history,Atiq Chauhan @ Pandit,c8fa0e41d3afa34e
-UP00329,Amit Kushwaha @ Babu,fuzzy(name:79/100=0.788+phone:0.0*0.04+ctx:0.5*0.02=0.798),0.798,78.8,0.0,0.5,UP-CRIM-0329,criminal_history,Amit Kushwaha @ Babu,a2806871e6f98462
+UP00036,Amit Kushwaha @ Babu,fuzzy(name:79/100=0.788+phone:0.0*0.04+ctx:0.5*0.02=0.798),0.798,78.8,0.0,0.5,UP-CRIM-0329,criminal_history,Amit Kushwaha @ Babu,a2806871e6f98462
 UP00310,Sanjay Dubey @ Bhaiya,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0331,criminal_history,Sanjay Dubey @ Bhaiya,3beca79dff9c254d
-UP01141,Sonu Mishra @ Raja,fuzzy(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.769,75.9,0.0,0.5,UP-CRIM-0334,criminal_history,Sonu Mishra @ Raja,474bf9d56f6dce1b
+UP00334,Sonu Mishra @ Raja,fuzzy(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.769,75.9,0.0,0.5,UP-CRIM-0334,criminal_history,Sonu Mishra @ Raja,474bf9d56f6dce1b
 UP00337,Ravindra Pal @ Kabadi,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0337,criminal_history,Ravindra Pal @ Kabadi,fcf619ea390cc195
 UP00091,Rakesh Pal @ Don,fuzzy(name:77/100=0.769+phone:0.0*0.04+ctx:0.5*0.02=0.779),0.779,76.9,0.0,0.5,UP-CRIM-0348,criminal_history,Rakesh Pal @ Don,8201cc62d1153849
 UP00357,Amit Shukla @ Kabadi,fuzzy(name:71/100=0.710+phone:0.0*0.04+ctx:0.5*0.02=0.720),0.72,71.0,0.0,0.5,UP-CRIM-0357,criminal_history,Amit Shukla @ Kabadi,53c333906ca6dde9
@@ -70,43 +70,43 @@ UP00364,Akhilesh Gautam @ Chacha,fuzzy(name:77/100=0.769+phone:0.0*0.04+ctx:0.5*
 UP00365,Brijesh Yadav @ Netaji,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0365,criminal_history,Brijesh Yadav @ Netaji,086733ac6aa9f1b7
 UP00371,Rizwan Pandey @ Pahalwan,fuzzy(name:70/100=0.703+phone:0.0*0.04+ctx:0.5*0.02=0.713),0.713,70.3,0.0,0.5,UP-CRIM-0371,criminal_history,Rizwan Pandey @ Pahalwan,b579e467d94f5c60
 Alok Bind @ Urf Chhotu,candidate->UP00372 score 95.0,fuzzy_reject(name:58/100=0.581+phone:0.0*0.04+ctx:0.5*0.02=0.591),0.5,58.1,0.0,0.5,UP-CRIM-0372,criminal_history,Alok Bind @ Urf Chhotu,d8be5653ebddd3f8
-UP00814,Ajay Qureshi @ Shooter,fuzzy(name:71/100=0.706+phone:0.0*0.04+ctx:0.5*0.02=0.716),0.716,70.6,0.0,0.5,UP-CRIM-0379,criminal_history,Ajay Qureshi @ Shooter,96dadd63d3e46af6
-UP01813,Alok Khan @ Don,fuzzy(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.76,75.0,0.0,0.5,UP-CRIM-0383,criminal_history,Alok Khan @ Don,045cde38db1477b3
+UP00379,Ajay Qureshi @ Shooter,fuzzy(name:71/100=0.706+phone:0.0*0.04+ctx:0.5*0.02=0.716),0.716,70.6,0.0,0.5,UP-CRIM-0379,criminal_history,Ajay Qureshi @ Shooter,96dadd63d3e46af6
+UP00383,Alok Khan @ Don,fuzzy(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.76,75.0,0.0,0.5,UP-CRIM-0383,criminal_history,Alok Khan @ Don,045cde38db1477b3
 UP00387,Ravindra Rajput @ Pandit,fuzzy(name:77/100=0.769+phone:0.0*0.04+ctx:0.5*0.02=0.779),0.779,76.9,0.0,0.5,UP-CRIM-0387,criminal_history,Ravindra Rajput @ Pandit,df4e988a1ae88f2a
-UP01080,Brijesh Tyagi @ Chacha,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0392,criminal_history,Brijesh Tyagi @ Chacha,e51d5e785fb08819
+UP00392,Brijesh Tyagi @ Chacha,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0392,criminal_history,Brijesh Tyagi @ Chacha,e51d5e785fb08819
 UP00028,Akhilesh Kushwaha @ Pandit,fuzzy(name:79/100=0.791+phone:0.0*0.04+ctx:0.5*0.02=0.801),0.801,79.1,0.0,0.5,UP-CRIM-0401,criminal_history,Akhilesh Kushwaha @ Pandit,96f1246af980781e
-UP00403,Imran Verma @ Raja,fuzzy(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.769,75.9,0.0,0.5,UP-CRIM-0403,criminal_history,Imran Verma @ Raja,7c634f6e611d8ed9
-UP01669,Deepak Pandey @ Pandit,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0415,criminal_history,Deepak Pandey @ Pandit,fbcbde8db07bada3
-UP00438,Satish Jaiswal @ Chacha,fuzzy(name:76/100=0.757+phone:0.0*0.04+ctx:0.5*0.02=0.767),0.767,75.7,0.0,0.5,UP-CRIM-0416,criminal_history,Satish Jaiswal @ Chacha,c066d161c4d274c5
+UP00156,Imran Verma @ Raja,fuzzy(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.769,75.9,0.0,0.5,UP-CRIM-0403,criminal_history,Imran Verma @ Raja,7c634f6e611d8ed9
+UP00108,Deepak Pandey @ Pandit,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0415,criminal_history,Deepak Pandey @ Pandit,fbcbde8db07bada3
+UP00034,Satish Jaiswal @ Chacha,fuzzy(name:76/100=0.757+phone:0.0*0.04+ctx:0.5*0.02=0.767),0.767,75.7,0.0,0.5,UP-CRIM-0416,criminal_history,Satish Jaiswal @ Chacha,c066d161c4d274c5
 Alok Shukla @ Contractor,candidate->UP00422 score 95.0,fuzzy_reject(name:63/100=0.629+phone:0.0*0.04+ctx:0.5*0.02=0.639),0.5,62.9,0.0,0.5,UP-CRIM-0422,criminal_history,Alok Shukla @ Contractor,f9d6370a176f94d5
 UP00425,Brijesh Tomar @ Kabadi,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0425,criminal_history,Brijesh Tomar @ Kabadi,4cb258fe429b7a35
-UP00408,Mahesh Mishra @ Pahalwan,fuzzy(name:70/100=0.703+phone:0.0*0.04+ctx:0.5*0.02=0.713),0.713,70.3,0.0,0.5,UP-CRIM-0427,criminal_history,Mahesh Mishra @ Pahalwan,791c42a9562c1ff8
-UP02118,Vikram Shukla @ Contractor,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0428,criminal_history,Vikram Shukla @ Contractor,05fc033099241b96
-UP01953,Dhananjay Bind @ Pahalwan,fuzzy(name:72/100=0.718+phone:0.0*0.04+ctx:0.5*0.02=0.728),0.728,71.8,0.0,0.5,UP-CRIM-0431,criminal_history,Dhananjay Bind @ Pahalwan,62fbccb9ac934647
+UP00076,Mahesh Mishra @ Pahalwan,fuzzy(name:70/100=0.703+phone:0.0*0.04+ctx:0.5*0.02=0.713),0.713,70.3,0.0,0.5,UP-CRIM-0427,criminal_history,Mahesh Mishra @ Pahalwan,791c42a9562c1ff8
+UP00220,Vikram Shukla @ Contractor,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0428,criminal_history,Vikram Shukla @ Contractor,05fc033099241b96
+UP00431,Dhananjay Bind @ Pahalwan,fuzzy(name:72/100=0.718+phone:0.0*0.04+ctx:0.5*0.02=0.728),0.728,71.8,0.0,0.5,UP-CRIM-0431,criminal_history,Dhananjay Bind @ Pahalwan,62fbccb9ac934647
 UP00440,Guddu Mishra @ Contractor,fuzzy(name:65/100=0.649+phone:0.0*0.04+ctx:0.5*0.02=0.659),0.659,64.9,0.0,0.5,UP-CRIM-0440,criminal_history,Guddu Mishra @ Contractor,e88f29d218996269
 UP00062,Manoj Chauhan @ Vakil,fuzzy(name:76/100=0.765+phone:0.0*0.04+ctx:0.5*0.02=0.775),0.775,76.5,0.0,0.5,UP-CRIM-0445,criminal_history,Manoj Chauhan @ Vakil,041ba286318a8e52
 UP00461,Ajay Rawat @ Don,fuzzy(name:77/100=0.769+phone:0.0*0.04+ctx:0.5*0.02=0.779),0.779,76.9,0.0,0.5,UP-CRIM-0461,criminal_history,Ajay Rawat @ Don,d033006e297873df
 UP00400,Abhay Nagar @ Raja,fuzzy(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.769,75.9,0.0,0.5,UP-CRIM-0465,criminal_history,Abhay Nagar @ Raja,d3d08b5ed0d16771
 UP00466,Aslam Tripathi @ Vakil,fuzzy(name:78/100=0.778+phone:0.0*0.04+ctx:0.5*0.02=0.788),0.788,77.8,0.0,0.5,UP-CRIM-0466,criminal_history,Aslam Tripathi @ Vakil,e8cb7bae35df36e4
 UP00264,Imran Gupta @ Chacha,fuzzy(name:71/100=0.710+phone:0.0*0.04+ctx:0.5*0.02=0.720),0.72,71.0,0.0,0.5,UP-CRIM-0471,criminal_history,Imran Gupta @ Chacha,eb8f6d467eaeaa91
-UP02035,Sonu Siddiqui @ Urf Chhotu,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0476,criminal_history,Sonu Siddiqui @ Urf Chhotu,1996437e4a7e6b01
+UP00476,Sonu Siddiqui @ Urf Chhotu,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0476,criminal_history,Sonu Siddiqui @ Urf Chhotu,1996437e4a7e6b01
 UP00484,Dhananjay Nishad @ Vakil,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0484,criminal_history,Dhananjay Nishad @ Vakil,9fd45b0cfabef91d
 UP00486,Deepak Rawat @ Vakil,fuzzy(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.76,75.0,0.0,0.5,UP-CRIM-0486,criminal_history,Deepak Rawat @ Vakil,a4558b949df585e8
-UP00527,Suresh Pandey @ Chacha,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0488,criminal_history,Suresh Pandey @ Chacha,3f2f7e773b0e2455
+UP00488,Suresh Pandey @ Chacha,fuzzy(name:74/100=0.743+phone:0.0*0.04+ctx:0.5*0.02=0.753),0.753,74.3,0.0,0.5,UP-CRIM-0488,criminal_history,Suresh Pandey @ Chacha,3f2f7e773b0e2455
 UP00489,Pramod Srivastav @ Don,fuzzy(name:84/100=0.842+phone:0.0*0.04+ctx:0.5*0.02=0.852),0.852,84.2,0.0,0.5,UP-CRIM-0489,criminal_history,Pramod Srivastav @ Don,2cfb8996b6023ecc
 UP00490,Mukhtar Mishra @ Vakil,fuzzy(name:78/100=0.778+phone:0.0*0.04+ctx:0.5*0.02=0.788),0.788,77.8,0.0,0.5,UP-CRIM-0490,criminal_history,Mukhtar Mishra @ Vakil,41b026b324510509
 UP00234,Virendra Nagar @ Pahalwan,fuzzy(name:72/100=0.718+phone:0.0*0.04+ctx:0.5*0.02=0.728),0.728,71.8,0.0,0.5,UP-CRIM-0492,criminal_history,Virendra Nagar @ Pahalwan,4f3af7a2664dff34
 UP00500,Vikram Gurjar @ Babu,fuzzy(name:79/100=0.788+phone:0.0*0.04+ctx:0.5*0.02=0.798),0.798,78.8,0.0,0.5,UP-CRIM-0500,criminal_history,Vikram Gurjar @ Babu,478ccbcc1ef7c84a
 UP00121,Anil Tiwari @ Fauji,fuzzy(name:73/100=0.733+phone:0.0*0.04+ctx:0.5*0.02=0.743),0.743,73.3,0.0,0.5,UP-CRIM-0504,criminal_history,Anil Tiwari @ Fauji,d1d4cee2082282d3
-UP00516,Imran Dubey @ Babu,fuzzy(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.769,75.9,0.0,0.5,UP-CRIM-0516,criminal_history,Imran Dubey @ Babu,f1161d0734af809a
-UP00102,Deepak Gautam @ Pahalwan,fuzzy(name:70/100=0.703+phone:0.0*0.04+ctx:0.5*0.02=0.713),0.713,70.3,0.0,0.5,UP-CRIM-0519,criminal_history,Deepak Gautam @ Pahalwan,eb24dd58e57fd435
+UP00321,Imran Dubey @ Babu,fuzzy(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.769,75.9,0.0,0.5,UP-CRIM-0516,criminal_history,Imran Dubey @ Babu,f1161d0734af809a
+UP00024,Deepak Gautam @ Pahalwan,fuzzy(name:70/100=0.703+phone:0.0*0.04+ctx:0.5*0.02=0.713),0.713,70.3,0.0,0.5,UP-CRIM-0519,criminal_history,Deepak Gautam @ Pahalwan,eb24dd58e57fd435
 UP00335,Pankaj Srivastav @ Kabadi,fuzzy(name:78/100=0.780+phone:0.0*0.04+ctx:0.5*0.02=0.790),0.79,78.0,0.0,0.5,UP-CRIM-0522,criminal_history,Pankaj Srivastav @ Kabadi,cef1a8cd855370a8
 UP00526,Rajesh Nishad @ Urf Chhotu,fuzzy(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.677,66.7,0.0,0.5,UP-CRIM-0526,criminal_history,Rajesh Nishad @ Urf Chhotu,119723cbec3ad433
 UP00291,Rakesh Rawat @ Urf Chhotu,fuzzy(name:65/100=0.649+phone:0.0*0.04+ctx:0.5*0.02=0.659),0.659,64.9,0.0,0.5,UP-CRIM-0528,criminal_history,Rakesh Rawat @ Urf Chhotu,a1028a13231b176d
 UP00529,Dhananjay Kushwaha @ Netaji,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0529,criminal_history,Dhananjay Kushwaha @ Netaji,64130bff15055043
 UP00532,Amit Qureshi @ Netaji,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0532,criminal_history,Amit Qureshi @ Netaji,5bfbaf0d1f5aa68b
-UP00535,Mahesh Srivastav @ Urf Chhotu,fuzzy(name:71/100=0.711+phone:0.0*0.04+ctx:0.5*0.02=0.721),0.721,71.1,0.0,0.5,UP-CRIM-0535,criminal_history,Mahesh Srivastav @ Urf Chhotu,3ca0da7b77ab6cef
-UP00538,Suresh Pal @ Kabadi,fuzzy(name:69/100=0.690+phone:0.0*0.04+ctx:0.5*0.02=0.700),0.7,69.0,0.0,0.5,UP-CRIM-0538,criminal_history,Suresh Pal @ Kabadi,8ce0aca9f6db7cea
+UP00462,Mahesh Srivastav @ Urf Chhotu,fuzzy(name:71/100=0.711+phone:0.0*0.04+ctx:0.5*0.02=0.721),0.721,71.1,0.0,0.5,UP-CRIM-0535,criminal_history,Mahesh Srivastav @ Urf Chhotu,3ca0da7b77ab6cef
+UP00147,Suresh Pal @ Kabadi,fuzzy(name:69/100=0.690+phone:0.0*0.04+ctx:0.5*0.02=0.700),0.7,69.0,0.0,0.5,UP-CRIM-0538,criminal_history,Suresh Pal @ Kabadi,8ce0aca9f6db7cea
 UP00542,Virendra Kushwaha @ Bhaiya,fuzzy(name:79/100=0.791+phone:0.0*0.04+ctx:0.5*0.02=0.801),0.801,79.1,0.0,0.5,UP-CRIM-0542,criminal_history,Virendra Kushwaha @ Bhaiya,dff5c1adee2c7cd8
 UP00545,Ravindra Qureshi @ Urf Chhotu,fuzzy(name:71/100=0.711+phone:0.0*0.04+ctx:0.5*0.02=0.721),0.721,71.1,0.0,0.5,UP-CRIM-0545,criminal_history,Ravindra Qureshi @ Urf Chhotu,ac2563ce204b3c31
 UP00546,Chhotu Rawat @ Urf Chhotu,fuzzy(name:65/100=0.649+phone:0.0*0.04+ctx:0.5*0.02=0.659),0.659,64.9,0.0,0.5,UP-CRIM-0546,criminal_history,Chhotu Rawat @ Urf Chhotu,7f7ac7563db650c6
@@ -115,117 +115,38 @@ UP00552,Abhay Khan @ Bhaiya,fuzzy(name:69/100=0.690+phone:0.0*0.04+ctx:0.5*0.02=
 UP00560,Guddu Verma @ Babu,fuzzy(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.769,75.9,0.0,0.5,UP-CRIM-0560,criminal_history,Guddu Verma @ Babu,83a7364c426eebeb
 UP00126,Tariq Pandey @ Don,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-CRIM-0567,criminal_history,Tariq Pandey @ Don,57389cf350258e65
 UP00572,Rakesh Ansari @ Pahalwan,fuzzy(name:70/100=0.703+phone:0.0*0.04+ctx:0.5*0.02=0.713),0.713,70.3,0.0,0.5,UP-CRIM-0572,criminal_history,Rakesh Ansari @ Pahalwan,70839afaf50ac5ed
-UP00366,Mukhtar Tripathi @ Pahalwan,fuzzy(name:74/100=0.744+phone:0.0*0.04+ctx:0.5*0.02=0.754),0.754,74.4,0.0,0.5,UP-CRIM-0579,criminal_history,Mukhtar Tripathi @ Pahalwan,d09e7bf1d4abaf56
+UP00103,Mukhtar Tripathi @ Pahalwan,fuzzy(name:74/100=0.744+phone:0.0*0.04+ctx:0.5*0.02=0.754),0.754,74.4,0.0,0.5,UP-CRIM-0579,criminal_history,Mukhtar Tripathi @ Pahalwan,d09e7bf1d4abaf56
 UP00581,Ravindra Chauhan @ Bhaiya,fuzzy(name:78/100=0.780+phone:0.0*0.04+ctx:0.5*0.02=0.790),0.79,78.0,0.0,0.5,UP-CRIM-0581,criminal_history,Ravindra Chauhan @ Bhaiya,bf997281d2b0496e
 UP00590,Atiq Jaiswal @ Urf Chhotu,fuzzy(name:65/100=0.649+phone:0.0*0.04+ctx:0.5*0.02=0.659),0.659,64.9,0.0,0.5,UP-CRIM-0590,criminal_history,Atiq Jaiswal @ Urf Chhotu,34c63147b134c5c4
-Anil Ansari @ Contractor,candidate->UP00597 score 95.0,fuzzy_reject(name:63/100=0.629+phone:0.0*0.04+ctx:0.5*0.02=0.639),0.5,62.9,0.0,0.5,UP-CRIM-0591,criminal_history,Anil Ansari @ Contractor,43f5e3aa5863564e
+Anil Ansari @ Contractor,candidate->UP00591 score 95.0,fuzzy_reject(name:63/100=0.629+phone:0.0*0.04+ctx:0.5*0.02=0.639),0.5,62.9,0.0,0.5,UP-CRIM-0591,criminal_history,Anil Ansari @ Contractor,43f5e3aa5863564e
 UP00592,Guddu Gurjar @ Contractor,fuzzy(name:65/100=0.649+phone:0.0*0.04+ctx:0.5*0.02=0.659),0.659,64.9,0.0,0.5,UP-CRIM-0592,criminal_history,Guddu Gurjar @ Contractor,6c399f6dd8e8e6ab
-UP00593,Vikram Dubey @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0593,criminal_history,Vikram Dubey @ Pandit,8161c461520d4531
+UP00345,Vikram Dubey @ Pandit,fuzzy(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.737,72.7,0.0,0.5,UP-CRIM-0593,criminal_history,Vikram Dubey @ Pandit,8161c461520d4531
 Gautam Buddha Nagar,candidate->UP00400 score 80.0,fuzzy_reject(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.5,66.7,0.0,0.5,UP-FIR-0001,fir,"4 registered at Sector 20 PS, Gautam Buddha Nagar (Noida). Charges under Sec 2/",0d0ac46455b4c81b
 Kanpur Nagar,candidate->UP02072 score 78.3,fuzzy_reject(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.5,78.3,0.0,0.5,UP-FIR-0003,fir,"024 registered at Chakeri PS, Kanpur Nagar. Charges under IPC 386 / BNS",b3ab7bc38a9033c5
-UP01884,Sanjay Khan,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-FIR-0018,fir,"or report states that accused Sanjay Khan, Ramesh Pandey were identifie",60918ed62c23956e
-UP00351,Alok Qureshi,fuzzy(name:77/100=0.769+phone:0.0*0.04+ctx:0.5*0.02=0.779),0.779,76.9,0.0,0.5,UP-FIR-0019,fir,or report states that accused Alok Qureshi were identified operating in,aa402f42fc90159b
-UP00118,Mukhtar Qureshi,fuzzy(name:79/100=0.786+phone:0.0*0.04+ctx:0.5*0.02=0.796),0.796,78.6,0.0,0.5,UP-FIR-0020,fir,or report states that accused Mukhtar Qureshi were identified operating in,ef9b26368977f0d4
-Guddu Maurya,candidate->UP00327 score 81.4,fuzzy_reject(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.5,78.3,0.0,0.5,UP-FIR-0027,fir,"Pankaj Rajput, Neeraj Ansari, Guddu Maurya were identified operating in",68ef5b99160cdb4f
-UP00910,Suresh Maurya,fuzzy(name:85/100=0.846+phone:0.0*0.04+ctx:0.5*0.02=0.856),0.856,84.6,0.0,0.5,UP-FIR-0028,fir,"or report states that accused Suresh Maurya, Anil Chauhan, Sonu Mishra we",7bf1ded3390a9bae
-UP00063,Ajay Pandey,fuzzy(name:92/100=0.917+phone:0.0*0.04+ctx:0.5*0.02=0.927),0.927,91.7,0.0,0.5,UP-FIR-0030,fir,"tes that accused Pappu Rawat, Ajay Pandey, Chhotu Verma were identified",1033ce810313c546
-UP00149,Khan,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0048,fir,states that accused Dhananjay Khan were identified operating in,ddd0c0f3acc8e506
-Atiq Mishra,candidate->UP01215 score 83.3,fuzzy_reject(name:83/100=0.833+phone:0.0*0.04+ctx:0.5*0.02=0.843),0.5,83.3,0.0,0.5,UP-FIR-0052,fir,"s that accused Vikram Shukla, Atiq Mishra, Mukhtar Bind were identified",de296ec9e846044f
-UP00833,Ajay Verma,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-FIR-0059,fir,"hat accused Dhananjay Ansari, Ajay Verma, Ajay Siddiqui were identifie",4625b84f332208d1
-UP02543,Babloo Khan,fuzzy(name:86/100=0.857+phone:0.0*0.04+ctx:0.5*0.02=0.867),0.867,85.7,0.0,0.5,UP-FIR-0065,fir,"es that accused Aslam Shukla, Babloo Khan, Mukhtar Gautam were identifi",4a4b636e9d07dbdb
-UP02221,Virendra Siddiqui,fuzzy(name:88/100=0.882+phone:0.0*0.04+ctx:0.5*0.02=0.892),0.892,88.2,0.0,0.5,UP-FIR-0075,fir,"that accused Dharmendra Bind, Virendra Siddiqui were identified operating in",a2993d931c8c2e26
-UP02678,Suresh Yadav,fuzzy(name:83/100=0.833+phone:0.0*0.04+ctx:0.5*0.02=0.843),0.843,83.3,0.0,0.5,UP-FIR-0085,fir,"or report states that accused Suresh Yadav, Mahesh Shukla were identifie",b2e399f78a4b788d
-UP00167,Anil Kushwaha,fuzzy(name:89/100=0.889+phone:0.0*0.04+ctx:0.5*0.02=0.899),0.899,88.9,0.0,0.5,UP-FIR-0091,fir,"es that accused Pramod Tomar, Anil Kushwaha, Atiq Ansari were identified",235fc183a849bfab
+UP00687,Sanjay Khan,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-FIR-0018,fir,"or report states that accused Sanjay Khan, Ramesh Pandey were identifie",60918ed62c23956e
+UP00060,Khan,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0048,fir,states that accused Dhananjay Khan were identified operating in,ddd0c0f3acc8e506
 UP01650,Atiq Ansari,fuzzy(name:87/100=0.870+phone:0.0*0.04+ctx:0.5*0.02=0.880),0.88,87.0,0.0,0.5,UP-FIR-0091,fir,"Pramod Tomar, Anil Kushwaha, Atiq Ansari were identified operating in",fb45dcdd501a7a3c
-UP00626,Ramesh Srivastav,fuzzy(name:94/100=0.938+phone:0.0*0.04+ctx:0.5*0.02=0.948),0.948,93.8,0.0,0.5,UP-FIR-0120,fir,"or report states that accused Ramesh Srivastav, Dharmendra Nagar were identi",3a0464b5ab69de1b
-UP00277,Dharmendra Nagar,fuzzy(name:79/100=0.788+phone:0.0*0.04+ctx:0.5*0.02=0.798),0.798,78.8,0.0,0.5,UP-FIR-0120,fir,"hat accused Ramesh Srivastav, Dharmendra Nagar were identified operating in",375833eb4db480f1
-Neeraj Tomar,candidate->UP00998 score 84.4,fuzzy_reject(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.5,72.7,0.0,0.5,UP-FIR-0129,fir,"ates that accused Sunil Khan, Neeraj Tomar were identified operating in",858ec4b5b52f4ef4
 UP00998,Abhay Tomar,fuzzy(name:86/100=0.857+phone:0.0*0.04+ctx:0.5*0.02=0.867),0.867,85.7,0.0,0.5,UP-FIR-0145,fir,"tes that accused Alok Mishra, Abhay Tomar were identified operating in",cc949b26ee99e872
-Bablu Mishra,candidate->UP01141 score 80.0,fuzzy_reject(name:70/100=0.696+phone:0.0*0.04+ctx:0.5*0.02=0.706),0.5,69.6,0.0,0.5,UP-FIR-0146,fir,"or report states that accused Bablu Mishra, Sonu Gupta, Suresh Chauhan w",69e97f61623842df
-Sunil Siddiqui,candidate->UP02035 score 81.5,fuzzy_reject(name:81/100=0.815+phone:0.0*0.04+ctx:0.5*0.02=0.825),0.5,81.5,0.0,0.5,UP-FIR-0149,fir,"at accused Dharmendra Gurjar, Sunil Siddiqui, Manoj Kushwaha were identifi",2be03a640cdb113d
 Virendra Pandey,candidate->UP00638 score 83.6,fuzzy_reject(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.5,75.9,0.0,0.5,UP-FIR-0165,fir,or report states that accused Virendra Pandey were identified operating in,6d7e2b7f7dbbf7b2
-Ravindra Bind,candidate->UP02221 score 83.6,fuzzy_reject(name:73/100=0.733+phone:0.0*0.04+ctx:0.5*0.02=0.743),0.5,73.3,0.0,0.5,UP-FIR-0167,fir,"or report states that accused Ravindra Bind, Rajesh Mishra were identifie",d5483810217a0bdc
-UP00506,Virendra Shukla,fuzzy(name:87/100=0.867+phone:0.0*0.04+ctx:0.5*0.02=0.877),0.877,86.7,0.0,0.5,UP-FIR-0176,fir,"es that accused Mahesh Nagar, Virendra Shukla, Bablu Tripathi were identifi",8a3017260c79b04e
 UP02129,Dharmendra Tomar,fuzzy(name:85/100=0.848+phone:0.0*0.04+ctx:0.5*0.02=0.858),0.858,84.8,0.0,0.5,UP-FIR-0178,fir,or report states that accused Dharmendra Tomar were identified operating in,fec41cb4558d8abd
-UP01672,Imran Ansari,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-FIR-0190,fir,"or report states that accused Imran Ansari, Bablu Qureshi, Dhananjay Sri",d22df05a46dba518
-UP00248,Manoj Gautam,fuzzy(name:87/100=0.870+phone:0.0*0.04+ctx:0.5*0.02=0.880),0.88,87.0,0.0,0.5,UP-FIR-0199,fir,"tates that accused Bablu Pal, Manoj Gautam, Tariq Khan were identified o",b7faf3b2cf5bddba
-UP00261,Suresh Verma,fuzzy(name:83/100=0.833+phone:0.0*0.04+ctx:0.5*0.02=0.843),0.843,83.3,0.0,0.5,UP-FIR-0223,fir,"or report states that accused Suresh Verma, Santosh Rajput, Babloo Tyagi",cc978e6c5bea3412
-UP00136,Sunil Qureshi,fuzzy(name:88/100=0.880+phone:0.0*0.04+ctx:0.5*0.02=0.890),0.89,88.0,0.0,0.5,UP-FIR-0230,fir,"or report states that accused Sunil Qureshi, Rizwan Mishra, Ravindra Ansa",f70e59ce051c6594
-UP02998,Babloo Verma,fuzzy(name:87/100=0.870+phone:0.0*0.04+ctx:0.5*0.02=0.880),0.88,87.0,0.0,0.5,UP-FIR-0243,fir,or report states that accused Babloo Verma were identified operating in,3af39e15ad30eae9
-UP00119,Gupta,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0263,fir,rt states that accused Satish Gupta were identified operating in,94e0f14aee7e4e27
-UP02046,Sanjay Srivastav,fuzzy(name:93/100=0.933+phone:0.0*0.04+ctx:0.5*0.02=0.943),0.943,93.3,0.0,0.5,UP-FIR-0287,fir,"or report states that accused Sanjay Srivastav, Manoj Verma, Gufran Srivasta",3da097669d2280e8
-Guddu Kushwaha,candidate->UP00167 score 79.2,fuzzy_reject(name:71/100=0.714+phone:0.0*0.04+ctx:0.5*0.02=0.724),0.5,71.4,0.0,0.5,UP-FIR-0292,fir,"Akhilesh Shukla, Ajay Pandey, Guddu Kushwaha were identified operating in",743a953bf2d663a3
-Pappu Kushwaha,candidate->UP02832 score 80.4,fuzzy_reject(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.5,75.9,0.0,0.5,UP-FIR-0303,fir,"Bablu Nagar, Dharmendra Khan, Pappu Kushwaha were identified operating in",db2128b423cf57df
-UP00536,Brijesh Gupta,fuzzy(name:89/100=0.889+phone:0.0*0.04+ctx:0.5*0.02=0.899),0.899,88.9,0.0,0.5,UP-FIR-0314,fir,"that accused Mukhtar Shukla, Brijesh Gupta, Sanjay Tiwari were identifie",575edf1e01213eed
-UP02501,Babloo Jaiswal,fuzzy(name:89/100=0.889+phone:0.0*0.04+ctx:0.5*0.02=0.899),0.899,88.9,0.0,0.5,UP-FIR-0320,fir,"s that accused Vikram Shukla, Babloo Jaiswal were identified operating in",bacd5131903cc600
-UP01566,Aslam Gupta,fuzzy(name:87/100=0.870+phone:0.0*0.04+ctx:0.5*0.02=0.880),0.88,87.0,0.0,0.5,UP-FIR-0328,fir,"es that accused Sanjay Tyagi, Aslam Gupta were identified operating in",26149fe3a17a9842
-UP00403,Gufran Verma,fuzzy(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.793,78.3,0.0,0.5,UP-FIR-0341,fir,"tes that accused Amit Nishad, Gufran Verma were identified operating in",a9f79796f452a631
-UP01752,Atiq Tyagi,fuzzy(name:86/100=0.857+phone:0.0*0.04+ctx:0.5*0.02=0.867),0.867,85.7,0.0,0.5,UP-FIR-0346,fir,"or report states that accused Atiq Tyagi, Akhilesh Ansari were identif",dade1e3dfe82662e
-UP00444,Ravindra Mishra,fuzzy(name:87/100=0.867+phone:0.0*0.04+ctx:0.5*0.02=0.877),0.877,86.7,0.0,0.5,UP-FIR-0352,fir,"es that accused Babloo Yadav, Ravindra Mishra were identified operating in",8e255682ffa4d66a
-UP02453,Anil Nagar,fuzzy(name:86/100=0.857+phone:0.0*0.04+ctx:0.5*0.02=0.867),0.867,85.7,0.0,0.5,UP-FIR-0370,fir,"s that accused Rizwan Pandey, Anil Nagar were identified operating in",cc91123c5af71550
-Pappu Bind,candidate->UP02274 score 80.0,fuzzy_reject(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.5,66.7,0.0,0.5,UP-FIR-0377,fir,"s that accused Neeraj Maurya, Pappu Bind, Sanjay Jaiswal were identifi",1f8278d26b9bcb1c
-UP00223,Suresh Bind,fuzzy(name:82/100=0.818+phone:0.0*0.04+ctx:0.5*0.02=0.828),0.828,81.8,0.0,0.5,UP-FIR-0398,fir,"s that accused Brijesh Dubey, Suresh Bind, Rakesh Nishad were identifie",f9c125e7f2eb6fe3
-UP00581,Virendra Chauhan,fuzzy(name:88/100=0.875+phone:0.0*0.04+ctx:0.5*0.02=0.885),0.885,87.5,0.0,0.5,UP-FIR-0404,fir,"Manoj Verma, Akhilesh Rajput, Virendra Chauhan were identified operating in",17ec2031df7184ea
-UP02946,Alok Siddiqui,fuzzy(name:79/100=0.786+phone:0.0*0.04+ctx:0.5*0.02=0.796),0.796,78.6,0.0,0.5,UP-FIR-0424,fir,"s that accused Gufran Rajput, Alok Siddiqui were identified operating in",bbbe97bbaa1f34d9
-UP00136,Imran Qureshi,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.81,80.0,0.0,0.5,UP-FIR-0428,fir,"tes that accused Ajay Ansari, Imran Qureshi were identified operating in",33d18acab73eb103
-Deepak Maurya,candidate->UP00635 score 82.6,fuzzy_reject(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.5,80.0,0.0,0.5,UP-FIR-0442,fir,"that accused Virendra Verma, Deepak Maurya were identified operating in",fe6cacfac558871b
-Pramod Mishra,candidate->UP02538 score 84.6,fuzzy_reject(name:85/100=0.846+phone:0.0*0.04+ctx:0.5*0.02=0.856),0.5,84.6,0.0,0.5,UP-FIR-0458,fir,"that accused Dhananjay Bind, Pramod Mishra were identified operating in",baad5aeb3b05109b
-UP00257,Dubey,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0468,fir,"accused Babloo Maurya, Imran Dubey were identified operating in",47a9024afdc36da9
-UP02812,Suresh Tyagi,fuzzy(name:83/100=0.833+phone:0.0*0.04+ctx:0.5*0.02=0.843),0.843,83.3,0.0,0.5,UP-FIR-0470,fir,or report states that accused Suresh Tyagi were identified operating in,9c804473d13b28ef
-Deepak Dubey,candidate->UP00655 score 84.4,fuzzy_reject(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.5,72.7,0.0,0.5,UP-FIR-0494,fir,"or report states that accused Deepak Dubey, Gufran Srivastav, Sanjay Sri",e6d2936c8aa3db17
-UP00177,Gufran Srivastav,fuzzy(name:84/100=0.839+phone:0.0*0.04+ctx:0.5*0.02=0.849),0.849,83.9,0.0,0.5,UP-FIR-0494,fir,"es that accused Deepak Dubey, Gufran Srivastav, Sanjay Srivastav were identi",21fbf11e3686a0da
-UP02735,Sunil Pal,fuzzy(name:76/100=0.762+phone:0.0*0.04+ctx:0.5*0.02=0.772),0.772,76.2,0.0,0.5,UP-FIR-0500,fir,"or report states that accused Sunil Pal, Ramesh Kushwaha, Mahesh Trip",c4e90c311495d887
-UP00223,Rajesh Bind,fuzzy(name:91/100=0.909+phone:0.0*0.04+ctx:0.5*0.02=0.919),0.919,90.9,0.0,0.5,UP-FIR-0507,fir,"or report states that accused Rajesh Bind, Rakesh Nishad, Munna Khan we",6bfc4119b3cf247a
-UP00435,Dhananjay Tomar,fuzzy(name:81/100=0.815+phone:0.0*0.04+ctx:0.5*0.02=0.825),0.825,81.5,0.0,0.5,UP-FIR-0511,fir,"or report states that accused Dhananjay Tomar, Brijesh Pandey, Gufran Mishr",c0a87e5694e91c00
-UP02513,Aslam Nishad,fuzzy(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.793,78.3,0.0,0.5,UP-FIR-0514,fir,"s that accused Satish Nishad, Aslam Nishad were identified operating in",fe8f7bc655610d6c
-Deepak Khan,candidate->UP01813 score 83.1,fuzzy_reject(name:70/100=0.700+phone:0.0*0.04+ctx:0.5*0.02=0.710),0.5,70.0,0.0,0.5,UP-FIR-0549,fir,"or report states that accused Deepak Khan, Manoj Khan, Babloo Tiwari we",a6448e792fc465ec
-Tariq Srivastav,candidate->UP00129 score 82.8,fuzzy_reject(name:83/100=0.828+phone:0.0*0.04+ctx:0.5*0.02=0.838),0.5,82.8,0.0,0.5,UP-FIR-0559,fir,"sed Tariq Bind, Munna Tiwari, Tariq Srivastav were identified operating in",bcc3647f37453308
-UP00833,Sanjay Verma,fuzzy(name:81/100=0.815+phone:0.0*0.04+ctx:0.5*0.02=0.825),0.825,81.5,0.0,0.5,UP-FIR-0578,fir,"or report states that accused Sanjay Verma, Rizwan Rawat, Vikram Kushwah",f89e8a62e579c8f8
+UP00011,Gupta,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0263,fir,rt states that accused Satish Gupta were identified operating in,94e0f14aee7e4e27
+UP00046,Dubey,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0468,fir,"accused Babloo Maurya, Imran Dubey were identified operating in",47a9024afdc36da9
+UP00786,Sunil Pal,fuzzy(name:76/100=0.762+phone:0.0*0.04+ctx:0.5*0.02=0.772),0.772,76.2,0.0,0.5,UP-FIR-0500,fir,"or report states that accused Sunil Pal, Ramesh Kushwaha, Mahesh Trip",c4e90c311495d887
 UP00572,Ramesh Ansari,fuzzy(name:92/100=0.923+phone:0.0*0.04+ctx:0.5*0.02=0.933),0.933,92.3,0.0,0.5,UP-FIR-0592,fir,"tates that accused Sunil Pal, Ramesh Ansari, Chhotu Mishra were identifie",cec43ac0730bea0d
 UP00934,"Pappu Mishra,",fuzzy(name:96/100=0.960+phone:0.0*0.04+ctx:0.5*0.02=0.970),0.97,96.0,0.0,0.5,UP-FIR-0622,fir,"at accused Brijesh Chaudhary, Pappu Mishra, Ravindra Siddiqui were identi",18d154fe2bb7423e
-UP01399,Babloo Nagar,fuzzy(name:87/100=0.870+phone:0.0*0.04+ctx:0.5*0.02=0.880),0.88,87.0,0.0,0.5,UP-FIR-0634,fir,"s that accused Sanjay Ansari, Babloo Nagar, Suresh Pandey were identifie",5f3e57389c38c32f
-UP00761,Amit Mishra,fuzzy(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.793,78.3,0.0,0.5,UP-FIR-0640,fir,"or report states that accused Amit Mishra, Pramod Jaiswal, Anil Chaudha",36bc56cc8ba09a22
-UP00640,Pankaj Gupta,fuzzy(name:88/100=0.880+phone:0.0*0.04+ctx:0.5*0.02=0.890),0.89,88.0,0.0,0.5,UP-FIR-0645,fir,"armendra Gautam, Bablu Dubey, Pankaj Gupta were identified operating in",9fc8b87596a5cbbf
-UP01658,Brijesh Khan,fuzzy(name:87/100=0.870+phone:0.0*0.04+ctx:0.5*0.02=0.880),0.88,87.0,0.0,0.5,UP-FIR-0655,fir,or report states that accused Brijesh Khan were identified operating in,43c2f1b654af8d85
-UP00187,Ramesh Mishra,fuzzy(name:92/100=0.923+phone:0.0*0.04+ctx:0.5*0.02=0.933),0.933,92.3,0.0,0.5,UP-FIR-0661,fir,"uddu Bind, Dhananjay Chauhan, Ramesh Mishra were identified operating in",7180fa3ca8f7ea00
-UP00490,Tariq Mishra,fuzzy(name:77/100=0.769+phone:0.0*0.04+ctx:0.5*0.02=0.779),0.779,76.9,0.0,0.5,UP-FIR-0678,fir,"or report states that accused Tariq Mishra, Munna Gautam were identified",079c15c27dc8bab7
+UP00067,Ramesh Mishra,fuzzy(name:92/100=0.923+phone:0.0*0.04+ctx:0.5*0.02=0.933),0.933,92.3,0.0,0.5,UP-FIR-0661,fir,"uddu Bind, Dhananjay Chauhan, Ramesh Mishra were identified operating in",7180fa3ca8f7ea00
+UP01250,Tariq Mishra,fuzzy(name:87/100=0.870+phone:0.0*0.04+ctx:0.5*0.02=0.880),0.88,87.0,0.0,0.5,UP-FIR-0678,fir,"or report states that accused Tariq Mishra, Munna Gautam were identified",079c15c27dc8bab7
 UP02266,Satish Tripathi,fuzzy(name:90/100=0.903+phone:0.0*0.04+ctx:0.5*0.02=0.913),0.913,90.3,0.0,0.5,UP-FIR-0679,fir,"or report states that accused Satish Tripathi, Ramesh Ansari were identifie",ccd124d5355bfb22
-Mahesh Gurjar,candidate->UP00250 score 84.6,fuzzy_reject(name:85/100=0.846+phone:0.0*0.04+ctx:0.5*0.02=0.856),0.5,84.6,0.0,0.5,UP-FIR-0680,fir,"or report states that accused Mahesh Gurjar, Ravindra Qureshi, Manoj Rajp",dbc026726f40c068
-UP01030,Sanjay Nagar,fuzzy(name:91/100=0.909+phone:0.0*0.04+ctx:0.5*0.02=0.919),0.919,90.9,0.0,0.5,UP-FIR-0688,fir,"es that accused Imran Nishad, Sanjay Nagar, Virendra Shukla were identif",901bffac9c3d5af6
-UP01042,Santosh Tomar,fuzzy(name:88/100=0.880+phone:0.0*0.04+ctx:0.5*0.02=0.890),0.89,88.0,0.0,0.5,UP-FIR-0695,fir,or report states that accused Santosh Tomar were identified operating in,f9ae55b91da04401
 Manoj Mishra,candidate->UP00398 score 83.3,fuzzy_reject(name:83/100=0.833+phone:0.0*0.04+ctx:0.5*0.02=0.843),0.5,83.3,0.0,0.5,UP-FIR-0788,fir,or report states that accused Manoj Mishra were identified operating in,64a35446ad688c2a
-UP02684,Tariq Rawat,fuzzy(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.76,75.0,0.0,0.5,UP-FIR-0806,fir,"or report states that accused Tariq Rawat, Rajesh Nagar were identified",f2ae079c54ffbf46
-UP00124,Chhotu Chauhan,fuzzy(name:87/100=0.867+phone:0.0*0.04+ctx:0.5*0.02=0.877),0.877,86.7,0.0,0.5,UP-FIR-0838,fir,"Akhilesh Khan, Munna Mishra, Chhotu Chauhan were identified operating in",432c86e71016e5dd
-UP00363,Tomar,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0875,fir,"accused Dhananjay Verma, Amit Tomar were identified operating in",9fafae1ca14f22ff
-UP01563,Anil Siddiqui,fuzzy(name:79/100=0.786+phone:0.0*0.04+ctx:0.5*0.02=0.796),0.796,78.6,0.0,0.5,UP-FIR-0923,fir,"tes that accused Sanjay Khan, Anil Siddiqui were identified operating in",79fac790f9dd3f97
-UP00809,Manoj Tripathi,fuzzy(name:86/100=0.857+phone:0.0*0.04+ctx:0.5*0.02=0.867),0.867,85.7,0.0,0.5,UP-FIR-0948,fir,"s that accused Suresh Nishad, Manoj Tripathi, Gufran Verma were identified",1057a58c2dd39c72
-UP00437,Verma,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0959,fir,"accused Amit Siddiqui, Imran Verma were identified operating in",faca580e7d3d67d9
-UP00323,Ramesh Siddiqui,fuzzy(name:93/100=0.933+phone:0.0*0.04+ctx:0.5*0.02=0.943),0.943,93.3,0.0,0.5,UP-FIR-1005,fir,"or report states that accused Ramesh Siddiqui, Anil Tyagi, Pramod Rawat wer",25bbbaf8ced1d023
-Rizwan Khan,candidate->UP00371 score 81.4,fuzzy_reject(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.5,75.0,0.0,0.5,UP-FIR-1010,fir,"or report states that accused Rizwan Khan, Vikram Nagar were identified",c09105f700eda520
-UP00237,Anil Gupta,fuzzy(name:86/100=0.857+phone:0.0*0.04+ctx:0.5*0.02=0.867),0.867,85.7,0.0,0.5,UP-FIR-1053,fir,"or report states that accused Anil Gupta, Neeraj Gurjar were identifie",58145eafbf786e3a
-Munna Siddiqui,candidate->UP00128 score 82.6,fuzzy_reject(name:74/100=0.741+phone:0.0*0.04+ctx:0.5*0.02=0.751),0.5,74.1,0.0,0.5,UP-FIR-1065,fir,"ates that accused Alok Yadav, Munna Siddiqui, Neeraj Tyagi were identified",797121ad101e6a05
-Guddu Dubey,candidate->UP01749 score 78.3,fuzzy_reject(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.5,78.3,0.0,0.5,UP-FIR-1071,fir,"or report states that accused Guddu Dubey, Alok Qureshi, Tariq Rajput w",04a33f8a20d99262
-Alok Verma,candidate->UP02140 score 84.4,fuzzy_reject(name:73/100=0.727+phone:0.0*0.04+ctx:0.5*0.02=0.737),0.5,72.7,0.0,0.5,UP-FIR-1079,fir,"ates that accused Neeraj Pal, Alok Verma were identified operating in",fbf1e3c7a3157212
+UP00031,Tomar,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0875,fir,"accused Dhananjay Verma, Amit Tomar were identified operating in",9fafae1ca14f22ff
+UP00965,Anil Siddiqui,fuzzy(name:89/100=0.889+phone:0.0*0.04+ctx:0.5*0.02=0.899),0.899,88.9,0.0,0.5,UP-FIR-0923,fir,"tes that accused Sanjay Khan, Anil Siddiqui were identified operating in",79fac790f9dd3f97
+UP00080,Verma,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,UP-FIR-0959,fir,"accused Amit Siddiqui, Imran Verma were identified operating in",faca580e7d3d67d9
+Guddu Dubey,candidate->UP01052 score 78.3,fuzzy_reject(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.5,78.3,0.0,0.5,UP-FIR-1071,fir,"or report states that accused Guddu Dubey, Alok Qureshi, Tariq Rajput w",04a33f8a20d99262
 UP02692,Virendra Dubey,fuzzy(name:86/100=0.857+phone:0.0*0.04+ctx:0.5*0.02=0.867),0.867,85.7,0.0,0.5,UP-FIR-1093,fir,or report states that accused Virendra Dubey were identified operating in,f6723c71d961e771
-UP01884,Ajay Khan,fuzzy(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.793,78.3,0.0,0.5,UP-FIR-1111,fir,or report states that accused Ajay Khan were identified operating in,fe1e6a6b25707815
-UP02020,Sanjay Shukla,fuzzy(name:92/100=0.917+phone:0.0*0.04+ctx:0.5*0.02=0.927),0.927,91.7,0.0,0.5,UP-FIR-1112,fir,"es that accused Guddu Maurya, Sanjay Shukla were identified operating in",c9c9cb9fb0593622
 Mahesh Singh,candidate->UP01607 score 84.6,fuzzy_reject(name:85/100=0.846+phone:0.0*0.04+ctx:0.5*0.02=0.856),0.5,84.6,0.0,0.5,UP-FIR-1141,fir,or report states that accused Mahesh Singh were identified operating in,7839fe4eae935584
-UP00501,Virendra Maurya,fuzzy(name:87/100=0.867+phone:0.0*0.04+ctx:0.5*0.02=0.877),0.877,86.7,0.0,0.5,UP-FIR-1142,fir,"es that accused Bablu Mishra, Virendra Maurya, Santosh Singh were identifie",995c8557a7ee2664
-Aslam Bind,candidate->UP00300 score 78.2,fuzzy_reject(name:67/100=0.667+phone:0.0*0.04+ctx:0.5*0.02=0.677),0.5,66.7,0.0,0.5,UP-FIR-1163,fir,or report states that accused Aslam Bind were identified operating in,5ae2ab9f6db244f5
-UP00177,Manoj Srivastav,fuzzy(name:87/100=0.867+phone:0.0*0.04+ctx:0.5*0.02=0.877),0.877,86.7,0.0,0.5,UP-FIR-1172,fir,"an Tripathi, Rakesh Siddiqui, Manoj Srivastav were identified operating in",9198d282492b2402
-UP02732,Dharmendra Rawat,fuzzy(name:85/100=0.848+phone:0.0*0.04+ctx:0.5*0.02=0.858),0.858,84.8,0.0,0.5,UP-FIR-1260,fir,"ed Ajay Kushwaha, Babloo Pal, Dharmendra Rawat were identified operating in",36625cbad1b258b3
-Chhotu Shukla,candidate->UP00338 score 81.4,fuzzy_reject(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.5,75.0,0.0,0.5,UP-FIR-1312,fir,or report states that accused Chhotu Shukla were identified operating in,8ac79d66f117d7b9
+UP00774,Dharmendra Rawat,fuzzy(name:85/100=0.848+phone:0.0*0.04+ctx:0.5*0.02=0.858),0.858,84.8,0.0,0.5,UP-FIR-1260,fir,"ed Ajay Kushwaha, Babloo Pal, Dharmendra Rawat were identified operating in",36625cbad1b258b3
+Chhotu Shukla,candidate->UP00132 score 81.4,fuzzy_reject(name:72/100=0.720+phone:0.0*0.04+ctx:0.5*0.02=0.730),0.5,72.0,0.0,0.5,UP-FIR-1312,fir,or report states that accused Chhotu Shukla were identified operating in,8ac79d66f117d7b9
 Manoj Nagar,candidate->UP00452 score 81.8,fuzzy_reject(name:82/100=0.818+phone:0.0*0.04+ctx:0.5*0.02=0.828),0.5,81.8,0.0,0.5,UP-FIR-1384,fir,"tes that accused Abhay Dubey, Manoj Nagar were identified operating in",bdf51539d550e043
 UP00189,Sunil Jaiswal,fuzzy(name:88/100=0.880+phone:0.0*0.04+ctx:0.5*0.02=0.890),0.89,88.0,0.0,0.5,UP-FIR-1416,fir,"s that accused Babloo Rajput, Sunil Jaiswal, Mukhtar Gupta were identifie",79b328c8e2f0f16f
-UP00543,Akhilesh Jaiswal,fuzzy(name:87/100=0.867+phone:0.0*0.04+ctx:0.5*0.02=0.877),0.877,86.7,0.0,0.5,UP-FIR-1425,fir,"that accused Deepak Kushwaha, Akhilesh Jaiswal, Deepak Tomar were identified",8e6af93e55534b4a
-UP00572,Suresh Ansari,fuzzy(name:85/100=0.846+phone:0.0*0.04+ctx:0.5*0.02=0.856),0.856,84.6,0.0,0.5,UP-FIR-1461,fir,"s that accused Sanjay Tiwari, Suresh Ansari were identified operating in",bcb57b0cbf1cfd02
-Ravindra Singh,candidate->UP02221 score 83.6,fuzzy_reject(name:71/100=0.710+phone:0.0*0.04+ctx:0.5*0.02=0.720),0.5,71.0,0.0,0.5,UP-FIR-1585,fir,"Pankaj Mishra, Ramesh Tiwari, Ravindra Singh were identified operating in",97e9cfc3d15cb285
-UP00814,Sanjay Qureshi,fuzzy(name:92/100=0.923+phone:0.0*0.04+ctx:0.5*0.02=0.933),0.933,92.3,0.0,0.5,UP-FIR-1648,fir,"Brijesh Gupta, Pankaj Ansari, Sanjay Qureshi were identified operating in",5f6c5a77c222405c
+Ravindra Singh,candidate->UP00506 score 83.6,fuzzy_reject(name:76/100=0.759+phone:0.0*0.04+ctx:0.5*0.02=0.769),0.5,75.9,0.0,0.5,UP-FIR-1585,fir,"Pankaj Mishra, Ramesh Tiwari, Ravindra Singh were identified operating in",97e9cfc3d15cb285
 UP00204,Tariq Tomar,fuzzy(name:86/100=0.857+phone:0.0*0.04+ctx:0.5*0.02=0.867),0.867,85.7,0.0,0.5,UP-FIR-1765,fir,"that accused Abhay Srivastav, Tariq Tomar were identified operating in",f90abb1c05eb7ff3
-UP02127,Pankaj Pal,fuzzy(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.793,78.3,0.0,0.5,UP-FIR-1787,fir,"or report states that accused Pankaj Pal, Pankaj Chaudhary, Neeraj Kus",a76ebe853fa7d885
-UP02845,Dharmendra Jaiswal,fuzzy(name:82/100=0.824+phone:0.0*0.04+ctx:0.5*0.02=0.834),0.834,82.4,0.0,0.5,UP-FIR-1849,fir,or report states that accused Dharmendra Jaiswal were identified operating in,b7b2f64dbe54ba3b
-Munna Nishad,candidate->UP01336 score 83.3,fuzzy_reject(name:83/100=0.833+phone:0.0*0.04+ctx:0.5*0.02=0.843),0.5,83.3,0.0,0.5,UP-FIR-1958,fir,"or report states that accused Munna Nishad, Bablu Siddiqui, Akhilesh Sid",36d8a0df5623f49c
-UP00189,Rizwan Jaiswal,fuzzy(name:77/100=0.769+phone:0.0*0.04+ctx:0.5*0.02=0.779),0.779,76.9,0.0,0.5,UP-FIR-1974,fir,"tes that accused Rakesh Khan, Rizwan Jaiswal were identified operating in",81940e9cd28f6866
-Sonu Nishad,candidate->UP01141 score 81.8,fuzzy_reject(name:82/100=0.818+phone:0.0*0.04+ctx:0.5*0.02=0.828),0.5,81.8,0.0,0.5,UP-FIR-2040,fir,"or report states that accused Sonu Nishad, Rakesh Rawat were identified",86b2d320a7aca5a0
-UP00063,Sanjay Pal,fuzzy(name:78/100=0.783+phone:0.0*0.04+ctx:0.5*0.02=0.793),0.793,78.3,0.0,0.5,UP-FIR-2078,fir,or report states that accused Sanjay Pal were identified operating in,ede2004a08eac685
-Mukhtar Singh,candidate->UP00301 score 82.6,fuzzy_reject(name:69/100=0.690+phone:0.0*0.04+ctx:0.5*0.02=0.700),0.5,69.0,0.0,0.5,UP-FIR-2365,fir,"es that accused Manoj Maurya, Mukhtar Singh, Anil Rajput were identified",54a940e257cd86e9

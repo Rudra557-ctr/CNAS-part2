@@ -252,6 +252,11 @@ def explain_connection(
             direct_edges_in_graph.append(edge)
 
     mutual_ids = (src_neighbors & dst_neighbors) - {src_info["id"], dst_info["id"]}
+    # A "mutual contact" is a person. Both men having been seen at Dockside
+    # Ward is co-location, not a shared associate — counting places here buried
+    # the one courier who actually links two cells under eight street names.
+    kinds = {str(n.get("id")): n.get("kind") for n in graph.get("nodes", [])}
+    mutual_ids = {m for m in mutual_ids if kinds.get(m) == "Person"}
     mutual_associates = []
     for m_id in sorted(mutual_ids)[:8]:
         m_details = _resolve_person_details(m_id, datasets)

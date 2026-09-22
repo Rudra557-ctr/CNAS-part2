@@ -3,22 +3,27 @@ Voice data ingestion — parsing, entity resolution, refusals, and the write pat
 
 The write tests are the point of this file. A parser test proves the system
 understood a sentence; only a commit test proves the case record actually
-changed and the derived graph agrees. Every test that writes runs inside
-`sandbox_sources`, which restores data/people_directory.json and
-data/intelligence_reports.csv byte-for-byte afterwards and rebuilds the graph,
-so a failed assertion cannot leave the demo dataset mutated.
+changed and the derived graph agrees.
+
+Every test that writes does so in its own throwaway case inside the test
+session's temporary investigations store (see conftest), never in data/. The
+earlier approach wrote the shared demo files and restored them afterwards; a
+restore that missed once left test people in the demo dataset. A module-level
+tripwire now fails the run if the shared demo files change at all.
 """
+import hashlib
 import json
 import shutil
+import uuid
 
 import pytest
 from fastapi.testclient import TestClient
 
 from backend.api.main import app
-from backend.graph.builder import load_graph_serial
+import backend.ingestion.store as store_mod
 from backend.ingestion import voice_writer
 from backend.ingestion.voice_writer import (
-    INTEL_PATH, PEOPLE_PATH, commit_ingest, plan_ingest, resolve_person,
+    INTEL_PATH, PEOPLE_PATH, commit_ingest, plan_ingest, resolve_person, scope_for,
 )
 from backend.voice.ingest_parser import (
     IngestCommand, classify_relation, parse_ingest_command,
@@ -29,18 +34,57 @@ client = TestClient(app)
 H = auth_headers("investigator")
 
 
+def _digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+@pytest.fixture(scope="module", autouse=True)
+def shared_demo_data_untouched():
+    """Tripwire: nothing in this module may modify the shared demo files."""
+    before = {p: _digest(p) for p in (PEOPLE_PATH, INTEL_PATH)}
+    yield
+    after = {p: _digest(p) for p in (PEOPLE_PATH, INTEL_PATH)}
+    changed = [p.name for p in before if before[p] != after[p]]
+    assert not changed, f"voice-ingest tests modified the shared demo data: {changed}"
+
+
+@pytest.fixture(scope="module")
+def template_case():
+    """
+    One processed case in the session's temp store, built the way an officer
+    would: create a case, then Process with no uploads (the demo fast path
+    copies the demo files in). Copied per test so writes never share state.
+    """
+    r = client.post("/investigations", headers=H,
+                    json={"name": "voice-ingest template", "description": "pytest"})
+    assert r.status_code == 200, r.text
+    iid = r.json()["id"]
+    r = client.post(f"/investigations/{iid}/process", headers=H)
+    assert r.status_code == 200, r.text
+    return iid
+
+
 @pytest.fixture
-def sandbox_sources(tmp_path):
-    """Snapshot the source files, run the test, put them back and rebuild."""
-    backups = {p: tmp_path / p.name for p in (PEOPLE_PATH, INTEL_PATH)}
-    for original, backup in backups.items():
-        shutil.copy2(original, backup)
-    try:
-        yield
-    finally:
-        for original, backup in backups.items():
-            shutil.copy2(backup, original)
-        voice_writer.rebuild_graph()
+def case(template_case):
+    """A fresh processed copy of the template case."""
+    root = store_mod.ROOT
+    iid = "vt" + uuid.uuid4().hex[:6]
+    shutil.copytree(root / template_case, root / iid)
+    meta_path = root / iid / "meta.json"
+    meta = json.loads(meta_path.read_text())
+    meta["id"] = iid
+    for f in meta.get("files", []):
+        f["stored"] = f["stored"].replace(template_case, iid)
+    meta_path.write_text(json.dumps(meta))
+    return iid
+
+
+def _case_graph(iid):
+    return json.loads(scope_for(iid).graph_path.read_text(encoding="utf-8"))
+
+
+def _case_people(iid):
+    return json.loads(scope_for(iid).people_path.read_text(encoding="utf-8"))
 
 
 @pytest.fixture
@@ -250,33 +294,35 @@ def test_a_self_link_is_refused():
     assert plan["status"] in ("invalid", "unrecognised")
 
 
-def test_a_refused_plan_never_writes(sandbox_sources):
-    before = PEOPLE_PATH.read_bytes()
-    result = commit_ingest(parse_ingest_command("Add a new person named Ramesh Yadav"))
+def test_a_refused_plan_never_writes(case):
+    people = scope_for(case).people_path
+    before = people.read_bytes()
+    result = commit_ingest(parse_ingest_command("Add a new person named Ramesh Yadav"),
+                           iid=case)
     assert result["committed"] is False
     assert result["status"] == "duplicate"
-    assert PEOPLE_PATH.read_bytes() == before, "a refusal must leave source data untouched"
+    assert people.read_bytes() == before, "a refusal must leave source data untouched"
 
 
 # ── the write path, end to end ────────────────────────────────────────────
 
-def test_create_reaches_the_graph_through_the_real_pipeline(sandbox_sources):
+def test_create_reaches_the_graph_through_the_real_pipeline(case):
     result = commit_ingest(parse_ingest_command(
         "Add a new person named Rajesh Kumar, phone number 9000000901, "
-        "associated with Ramesh Yadav."), operator="pytest")
+        "associated with Ramesh Yadav."), operator="pytest", iid=case)
 
     assert result["committed"] is True
     assert result["status"] == "committed"
     assert result["verification"]["verified"] is True
 
-    # 1. the source data really changed
-    directory = json.loads(PEOPLE_PATH.read_text(encoding="utf-8"))
+    # 1. the case's source data really changed
+    directory = _case_people(case)
     record = next(p for p in directory["network_people"] if p["id"] == result["entity_id"])
     assert record["name"] == "Rajesh Kumar" and record["phone"] == "9000000901"
-    assert "Rajesh Kumar" in INTEL_PATH.read_text(encoding="utf-8")
+    assert "Rajesh Kumar" in scope_for(case).intel_path.read_text(encoding="utf-8")
 
     # 2. the pipeline ran and the graph derived from it agrees
-    serial = load_graph_serial()
+    serial = _case_graph(case)
     node = next(n for n in serial["nodes"] if n["id"] == result["entity_id"])
     assert node["label"] == "Rajesh Kumar" and node["kind"] == "Person"
     assert any({e["src"], e["dst"]} == {result["entity_id"], "A7"} for e in serial["edges"])
@@ -287,43 +333,45 @@ def test_create_reaches_the_graph_through_the_real_pipeline(sandbox_sources):
     assert edge["supporting_text"] and edge["source"].startswith("INTEL")
 
 
-def test_update_changes_the_record_and_the_node(sandbox_sources):
+def test_update_changes_the_record_and_the_node(case):
     result = commit_ingest(parse_ingest_command(
-        "Update Ramesh Yadav's role to Financier"), operator="pytest")
+        "Update Ramesh Yadav's role to Financier"), operator="pytest", iid=case)
     assert result["committed"] is True and result["entity_id"] == "A7"
     assert result["verification"]["verified"] is True
 
-    directory = json.loads(PEOPLE_PATH.read_text(encoding="utf-8"))
+    directory = _case_people(case)
     assert next(p for p in directory["network_people"]
                 if p["id"] == "A7")["role"] == "Financier"
-    serial = load_graph_serial()
+    serial = _case_graph(case)
     assert next(n for n in serial["nodes"] if n["id"] == "A7")["role"] == "Financier"
 
 
-def test_relationship_between_two_existing_people_becomes_an_edge(sandbox_sources):
-    serial_before = load_graph_serial()
+def test_relationship_between_two_existing_people_becomes_an_edge(case):
+    serial_before = _case_graph(case)
     had = any({e["src"], e["dst"]} == {"A1", "B11"} for e in serial_before["edges"])
 
     result = commit_ingest(parse_ingest_command(
         "Anwar Sheikh is connected to Kavita Desai through a financial transaction"),
-        operator="pytest")
+        operator="pytest", iid=case)
     assert result["committed"] is True
     assert result["verification"]["verified"] is True
     assert any("intelligence_reports.csv" in f for f in result["files_written"])
 
-    serial = load_graph_serial()
+    serial = _case_graph(case)
     assert any({e["src"], e["dst"]} == {"A1", "B11"} for e in serial["edges"])
     if not had:
         assert serial["stats"]["edge_count"] > serial_before["stats"]["edge_count"]
 
 
-def test_two_creates_do_not_collide_on_an_id(sandbox_sources):
+def test_two_creates_do_not_collide_on_an_id(case):
     first = commit_ingest(parse_ingest_command(
-        "Add a new person named Rajesh Kumar, phone number 9000000901"), operator="pytest")
+        "Add a new person named Rajesh Kumar, phone number 9000000901"),
+        operator="pytest", iid=case)
     second = commit_ingest(parse_ingest_command(
-        "Add a new person named Suneeta Bhosle, phone number 9000000902"), operator="pytest")
+        "Add a new person named Suneeta Bhosle, phone number 9000000902"),
+        operator="pytest", iid=case)
     assert first["entity_id"] != second["entity_id"]
-    serial = load_graph_serial()
+    serial = _case_graph(case)
     ids = {n["id"] for n in serial["nodes"]}
     assert first["entity_id"] in ids and second["entity_id"] in ids
 
@@ -335,13 +383,14 @@ def test_update_of_an_absent_person_is_still_refused():
     assert plan["status"] == "not_found"
 
 
-def test_a_second_create_of_the_same_person_is_caught_after_the_first_landed(sandbox_sources):
+def test_a_second_create_of_the_same_person_is_caught_after_the_first_landed(case):
     # Duplicate prevention has to hold against records this feature itself
     # created, not just against the seed dataset.
     commit_ingest(parse_ingest_command(
-        "Add a new person named Rajesh Kumar, phone number 9000000901"), operator="pytest")
+        "Add a new person named Rajesh Kumar, phone number 9000000901"),
+        operator="pytest", iid=case)
     again = commit_ingest(parse_ingest_command(
-        "Add a new person named Rajesh Kumar"), operator="pytest")
+        "Add a new person named Rajesh Kumar"), operator="pytest", iid=case)
     assert again["committed"] is False and again["status"] == "duplicate"
 
 
@@ -401,20 +450,22 @@ def test_commit_rejects_a_field_outside_the_writable_set():
     assert r.status_code == 400
 
 
-def test_full_round_trip_through_the_api(sandbox_sources):
+def test_full_round_trip_through_the_api(case):
     spoken = ("Add a new person named Rajesh Kumar, phone number 9000000901, "
               "associated with Ramesh Yadav.")
-    preview = client.post("/api/voice-ingest", headers=H, data={"text": spoken}).json()
+    preview = client.post(f"/api/voice-ingest?iid={case}", headers=H,
+                          data={"text": spoken}).json()
     assert preview["status"] == "ready"
+    assert preview["scope"] == case
 
     committed = client.post("/api/voice-ingest/commit", headers=H,
-                            json={"command": preview["command"]}).json()
+                            json={"command": preview["command"], "iid": case}).json()
     assert committed["success"] is True
     assert committed["verification"]["verified"] is True
     assert "Rajesh Kumar" in committed["message"]
 
-    # the graph the UI reads is the graph that changed
-    graph = client.get("/graph", headers=H).json()
+    # the graph the UI reads for this case is the graph that changed
+    graph = client.get(f"/investigations/{case}/graph", headers=H).json()
     assert any(n["id"] == committed["entity_id"] for n in graph["nodes"])
 
 

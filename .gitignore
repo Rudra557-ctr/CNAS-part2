@@ -19,6 +19,7 @@ node_modules/
 *.log
 tmp/
 audit.jsonl
+output/annotations.json
 data/investigations/*
 !data/investigations/.gitkeep
 

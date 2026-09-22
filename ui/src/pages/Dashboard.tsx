@@ -83,6 +83,13 @@ export default function Dashboard() {
     }
   }
 
+  // Lead tile: the highest score and who holds it. A count of HIGH-priority
+  // leads read 0 on the shared graph (top score 74, HIGH starts at 75) right
+  // beside "16 high-severity anomalies", which looked contradictory.
+  const topLead = leads.reduce<Lead | undefined>(
+    (best, l) => (!best || l.lead_score > best.lead_score ? l : best), undefined)
+  const leadName = (l: Lead) => (lang === 'hi' && (l as any).label_hi ? (l as any).label_hi : l.label)
+
   // Backend may return lowercase severity/priority; normalize before comparing.
   const prio = (level?: string) => (level || '').toUpperCase()
   const prioText = (level?: string) => {
@@ -135,7 +142,7 @@ export default function Dashboard() {
         {[
           { label: t('dash.stat.entities'), value: stats.nodes, icon: Users, color: 'text-gov-navy', sub: t('dash.stat.entities_sub') },
           { label: t('dash.stat.connections'), value: stats.edges, icon: Network, color: 'text-gov-navy', sub: t('dash.stat.connections_sub') },
-          { label: t('dash.stat.leads'), value: leads.filter(l => prio(l.priority) === 'HIGH').length, icon: TrendingUp, color: 'text-gov-red', sub: t('dash.stat.leads_sub') },
+          { label: t('dash.stat.leads'), value: topLead ? topLead.lead_score : '—', icon: TrendingUp, color: 'text-gov-red', sub: topLead ? `${leadName(topLead)} (${topLead.entity_id})` : t('dash.stat.leads_sub') },
           { label: t('dash.stat.anomalies'), value: anomalies.length, icon: AlertTriangle, color: 'text-gov-saffron', sub: t('dash.stat.anomalies_sub') },
         ].map(s => (
           <div key={s.label} className="gov-stat">
@@ -144,7 +151,7 @@ export default function Dashboard() {
               <s.icon size={15} className={s.color} />
             </div>
             <p className="text-[26px] font-bold text-gov-ink leading-tight">{s.value}</p>
-            <p className="text-[10px] text-gov-faint">{s.sub}</p>
+            <p className="text-[10px] text-gov-faint truncate">{s.sub}</p>
           </div>
         ))}
       </div>

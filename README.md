@@ -62,10 +62,16 @@ Telecom is the richest single source here; its blind spot is the money trail, no
 
 ![Ask the case](docs/screenshots/ask-the-case.png)
 
-Asked for transactions "in North Delhi during July", it applies the three constraints it
-understands and refuses the two it cannot: North Delhi is not a location on record, and this
+Asked for transactions "in North Delhi during July", it applies the four constraints it
+understands (A1, one hop out for "associates", transactions, over five lakh) and refuses the
+two it cannot: North Delhi is not a location on record, and this
 case indexes evidence by day number rather than calendar dates. The honest answer inside those
 constraints is zero records — A1's neighbourhood holds 17 transactions, none above ₹2.85 lakh.
+
+**Dictate (voice data entry)**
+- Speak or type a change to the case — *"Add a new person named Rajesh Kumar, phone number 9876543210, associated with Ramesh Yadav"*, *"Update Ramesh Yadav's role to Financier"*, *"X is connected to Y through a financial transaction"*. Transcribed offline by faster-whisper, parsed deterministically, no LLM
+- Every name is resolved against the open case's people before anything is written. Namesakes are listed rather than guessed (say the ID or phone number to pick one), existing people and phone numbers are refused as duplicates, and updating someone not on file returns *not found*
+- Nothing is saved until the officer confirms the interpretation. The write goes into the case's own source files, the same pipeline an upload uses rebuilds the graph, and the new node and edge are checked in the rebuilt graph before success is reported. A failed rebuild rolls the files back
 
 **Act**
 - Arrest impact simulator: four strike packages, network dismantlement %, isolated fragments, freezable assets
@@ -75,6 +81,7 @@ constraints is zero records — A1's neighbourhood holds 17 transactions, none a
 **Govern**
 - JWT auth with role gating: all three roles (`admin` / `investigator` / `analyst`) can read the graph; writes — entity edits, merges, curation — are restricted to `admin` and `investigator`
 - Append-only audit trail: every query logged with user, timestamp and touched entity IDs
+- Passwords stored as salted scrypt (older SHA-256 records still verify). The seed accounts' demo passwords are public in this repo, so a deployment must override them — see *Deploy*
 - Blockchain-style evidence ledger: SHA-256 per record, chained, Merkle-rooted, verifiable in the UI
 - Every screen labels output as investigative leads, never determinations of guilt
 
@@ -148,6 +155,23 @@ With Neo4j + GDS instead of the in-memory fallback:
 ```bash
 docker compose up -d      # Neo4j 5.26 + GDS, plus the API container
 ```
+
+### Deploy (one URL, API + UI)
+
+`Dockerfile` builds the UI and serves it from the API, so one web service hosts
+everything. `render.yaml` is a Render blueprint for it:
+
+- **Plan:** `standard` or larger — the Whisper `small` speech model needs about 2 GB RAM.
+  On a smaller plan set `WHISPER_MODEL_SIZE` to `base` or `tiny` (build arg and env must match).
+- **Set before sharing the URL:** `CNAS_ADMIN_PASSWORD`, `CNAS_ANALYST_PASSWORD`,
+  `CNAS_INVESTIGATOR_PASSWORD`. Unset, the public demo passwords work for anyone.
+  `JWT_SECRET` is generated for you.
+- **Storage:** the container's disk resets on every restart and redeploy. Dictated records,
+  uploads, new cases, account approvals and the audit log are lost unless you attach a disk
+  at `/app/data`.
+- **Neo4j** is optional (fill `NEO4J_*` for Aura); without it everything runs file-mode.
+- Startup serves requests within seconds and warms every case's analytics in the
+  background; set `CNAS_WARMUP=0` to skip that.
 
 ---
 

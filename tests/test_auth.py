@@ -37,9 +37,16 @@ def teardown_module():
 
 
 def test_login_post_match_and_mismatch():
-    r = client.post("/login", json={"username": "vibhu123", "password": "Vibhu@2026", "role": "investigator"})
+    # A throwaway file-backed investigator: the real officer accounts' passwords
+    # are not in the repo, so the test must not depend on them.
+    from backend.auth import admin_create_user
+
+    uname = _unique_user("post")
+    _track(uname)
+    admin_create_user(uname, "PostCheck#2026", "investigator")
+    r = client.post("/login", json={"username": uname, "password": "PostCheck#2026", "role": "investigator"})
     assert r.status_code == 200, r.text
-    r = client.post("/login", json={"username": "vibhu123", "password": "Vibhu@2026", "role": "analyst"})
+    r = client.post("/login", json={"username": uname, "password": "PostCheck#2026", "role": "analyst"})
     assert r.status_code == 403, r.text
     assert "post" in r.json()["detail"].lower()
     r = client.post("/login", json={"username": "analyst", "password": "analyst123", "role": "analyst"})

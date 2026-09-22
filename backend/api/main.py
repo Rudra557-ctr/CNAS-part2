@@ -14,6 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from typing import Optional, List, Dict
 import json
+import os
 import time
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -73,11 +74,25 @@ async def _lifespan(app):
         get_nlp()
     except Exception as exc:  # noqa: BLE001
         print(f"[warmup] spaCy skipped: {exc}")
-    try:
-        from backend import serve_cache as _sc
-        _sc.warmup()
-    except Exception as exc:  # noqa: BLE001
-        print(f"[warmup] analytics skipped: {exc}")
+    # Analytics warm in the background, after the server is accepting
+    # requests: warming every case (Purvanchal alone is ~9.6k entities) before
+    # `yield` would hold startup long enough to trip a platform health check.
+    # A request that arrives mid-warmup waits on the same cache entry rather
+    # than computing it a second time. CNAS_WARMUP=0 turns it off.
+    if os.getenv("CNAS_WARMUP", "1") != "0":
+        import threading
+
+        def _warm():
+            try:
+                from backend import serve_cache as _sc
+                t0 = time.time()
+                done = _sc.warmup_all()
+                print(f"[warmup] {sum(done.values())}/{len(done)} scopes warm "
+                      f"in {time.time() - t0:.1f}s")
+            except Exception as exc:  # noqa: BLE001
+                print(f"[warmup] analytics skipped: {exc}")
+
+        threading.Thread(target=_warm, name="cnas-warmup", daemon=True).start()
     yield
 
 
@@ -1107,22 +1122,31 @@ def inv_leads(iid: str, limit: int = Query(20, ge=1, le=100), user: dict = Depen
     if not out.exists():
         raise HTTPException(status_code=404, detail="Not processed")
     import json as js
+    from backend import serve_cache as _sc
+    # leads.json is a cache of the scores for *this* graph. It used to be read
+    # whenever it existed, so a reprocess, upload or voice ingestion left the
+    # case serving the old graph's leads indefinitely — and it stored only the
+    # first caller's `limit`, truncating every later request. It is now trusted
+    # only when it is newer than graph.json and holds the complete list.
     leads_cache = INV_ROOT / iid / "output" / "leads.json"
-    if leads_cache.exists():
+    try:
+        fresh = leads_cache.stat().st_mtime_ns >= out.stat().st_mtime_ns
+    except OSError:
+        fresh = False
+    if fresh:
         try:
             cached = js.loads(leads_cache.read_text())
-            return {"leads": cached[:limit], "investigation_id": iid}
+            if isinstance(cached, dict) and cached.get("complete"):
+                return {"leads": cached["leads"][:limit], "investigation_id": iid}
         except Exception:
             pass
-    serial = js.loads(out.read_text())
-    full_ds_path = INV_ROOT / iid / "mapped" / "full_datasets.json"
-    ds = js.loads(full_ds_path.read_text()) if full_ds_path.exists() else None
-    leads = get_leads(limit=limit, datasets=ds, graph_serial=serial)
+    ds, serial = _sc.get_datasets_and_serial(iid)
+    leads = _sc.get_result(iid, "leads_all", lambda: compute_lead_scores(ds, serial))
     try:
-        leads_cache.write_text(js.dumps(leads, indent=2))
+        leads_cache.write_text(js.dumps({"complete": True, "leads": leads}, indent=2))
     except Exception:
         pass
-    return {"leads": leads[:limit], "investigation_id": iid}
+    return {"leads": list(leads[:limit]), "investigation_id": iid}
 
 @app.get("/investigations/{iid}/graph")
 def inv_graph(iid: str, day: Optional[int] = Query(None, ge=1, le=90), user: dict = Depends(CAN_VIEW_GRAPH)):

@@ -9,7 +9,7 @@
       "role": "Kingpin",
       "phone": "7000000001",
       "account": "AC0009000001",
-      "degree": 145
+      "degree": 146
     },
     {
       "id": "PHONE_7000000001",
@@ -84,7 +84,7 @@
       "role": "Lieutenant",
       "phone": "7000000004",
       "account": "AC0009000004",
-      "degree": 61
+      "degree": 63
     },
     {
       "id": "PHONE_7000000004",
@@ -109,7 +109,7 @@
       "role": "Associate",
       "phone": "7000000005",
       "account": "AC0009000005",
-      "degree": 13
+      "degree": 16
     },
     {
       "id": "PHONE_7000000005",
@@ -134,7 +134,7 @@
       "role": "Associate",
       "phone": "7000000006",
       "account": "AC0009000006",
-      "degree": 19
+      "degree": 20
     },
     {
       "id": "PHONE_7000000006",
@@ -234,7 +234,7 @@
       "role": "Associate",
       "phone": "7000000010",
       "account": "AC0009000010",
-      "degree": 16
+      "degree": 17
     },
     {
       "id": "PHONE_7000000010",
@@ -334,7 +334,7 @@
       "role": "Kingpin",
       "phone": "7000000014",
       "account": "AC0009000014",
-      "degree": 162
+      "degree": 179
     },
     {
       "id": "PHONE_7000000014",
@@ -434,7 +434,7 @@
       "role": "Courier",
       "phone": "7000000018",
       "account": "AC0009000018",
-      "degree": 11
+      "degree": 12
     },
     {
       "id": "PHONE_7000000018",
@@ -484,7 +484,7 @@
       "role": "Courier",
       "phone": "7000000020",
       "account": "AC0009000020",
-      "degree": 20
+      "degree": 22
     },
     {
       "id": "PHONE_7000000020",
@@ -509,7 +509,7 @@
       "role": "Courier",
       "phone": "7000000021",
       "account": "AC0009000021",
-      "degree": 18
+      "degree": 23
     },
     {
       "id": "PHONE_7000000021",
@@ -534,7 +534,7 @@
       "role": "Courier",
       "phone": "7000000022",
       "account": "AC0009000022",
-      "degree": 19
+      "degree": 20
     },
     {
       "id": "PHONE_7000000022",
@@ -559,7 +559,7 @@
       "role": "Courier",
       "phone": "7000000023",
       "account": "AC0009000023",
-      "degree": 19
+      "degree": 20
     },
     {
       "id": "PHONE_7000000023",
@@ -584,7 +584,7 @@
       "role": "Courier",
       "phone": "7000000024",
       "account": "AC0009000024",
-      "degree": 16
+      "degree": 25
     },
     {
       "id": "PHONE_7000000024",
@@ -609,7 +609,7 @@
       "role": "Financier",
       "phone": "7000000025",
       "account": "AC0009000025",
-      "degree": 69
+      "degree": 70
     },
     {
       "id": "PHONE_7000000025",
@@ -634,7 +634,7 @@
       "role": "Cache keeper",
       "phone": "7000000026",
       "account": "AC0009000026",
-      "degree": 53
+      "degree": 54
     },
     {
       "id": "PHONE_7000000026",
@@ -659,7 +659,7 @@
       "role": "Kingpin",
       "phone": "7000000027",
       "account": "AC0009000027",
-      "degree": 142
+      "degree": 161
     },
     {
       "id": "PHONE_7000000027",
@@ -684,7 +684,7 @@
       "role": "Lieutenant",
       "phone": "7000000028",
       "account": "AC0009000028",
-      "degree": 109
+      "degree": 110
     },
     {
       "id": "PHONE_7000000028",
@@ -784,7 +784,7 @@
       "role": "Enforcer",
       "phone": "7000000032",
       "account": "AC0009000032",
-      "degree": 21
+      "degree": 26
     },
     {
       "id": "PHONE_7000000032",
@@ -884,7 +884,7 @@
       "role": "Enforcer",
       "phone": "7000000036",
       "account": "AC0009000036",
-      "degree": 16
+      "degree": 17
     },
     {
       "id": "PHONE_7000000036",
@@ -959,7 +959,7 @@
       "role": "Collection agent",
       "phone": "7000000039",
       "account": "AC0009000039",
-      "degree": 66
+      "degree": 67
     },
     {
       "id": "PHONE_7000000039",
@@ -1582,7 +1582,7 @@
       "cell": "FIR",
       "day": "45",
       "location": "Lakeview Chowk",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "FIR0026",
@@ -1609,7 +1609,7 @@
       "cell": "FIR",
       "day": "44",
       "location": "Riverside Colony",
-      "degree": 3
+      "degree": 4
     },
     {
       "id": "FIR0030",
@@ -1636,7 +1636,7 @@
       "cell": "FIR",
       "day": "52",
       "location": "Industrial Estate Road",
-      "degree": 2
+      "degree": 4
     },
     {
       "id": "FIR0035",
@@ -1672,7 +1672,7 @@
       "cell": "FIR",
       "day": "49",
       "location": "Dockside Ward",
-      "degree": 3
+      "degree": 5
     },
     {
       "id": "FIR0006",
@@ -1690,7 +1690,7 @@
       "cell": "FIR",
       "day": "49",
       "location": "Industrial Estate Road",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "FIR0016",
@@ -1717,7 +1717,7 @@
       "cell": "FIR",
       "day": "53",
       "location": "Old Market Circle",
-      "degree": 2
+      "degree": 4
     },
     {
       "id": "FIR0019",
@@ -1726,7 +1726,7 @@
       "cell": "FIR",
       "day": "44",
       "location": "Station Road",
-      "degree": 2
+      "degree": 5
     },
     {
       "id": "FIR0014",
@@ -1735,7 +1735,7 @@
       "cell": "FIR",
       "day": "42",
       "location": "Riverside Colony",
-      "degree": 2
+      "degree": 4
     },
     {
       "id": "FIR0028",
@@ -1789,7 +1789,7 @@
       "cell": "FIR",
       "day": "52",
       "location": "Old Market Circle",
-      "degree": 3
+      "degree": 4
     },
     {
       "id": "FIR0013",
@@ -1798,7 +1798,7 @@
       "cell": "FIR",
       "day": "52",
       "location": "Central Junction",
-      "degree": 2
+      "degree": 4
     },
     {
       "id": "FIR0011",
@@ -1807,7 +1807,7 @@
       "cell": "FIR",
       "day": "54",
       "location": "Old Market Circle",
-      "degree": 2
+      "degree": 4
     },
     {
       "id": "FIR0005",
@@ -1843,7 +1843,7 @@
       "cell": "FIR",
       "day": "61",
       "location": "Industrial Estate Road",
-      "degree": 3
+      "degree": 5
     },
     {
       "id": "FIR0031",
@@ -1879,7 +1879,7 @@
       "cell": "FIR",
       "day": "44",
       "location": "Station Road",
-      "degree": 3
+      "degree": 5
     },
     {
       "id": "FIR0004",
@@ -1888,7 +1888,7 @@
       "cell": "FIR",
       "day": "52",
       "location": "Dockside Ward",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "SURV0025",
@@ -2496,34 +2496,6 @@
       "degree": 73
     },
     {
-      "id": "Rajan Naik",
-      "label": "Rajan Naik",
-      "kind": "Location",
-      "cell": "Location",
-      "degree": 8
-    },
-    {
-      "id": "Prakash Shetty",
-      "label": "Prakash Shetty",
-      "kind": "Location",
-      "cell": "Location",
-      "degree": 7
-    },
-    {
-      "id": "Santosh Bhosale",
-      "label": "Santosh Bhosale",
-      "kind": "Location",
-      "cell": "Location",
-      "degree": 1
-    },
-    {
-      "id": "Ganesh Pawar",
-      "label": "Ganesh Pawar",
-      "kind": "Location",
-      "cell": "Location",
-      "degree": 1
-    },
-    {
       "id": "Surveillance Team Alpha",
       "label": "Surveillance Team Alpha",
       "kind": "Location",
@@ -2549,14 +2521,7 @@
       "label": "Surveillance Team Charlie",
       "kind": "Location",
       "cell": "Location",
-      "degree": 5
-    },
-    {
-      "id": "Ganesh Pandit",
-      "label": "Ganesh Pandit",
-      "kind": "Location",
-      "cell": "Location",
-      "degree": 1
+      "degree": 6
     },
     {
       "id": "Prkash Shetty",
@@ -3780,6 +3745,21 @@
         "duration_sec": "225",
         "tower": "Lakeview Chowk",
         "call_type": "voice"
+      }
+    },
+    {
+      "src": "A1",
+      "dst": "A4",
+      "kind": "MET",
+      "source": "SURV0003",
+      "source_type": "surveillance",
+      "day": "57",
+      "confidence": 0.7,
+      "supporting_text": "Anwar Sheikh seen meeting briefly with Vikas Chauhan; a small package changed hands but contents not confirmed",
+      "evidence_hash": "d217a179c186a870",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Anwar Sheikh seen meeting briefly with Vikas Chauhan; a small package changed hands but contents not confirmed"
       }
     },
     {
@@ -7660,6 +7640,21 @@
     },
     {
       "src": "A4",
+      "dst": "A6",
+      "kind": "MET",
+      "source": "SURV0008",
+      "source_type": "surveillance",
+      "day": "57",
+      "confidence": 0.7,
+      "supporting_text": "Iqbal Khan seen meeting briefly with Vikas Chauhan; a small package changed hands but contents not confirmed",
+      "evidence_hash": "e5a5f8a47a9971a3",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Iqbal Khan seen meeting briefly with Vikas Chauhan; a small package changed hands but contents not confirmed"
+      }
+    },
+    {
+      "src": "A4",
       "dst": "SOC0015",
       "kind": "AUTHORED",
       "source": "SOC0015",
@@ -7774,6 +7769,49 @@
       "evidence_hash": "",
       "extractor": "canonical",
       "meta": {}
+    },
+    {
+      "src": "A5",
+      "dst": "FIR0004",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0004",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "ment of unknown persons believed to include Tariq Ansri and Ganesh Pawar around Dockside Ward in the days preceding drug shipment. S",
+      "evidence_hash": "6daa367e54c43d22",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "A5",
+      "dst": "A9",
+      "kind": "ASSOCIATED_WITH",
+      "source": "FIR0004",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.55,
+      "supporting_text": "Complainant reported suspicious movement of unknown persons believed to include Tariq Ansri and Ganesh Pawar around Dockside Ward in the days preceding drug shipment",
+      "evidence_hash": "667ebeedf2c4c463",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Complainant reported suspicious movement of unknown persons believed to include Tariq Ansri and Ganesh Pawar around Dockside Ward in the days preceding drug shipment"
+      }
+    },
+    {
+      "src": "A5",
+      "dst": "Dockside Ward",
+      "kind": "LOCATED_AT",
+      "source": "FIR0004",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "Complainant reported suspicious movement of unknown persons believed to include Tariq Ansri and Ganesh Pawar around Dockside Ward in the days preceding drug shipment",
+      "evidence_hash": "667ebeedf2c4c463",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "Complainant reported suspicious movement of unknown persons believed to include Tariq Ansri and Ganesh Pawar around Dockside Ward in the days preceding drug shipment"
+      }
     },
     {
       "src": "PHONE_7000000005",
@@ -9006,6 +9044,71 @@
     },
     {
       "src": "B1",
+      "dst": "FIR0015",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0015",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Ashok Gaikwad, associated with Rajan Naik's network, was seen meeting Mohsin Qrueshi at Riverside Col",
+      "evidence_hash": "f6efc17ff4650a11",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "B1",
+      "dst": "FIR0012",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0012",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Est",
+      "evidence_hash": "e22c7feef1d4a67c",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "B1",
+      "dst": "FIR0014",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0014",
+      "source_type": "fir",
+      "day": "42",
+      "confidence": 0.6,
+      "supporting_text": "Source intelligence indicates Rajan Naik's group may be preparing for an upcoming operation. Ganesh",
+      "evidence_hash": "cb6fd0e15807d6ff",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "B1",
+      "dst": "FIR0013",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0013",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "nction on suspicion of involvement with a network linked to Rajan Naik. Ganesh Pandit was found in possession of a mobile phone wi",
+      "evidence_hash": "8f6bb6c386fec675",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "B1",
+      "dst": "FIR0011",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0011",
+      "source_type": "fir",
+      "day": "54",
+      "confidence": 0.6,
+      "supporting_text": "Source intelligence indicates Rajan Naik's group may be preparing for an upcoming operation. Deepak",
+      "evidence_hash": "bf7c6dd4fa09b9c7",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "B1",
       "dst": "B2",
       "kind": "CALLED",
       "source": "CDR00110",
@@ -10089,6 +10192,21 @@
     },
     {
       "src": "B1",
+      "dst": "B12",
+      "kind": "MET",
+      "source": "FIR0015",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.7,
+      "supporting_text": "Informant states that Ashok Gaikwad, associated with Rajan Naik's network, was seen meeting Mohsin Qrueshi at Riverside Colony",
+      "evidence_hash": "b9d6cb315db95a52",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Informant states that Ashok Gaikwad, associated with Rajan Naik's network, was seen meeting Mohsin Qrueshi at Riverside Colony"
+      }
+    },
+    {
+      "src": "B1",
       "dst": "N9",
       "kind": "CALLED",
       "source": "CDR00507",
@@ -10297,6 +10415,21 @@
       "extractor": "cdr_tower",
       "meta": {
         "tower": "Industrial Estate Road"
+      }
+    },
+    {
+      "src": "B1",
+      "dst": "Industrial Estate Road",
+      "kind": "LOCATED_AT",
+      "source": "FIR0012",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road",
+      "evidence_hash": "888ce3621bf6c18a",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road"
       }
     },
     {
@@ -10721,6 +10854,36 @@
     },
     {
       "src": "B1",
+      "dst": "Riverside Colony",
+      "kind": "LOCATED_AT",
+      "source": "FIR0015",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Ashok Gaikwad, associated with Rajan Naik's network, was seen meeting Mohsin Qrueshi at Riverside Colony",
+      "evidence_hash": "b9d6cb315db95a52",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "Informant states that Ashok Gaikwad, associated with Rajan Naik's network, was seen meeting Mohsin Qrueshi at Riverside Colony"
+      }
+    },
+    {
+      "src": "B1",
+      "dst": "Riverside Colony",
+      "kind": "LOCATED_AT",
+      "source": "SURV0010",
+      "source_type": "surveillance",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "1957 hrs - Surveillance Team Bravo reports Rajan Naik entering premises at Riverside Colony alone",
+      "evidence_hash": "b29e3d08c38ad36c",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "1957 hrs - Surveillance Team Bravo reports Rajan Naik entering premises at Riverside Colony alone"
+      }
+    },
+    {
+      "src": "B1",
       "dst": "Eastgate",
       "kind": "LOCATED_AT",
       "source": "CDR00120",
@@ -10976,6 +11139,21 @@
     },
     {
       "src": "B1",
+      "dst": "Central Junction",
+      "kind": "LOCATED_AT",
+      "source": "FIR0013",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "Acting on a tip-off, a patrol team intercepted Ganesh Pandit near Central Junction on suspicion of involvement with a network linked to Rajan Naik",
+      "evidence_hash": "c7e97e1fb075965a",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "Acting on a tip-off, a patrol team intercepted Ganesh Pandit near Central Junction on suspicion of involvement with a network linked to Rajan Naik"
+      }
+    },
+    {
+      "src": "B1",
       "dst": "Hilltop Society",
       "kind": "LOCATED_AT",
       "source": "CDR00126",
@@ -11002,6 +11180,111 @@
       "extractor": "cdr_tower",
       "meta": {
         "tower": "Hilltop Society"
+      }
+    },
+    {
+      "src": "B1",
+      "dst": "B5",
+      "kind": "MET",
+      "source": "FIR0015",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.7,
+      "supporting_text": "Informant states that Ashok Gaikwad, associated with Rajan Naik's network, was seen meeting Mohsin Qrueshi at Riverside Colony",
+      "evidence_hash": "b9d6cb315db95a52",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Informant states that Ashok Gaikwad, associated with Rajan Naik's network, was seen meeting Mohsin Qrueshi at Riverside Colony"
+      }
+    },
+    {
+      "src": "B1",
+      "dst": "B13",
+      "kind": "MET",
+      "source": "FIR0012",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.7,
+      "supporting_text": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road",
+      "evidence_hash": "888ce3621bf6c18a",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road"
+      }
+    },
+    {
+      "src": "B1",
+      "dst": "B7",
+      "kind": "MET",
+      "source": "FIR0012",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.7,
+      "supporting_text": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road",
+      "evidence_hash": "888ce3621bf6c18a",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road"
+      }
+    },
+    {
+      "src": "B1",
+      "dst": "B10",
+      "kind": "ASSOCIATED_WITH",
+      "source": "FIR0013",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.55,
+      "supporting_text": "Acting on a tip-off, a patrol team intercepted Ganesh Pandit near Central Junction on suspicion of involvement with a network linked to Rajan Naik",
+      "evidence_hash": "c7e97e1fb075965a",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Acting on a tip-off, a patrol team intercepted Ganesh Pandit near Central Junction on suspicion of involvement with a network linked to Rajan Naik"
+      }
+    },
+    {
+      "src": "B1",
+      "dst": "Surveillance Team Bravo",
+      "kind": "ASSOCIATED_WITH",
+      "source": "SURV0010",
+      "source_type": "surveillance",
+      "day": "52",
+      "confidence": 0.55,
+      "supporting_text": "1957 hrs - Surveillance Team Bravo reports Rajan Naik entering premises at Riverside Colony alone",
+      "evidence_hash": "b29e3d08c38ad36c",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "1957 hrs - Surveillance Team Bravo reports Rajan Naik entering premises at Riverside Colony alone"
+      }
+    },
+    {
+      "src": "B1",
+      "dst": "B8",
+      "kind": "ASSOCIATED_WITH",
+      "source": "SURV0015",
+      "source_type": "surveillance",
+      "day": "53",
+      "confidence": 0.55,
+      "supporting_text": "Subject matching description of Rajan Naik observed arriving in a vehicle (reg: MH-DEMO-4855), accompanied by an unidentified associate believed to be Waseem Ali",
+      "evidence_hash": "64a0000b0dd7702f",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Subject matching description of Rajan Naik observed arriving in a vehicle (reg: MH-DEMO-4855), accompanied by an unidentified associate believed to be Waseem Ali"
+      }
+    },
+    {
+      "src": "B1",
+      "dst": "B8",
+      "kind": "ASSOCIATED_WITH",
+      "source": "SURV0012",
+      "source_type": "surveillance",
+      "day": "54",
+      "confidence": 0.55,
+      "supporting_text": "Subject matching description of Rajan Naik observed arriving in a vehicle (reg: MH-DEMO-9842), accompanied by an unidentified associate believed to be Waseem Ali",
+      "evidence_hash": "b0dfa05ea271a064",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Subject matching description of Rajan Naik observed arriving in a vehicle (reg: MH-DEMO-9842), accompanied by an unidentified associate believed to be Waseem Ali"
       }
     },
     {
@@ -14119,6 +14402,36 @@
     },
     {
       "src": "B13",
+      "dst": "B7",
+      "kind": "MET",
+      "source": "FIR0011",
+      "source_type": "fir",
+      "day": "54",
+      "confidence": 0.7,
+      "supporting_text": "Deepak Sawant and Sameer Jadhav were observed conferring near Old Market Circle multiple times this week.",
+      "evidence_hash": "39133a5115067bd3",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Deepak Sawant and Sameer Jadhav were observed conferring near Old Market Circle multiple times this week."
+      }
+    },
+    {
+      "src": "B13",
+      "dst": "B7",
+      "kind": "ASSOCIATED_WITH",
+      "source": "SURV0011",
+      "source_type": "surveillance",
+      "day": "53",
+      "confidence": 0.55,
+      "supporting_text": "Subject matching description of Deepak Sawant observed arriving in a vehicle (reg: MH-DEMO-2442), accompanied by an unidentified associate believed to be Sameer Jadhav",
+      "evidence_hash": "330cd1ba3636fa75",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Subject matching description of Deepak Sawant observed arriving in a vehicle (reg: MH-DEMO-2442), accompanied by an unidentified associate believed to be Sameer Jadhav"
+      }
+    },
+    {
+      "src": "B13",
       "dst": "Old Market Circle",
       "kind": "LOCATED_AT",
       "source": "FIR0011",
@@ -14169,6 +14482,32 @@
       "supporting_text": "B7 owns account AC0009000021",
       "evidence_hash": "",
       "extractor": "canonical",
+      "meta": {}
+    },
+    {
+      "src": "B7",
+      "dst": "FIR0012",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0012",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sam",
+      "evidence_hash": "49b25fc488b32799",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "B7",
+      "dst": "FIR0011",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0011",
+      "source_type": "fir",
+      "day": "54",
+      "confidence": 0.6,
+      "supporting_text": "an Naik's group may be preparing for an upcoming operation. Deepak Sawant and Sameer Jadhav were observed conferring near Old Market",
+      "evidence_hash": "f12a155c96371637",
+      "extractor": "fir_mention",
       "meta": {}
     },
     {
@@ -14385,6 +14724,21 @@
     },
     {
       "src": "B8",
+      "dst": "B10",
+      "kind": "MET",
+      "source": "FIR0014",
+      "source_type": "fir",
+      "day": "42",
+      "confidence": 0.7,
+      "supporting_text": "Ganesh Pandit and Waseem Ali were observed conferring near Riverside Colony multiple times this week.",
+      "evidence_hash": "519893cba0cf61c0",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Ganesh Pandit and Waseem Ali were observed conferring near Riverside Colony multiple times this week."
+      }
+    },
+    {
+      "src": "B8",
       "dst": "Riverside Colony",
       "kind": "LOCATED_AT",
       "source": "FIR0014",
@@ -14465,6 +14819,21 @@
     },
     {
       "src": "B9",
+      "dst": "B10",
+      "kind": "ASSOCIATED_WITH",
+      "source": "FIR0010",
+      "source_type": "fir",
+      "day": "49",
+      "confidence": 0.55,
+      "supporting_text": "Complainant reported suspicious movement of unknown persons believed to include Ganesh Pandit and Rafiq Shaikh around Industrial Estate Road in the days preceding arms shipment",
+      "evidence_hash": "ad5c68d8a1c49db9",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Complainant reported suspicious movement of unknown persons believed to include Ganesh Pandit and Rafiq Shaikh around Industrial Estate Road in the days preceding arms shipment"
+      }
+    },
+    {
+      "src": "B9",
       "dst": "Industrial Estate Road",
       "kind": "LOCATED_AT",
       "source": "FIR0010",
@@ -14531,6 +14900,90 @@
       "evidence_hash": "",
       "extractor": "canonical",
       "meta": {}
+    },
+    {
+      "src": "B10",
+      "dst": "FIR0010",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0010",
+      "source_type": "fir",
+      "day": "49",
+      "confidence": 0.6,
+      "supporting_text": "suspicious movement of unknown persons believed to include Ganesh Pandit and Rafiq Shaikh around Industrial Estate Road in the days",
+      "evidence_hash": "db445ff67953f4b5",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "B10",
+      "dst": "FIR0014",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0014",
+      "source_type": "fir",
+      "day": "42",
+      "confidence": 0.6,
+      "supporting_text": "an Naik's group may be preparing for an upcoming operation. Ganesh Pandit and Waseem Ali were observed conferring near Riverside Colo",
+      "evidence_hash": "cb24bfb82310dcb6",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "B10",
+      "dst": "FIR0013",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0013",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "Acting on a tip-off, a patrol team intercepted Ganesh Pandit near Central Junction on suspicion of involvement with a ne",
+      "evidence_hash": "8ee7cf3027faf09f",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "B10",
+      "dst": "B11",
+      "kind": "CALLS",
+      "source": "FIR0013",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.75,
+      "supporting_text": "Ganesh Pandit was found in possession of a mobile phone with frequent contact to Kavita Desai",
+      "evidence_hash": "7daaeab280d35ba6",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Ganesh Pandit was found in possession of a mobile phone with frequent contact to Kavita Desai"
+      }
+    },
+    {
+      "src": "B10",
+      "dst": "Surveillance Team Charlie",
+      "kind": "ASSOCIATED_WITH",
+      "source": "SURV0014",
+      "source_type": "surveillance",
+      "day": "56",
+      "confidence": 0.55,
+      "supporting_text": "1234 hrs - Surveillance Team Charlie reports Ganesh Pandit entering premises at Dockside Ward alone",
+      "evidence_hash": "014865b8b465dbc3",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "1234 hrs - Surveillance Team Charlie reports Ganesh Pandit entering premises at Dockside Ward alone"
+      }
+    },
+    {
+      "src": "B10",
+      "dst": "Dockside Ward",
+      "kind": "LOCATED_AT",
+      "source": "SURV0014",
+      "source_type": "surveillance",
+      "day": "56",
+      "confidence": 0.6,
+      "supporting_text": "1234 hrs - Surveillance Team Charlie reports Ganesh Pandit entering premises at Dockside Ward alone",
+      "evidence_hash": "014865b8b465dbc3",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "1234 hrs - Surveillance Team Charlie reports Ganesh Pandit entering premises at Dockside Ward alone"
+      }
     },
     {
       "src": "PHONE_7000000024",
@@ -15463,6 +15916,149 @@
     },
     {
       "src": "C1",
+      "dst": "FIR0020",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0020",
+      "source_type": "fir",
+      "day": "49",
+      "confidence": 0.6,
+      "supporting_text": "Source intelligence indicates Prakash Shetty's group may be preparing for an upcoming operation. Aslam P",
+      "evidence_hash": "b4eb098c30023516",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0020",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0020",
+      "source_type": "fir",
+      "day": "49",
+      "confidence": 0.6,
+      "supporting_text": "Source intelligence indicates Prakash Shetty's group may be preparing for an upcoming operation. Aslam Pat",
+      "evidence_hash": "966f73db819177c3",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0023",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0023",
+      "source_type": "fir",
+      "day": "53",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Neha Madam, associated with Prakash Shetty's network, was seen meeting Sunil Pillai at Old Market Circ",
+      "evidence_hash": "c238e934c7c928e6",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0023",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0023",
+      "source_type": "fir",
+      "day": "53",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Neha Madam, associated with Prakash Shetty's network, was seen meeting Sunil Pillai at Old Market Circle",
+      "evidence_hash": "0d8779f8acf8b0e5",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0019",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0019",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.6,
+      "supporting_text": "Source intelligence indicates Prakash Shetty's group may be preparing for an upcoming operation. Irfan S",
+      "evidence_hash": "6dd4bf3c22708b55",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0019",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0019",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.6,
+      "supporting_text": "Source intelligence indicates Prakash Shetty's group may be preparing for an upcoming operation. Irfan She",
+      "evidence_hash": "b63dbf5ad10bc6d7",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0022",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0022",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "Circle on suspicion of involvement with a network linked to Prakash Shetty. Mahesh Gupta was found in possession of a mobile phone wit",
+      "evidence_hash": "46a94db013b91f47",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0018",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0018",
+      "source_type": "fir",
+      "day": "61",
+      "confidence": 0.6,
+      "supporting_text": "Source intelligence indicates Prakash Shetty's group may be preparing for an upcoming operation. Ramesh",
+      "evidence_hash": "1d7918fae41fb065",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0018",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0018",
+      "source_type": "fir",
+      "day": "61",
+      "confidence": 0.6,
+      "supporting_text": "Source intelligence indicates Prakash Shetty's group may be preparing for an upcoming operation. Ramesh Ch",
+      "evidence_hash": "2948c9d7be6e58a8",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0017",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0017",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road. Nat",
+      "evidence_hash": "5db9057f9b070fee",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
+      "dst": "FIR0017",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0017",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road. Natur",
+      "evidence_hash": "1e5152333583ca89",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C1",
       "dst": "C2",
       "kind": "CALLED",
       "source": "CDR00232",
@@ -15833,6 +16429,21 @@
         "duration_sec": "337",
         "tower": "Lakeview Chowk",
         "call_type": "voice"
+      }
+    },
+    {
+      "src": "C1",
+      "dst": "C3",
+      "kind": "MET",
+      "source": "FIR0017",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.7,
+      "supporting_text": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road",
+      "evidence_hash": "4eace2cef0105e2e",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road"
       }
     },
     {
@@ -16380,6 +16991,36 @@
     },
     {
       "src": "C1",
+      "dst": "C12",
+      "kind": "MET",
+      "source": "FIR0023",
+      "source_type": "fir",
+      "day": "53",
+      "confidence": 0.7,
+      "supporting_text": "Informant states that Neha Madam, associated with Prakash Shetty's network, was seen meeting Sunil Pillai at Old Market Circle",
+      "evidence_hash": "0d8779f8acf8b0e5",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Informant states that Neha Madam, associated with Prakash Shetty's network, was seen meeting Sunil Pillai at Old Market Circle"
+      }
+    },
+    {
+      "src": "C1",
+      "dst": "C12",
+      "kind": "MET",
+      "source": "SURV0023",
+      "source_type": "surveillance",
+      "day": "60",
+      "confidence": 0.7,
+      "supporting_text": "Sunil Pillai seen meeting briefly with Prakash Shetty; a small package changed hands but contents not confirmed",
+      "evidence_hash": "2408918bcd389343",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Sunil Pillai seen meeting briefly with Prakash Shetty; a small package changed hands but contents not confirmed"
+      }
+    },
+    {
+      "src": "C1",
       "dst": "Eastgate",
       "kind": "LOCATED_AT",
       "source": "CDR00232",
@@ -16800,6 +17441,36 @@
     },
     {
       "src": "C1",
+      "dst": "Old Market Circle",
+      "kind": "LOCATED_AT",
+      "source": "FIR0023",
+      "source_type": "fir",
+      "day": "53",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Neha Madam, associated with Prakash Shetty's network, was seen meeting Sunil Pillai at Old Market Circle",
+      "evidence_hash": "0d8779f8acf8b0e5",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "Informant states that Neha Madam, associated with Prakash Shetty's network, was seen meeting Sunil Pillai at Old Market Circle"
+      }
+    },
+    {
+      "src": "C1",
+      "dst": "Old Market Circle",
+      "kind": "LOCATED_AT",
+      "source": "FIR0022",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.6,
+      "supporting_text": "Acting on a tip-off, a patrol team intercepted Mahesh Gupta near Old Market Circle on suspicion of involvement with a network linked to Prakash Shetty",
+      "evidence_hash": "fda9d182939dbc1f",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "Acting on a tip-off, a patrol team intercepted Mahesh Gupta near Old Market Circle on suspicion of involvement with a network linked to Prakash Shetty"
+      }
+    },
+    {
+      "src": "C1",
       "dst": "North Bypass",
       "kind": "LOCATED_AT",
       "source": "CDR00241",
@@ -17171,6 +17842,51 @@
       "extractor": "cdr_tower",
       "meta": {
         "tower": "Station Road"
+      }
+    },
+    {
+      "src": "C1",
+      "dst": "Station Road",
+      "kind": "LOCATED_AT",
+      "source": "FIR0017",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.6,
+      "supporting_text": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road",
+      "evidence_hash": "4eace2cef0105e2e",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road"
+      }
+    },
+    {
+      "src": "C1",
+      "dst": "C8",
+      "kind": "ASSOCIATED_WITH",
+      "source": "FIR0022",
+      "source_type": "fir",
+      "day": "52",
+      "confidence": 0.55,
+      "supporting_text": "Acting on a tip-off, a patrol team intercepted Mahesh Gupta near Old Market Circle on suspicion of involvement with a network linked to Prakash Shetty",
+      "evidence_hash": "fda9d182939dbc1f",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Acting on a tip-off, a patrol team intercepted Mahesh Gupta near Old Market Circle on suspicion of involvement with a network linked to Prakash Shetty"
+      }
+    },
+    {
+      "src": "C1",
+      "dst": "C13",
+      "kind": "MET",
+      "source": "FIR0017",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.7,
+      "supporting_text": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road",
+      "evidence_hash": "4eace2cef0105e2e",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road"
       }
     },
     {
@@ -17679,6 +18395,21 @@
         "duration_sec": "377",
         "tower": "Dockside Ward",
         "call_type": "voice"
+      }
+    },
+    {
+      "src": "C2",
+      "dst": "C6",
+      "kind": "ASSOCIATED_WITH",
+      "source": "FIR0021",
+      "source_type": "fir",
+      "day": "45",
+      "confidence": 0.55,
+      "supporting_text": "Complainant reported suspicious movement of unknown persons believed to include Nasir Malik and Santosh Bhosale around Lakeview Chowk in the days preceding extortion collection",
+      "evidence_hash": "aa17d9a06636b180",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Complainant reported suspicious movement of unknown persons believed to include Nasir Malik and Santosh Bhosale around Lakeview Chowk in the days preceding extortion collection"
       }
     },
     {
@@ -20268,6 +20999,32 @@
     },
     {
       "src": "C6",
+      "dst": "FIR0021",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0021",
+      "source_type": "fir",
+      "day": "45",
+      "confidence": 0.6,
+      "supporting_text": "ment of unknown persons believed to include Nasir Malik and Santosh Bhosale around Lakeview Chowk in the days preceding extortion colle",
+      "evidence_hash": "05bc6b26b755de4c",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C6",
+      "dst": "FIR0019",
+      "kind": "MENTIONED_IN",
+      "source": "FIR0019",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.6,
+      "supporting_text": "ay be preparing for an upcoming operation. Irfan Sheikh and Santosh Bhosale were observed conferring near Station Road multiple times t",
+      "evidence_hash": "ad64a03915d1e214",
+      "extractor": "fir_mention",
+      "meta": {}
+    },
+    {
+      "src": "C6",
       "dst": "N12",
       "kind": "CALLED",
       "source": "CDR00530",
@@ -20328,6 +21085,36 @@
       "extractor": "cdr_tower",
       "meta": {
         "tower": "Industrial Estate Road"
+      }
+    },
+    {
+      "src": "C6",
+      "dst": "C9",
+      "kind": "MET",
+      "source": "FIR0019",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.7,
+      "supporting_text": "Irfan Sheikh and Santosh Bhosale were observed conferring near Station Road multiple times this week.",
+      "evidence_hash": "b2c121c68dde78e4",
+      "extractor": "unstructured_nlp",
+      "meta": {
+        "sentence": "Irfan Sheikh and Santosh Bhosale were observed conferring near Station Road multiple times this week."
+      }
+    },
+    {
+      "src": "C6",
+      "dst": "Station Road",
+      "kind": "LOCATED_AT",
+      "source": "FIR0019",
+      "source_type": "fir",
+      "day": "44",
+      "confidence": 0.6,
+      "supporting_text": "Irfan Sheikh and Santosh Bhosale were observed conferring near Station Road multiple times this week.",
+      "evidence_hash": "b2c121c68dde78e4",
+      "extractor": "unstructured_loc",
+      "meta": {
+        "sentence": "Irfan Sheikh and Santosh Bhosale were observed conferring near Station Road multiple times this week."
       }
     },
     {
@@ -34522,261 +35309,6 @@
       }
     },
     {
-      "src": "Rajan Naik",
-      "dst": "Riverside Colony",
-      "kind": "LOCATED_AT",
-      "source": "FIR0015",
-      "source_type": "fir",
-      "day": "44",
-      "confidence": 0.6,
-      "supporting_text": "Informant states that Ashok Gaikwad, associated with Rajan Naik's network, was seen meeting Mohsin Qrueshi at Riverside Colony",
-      "evidence_hash": "b9d6cb315db95a52",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "Informant states that Ashok Gaikwad, associated with Rajan Naik's network, was seen meeting Mohsin Qrueshi at Riverside Colony"
-      }
-    },
-    {
-      "src": "Rajan Naik",
-      "dst": "Riverside Colony",
-      "kind": "LOCATED_AT",
-      "source": "SURV0010",
-      "source_type": "surveillance",
-      "day": "52",
-      "confidence": 0.6,
-      "supporting_text": "1957 hrs - Surveillance Team Bravo reports Rajan Naik entering premises at Riverside Colony alone",
-      "evidence_hash": "b29e3d08c38ad36c",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "1957 hrs - Surveillance Team Bravo reports Rajan Naik entering premises at Riverside Colony alone"
-      }
-    },
-    {
-      "src": "Rajan Naik",
-      "dst": "B13",
-      "kind": "MET",
-      "source": "FIR0012",
-      "source_type": "fir",
-      "day": "52",
-      "confidence": 0.7,
-      "supporting_text": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road",
-      "evidence_hash": "888ce3621bf6c18a",
-      "extractor": "unstructured_nlp",
-      "meta": {
-        "sentence": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road"
-      }
-    },
-    {
-      "src": "Rajan Naik",
-      "dst": "Industrial Estate Road",
-      "kind": "LOCATED_AT",
-      "source": "FIR0012",
-      "source_type": "fir",
-      "day": "52",
-      "confidence": 0.6,
-      "supporting_text": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road",
-      "evidence_hash": "888ce3621bf6c18a",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "Informant states that Deepak Sawant, associated with Rajan Naik's network, was seen meeting Sameer Jadhav at Industrial Estate Road"
-      }
-    },
-    {
-      "src": "Rajan Naik",
-      "dst": "Central Junction",
-      "kind": "LOCATED_AT",
-      "source": "FIR0013",
-      "source_type": "fir",
-      "day": "52",
-      "confidence": 0.6,
-      "supporting_text": "Acting on a tip-off, a patrol team intercepted Ganesh Pandit near Central Junction on suspicion of involvement with a network linked to Rajan Naik",
-      "evidence_hash": "c7e97e1fb075965a",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "Acting on a tip-off, a patrol team intercepted Ganesh Pandit near Central Junction on suspicion of involvement with a network linked to Rajan Naik"
-      }
-    },
-    {
-      "src": "Rajan Naik",
-      "dst": "Surveillance Team Bravo",
-      "kind": "ASSOCIATED_WITH",
-      "source": "SURV0010",
-      "source_type": "surveillance",
-      "day": "52",
-      "confidence": 0.55,
-      "supporting_text": "1957 hrs - Surveillance Team Bravo reports Rajan Naik entering premises at Riverside Colony alone",
-      "evidence_hash": "b29e3d08c38ad36c",
-      "extractor": "unstructured_nlp",
-      "meta": {
-        "sentence": "1957 hrs - Surveillance Team Bravo reports Rajan Naik entering premises at Riverside Colony alone"
-      }
-    },
-    {
-      "src": "Rajan Naik",
-      "dst": "B8",
-      "kind": "ASSOCIATED_WITH",
-      "source": "SURV0015",
-      "source_type": "surveillance",
-      "day": "53",
-      "confidence": 0.55,
-      "supporting_text": "Subject matching description of Rajan Naik observed arriving in a vehicle (reg: MH-DEMO-4855), accompanied by an unidentified associate believed to be Waseem Ali",
-      "evidence_hash": "64a0000b0dd7702f",
-      "extractor": "unstructured_nlp",
-      "meta": {
-        "sentence": "Subject matching description of Rajan Naik observed arriving in a vehicle (reg: MH-DEMO-4855), accompanied by an unidentified associate believed to be Waseem Ali"
-      }
-    },
-    {
-      "src": "Rajan Naik",
-      "dst": "B8",
-      "kind": "ASSOCIATED_WITH",
-      "source": "SURV0012",
-      "source_type": "surveillance",
-      "day": "54",
-      "confidence": 0.55,
-      "supporting_text": "Subject matching description of Rajan Naik observed arriving in a vehicle (reg: MH-DEMO-9842), accompanied by an unidentified associate believed to be Waseem Ali",
-      "evidence_hash": "b0dfa05ea271a064",
-      "extractor": "unstructured_nlp",
-      "meta": {
-        "sentence": "Subject matching description of Rajan Naik observed arriving in a vehicle (reg: MH-DEMO-9842), accompanied by an unidentified associate believed to be Waseem Ali"
-      }
-    },
-    {
-      "src": "Prakash Shetty",
-      "dst": "Old Market Circle",
-      "kind": "LOCATED_AT",
-      "source": "FIR0023",
-      "source_type": "fir",
-      "day": "53",
-      "confidence": 0.6,
-      "supporting_text": "Informant states that Neha Madam, associated with Prakash Shetty's network, was seen meeting Sunil Pillai at Old Market Circle",
-      "evidence_hash": "0d8779f8acf8b0e5",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "Informant states that Neha Madam, associated with Prakash Shetty's network, was seen meeting Sunil Pillai at Old Market Circle"
-      }
-    },
-    {
-      "src": "Prakash Shetty",
-      "dst": "Old Market Circle",
-      "kind": "LOCATED_AT",
-      "source": "FIR0022",
-      "source_type": "fir",
-      "day": "52",
-      "confidence": 0.6,
-      "supporting_text": "Acting on a tip-off, a patrol team intercepted Mahesh Gupta near Old Market Circle on suspicion of involvement with a network linked to Prakash Shetty",
-      "evidence_hash": "fda9d182939dbc1f",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "Acting on a tip-off, a patrol team intercepted Mahesh Gupta near Old Market Circle on suspicion of involvement with a network linked to Prakash Shetty"
-      }
-    },
-    {
-      "src": "Prakash Shetty",
-      "dst": "C8",
-      "kind": "ASSOCIATED_WITH",
-      "source": "FIR0022",
-      "source_type": "fir",
-      "day": "52",
-      "confidence": 0.55,
-      "supporting_text": "Acting on a tip-off, a patrol team intercepted Mahesh Gupta near Old Market Circle on suspicion of involvement with a network linked to Prakash Shetty",
-      "evidence_hash": "fda9d182939dbc1f",
-      "extractor": "unstructured_nlp",
-      "meta": {
-        "sentence": "Acting on a tip-off, a patrol team intercepted Mahesh Gupta near Old Market Circle on suspicion of involvement with a network linked to Prakash Shetty"
-      }
-    },
-    {
-      "src": "Prakash Shetty",
-      "dst": "C3",
-      "kind": "MET",
-      "source": "FIR0017",
-      "source_type": "fir",
-      "day": "44",
-      "confidence": 0.7,
-      "supporting_text": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road",
-      "evidence_hash": "4eace2cef0105e2e",
-      "extractor": "unstructured_nlp",
-      "meta": {
-        "sentence": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road"
-      }
-    },
-    {
-      "src": "Prakash Shetty",
-      "dst": "C13",
-      "kind": "MET",
-      "source": "FIR0017",
-      "source_type": "fir",
-      "day": "44",
-      "confidence": 0.7,
-      "supporting_text": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road",
-      "evidence_hash": "4eace2cef0105e2e",
-      "extractor": "unstructured_nlp",
-      "meta": {
-        "sentence": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road"
-      }
-    },
-    {
-      "src": "Prakash Shetty",
-      "dst": "Station Road",
-      "kind": "LOCATED_AT",
-      "source": "FIR0017",
-      "source_type": "fir",
-      "day": "44",
-      "confidence": 0.6,
-      "supporting_text": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road",
-      "evidence_hash": "4eace2cef0105e2e",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "Informant states that Ramesh Chugule, associated with Prakash Shetty's network, was seen meeting Ravi Kadam at Station Road"
-      }
-    },
-    {
-      "src": "Prakash Shetty",
-      "dst": "C12",
-      "kind": "MET",
-      "source": "SURV0023",
-      "source_type": "surveillance",
-      "day": "60",
-      "confidence": 0.7,
-      "supporting_text": "Sunil Pillai seen meeting briefly with Prakash Shetty; a small package changed hands but contents not confirmed",
-      "evidence_hash": "2408918bcd389343",
-      "extractor": "unstructured_nlp",
-      "meta": {
-        "sentence": "Sunil Pillai seen meeting briefly with Prakash Shetty; a small package changed hands but contents not confirmed"
-      }
-    },
-    {
-      "src": "Santosh Bhosale",
-      "dst": "Station Road",
-      "kind": "LOCATED_AT",
-      "source": "FIR0019",
-      "source_type": "fir",
-      "day": "44",
-      "confidence": 0.6,
-      "supporting_text": "Irfan Sheikh and Santosh Bhosale were observed conferring near Station Road multiple times this week.",
-      "evidence_hash": "b2c121c68dde78e4",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "Irfan Sheikh and Santosh Bhosale were observed conferring near Station Road multiple times this week."
-      }
-    },
-    {
-      "src": "Ganesh Pawar",
-      "dst": "Dockside Ward",
-      "kind": "LOCATED_AT",
-      "source": "FIR0004",
-      "source_type": "fir",
-      "day": "52",
-      "confidence": 0.6,
-      "supporting_text": "Complainant reported suspicious movement of unknown persons believed to include Tariq Ansri and Ganesh Pawar around Dockside Ward in the days preceding drug shipment",
-      "evidence_hash": "667ebeedf2c4c463",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "Complainant reported suspicious movement of unknown persons believed to include Tariq Ansri and Ganesh Pawar around Dockside Ward in the days preceding drug shipment"
-      }
-    },
-    {
       "src": "Surveillance Team Alpha",
       "dst": "Lakeview Chowk",
       "kind": "LOCATED_AT",
@@ -35122,21 +35654,6 @@
       }
     },
     {
-      "src": "Ganesh Pandit",
-      "dst": "Dockside Ward",
-      "kind": "LOCATED_AT",
-      "source": "SURV0014",
-      "source_type": "surveillance",
-      "day": "56",
-      "confidence": 0.6,
-      "supporting_text": "1234 hrs - Surveillance Team Charlie reports Ganesh Pandit entering premises at Dockside Ward alone",
-      "evidence_hash": "014865b8b465dbc3",
-      "extractor": "unstructured_loc",
-      "meta": {
-        "sentence": "1234 hrs - Surveillance Team Charlie reports Ganesh Pandit entering premises at Dockside Ward alone"
-      }
-    },
-    {
       "src": "Prkash Shetty",
       "dst": "Dockside Ward",
       "kind": "LOCATED_AT",
@@ -35213,7 +35730,7 @@
     }
   ],
   "stats": {
-    "node_count": 377,
-    "edge_count": 2065
+    "node_count": 372,
+    "edge_count": 2105
   }
 }

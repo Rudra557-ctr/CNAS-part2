@@ -304,6 +304,57 @@
           "ground_truth_flag": "noise"
         }
       ]
+    },
+    {
+      "original": "people_directory.json",
+      "stored": "1648dfb1/files/people_directory.json",
+      "format": "json",
+      "detected_type": "people_directory",
+      "type_confidence": 0.664,
+      "columns": [
+        "id",
+        "name",
+        "alias",
+        "role",
+        "cell",
+        "district",
+        "station",
+        "phone",
+        "account",
+        "vehicle",
+        "lat",
+        "lng"
+      ],
+      "sample_rows": [
+        {
+          "id": "UP00001",
+          "name": "Rajesh Rajput",
+          "alias": "",
+          "role": "Kingpin",
+          "cell": "UP-East-Ring",
+          "district": "Varanasi",
+          "station": "Shivpur PS",
+          "phone": "9125000001",
+          "account": "BARB000000000001",
+          "vehicle": "",
+          "lat": 25.284514563795494,
+          "lng": 82.93935518603305
+        },
+        {
+          "id": "UP00002",
+          "name": "Rajesh Tiwari",
+          "alias": "",
+          "role": "Kingpin",
+          "cell": "UP-West-Ring",
+          "district": "Gautam Buddha Nagar (Noida)",
+          "station": "Sector 39 PS",
+          "phone": "9927000002",
+          "account": "HDFC000000000002",
+          "vehicle": "",
+          "lat": 28.510999496732122,
+          "lng": 77.36777308182094
+        }
+      ]
     }
   ],
   "mapping": {
@@ -411,12 +462,25 @@
       },
       "validated": true,
       "missing": []
+    },
+    "people_directory.json": {
+      "mapping": {
+        "phone": "phone",
+        "account": "account",
+        "id": "id",
+        "name": "name",
+        "name_hi": null,
+        "cell": "cell",
+        "role": "role"
+      },
+      "validated": true,
+      "missing": []
     }
   },
   "processing": {
-    "entities": 57384,
+    "entities": 59061,
     "relationships": 13295,
-    "graph_nodes": 7604,
-    "graph_edges": 22516
+    "graph_nodes": 9623,
+    "graph_edges": 25060
   }
 }

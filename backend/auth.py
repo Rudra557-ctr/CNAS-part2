@@ -26,10 +26,18 @@ User record schema (data/users.json):
 Legacy records (only password_hash/role/name) are treated as active and
 are backfilled with defaults on read — fully backward compatible.
 
-Passwords are SHA-256 (stdlib only) for the SIH prototype. Production must
-use bcrypt/scrypt + a strong JWT_SECRET.
+Passwords set from now on are salted scrypt (stdlib, no new dependency).
+Hashes already on file from the SHA-256 era still verify, so no existing
+account is locked out; they upgrade when the password is next reset.
+
+The three seed accounts ship with public demo passwords — they are written in
+this file and in tests/conftest.py, in a public repository. A deployment that
+anyone can reach must override them: set CNAS_ADMIN_PASSWORD,
+CNAS_ANALYST_PASSWORD and CNAS_INVESTIGATOR_PASSWORD. Unset, the demo
+defaults apply (local development and the test suite rely on that).
 """
 import hashlib
+import hmac
 import json
 import os
 import re
@@ -48,8 +56,37 @@ TOKEN_TTL_HOURS = 8
 _bearer = HTTPBearer(auto_error=False)
 
 
+# scrypt cost: ~50ms and 16MB per check — cheap for a login, expensive for an
+# offline guesser working through a leaked users.json.
+_SCRYPT = {"n": 2 ** 14, "r": 8, "p": 1, "dklen": 32}
+
+
 def _hash(password: str) -> str:
-    return hashlib.sha256(password.encode()).hexdigest()
+    """Salted scrypt, encoded as scrypt$<salt hex>$<digest hex>."""
+    salt = secrets.token_bytes(16)
+    digest = hashlib.scrypt(password.encode(), salt=salt, **_SCRYPT)
+    return f"scrypt${salt.hex()}${digest.hex()}"
+
+
+def verify_password(password: str, stored: str) -> bool:
+    """Check a password against either hash format, in constant time."""
+    stored = stored or ""
+    if stored.startswith("scrypt$"):
+        try:
+            _, salt_hex, digest_hex = stored.split("$", 2)
+            digest = hashlib.scrypt((password or "").encode(),
+                                    salt=bytes.fromhex(salt_hex), **_SCRYPT)
+        except ValueError:
+            return False
+        return hmac.compare_digest(digest.hex(), digest_hex)
+    # Legacy unsalted SHA-256 records written before the switch.
+    legacy = hashlib.sha256((password or "").encode()).hexdigest()
+    return hmac.compare_digest(legacy, stored)
+
+
+def _seed_password(env_name: str, demo_default: str) -> str:
+    """A deployment's own password when configured, else the public demo one."""
+    return os.getenv(env_name) or demo_default
 
 
 def _now_iso() -> str:
@@ -59,7 +96,7 @@ def _now_iso() -> str:
 # username -> full user record (seed accounts are pre-activated)
 USERS = {
     "admin": {
-        "password_hash": _hash("supervisor123"),
+        "password_hash": _hash(_seed_password("CNAS_ADMIN_PASSWORD", "supervisor123")),
         "role": "admin",
         "name": "System Administrator",
         "badge_id": "ADMIN-001",
@@ -72,7 +109,7 @@ USERS = {
         "rejection_reason": None,
     },
     "analyst": {
-        "password_hash": _hash("analyst123"),
+        "password_hash": _hash(_seed_password("CNAS_ANALYST_PASSWORD", "analyst123")),
         "role": "analyst",
         "name": "Senior Intelligence Analyst",
         "badge_id": "ANL-001",
@@ -85,7 +122,7 @@ USERS = {
         "rejection_reason": None,
     },
     "investigator": {
-        "password_hash": _hash("investigator123"),
+        "password_hash": _hash(_seed_password("CNAS_INVESTIGATOR_PASSWORD", "investigator123")),
         "role": "investigator",
         "name": "Senior Detective",
         "badge_id": "INV-001",
@@ -427,7 +464,7 @@ def authenticate(username: str, password: str):
     user = _all_users().get(uname)
     if not user:
         return None
-    if user["password_hash"] != _hash(password or ""):
+    if not verify_password(password or "", user.get("password_hash", "")):
         return None
     if (user.get("status") or "active") != "active":
         raise _status_error_for(user)

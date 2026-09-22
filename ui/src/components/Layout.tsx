@@ -64,14 +64,20 @@ export default function Layout() {
   })
   const [alertCount, setAlertCount] = useState<number | null>(null)
 
-  // Pending-alert pill: total detections across the four alert feeds.
-  // Global scope (no case filter), fetched once — failure hides the pill.
+  // Pending-alert pill: total detections across the four alert feeds, for the
+  // case that is open (or the shared graph when none is) — the same scope the
+  // Alerts page counts, so the two numbers agree. Read on every render:
+  // Layout stays mounted across navigation, so a one-time read would keep
+  // counting the shared graph after a case is opened. Failure hides the pill.
+  const scopeId = (() => {
+    try { return sessionStorage.getItem('caseId') || undefined } catch { return undefined }
+  })()
   useEffect(() => {
     let live = true
     const safe = (p: Promise<any>) => p.catch(() => null)
     Promise.all([
-      safe(fetchAnomalies()), safe(fetchBridges()),
-      safe(fetchBursts()), safe(fetchCrossCase()),
+      safe(fetchAnomalies(scopeId)), safe(fetchBridges(scopeId)),
+      safe(fetchBursts(scopeId)), safe(fetchCrossCase(scopeId)),
     ]).then(([a, b, u, c]) => {
       if (!live) return
       const n = (r: any) =>
@@ -84,7 +90,7 @@ export default function Layout() {
       setAlertCount(total)
     })
     return () => { live = false }
-  }, [])
+  }, [scopeId])
 
   const toggle = (key: string) => {
     setCollapsed(prev => {
