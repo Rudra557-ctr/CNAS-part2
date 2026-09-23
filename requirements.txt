@@ -1,13 +1,19 @@
-# Frozen: verified working set as of 2026-09-15 (Python 3.14.3).
-# Verified by: 126/126 pytest green, frontend build clean, all 17 API
-# endpoints + 15 UI routes + RBAC matrix smoke-tested live.
+# Frozen: verified working set as of 2026-09-23 (Python 3.14.3).
+# Verified by: 249/249 pytest green, frontend build clean, and the
+# single-service Docker image built and served (health, login, graph and the
+# Whisper model load) before deploy.
 # Install everything (including the spaCy model) with:
 #   pip install -r requirements.txt
+# Test-only extras (pytest, httpx) live in requirements-dev.txt and stay out
+# of the deployed image.
 fastapi==0.141.1
 uvicorn[standard]==0.52.4
 neo4j==6.3.0
 networkx==3.6.1
 pandas==3.0.5
+# Imported directly by backend/analytics/face_search.py, so it is pinned here
+# rather than left to arrive as a pandas dependency.
+numpy==2.5.2
 python-multipart==0.0.32
 rapidfuzz==3.14.6
 phonenumbers==9.0.38
@@ -25,3 +31,8 @@ faster-whisper==1.2.1
 
 # spaCy NER model (not on PyPI; pinned GitHub release wheel, verified 3.8.0 loads)
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+
+# python-docx is optional: backend/ingestion/detector.py uses it for .docx
+# narratives when present and falls back to reading the OOXML zip when not.
+# Uncomment for the richer path:
+# python-docx==1.2.0
