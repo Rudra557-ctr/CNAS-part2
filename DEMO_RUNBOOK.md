@@ -1,5 +1,8 @@
 # CNAS Demo Runbook — 8 Minutes (revised 2026-09-22)
 
+**Before 0:00 — deliver the two-minute opening in `PITCH.md`** (problem, idea, what we
+built), then start this script.
+
 **Setup (do 10 min before):** backend `python3 -m uvicorn backend.api.main:app --port 8000`
 (from repo root), frontend `npm run dev` (from `ui/`). Open http://localhost:5173/.
 Log in as `vibhu123` **(investigator)**. The password is in the team's private note, not

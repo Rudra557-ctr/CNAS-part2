@@ -54,6 +54,8 @@ export const adminSetUserStatus = (username: string, status: 'active' | 'suspend
 export const adminResetPassword = (username: string, new_password?: string) =>
   api.post(`/admin/users/${encodeURIComponent(username)}/reset-password`,
     new_password ? { new_password } : {})
+export const adminDeleteUser = (username: string) =>
+  api.delete(`/admin/users/${encodeURIComponent(username)}`)
 export const adminAuditTrail = (p?: { limit?: number; q?: string }) =>
   api.get('/admin/audit-trail', { params: p })
 

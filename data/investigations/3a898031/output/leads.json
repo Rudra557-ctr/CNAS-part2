@@ -1,184 +1,187 @@
-[
-  {
-    "entity_id": "9820098200",
-    "entity_type": "Person",
-    "label": "9820098200",
-    "label_hi": null,
-    "cell": "Unknown",
-    "role": "Unknown (auto-bootstrapped)",
-    "lead_score": 50,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 1.0,
-      "betweenness": 1.0,
-      "degree": 1.0,
-      "centrality": 1.0,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 0.0,
-      "evidence_quality": 0.971,
-      "cross_case": 0.0
+{
+  "complete": true,
+  "leads": [
+    {
+      "entity_id": "9820098200",
+      "entity_type": "Person",
+      "label": "9820098200",
+      "label_hi": null,
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "lead_score": 50,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 1.0,
+        "betweenness": 1.0,
+        "degree": 1.0,
+        "centrality": 1.0,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.971,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 1.0 rank 1"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (50/100): Bridge score 1.0 rank 1"
     },
-    "reasons": [
-      "Bridge score 1.0 rank 1"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (50/100): Bridge score 1.0 rank 1"
-  },
-  {
-    "entity_id": "9811198111",
-    "entity_type": "Person",
-    "label": "9811198111",
-    "label_hi": null,
-    "cell": "Unknown",
-    "role": "Unknown (auto-bootstrapped)",
-    "lead_score": 50,
-    "priority": "MEDIUM",
-    "signals": {
-      "bridge_score": 1.0,
-      "betweenness": 1.0,
-      "degree": 1.0,
-      "centrality": 1.0,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 0.0,
-      "evidence_quality": 0.983,
-      "cross_case": 0.0
+    {
+      "entity_id": "9811198111",
+      "entity_type": "Person",
+      "label": "9811198111",
+      "label_hi": null,
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "lead_score": 50,
+      "priority": "MEDIUM",
+      "signals": {
+        "bridge_score": 1.0,
+        "betweenness": 1.0,
+        "degree": 1.0,
+        "centrality": 1.0,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.983,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 1.0 rank 2"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (50/100): Bridge score 1.0 rank 2"
     },
-    "reasons": [
-      "Bridge score 1.0 rank 2"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (50/100): Bridge score 1.0 rank 2"
-  },
-  {
-    "entity_id": "9890198901",
-    "entity_type": "Person",
-    "label": "9890198901",
-    "label_hi": null,
-    "cell": "Unknown",
-    "role": "Unknown (auto-bootstrapped)",
-    "lead_score": 37,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.657,
-      "betweenness": 0.428,
-      "degree": 0.667,
-      "centrality": 0.547,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 0.0,
-      "evidence_quality": 0.98,
-      "cross_case": 0.0
+    {
+      "entity_id": "9890198901",
+      "entity_type": "Person",
+      "label": "9890198901",
+      "label_hi": null,
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "lead_score": 37,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.657,
+        "betweenness": 0.428,
+        "degree": 0.667,
+        "centrality": 0.547,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.98,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 0.657 rank 3"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (37/100): Bridge score 0.657 rank 3"
     },
-    "reasons": [
-      "Bridge score 0.657 rank 3"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (37/100): Bridge score 0.657 rank 3"
-  },
-  {
-    "entity_id": "9769097690",
-    "entity_type": "Person",
-    "label": "9769097690",
-    "label_hi": null,
-    "cell": "Unknown",
-    "role": "Unknown (auto-bootstrapped)",
-    "lead_score": 37,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.657,
-      "betweenness": 0.428,
-      "degree": 0.667,
-      "centrality": 0.547,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 0.0,
-      "evidence_quality": 0.98,
-      "cross_case": 0.0
+    {
+      "entity_id": "9769097690",
+      "entity_type": "Person",
+      "label": "9769097690",
+      "label_hi": null,
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "lead_score": 37,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.657,
+        "betweenness": 0.428,
+        "degree": 0.667,
+        "centrality": 0.547,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 0.98,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Bridge score 0.657 rank 4"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (37/100): Bridge score 0.657 rank 4"
     },
-    "reasons": [
-      "Bridge score 0.657 rank 4"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (37/100): Bridge score 0.657 rank 4"
-  },
-  {
-    "entity_id": "AUTO-001",
-    "entity_type": "Person",
-    "label": "AUTO-001",
-    "label_hi": null,
-    "cell": "Unknown",
-    "role": "Unknown (auto-bootstrapped)",
-    "lead_score": 27,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.4,
-      "betweenness": 0.0,
-      "degree": 0.333,
-      "centrality": 0.167,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 0.0,
-      "evidence_quality": 1.0,
-      "cross_case": 0.0
+    {
+      "entity_id": "AUTO-001",
+      "entity_type": "Person",
+      "label": "AUTO-001",
+      "label_hi": null,
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "lead_score": 27,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.4,
+        "betweenness": 0.0,
+        "degree": 0.333,
+        "centrality": 0.167,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
     },
-    "reasons": [
-      "Low anomaly signals; review degree/evidence"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
-  },
-  {
-    "entity_id": "AUTO-002",
-    "entity_type": "Person",
-    "label": "AUTO-002",
-    "label_hi": null,
-    "cell": "Unknown",
-    "role": "Unknown (auto-bootstrapped)",
-    "lead_score": 27,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.4,
-      "betweenness": 0.0,
-      "degree": 0.333,
-      "centrality": 0.167,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 0.0,
-      "evidence_quality": 1.0,
-      "cross_case": 0.0
+    {
+      "entity_id": "AUTO-002",
+      "entity_type": "Person",
+      "label": "AUTO-002",
+      "label_hi": null,
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "lead_score": 27,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.4,
+        "betweenness": 0.0,
+        "degree": 0.333,
+        "centrality": 0.167,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
     },
-    "reasons": [
-      "Low anomaly signals; review degree/evidence"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
-  },
-  {
-    "entity_id": "AUTO-003",
-    "entity_type": "Person",
-    "label": "AUTO-003",
-    "label_hi": null,
-    "cell": "Unknown",
-    "role": "Unknown (auto-bootstrapped)",
-    "lead_score": 27,
-    "priority": "LOW",
-    "signals": {
-      "bridge_score": 0.4,
-      "betweenness": 0.0,
-      "degree": 0.333,
-      "centrality": 0.167,
-      "financial_anomaly": 0.0,
-      "communication_anomaly": 0.0,
-      "temporal_correlation": 0.0,
-      "evidence_quality": 1.0,
-      "cross_case": 0.0
-    },
-    "reasons": [
-      "Low anomaly signals; review degree/evidence"
-    ],
-    "evidence_refs": [],
-    "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
-  }
-]
+    {
+      "entity_id": "AUTO-003",
+      "entity_type": "Person",
+      "label": "AUTO-003",
+      "label_hi": null,
+      "cell": "Unknown",
+      "role": "Unknown (auto-bootstrapped)",
+      "lead_score": 27,
+      "priority": "LOW",
+      "signals": {
+        "bridge_score": 0.4,
+        "betweenness": 0.0,
+        "degree": 0.333,
+        "centrality": 0.167,
+        "financial_anomaly": 0.0,
+        "communication_anomaly": 0.0,
+        "temporal_correlation": 0.0,
+        "evidence_quality": 1.0,
+        "cross_case": 0.0
+      },
+      "reasons": [
+        "Low anomaly signals; review degree/evidence"
+      ],
+      "evidence_refs": [],
+      "explanation": "Potential investigative lead (27/100): Low anomaly signals; review degree/evidence"
+    }
+  ]
+}

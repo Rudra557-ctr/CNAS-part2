@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react'
 import {
-  ShieldCheck, UserPlus, Check, X, RotateCcw, Ban, Search, ScrollText,
+  ShieldCheck, UserPlus, Check, X, RotateCcw, Ban, Search, ScrollText, Trash2,
 } from 'lucide-react'
 import {
   adminListUsers, adminCreateUser, adminApproveUser, adminRejectUser,
-  adminSetUserStatus, adminResetPassword, adminAuditTrail,
+  adminSetUserStatus, adminResetPassword, adminAuditTrail, adminDeleteUser,
 } from '../api/client'
+import { useAuth } from '../components/AuthContext'
 
 interface U {
   username: string; role: string; name: string; badge_id: string
   department: string; status: string; created_at?: string | null
   approved_by?: string | null; rejection_reason?: string | null
 }
+
+// Shipped with the application; the API refuses to modify them.
+const SEED_ACCOUNTS = ['admin', 'analyst', 'investigator']
 
 const STATUS_STYLE: Record<string, string> = {
   active: 'bg-green-50 text-green-800 border-green-200',
@@ -21,6 +25,7 @@ const STATUS_STYLE: Record<string, string> = {
 }
 
 export default function Admin() {
+  const { username: me } = useAuth()
   const [tab, setTab] = useState<'queue' | 'users' | 'create' | 'audit'>('queue')
   const [users, setUsers] = useState<U[]>([])
   const [events, setEvents] = useState<any[]>([])
@@ -28,6 +33,9 @@ export default function Admin() {
   const [busy, setBusy] = useState('')
   const [msg, setMsg] = useState('')
   const [err, setErr] = useState('')
+  // Deleting an officer is irreversible, so the button arms first and only the
+  // second click on the same row goes through.
+  const [confirmDelete, setConfirmDelete] = useState('')
   const [rejectFor, setRejectFor] = useState('')
   const [rejectReason, setRejectReason] = useState('')
   const [form, setForm] = useState({
@@ -227,6 +235,31 @@ export default function Admin() {
                           }
                         }}
                         className="gov-ghost border border-gov-border !p-1.5"><RotateCcw size={12} /></button>
+
+                      {/* Seed accounts and your own login are never deletable. */}
+                      {!SEED_ACCOUNTS.includes(u.username) && u.username !== me && (
+                        confirmDelete === u.username ? (
+                          <span className="flex items-center gap-1">
+                            <button disabled={!!busy} title="Confirm deletion"
+                              onClick={async () => {
+                                setConfirmDelete('')
+                                await act(`del-${u.username}`, () => adminDeleteUser(u.username),
+                                  `${u.username} deleted.`)
+                              }}
+                              className="text-[10px] font-bold px-2 py-1.5 rounded-lg bg-gov-red text-white hover:opacity-90">
+                              Delete?
+                            </button>
+                            <button onClick={() => setConfirmDelete('')} title="Cancel"
+                              className="gov-ghost border border-gov-border !p-1.5"><X size={12} /></button>
+                          </span>
+                        ) : (
+                          <button disabled={!!busy} title="Delete officer"
+                            onClick={() => setConfirmDelete(u.username)}
+                            className="gov-ghost border border-gov-border !p-1.5 text-gov-red hover:border-gov-red">
+                            <Trash2 size={12} />
+                          </button>
+                        )
+                      )}
                     </div>
                   </td>
                 </tr>

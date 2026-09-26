@@ -69,13 +69,23 @@ LINK_VERB_RE = re.compile(rf"\b[Ll]ink\s+({NAME})\s+to\s+({NAME})")
 # "…, associated with Ramesh Yadav", "…and connect him with Ravindra
 # Chaudhary", "…and link them to X" — so the pronoun and the verb form are
 # both optional rather than a fixed template.
+# The flag is scoped to the verb deliberately. A case-insensitive NAME group
+# matches lowercase words too, which swallowed the word after the name:
+# "connected with Anil Tandel through a phone call" captured "Anil Tandel
+# through" and then tried to create a person by that name.
 CREATE_LINK_RE = re.compile(
-    r"(?:associated|connected|linked|related|connect|link|associate|relate)\s+"
-    r"(?:him|her|them|it|this person|the person)?\s*"
-    rf"(?:to|with)\s+({NAME})", re.IGNORECASE)
+    r"(?i:(?:associated|connected|linked|related|connect|link|associate|relate)\s+"
+    r"(?:him|her|them|it|this person|the person)?\s*(?:to|with)\s+)"
+    rf"({NAME})")
 
 NAMED_RE = re.compile(rf"\b(?:named|called|name is)\s+({NAME})")
-NOUN_NAME_RE = re.compile(rf"\b(?:person|suspect|individual|accused)\s+({NAME})")
+# "Add a person, Sanjay Singh" — officers pause after the noun, and Whisper
+# writes that pause as a comma. The separator is optional, so "add a person
+# Sanjay Singh", "add a suspect: Sanjay Singh" and "add a person — Sanjay
+# Singh" all reach the same slot.
+NOUN_NAME_RE = re.compile(
+    rf"\b(?:person|suspect|individual|accused|entity)\s*[,:;\u2013\u2014-]?\s*"
+    rf"(?:named\s+|called\s+|by\s+the\s+name\s+)?({NAME})")
 # ASR sometimes drops capitals entirely; only trusted right after "named".
 LOOSE_NAMED_RE = re.compile(
     r"\b(?:named|called)\s+([a-z]+(?:\s+[a-z]+){0,2})\b", re.IGNORECASE)
@@ -109,6 +119,35 @@ ROLE_RE = re.compile(
     re.IGNORECASE)
 CELL_RE = re.compile(r"\b(?:cell|gang|module)\s+([A-Za-z0-9]{1,12})\b", re.IGNORECASE)
 
+# ── who was contacted ─────────────────────────────────────────────────────
+# "who called 9167000003" names a second person by their number, not the new
+# person's own phone. Read as an attribute it produced the worst possible
+# answer: a refusal saying the number already belongs to someone else — which
+# was precisely the officer's point. The contact clause is therefore captured
+# first and removed before attributes are read, so "with mobile X who called Y"
+# still gives X as the phone and Y as the link.
+CONTACT_VERBS = (r"called|calls|calling|rang|phoned|contacted|contacts|"
+                 r"spoke\s+to|speaks\s+to|in\s+contact\s+with|in\s+touch\s+with|"
+                 r"paid|transferred\s+(?:money|funds)\s+to|sent\s+money\s+to|met")
+CONTACT_RE = re.compile(
+    rf"\b(?:who|whom|and|then)?\s*(?:{CONTACT_VERBS})\s+"
+    rf"(?:the\s+)?(?:phone|mobile|contact|cell)?\s*(?:number|no\.?)?\s*"
+    rf"(?:is\s*)?((?:\d[\s\-]?){{9}}\d|{_ENTITY_ID}|{_LATIN}|{_DEVA})",
+    re.IGNORECASE)
+
+# ── place of activity ─────────────────────────────────────────────────────
+# "seen at Vashi", "active near Wagle Estate", "operating in Zaveri Bazaar".
+# A sighting is not an attribute of the person — it is an observation with a
+# place, so it is written as an intelligence report and the existing extractor
+# turns it into the Location node and LOCATED_AT edge, exactly as it does for a
+# surveillance log. The place itself is never invented: the writer resolves it
+# against the locations already on record for the case.
+LOCATION_CUES = (r"seen|spotted|observed|sighted|active|operating|present|"
+                 r"located|moving|hanging around|loitering|arrested|picked up")
+LOCATION_RE = re.compile(
+    rf"\b(?:{LOCATION_CUES})\s+(?:at|in|near|around|outside)\s+"
+    rf"(?:the\s+)?({_LATIN}|{_DEVA})")
+
 # ── relationship vocabulary ───────────────────────────────────────────────
 # Each spoken cue maps to a relationship kind the extractor already emits AND
 # to the narrative wording that makes it emit that kind. We do not invent a new
@@ -140,6 +179,10 @@ _FILLER = {
     # relative pronouns and objects joining the clauses of one command:
     # "named X whose phone is Y and connect him with Z"
     "whose", "who", "whom", "having", "him", "them", "its", "also", "then",
+    # sighting phrasing — the place is captured, the verb around it is not
+    "seen", "spotted", "observed", "sighted", "active", "operating", "present",
+    "located", "moving", "around", "near", "outside", "at", "activity",
+    "suspicious", "fishy", "activities",
 }
 
 
@@ -156,6 +199,7 @@ class IngestCommand(BaseModel):
     subject_name: Optional[str] = None
     object_name: Optional[str] = None
     attributes: Dict[str, str] = Field(default_factory=dict)
+    location: Optional[str] = None            # place of activity, if one was given
     relation: Optional[str] = None             # canonical kind, e.g. TRANSFERRED_TO
     relation_phrase: Optional[str] = None      # what the officer actually said
     transcript: str = ""
@@ -187,8 +231,9 @@ class IngestCommand(BaseModel):
         if self.operation == "CREATE":
             bits = ", ".join(f"{k} {v}" for k, v in self.attributes.items())
             tail = f", linked to {self.object_name}" if self.object_name else ""
+            where = f", seen at {self.location}" if self.location else ""
             return f"Add {self.entity_type.lower()} {self.subject_name}" \
-                   + (f" ({bits})" if bits else "") + tail
+                   + (f" ({bits})" if bits else "") + tail + where
         if self.operation == "UPDATE":
             bits = ", ".join(f"{k} → {v}" for k, v in self.attributes.items())
             return f"Update {self.subject_name}: {bits}"
@@ -210,6 +255,8 @@ _NAME_STOP = {
     "connect", "connected", "connects", "link", "linked", "links", "associate",
     "associated", "related", "relate", "him", "her", "them", "his", "their",
     "its", "this", "that", "person", "suspect", "also", "then", "please",
+    # a relationship cue that follows the name: "… with Anil Tandel through a call"
+    "through", "via", "over", "using", "seen", "spotted", "observed", "active",
 }
 
 
@@ -245,6 +292,31 @@ def _normalise_value(field: str, raw: str) -> str:
     if field == "cell":
         return v.strip().title() if len(v) > 1 else v.upper()
     return re.sub(r"\s+", " ", v)
+
+
+# "a person called Ramesh" is a name; "who called Ramesh" is a phone call. The
+# word is the same, so the one that follows a noun like person/suspect/name is
+# read as naming and skipped.
+_NAMING_LEAD = re.compile(
+    r"(?:person|suspect|individual|accused|entity|name|named)\s*[,:;-]?\s*$",
+    re.IGNORECASE)
+
+
+def _find_contact(text: str):
+    """First contact clause that is not the naming sense of 'called'."""
+    for m in CONTACT_RE.finditer(text):
+        target = m.group(1).strip()
+        # A ten-digit number is never somebody's name, whatever precedes it.
+        if len(re.sub(r"\D", "", target)) == 10:
+            return m
+        # "a person called Ramesh" names him; "a person WHO called Ramesh"
+        # rang him. The naming sense only applies when the verb follows the
+        # noun directly, so a relative pronoun in between settles it.
+        leads_with_pronoun = re.match(r"\s*(?:who|whom|and|then)\b", m.group(0), re.IGNORECASE)
+        if not leads_with_pronoun and _NAMING_LEAD.search(text[:m.start()]):
+            continue
+        return m
+    return None
 
 
 def _extract_attributes(text: str) -> Dict[str, str]:
@@ -339,17 +411,42 @@ def parse_ingest_command(text: str) -> IngestCommand:
 
     # ── CREATE ────────────────────────────────────────────────────────────
     if CREATE_RE.search(text):
-        subject = _find_subject_name(text)
-        attributes = _extract_attributes(text)
+        # The contact clause is read first and cut out of the text, so its
+        # number is never mistaken for the new person's own phone — and so that
+        # "who CALLED Anil Tandel" is not read as "a person CALLED Anil
+        # Tandel", the other sense of the same word.
+        contact_m = _find_contact(text)
+        contact, rest = None, text
+        if contact_m:
+            raw = contact_m.group(1).strip()
+            digits = re.sub(r"\D", "", raw)
+            contact = digits if len(digits) == 10 else _clean_name(raw)
+            rest = text[:contact_m.start()] + " " + text[contact_m.end():]
+
+        subject = _find_subject_name(rest)
+
         link = CREATE_LINK_RE.search(text)
         object_name = _clean_name(link.group(1)) if link else None
+        if not object_name and contact:
+            object_name = contact
         # A name captured as the link target must not also be the subject.
         if object_name and subject and object_name.lower() == subject.lower():
             object_name = None
-        # Classify on the link clause alone — see classify_relation().
+
+        # Classify on the clause that named the other person — see
+        # classify_relation(). "who called …" is a call; "linked to … through a
+        # transaction" is a transfer.
         kind, cue = (None, None)
         if object_name:
-            kind, _, cue = _classify_with_cue(text[link.start():])
+            start = link.start() if link else (contact_m.start() if contact_m else 0)
+            kind, _, cue = _classify_with_cue(text[start:])
+
+        attributes = _extract_attributes(rest)
+
+        loc_m = LOCATION_RE.search(text)
+        location = _clean_name(loc_m.group(1)) if loc_m else None
+        if location and subject and location.lower() == subject.lower():
+            location = None
 
         understood = ["create person"]
         understood += [subject] if subject else []
@@ -357,13 +454,16 @@ def parse_ingest_command(text: str) -> IngestCommand:
         if object_name:
             understood.append(f"link to {object_name} ({kind})")
             understood += [cue] if cue else []
+        if location:
+            understood.append(f"seen at {location}")
 
         cmd = IngestCommand(
             operation="CREATE", subject_name=subject, object_name=object_name,
             attributes=attributes, relation=kind, relation_phrase=text if object_name else None,
+            location=location,
             transcript=text, understood=understood,
             ignored=_leftovers(text, understood + list(attributes.values())
-                               + [subject or "", object_name or ""]),
+                               + [subject or "", object_name or "", location or ""]),
         )
         if not subject:
             cmd.ignored.insert(0, "no name heard — say 'add a new person named …'")

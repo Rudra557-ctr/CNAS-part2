@@ -413,6 +413,23 @@ def admin_reset_password(username: str, new_password: str = None) -> dict:
     return profile
 
 
+def delete_user(username: str, actor: str = "admin") -> dict:
+    """Remove a file-backed account permanently.
+
+    Seed accounts are refused by _require_file_user, and an admin cannot delete
+    their own account — locking the last administrator out of the system is not
+    a mistake worth allowing. Returns the profile as it was before removal, so
+    the caller can audit-log who was deleted.
+    """
+    username, registered = _require_file_user(username)
+    if username == (actor or "").strip().lower():
+        raise ValueError("You cannot delete your own account")
+    profile = public_user(username, registered[username])
+    del registered[username]
+    _save_registered(registered)
+    return profile
+
+
 def list_all_users(status_filter: str = None, role_filter: str = None, search: str = None) -> list:
     """All accounts (seed + file) as public profiles, newest file users first."""
     users = _all_users()

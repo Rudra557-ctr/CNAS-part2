@@ -352,6 +352,20 @@ def admin_update_status(username: str, payload: StatusUpdateRequest, user: dict 
     return profile
 
 
+@app.delete("/admin/users/{username}")
+def admin_delete_user(username: str, user: dict = Depends(REQUIRE_SUPERVISOR)):
+    from backend.auth import delete_user
+
+    try:
+        profile = delete_user(username, actor=user["username"])
+    except KeyError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    audit_log(f"DELETE /admin/users/{username} by {user['username']}", [username])
+    return {"deleted": True, "user": profile}
+
+
 @app.post("/admin/users/{username}/reset-password")
 def admin_reset_password(username: str, payload: ResetPasswordRequest = None, user: dict = Depends(REQUIRE_SUPERVISOR)):
     from backend.auth import admin_reset_password as _reset

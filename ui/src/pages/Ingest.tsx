@@ -86,7 +86,9 @@ function StatusPill({ status }: { status: string }) {
   )
 }
 
-function ResolvedSide({ label, side }: { label: string; side: Side | null }) {
+function ResolvedSide({ label, side, onPick }: {
+  label: string; side: Side | null; onPick?: (c: Candidate) => void
+}) {
   if (!side) return null
   return (
     <div className="border border-gov-border rounded-lg p-2.5 bg-white">
@@ -110,15 +112,38 @@ function ResolvedSide({ label, side }: { label: string; side: Side | null }) {
       {/* An ambiguous name is shown with every record it could be, because the
           officer is the only one who can break the tie. */}
       {side.status !== 'resolved' && side.candidates.length > 0 && (
-        <ul className="mt-1.5 space-y-0.5">
-          {side.candidates.map(c => (
-            <li key={c.id} className="text-xs text-gov-muted">
-              <span className="font-mono">{c.id}</span> {c.name}
-              {c.role && <span className="text-gov-faint"> · {c.role}</span>}
-              <span className="text-gov-faint"> · {c.score}%</span>
-            </li>
-          ))}
-        </ul>
+        <>
+          {onPick && side.status === 'ambiguous' && (
+            <p className="text-[10px] text-gov-faint mt-1.5">
+              Pick the right record — the command is rewritten with that ID and re-read.
+            </p>
+          )}
+          <ul className="mt-1 space-y-1">
+            {side.candidates.map(c => (
+              <li key={c.id}>
+                {onPick && side.status === 'ambiguous' ? (
+                  <button
+                    onClick={() => onPick(c)}
+                    className="w-full text-left text-xs px-2 py-1.5 rounded border border-gov-border
+                               hover:border-gov-navy hover:bg-gov-wash transition-colors"
+                  >
+                    <span className="font-mono text-gov-navy">{c.id}</span>{' '}
+                    <span className="text-gov-ink font-medium">{c.name}</span>
+                    {c.role && <span className="text-gov-faint"> · {c.role}</span>}
+                    {c.phone && <span className="text-gov-faint font-mono"> · {c.phone}</span>}
+                    <span className="text-gov-faint"> · {c.score}%</span>
+                  </button>
+                ) : (
+                  <span className="text-xs text-gov-muted">
+                    <span className="font-mono">{c.id}</span> {c.name}
+                    {c.role && <span className="text-gov-faint"> · {c.role}</span>}
+                    <span className="text-gov-faint"> · {c.score}%</span>
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </>
       )}
       {side.status === 'absent' && side.candidates.length === 0 && (
         <p className="text-xs text-gov-faint mt-1">No existing record resembles this name.</p>
@@ -136,6 +161,21 @@ export default function Ingest() {
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [committing, setCommitting] = useState(false)
+
+  // Ambiguity is resolved the way the message asks for — by naming the ID —
+  // except the officer clicks instead of dictating it again. The spoken name in
+  // the command is swapped for the chosen ID and the command is re-read, so the
+  // write still goes through the same parse, plan and confirm as any other.
+  const pickCandidate = useCallback((c: Candidate) => {
+    const spoken = [preview?.subject, preview?.object]
+      .find(s => s && s.status === 'ambiguous' && s.candidates.some(x => x.id === c.id))?.spoken
+    const base = typed || preview?.transcription || ''
+    const next = spoken
+      ? base.replace(new RegExp(spoken.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), c.id)
+      : base
+    setTyped(next)
+    interpret(next)
+  }, [preview, typed])
 
   const interpret = useCallback(async (input: File | string) => {
     setError(null); setPreview(null); setDone(null); setBusy(true)
@@ -316,8 +356,10 @@ export default function Ingest() {
               </p>
               <p className="text-xs text-gov-muted mt-0.5">{preview.summary}</p>
             </div>
-            <ResolvedSide label={t('ingest.subject')} side={preview.subject} />
-            <ResolvedSide label={t('ingest.object')} side={preview.object} />
+            <ResolvedSide label={t('ingest.subject')} side={preview.subject}
+              onPick={preview.status === 'ambiguous' ? pickCandidate : undefined} />
+            <ResolvedSide label={t('ingest.object')} side={preview.object}
+              onPick={preview.status === 'ambiguous' ? pickCandidate : undefined} />
           </div>
 
           {preview.changes.length > 0 && (

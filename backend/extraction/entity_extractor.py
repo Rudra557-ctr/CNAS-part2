@@ -422,6 +422,52 @@ def extract_relationships(datasets: Dict) -> List[Dict]:
             "meta": {"team": row.get("team"), "notes": snippet}
         })
 
+    # Sightings: one person, one place, in a sentence that says they were seen
+    # there. The pair extractor below needs two people in a sentence, so an
+    # observation like "Sanjay Singh was observed at Wagle Estate PS, Thane"
+    # produced a Location node and a Person node with nothing joining them.
+    # This is the narrow case that fills that gap — a single person, a location
+    # already on record for the case, and an explicit sighting verb between
+    # them. Confidence is 0.6: an officer's report of a sighting, not a tower
+    # ping.
+    _SIGHTING_RE = re.compile(
+        r"\b(?:observed|seen|spotted|sighted|located|present|arrested|picked up)\b"
+        r"[^.]{0,20}?\b(?:at|in|near|outside|around)\b", re.IGNORECASE)
+    _people = datasets.get("people_directory", {})
+    _known = {p["name"]: p["id"] for p in
+              _people.get("network_people", []) + _people.get("noise_people", [])}
+    _places = {str(n) for rowset, field in (
+        (datasets.get("surveillance_reports", []), "location"),
+        (datasets.get("firs", []), "location"),
+    ) for n in (r.get(field) for r in rowset) if n}
+
+    def sightings_from_text(text: str, source_id, source_type, day, timestamp):
+        if not text or not _SIGHTING_RE.search(text):
+            return
+        for sent in re.split(r"(?:[.!?]\s+|।\s*)", text):
+            if not _SIGHTING_RE.search(sent):
+                continue
+            named = [n for n in _known if n.lower() in sent.lower()]
+            here = [p for p in _places if p.lower() in sent.lower()]
+            if len(named) != 1 or not here:
+                continue
+            place = max(here, key=len)
+            snippet = f"{named[0]} observed at {place} ({source_id})"
+            rels.append({
+                "src": _known[named[0]], "dst": place, "kind": "LOCATED_AT",
+                "source": source_id, "source_type": source_type, "day": day,
+                "timestamp": timestamp, "confidence": 0.6,
+                "supporting_text": snippet, "evidence_hash": _hash_rel(snippet),
+                "extractor": "text_sighting", "meta": {"place": place},
+            })
+
+    for _row in datasets.get("intelligence_reports", []):
+        sightings_from_text(_row.get("narrative", ""), _row.get("report_id"),
+                            "intel", _row.get("day"), _row.get("date"))
+    for _row in datasets.get("surveillance_reports", []):
+        sightings_from_text(_row.get("activity_notes", ""), _row.get("report_id"),
+                            "surveillance", _row.get("day"), _row.get("date"))
+
     # --- Task2: Unstructured relationship extraction from FIR / surveillance / intel narratives ---
     # Build canonical name set for substring matching (modest alias handling deferred to resolution)
     pd = datasets.get("people_directory", {})

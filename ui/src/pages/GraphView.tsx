@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
+import { useLocation } from 'react-router-dom'
 import ForceGraph3D from 'react-force-graph-3d'
 import ForceGraph2D from 'react-force-graph-2d'
 import {
@@ -64,6 +65,7 @@ const idOf = (v: unknown): string =>
   typeof v === 'object' && v !== null ? String((v as { id: unknown }).id) : String(v)
 
 export default function GraphView() {
+  const location = useLocation()
   const canWrite = useCanWrite()
   const { username } = useAuth()
   const { lang } = useLang()
@@ -417,6 +419,7 @@ export default function GraphView() {
     sessionStorage.removeItem('focusNode')
     const n = graphData.nodes.find(x => x.id === focusId)
     if (n) {
+      setSubview('graph')
       selectNode(n)
       setTimeout(() => {
         try {
@@ -426,7 +429,7 @@ export default function GraphView() {
         } catch { /* engine not settled yet */ }
       }, 1500)
     }
-  }, [graphData, selectNode])
+  }, [graphData, selectNode, location.key])
 
   const zoom = (d: number) => {
     try {

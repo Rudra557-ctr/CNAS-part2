@@ -249,6 +249,19 @@ def resolve_person(name: str, people: List[Dict], _unused: str = "",
         return {"status": "resolved", "person": exact, "score": 100.0,
                 "matched_on": "canonical id", "candidates": [_candidate(exact, 100.0)]}
 
+    # "who called 9167000003" names the other party by their number. A phone is
+    # a stronger identifier than a name — it belongs to exactly one record — so
+    # it resolves outright, and an unknown number is reported rather than
+    # fuzzy-matched against people's names.
+    digits = re.sub(r"\D", "", name or "")
+    if len(digits) == 10 and digits == (name or "").strip().replace(" ", "").replace("-", ""):
+        owner = next((p for p in people if str(p.get("phone") or "") == digits), None)
+        if owner:
+            return {"status": "resolved", "person": owner, "score": 100.0,
+                    "matched_on": "phone number", "candidates": [_candidate(owner, 100.0)]}
+        return {"status": "absent", "person": None, "score": 0.0,
+                "matched_on": "phone number", "candidates": []}
+
     scored = match_people(name, people)
     above = [(p, s) for p, s in scored if s >= MATCH_THRESHOLD]
 
@@ -352,12 +365,37 @@ def plan_ingest(cmd: IngestCommand, iid: Optional[str] = None) -> Dict:
         changes += [f"set {k} = {v}" for k, v in cmd.attributes.items()]
         creates = [cmd.subject_name]
 
+        # A dictated place is checked against the case before it is accepted.
+        place = None
+        if getattr(cmd, "location", None):
+            places = known_locations(scope)
+            hit = resolve_location(cmd.location, places)
+            base["location"] = {"spoken": cmd.location, **hit}
+            if hit["status"] != "resolved":
+                closest = hit.get("closest")
+                return {**base, "status": "invalid", "requires_confirmation": False,
+                        "message": f"“{cmd.location}” is not a location on record in "
+                                   f"this case."
+                                   + (f" Closest is {closest} at {hit['score']}%."
+                                      if closest else "")
+                                   + " Nothing was written."}
+            place = hit["value"]
+            changes.append(f"record sighting at {place}")
+
         if cmd.object_name:
             obj = resolve_person(cmd.object_name, universe, transcript)
             base["object"] = {"spoken": cmd.object_name, **obj}
             if obj["status"] == "ambiguous":
                 return {**base, "status": "ambiguous", "requires_confirmation": False,
                         "message": _disambiguation_hint(obj, cmd.object_name)}
+            if obj["status"] == "absent" and obj.get("matched_on") == "phone number":
+                # A number identifies someone already on file or nobody at all.
+                # Creating "Person 9999999999" would put a phone number in the
+                # name column and quietly invent a suspect.
+                return {**base, "status": "invalid", "requires_confirmation": False,
+                        "message": f"No record on file has phone {cmd.object_name}. "
+                                   f"Name the person instead, or add them first. "
+                                   f"Nothing was written."}
             if obj["status"] == "absent":
                 # The command introduces this person as the other end of a new
                 # link; refusing here would make "add A and connect them to B"
@@ -427,6 +465,108 @@ def plan_ingest(cmd: IngestCommand, iid: Optional[str] = None) -> Dict:
 
 
 # ── writing source data ───────────────────────────────────────────────────
+
+# A tower label is a cell site, not a place a human names: the graph holds
+# "Vashi Cell Site 1A, Navi Mumbai" where an officer says "Vashi". Sightings
+# are therefore resolved against the *area*, which is the label with the site
+# designator removed — and the area is what gets written, because that is what
+# was actually observed.
+_SITE_SUFFIX = re.compile(r"\s+(?:Cell Site|Tower|Site)\s*[\w-]*", re.IGNORECASE)
+
+
+def _area_of(label: str) -> str:
+    return re.sub(r"\s{2,}", " ", _SITE_SUFFIX.sub("", label)).replace(" ,", ",").strip(" ,")
+
+
+def known_locations(scope: Scope) -> List[str]:
+    """Distinct areas on record for this case, from its built graph."""
+    try:
+        serial = json.loads(scope.graph_path.read_text())
+    except Exception:  # noqa: BLE001 — a case with no graph yet has no places
+        return []
+    areas = {_area_of(str(n.get("label") or n.get("id")))
+             for n in serial.get("nodes", []) if n.get("kind") == "Location"}
+    return sorted(a for a in areas if a)
+
+
+def resolve_location(spoken: str, places: List[str]) -> Dict:
+    """
+    Match a dictated place against the ones on record.
+
+    Same bar as every other match in the system: 85. A place that scores below
+    it is reported back rather than written, because a sighting at a location
+    the case has never heard of is a typo or a mishearing far more often than
+    it is new ground truth.
+    """
+    if not spoken:
+        return {"status": "none", "value": None, "score": 0.0}
+    # "Vashi" against "Vashi, Navi Mumbai" scores 62 on a whole-string ratio
+    # and 100 on a containment ratio. An officer names the locality, not the
+    # district it sits in, so the containment score is the honest one here —
+    # while the same 85 bar still applies.
+    try:
+        from rapidfuzz import fuzz
+
+        def _score(a: str, b: str) -> float:
+            return max(fuzz.ratio(a, b), fuzz.partial_ratio(a, b),
+                       fuzz.token_set_ratio(a, b))
+
+        def fuzz_ratio(a: str, b: str) -> float:
+            return fuzz.ratio(a, b)
+    except ImportError:  # pragma: no cover — rapidfuzz ships with the app
+        def _score(a: str, b: str) -> float:
+            return name_similarity(a, b)
+
+        def fuzz_ratio(a: str, b: str) -> float:
+            return name_similarity(a, b)
+
+    # Containment is applied to the locality only. Against the whole label it
+    # matches the district too, so "Uran" resolved to "Khopoli PS, Raigad
+    # (Uran / JNPT)" — a real place, and the wrong one.
+    spoken_l = spoken.strip().lower()
+    best, score = None, 0.0
+    for place in places:
+        locality = place.split(",")[0].strip().lower()
+        s = max(_score(spoken_l, locality), float(fuzz_ratio(spoken_l, place.lower())))
+        if s > score:
+            best, score = place, s
+    if best and score >= MATCH_THRESHOLD:
+        return {"status": "resolved", "value": best, "score": round(score, 1),
+                "spoken": spoken}
+    return {"status": "not_found", "value": None, "score": round(score, 1),
+            "spoken": spoken, "closest": best}
+
+
+def _append_sighting_row(scope: Scope, person: Dict, place: str,
+                         transcript: str, operator: str) -> Dict:
+    """
+    Record "X was seen at Y" as an intelligence report.
+
+    The narrative names the person and the place in a sentence the existing
+    unstructured extractor already reads, so the Location node and the
+    LOCATED_AT edge are derived by the pipeline rather than injected.
+    """
+    fieldnames, rows = _read_intel(scope)
+    day = _latest_day(rows)
+    row = {
+        "report_id": _next_report_id(rows),
+        "date": (_EPOCH + _dt.timedelta(days=day - 1)).isoformat(),
+        "day": str(day),
+        "source_reliability": VOICE_RELIABILITY,
+        "narrative": f"{person['name']} was observed at {place}. "
+                     f"Recorded by {operator} via voice data entry; "
+                     f"dictated as: \"{transcript.strip()}\"",
+        "mentioned_entity_ids": person["id"],
+        "ground_truth_flag": "",
+    }
+    write_header = not scope.intel_path.exists()
+    with open(scope.intel_path, "a", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        if write_header:
+            writer.writeheader()
+        writer.writerow(row)
+    return row
+
 
 def _read_intel(scope: Scope) -> Tuple[List[str], List[Dict]]:
     if not scope.intel_path.exists():
@@ -686,6 +826,14 @@ def commit_ingest(cmd: IngestCommand, operator: str = "voice-operator",
                 row = _append_intel_row(scope, src, dst, template, cmd.transcript, operator)
                 written.append(f"{scope.intel_path.name} ← {row['report_id']}")
                 link = (src["id"], dst["id"])
+
+            # A sighting rides alongside whatever else the command did: the
+            # person may have been created and linked in the same breath.
+            place = (plan.get("location") or {}).get("value")
+            if place and cmd.operation == "CREATE":
+                who = _endpoint("subject", cmd.subject_name)
+                row = _append_sighting_row(scope, who, place, cmd.transcript, operator)
+                written.append(f"{scope.intel_path.name} ← {row['report_id']}")
 
             serial = rebuild_graph(scope, operator)
         except Exception as exc:  # noqa: BLE001 — every failure rolls back

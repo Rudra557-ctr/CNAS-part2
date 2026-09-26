@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Search, X } from 'lucide-react'
 import { searchPeople } from '../api/client'
 import { useLang } from '../i18n/LanguageContext'
@@ -16,6 +16,8 @@ interface Hit {
 export default function GlobalSearch() {
   const { t } = useLang()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const onGraph = pathname.startsWith('/graph')
   const [q,       setQ]       = useState('')
   const [results, setResults] = useState<Hit[]>([])
   const [open,    setOpen]    = useState(false)
@@ -51,10 +53,17 @@ export default function GlobalSearch() {
           onChange={e => search(e.target.value)}
           onFocus={() => { if (results.length) setOpen(true) }}
           onKeyDown={e => {
-            if (e.key === 'Enter' && q.trim()) {
-              setOpen(false)
-              navigate(`/search?q=${encodeURIComponent(q.trim())}`)
+            if (e.key !== 'Enter' || !q.trim()) return
+            // On the graph, Enter means "show me this person here" — the top
+            // hit opens in the profile panel exactly as clicking their node
+            // does. Everywhere else Enter still opens the full results page,
+            // which is the right answer when there is no graph to show them on.
+            if (onGraph && results.length) {
+              pick(results[0])
+              return
             }
+            setOpen(false)
+            navigate(`/search?q=${encodeURIComponent(q.trim())}`)
           }}
         />
         {q && (
