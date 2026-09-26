@@ -1,0 +1,486 @@
+{
+  "id": "6201d46f",
+  "name": "Operation Konkan",
+  "description": "",
+  "created": "2026-09-23T17:45:40.839219Z",
+  "status": "completed",
+  "files": [
+    {
+      "original": "cdrs.csv",
+      "stored": "6201d46f/files/cdrs.csv",
+      "format": "csv",
+      "detected_type": "cdrs",
+      "type_confidence": 0.771,
+      "columns": [
+        "call_id",
+        "caller_id",
+        "caller_name",
+        "caller_phone",
+        "callee_id",
+        "callee_name",
+        "callee_phone",
+        "timestamp",
+        "day",
+        "call_type",
+        "duration_sec",
+        "cell_tower_location"
+      ],
+      "sample_rows": [
+        {
+          "call_id": "KK-CDR-000001",
+          "caller_id": "KK00357",
+          "caller_name": "Dnyaneshwar Shah",
+          "caller_phone": "9833000357",
+          "callee_id": "KK00236",
+          "callee_name": "Rakesh Shaikh",
+          "callee_phone": "8976000236",
+          "timestamp": "2025-01-01 23:20:35",
+          "day": "1",
+          "call_type": "voice",
+          "duration_sec": "62",
+          "cell_tower_location": "Bund Garden PS Tower, Pune"
+        },
+        {
+          "call_id": "KK-CDR-000002",
+          "caller_id": "KK00036",
+          "caller_name": "Umesh Patil",
+          "caller_phone": "9167000036",
+          "callee_id": "KK00002",
+          "callee_name": "Iqbal Naik",
+          "callee_phone": "8976000002",
+          "timestamp": "2025-01-01 23:54:23",
+          "day": "1",
+          "call_type": "voice",
+          "duration_sec": "242",
+          "cell_tower_location": "Nhava Sheva Port PS Tower, Raigad (Uran / JNPT)"
+        }
+      ]
+    },
+    {
+      "original": "criminal_history.csv",
+      "stored": "6201d46f/files/criminal_history.csv",
+      "format": "csv",
+      "detected_type": "criminal_history",
+      "type_confidence": 0.545,
+      "columns": [
+        "record_id",
+        "person_id",
+        "name",
+        "alias",
+        "dob",
+        "prior_offences",
+        "gang_affiliation",
+        "known_address",
+        "ground_truth_flag"
+      ],
+      "sample_rows": [
+        {
+          "record_id": "KK-CRIM-0001",
+          "person_id": "KK00001",
+          "name": "Nilesh Khatib",
+          "alias": "",
+          "dob": "1992-05-18",
+          "prior_offences": "2023 - Arms Act Sec 25",
+          "gang_affiliation": "Konkan-Port-Cell",
+          "known_address": "257, near Uran PS, Raigad (Uran / JNPT), Maharashtra",
+          "ground_truth_flag": "core_gang"
+        },
+        {
+          "record_id": "KK-CRIM-0002",
+          "person_id": "KK00002",
+          "name": "Iqbal Naik",
+          "alias": "Dada",
+          "dob": "1988-09-28",
+          "prior_offences": "2024 - IPC 392 / BNS 309 (Robbery)",
+          "gang_affiliation": "Konkan-Port-Cell",
+          "known_address": "82, near Kapurbawdi PS, Thane, Maharashtra",
+          "ground_truth_flag": "core_gang"
+        }
+      ]
+    },
+    {
+      "original": "firs.csv",
+      "stored": "6201d46f/files/firs.csv",
+      "format": "csv",
+      "detected_type": "firs",
+      "type_confidence": 0.5,
+      "columns": [
+        "fir_id",
+        "date",
+        "day",
+        "station",
+        "location",
+        "ipc_sections",
+        "narrative",
+        "ground_truth_flag"
+      ],
+      "sample_rows": [
+        {
+          "fir_id": "KK-FIR-0054",
+          "date": "2025-01-01",
+          "day": "1",
+          "station": "CBD Belapur PS",
+          "location": "CBD Belapur PS, Navi Mumbai",
+          "ipc_sections": "BNS 2023 Sec 61 (Criminal conspiracy)",
+          "narrative": "Case Crime No. 0054/2025 at CBD Belapur PS, Navi Mumbai. Offence under BNS 2023 Sec 61 (Criminal conspiracy). Complainant states that accused Shirish Salvi demanded money and threatened consequences. Agreement to commit a scheduled offence. Statement recorded under BNSS Sec 180.",
+          "ground_truth_flag": "syndicate"
+        },
+        {
+          "fir_id": "KK-FIR-0110",
+          "date": "2025-01-03",
+          "day": "3",
+          "station": "Dapoli PS",
+          "location": "Dapoli PS, Ratnagiri",
+          "ipc_sections": "BNS 2023 Sec 308 (Extortion)",
+          "narrative": "Case Crime No. 0110/2025 at Dapoli PS, Ratnagiri. Offence under BNS 2023 Sec 308 (Extortion). Complainant states that accused Shirish Rane demanded money and threatened consequences. Demand of protection money from traders. Statement recorded under BNSS Sec 180.",
+          "ground_truth_flag": "local_crime"
+        }
+      ]
+    },
+    {
+      "original": "intelligence_reports.csv",
+      "stored": "6201d46f/files/intelligence_reports.csv",
+      "format": "csv",
+      "detected_type": "intelligence_reports",
+      "type_confidence": 0.4,
+      "columns": [
+        "report_id",
+        "date",
+        "day",
+        "source_reliability",
+        "narrative",
+        "mentioned_entity_ids",
+        "ground_truth_flag"
+      ],
+      "sample_rows": [
+        {
+          "report_id": "KK-INTEL-0046",
+          "date": "2025-01-02",
+          "day": "2",
+          "source_reliability": "A1 (Completely Reliable)",
+          "narrative": "Source states that a safehouse near Palghar is being used to hold couriers before dispatch.",
+          "mentioned_entity_ids": "KK00046",
+          "ground_truth_flag": "noise"
+        },
+        {
+          "report_id": "KK-INTEL-0016",
+          "date": "2025-01-07",
+          "day": "7",
+          "source_reliability": "D4 (Not Usually Reliable)",
+          "narrative": "Informant reports a dispute over commission between the port group and the Thane group.",
+          "mentioned_entity_ids": "KK00017",
+          "ground_truth_flag": "noise"
+        }
+      ]
+    },
+    {
+      "original": "people_directory.json",
+      "stored": "6201d46f/files/people_directory.json",
+      "format": "json",
+      "detected_type": "people_directory",
+      "type_confidence": 0.664,
+      "columns": [
+        "id",
+        "name",
+        "alias",
+        "role",
+        "cell",
+        "district",
+        "station",
+        "phone",
+        "account",
+        "vehicle",
+        "lat",
+        "lng"
+      ],
+      "sample_rows": [
+        {
+          "id": "KK00001",
+          "name": "Nilesh Khatib",
+          "alias": "",
+          "role": "Kingpin",
+          "cell": "Konkan-Port-Cell",
+          "district": "Raigad (Uran / JNPT)",
+          "station": "Uran PS",
+          "phone": "9167000001",
+          "account": "BKID000700000007",
+          "vehicle": "",
+          "lat": 18.91044,
+          "lng": 72.893281
+        },
+        {
+          "id": "KK00002",
+          "name": "Iqbal Naik",
+          "alias": "Dada",
+          "role": "Lieutenant",
+          "cell": "Konkan-Port-Cell",
+          "district": "Thane",
+          "station": "Kapurbawdi PS",
+          "phone": "8976000002",
+          "account": "MAHB000700000014",
+          "vehicle": "",
+          "lat": 19.171409,
+          "lng": 72.984039
+        }
+      ]
+    },
+    {
+      "original": "social_posts.csv",
+      "stored": "6201d46f/files/social_posts.csv",
+      "format": "csv",
+      "detected_type": "social_posts",
+      "type_confidence": 0.429,
+      "columns": [
+        "post_id",
+        "handle",
+        "person_id",
+        "timestamp",
+        "day",
+        "location_tag",
+        "post_text",
+        "hashtags",
+        "ground_truth_flag"
+      ],
+      "sample_rows": [
+        {
+          "post_id": "KK-SOC-0004",
+          "handle": "@paresh_319",
+          "person_id": "KK00319",
+          "timestamp": "2025-01-01 15:29:11",
+          "day": "1",
+          "location_tag": "Mumbai City, MH",
+          "post_text": "Gold rate is down, best time to buy.",
+          "hashtags": "#zaveribazaar,#mumbai",
+          "ground_truth_flag": "noise"
+        },
+        {
+          "post_id": "KK-SOC-0132",
+          "handle": "@shirish_032",
+          "person_id": "KK00032",
+          "timestamp": "2025-01-01 08:48:30",
+          "day": "1",
+          "location_tag": "Raigad (Uran / JNPT), MH",
+          "post_text": "Cashew season starting, orders being taken.",
+          "hashtags": "#konkan,#business",
+          "ground_truth_flag": "syndicate_social"
+        }
+      ]
+    },
+    {
+      "original": "surveillance_reports.csv",
+      "stored": "6201d46f/files/surveillance_reports.csv",
+      "format": "csv",
+      "detected_type": "surveillance_reports",
+      "type_confidence": 0.429,
+      "columns": [
+        "report_id",
+        "date",
+        "day",
+        "team",
+        "location",
+        "confidence",
+        "activity_notes",
+        "ground_truth_flag"
+      ],
+      "sample_rows": [
+        {
+          "report_id": "KK-SURV-0057",
+          "date": "2025-01-01",
+          "day": "1",
+          "team": "EOW Mumbai",
+          "location": "Andheri PS, Mumbai Suburban",
+          "confidence": "Low",
+          "activity_notes": "Mobile surveillance discontinued after the subject took an evasive route through the market.",
+          "ground_truth_flag": "core_surveillance"
+        },
+        {
+          "report_id": "KK-SURV-0021",
+          "date": "2025-01-02",
+          "day": "2",
+          "team": "EOW Mumbai",
+          "location": "Andheri PS, Mumbai Suburban",
+          "confidence": "High",
+          "activity_notes": "Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.",
+          "ground_truth_flag": "noise"
+        }
+      ]
+    },
+    {
+      "original": "transactions.csv",
+      "stored": "6201d46f/files/transactions.csv",
+      "format": "csv",
+      "detected_type": "transactions",
+      "type_confidence": 0.463,
+      "columns": [
+        "txn_id",
+        "sender_id",
+        "sender_name",
+        "sender_account",
+        "receiver_id",
+        "receiver_name",
+        "receiver_account",
+        "amount_inr",
+        "timestamp",
+        "day",
+        "txn_type",
+        "ground_truth_flag"
+      ],
+      "sample_rows": [
+        {
+          "txn_id": "KK-TXN-00001",
+          "sender_id": "KK00206",
+          "sender_name": "Ashok Khatib",
+          "sender_account": "UTIB000700001442",
+          "receiver_id": "KK00260",
+          "receiver_name": "Nilesh Bhosale",
+          "receiver_account": "HDFC000700001820",
+          "amount_inr": "275500",
+          "timestamp": "2025-01-01 09:09:54",
+          "day": "1",
+          "txn_type": "RTGS",
+          "ground_truth_flag": "none"
+        },
+        {
+          "txn_id": "KK-TXN-00002",
+          "sender_id": "KK00154",
+          "sender_name": "Kishor Parab",
+          "sender_account": "ICIC000700001078",
+          "receiver_id": "KK00169",
+          "receiver_name": "Mangesh Naik",
+          "receiver_account": "BKID000700001183",
+          "amount_inr": "29000",
+          "timestamp": "2025-01-01 10:18:28",
+          "day": "1",
+          "txn_type": "UPI",
+          "ground_truth_flag": "none"
+        }
+      ]
+    }
+  ],
+  "mapping": {
+    "cdrs.csv": {
+      "mapping": {
+        "caller_phone": "caller_phone",
+        "callee_phone": "callee_phone",
+        "caller_id": "caller_id",
+        "callee_id": "callee_id",
+        "timestamp": "timestamp",
+        "date": null,
+        "duration_sec": "duration_sec",
+        "day": "day",
+        "call_id": "call_id",
+        "caller_name": "caller_name",
+        "callee_name": "callee_name",
+        "call_type": "call_type",
+        "cell_tower_location": "cell_tower_location"
+      },
+      "validated": true,
+      "missing": []
+    },
+    "criminal_history.csv": {
+      "mapping": {
+        "person_id": "person_id",
+        "record_id": "record_id",
+        "name": "name",
+        "alias": "alias",
+        "dob": "dob",
+        "prior_offences": "prior_offences",
+        "gang_affiliation": "gang_affiliation",
+        "known_address": "known_address"
+      },
+      "validated": true,
+      "missing": []
+    },
+    "firs.csv": {
+      "mapping": {
+        "date": "date",
+        "day": "day",
+        "fir_id": "fir_id",
+        "station": "station",
+        "location": "location",
+        "ipc_sections": "ipc_sections",
+        "narrative": "narrative",
+        "accused_name": null,
+        "complainant_name": null
+      },
+      "validated": true,
+      "missing": []
+    },
+    "intelligence_reports.csv": {
+      "mapping": {
+        "date": "date",
+        "day": "day",
+        "report_id": "report_id",
+        "source_reliability": "source_reliability",
+        "narrative": "narrative",
+        "mentioned_entity_ids": "mentioned_entity_ids"
+      },
+      "validated": true,
+      "missing": []
+    },
+    "people_directory.json": {
+      "mapping": {
+        "phone": "phone",
+        "account": "account",
+        "id": "id",
+        "name": "name",
+        "name_hi": null,
+        "cell": "cell",
+        "role": "role"
+      },
+      "validated": true,
+      "missing": []
+    },
+    "social_posts.csv": {
+      "mapping": {
+        "person_id": "person_id",
+        "timestamp": "timestamp",
+        "day": "day",
+        "post_id": "post_id",
+        "handle": "handle",
+        "location_tag": "location_tag",
+        "post_text": "post_text",
+        "hashtags": "hashtags"
+      },
+      "validated": true,
+      "missing": []
+    },
+    "surveillance_reports.csv": {
+      "mapping": {
+        "date": "date",
+        "day": "day",
+        "report_id": "report_id",
+        "team": "team",
+        "location": "location",
+        "confidence": "confidence",
+        "activity_notes": "activity_notes"
+      },
+      "validated": true,
+      "missing": []
+    },
+    "transactions.csv": {
+      "mapping": {
+        "sender_account": "sender_account",
+        "receiver_account": "receiver_account",
+        "sender_id": "sender_id",
+        "receiver_id": "receiver_id",
+        "amount_inr": "amount_inr",
+        "timestamp": "timestamp",
+        "date": null,
+        "day": "day",
+        "txn_id": "txn_id",
+        "sender_name": "sender_name",
+        "receiver_name": "receiver_name",
+        "txn_type": "txn_type"
+      },
+      "validated": true,
+      "missing": []
+    }
+  },
+  "processing": {
+    "entities": 28221,
+    "relationships": 9916,
+    "graph_nodes": 1790,
+    "graph_edges": 11538
+  }
+}

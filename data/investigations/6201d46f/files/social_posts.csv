@@ -1,0 +1,151 @@
+post_id,handle,person_id,timestamp,day,location_tag,post_text,hashtags,ground_truth_flag
+KK-SOC-0114,@anil_031,KK00031,2025-01-01 11:48:29,1,"Ratnagiri, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0122,@salim_006,KK00006,2025-01-03 16:04:00,3,"Ratnagiri, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0118,@rakesh_052,KK00052,2025-01-04 11:55:47,4,"Mumbai Suburban, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0108,@shabbir_042,KK00042,2025-01-05 15:41:47,5,"Mumbai Suburban, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",syndicate_social
+KK-SOC-0020,@dnyaneshwar_065,KK00065,2025-01-06 10:42:32,6,"Mumbai Suburban, MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0003,@shabbir_042,KK00042,2025-01-08 13:13:05,8,"Mumbai Suburban, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0090,@shirish_161,KK00161,2025-01-09 13:46:40,9,"Thane, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0038,@ashok_044,KK00044,2025-01-11 11:36:12,11,"Mumbai City, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0061,@mahesh_301,KK00301,2025-01-11 14:31:00,11,"Thane, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",noise
+KK-SOC-0012,@iqbal_002,KK00002,2025-01-12 19:30:59,12,"Raigad (Uran / JNPT), MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0126,@hanif_066,KK00066,2025-01-12 21:23:29,12,"Mumbai City, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0046,@salim_059,KK00059,2025-01-13 20:19:59,13,"Mumbai Suburban, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0019,@arif_090,KK00090,2025-01-14 18:13:25,14,"Thane, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0139,@shirish_078,KK00078,2025-01-14 12:01:57,14,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",syndicate_social
+KK-SOC-0035,@hitesh_375,KK00375,2025-01-16 23:06:24,16,"Mumbai Suburban, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",noise
+KK-SOC-0051,@mahesh_056,KK00056,2025-01-18 23:02:03,18,"Mumbai Suburban, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0137,@rakesh_052,KK00052,2025-01-18 12:14:48,18,"Mumbai Suburban, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",syndicate_social
+KK-SOC-0050,@prakash_068,KK00068,2025-01-19 17:33:12,19,"Thane, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0098,@sameer_028,KK00028,2025-01-19 08:03:31,19,"Palghar, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",syndicate_social
+KK-SOC-0027,@shirish_078,KK00078,2025-01-20 14:37:38,20,"Thane, MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0115,@sameer_048,KK00048,2025-01-21 10:47:31,21,"Mumbai City, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0045,@suhas_344,KK00344,2025-01-22 12:52:38,22,"Pune, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0059,@pravin_215,KK00215,2025-01-22 19:43:19,22,"Mumbai City, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0067,@ganesh_089,KK00089,2025-01-22 20:14:30,22,"Thane, MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0017,@prakash_023,KK00023,2025-01-23 20:52:07,23,"Ratnagiri, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0002,@santosh_186,KK00186,2025-01-24 22:24:16,24,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",noise
+KK-SOC-0100,@ravindra_338,KK00338,2025-01-27 15:24:53,27,"Pune, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",noise
+KK-SOC-0149,@nitin_254,KK00254,2025-01-27 23:57:11,27,"Mumbai Suburban, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0068,@salim_122,KK00122,2025-01-28 16:48:44,28,"Palghar, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0026,@sunil_231,KK00231,2025-01-29 06:50:19,29,"Thane, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",noise
+KK-SOC-0042,@rafiq_087,KK00087,2025-02-02 13:57:01,33,"Thane, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0097,@iqbal_180,KK00180,2025-02-02 12:09:07,33,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",noise
+KK-SOC-0014,@prakash_085,KK00085,2025-02-03 09:25:39,34,"Thane, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0112,@rajan_088,KK00088,2025-02-03 11:11:31,34,"Thane, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0120,@deepak_003,KK00003,2025-02-03 06:52:03,34,"Ratnagiri, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0121,@hanif_203,KK00203,2025-02-05 12:53:02,36,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",noise
+KK-SOC-0032,@hanif_340,KK00340,2025-02-09 19:46:22,40,"Mumbai Suburban, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0064,@bhavesh_012,KK00012,2025-02-09 21:41:18,40,"Raigad (Uran / JNPT), MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0082,@rafiq_217,KK00217,2025-02-10 12:02:20,41,"Mumbai Suburban, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0004,@rajan_093,KK00093,2025-02-12 19:24:57,43,"Thane, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0018,@javed_101,KK00101,2025-02-12 22:34:15,43,"Thane, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0022,@hitesh_166,KK00166,2025-02-12 19:05:31,43,"Thane, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0028,@sameer_048,KK00048,2025-02-13 19:17:27,44,"Mumbai City, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0057,@santosh_047,KK00047,2025-02-13 08:26:38,44,"Mumbai Suburban, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0134,@rajan_080,KK00080,2025-02-13 08:42:17,44,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",syndicate_social
+KK-SOC-0063,@shirish_033,KK00033,2025-02-15 14:36:04,46,"Ratnagiri, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0056,@yogesh_417,KK00417,2025-02-16 16:03:10,47,"Thane, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0083,@sameer_210,KK00210,2025-02-17 22:44:01,48,"Raigad (Uran / JNPT), MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",noise
+KK-SOC-0123,@sunil_231,KK00231,2025-02-18 23:11:17,49,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",noise
+KK-SOC-0084,@kishor_005,KK00005,2025-02-20 09:28:44,51,"Palghar, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0091,@mangesh_292,KK00292,2025-02-20 11:35:41,51,"Mumbai Suburban, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0036,@imtiaz_104,KK00104,2025-02-24 16:30:28,55,"Raigad (Uran / JNPT), MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0106,@deepak_003,KK00003,2025-02-24 09:59:05,55,"Ratnagiri, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0065,@sachin_383,KK00383,2025-02-25 10:11:24,56,"Thane, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",noise
+KK-SOC-0127,@suhas_092,KK00092,2025-02-26 23:44:23,57,"Thane, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0095,@fayyaz_197,KK00197,2025-03-04 11:55:18,63,"Mumbai Suburban, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",noise
+KK-SOC-0052,@vilas_008,KK00008,2025-03-05 16:56:07,64,"Raigad (Uran / JNPT), MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0074,@fayyaz_113,KK00113,2025-03-05 07:43:41,64,"Mumbai Suburban, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",noise
+KK-SOC-0102,@sameer_210,KK00210,2025-03-06 12:52:12,65,"Raigad (Uran / JNPT), MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",noise
+KK-SOC-0043,@yogesh_011,KK00011,2025-03-07 20:25:18,66,"Raigad (Uran / JNPT), MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0136,@anil_077,KK00077,2025-03-08 14:02:07,67,"Thane, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0062,@shabbir_374,KK00374,2025-03-09 16:53:48,68,"Pune, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0142,@dattatray_179,KK00179,2025-03-11 14:31:51,70,"Mumbai Suburban, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",noise
+KK-SOC-0054,@sameer_380,KK00380,2025-03-12 11:03:35,71,"Mumbai Suburban, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0150,@ashok_091,KK00091,2025-03-12 17:14:53,71,"Thane, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0015,@shabbir_042,KK00042,2025-03-14 18:09:42,73,"Mumbai Suburban, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0080,@shirish_067,KK00067,2025-03-15 06:29:23,74,"Thane, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0135,@prakash_165,KK00165,2025-03-17 13:01:37,76,"Raigad (Uran / JNPT), MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",noise
+KK-SOC-0116,@dnyaneshwar_022,KK00022,2025-03-18 16:26:43,77,"Ratnagiri, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0145,@vinod_084,KK00084,2025-03-18 12:07:50,77,"Thane, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0033,@arif_345,KK00345,2025-03-19 23:25:54,78,"Thane, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",noise
+KK-SOC-0047,@hitesh_294,KK00294,2025-03-19 08:55:04,78,"Pune, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0138,@prakash_023,KK00023,2025-03-22 06:54:06,81,"Ratnagiri, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0058,@ganesh_089,KK00089,2025-03-23 08:14:21,82,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",syndicate_social
+KK-SOC-0128,@anil_234,KK00234,2025-03-23 23:16:53,82,"Pune, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",noise
+KK-SOC-0105,@ravindra_039,KK00039,2025-03-25 14:56:39,84,"Mumbai City, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0109,@salim_006,KK00006,2025-03-25 18:33:20,84,"Ratnagiri, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0079,@pravin_153,KK00153,2025-03-26 09:03:31,85,"Thane, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0075,@prakash_238,KK00238,2025-03-28 07:24:34,87,"Mumbai Suburban, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0011,@ravindra_338,KK00338,2025-03-29 22:51:40,88,"Pune, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0001,@yogesh_072,KK00072,2025-03-30 17:06:18,89,"Thane, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0060,@pravin_349,KK00349,2025-03-30 16:00:14,89,"Pune, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0111,@kishor_005,KK00005,2025-03-31 12:33:23,90,"Palghar, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0071,@rajan_258,KK00258,2025-04-01 23:52:32,91,"Mumbai Suburban, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0107,@prakash_074,KK00074,2025-04-02 20:12:56,92,"Thane, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0129,@prakash_074,KK00074,2025-04-04 22:38:37,94,"Thane, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0070,@hitesh_347,KK00347,2025-04-07 17:57:33,97,"Pune, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",noise
+KK-SOC-0053,@pravin_029,KK00029,2025-04-08 07:59:30,98,"Palghar, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0072,@salim_006,KK00006,2025-04-09 06:39:18,99,"Ratnagiri, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0006,@sameer_167,KK00167,2025-04-10 11:27:44,100,"Ratnagiri, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",noise
+KK-SOC-0034,@umesh_420,KK00420,2025-04-11 06:36:06,101,"Mumbai Suburban, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0073,@dnyaneshwar_041,KK00041,2025-04-11 20:35:04,101,"Mumbai Suburban, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0010,@yogesh_072,KK00072,2025-04-15 21:35:58,105,"Thane, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0094,@mangesh_060,KK00060,2025-04-16 09:18:56,106,"Mumbai Suburban, MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0044,@paresh_351,KK00351,2025-04-18 20:26:22,108,"Thane, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0066,@sameer_048,KK00048,2025-04-20 08:58:05,110,"Mumbai City, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0141,@rakesh_364,KK00364,2025-04-21 23:09:19,111,"Thane, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0119,@rafiq_087,KK00087,2025-04-24 23:01:33,114,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",syndicate_social
+KK-SOC-0086,@pravin_215,KK00215,2025-04-29 20:38:54,119,"Mumbai City, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0125,@deepak_330,KK00330,2025-04-29 11:48:37,119,"Pune, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0133,@umesh_181,KK00181,2025-04-29 19:44:01,119,"Mumbai City, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0031,@imtiaz_284,KK00284,2025-04-30 23:22:34,120,"Mumbai Suburban, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0016,@yogesh_011,KK00011,2025-05-03 08:59:31,123,"Raigad (Uran / JNPT), MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0147,@sameer_048,KK00048,2025-05-03 15:17:52,123,"Mumbai City, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0021,@sachin_152,KK00152,2025-05-04 18:04:04,124,"Ratnagiri, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",noise
+KK-SOC-0049,@shirish_142,KK00142,2025-05-04 08:08:42,124,"Mumbai City, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise
+KK-SOC-0078,@hanif_066,KK00066,2025-05-04 11:55:41,124,"Mumbai City, MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0148,@rafiq_075,KK00075,2025-05-04 23:36:05,124,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",syndicate_social
+KK-SOC-0040,@santosh_366,KK00366,2025-05-05 18:13:15,125,"Thane, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",noise
+KK-SOC-0099,@hanif_070,KK00070,2025-05-06 16:59:24,126,"Thane, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0023,@santosh_317,KK00317,2025-05-09 15:44:39,129,"Mumbai Suburban, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",noise
+KK-SOC-0132,@shabbir_280,KK00280,2025-05-10 07:56:38,130,"Thane, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",noise
+KK-SOC-0009,@vinod_084,KK00084,2025-05-11 22:08:00,131,"Thane, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0143,@dattatray_237,KK00237,2025-05-11 15:26:09,131,"Mumbai Suburban, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",noise
+KK-SOC-0096,@sameer_272,KK00272,2025-05-15 10:59:01,135,"Pune, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",noise
+KK-SOC-0089,@salim_122,KK00122,2025-05-17 22:08:26,137,"Palghar, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",noise
+KK-SOC-0030,@suhas_147,KK00147,2025-05-21 15:52:34,141,"Thane, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0041,@yogesh_072,KK00072,2025-05-25 23:34:10,145,"Thane, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0005,@kishor_082,KK00082,2025-05-27 07:24:04,147,"Thane, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0055,@deepak_003,KK00003,2025-05-27 09:50:27,147,"Ratnagiri, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0087,@santosh_021,KK00021,2025-05-31 16:55:29,151,"Ratnagiri, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0007,@mangesh_126,KK00126,2025-06-02 23:46:55,153,"Mumbai City, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",noise
+KK-SOC-0113,@balkrishna_035,KK00035,2025-06-02 22:30:59,153,"Palghar, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0037,@sameer_394,KK00394,2025-06-03 09:58:56,154,"Mumbai Suburban, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0039,@prakash_023,KK00023,2025-06-03 09:15:04,154,"Ratnagiri, MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0144,@salim_288,KK00288,2025-06-04 20:02:41,155,"Mumbai Suburban, MH","Cashew season starting, orders being taken.","#konkan,#business",noise
+KK-SOC-0024,@anil_014,KK00014,2025-06-07 12:13:30,158,"Palghar, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0025,@dattatray_032,KK00032,2025-06-07 15:39:52,158,"Raigad (Uran / JNPT), MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",syndicate_social
+KK-SOC-0077,@vinod_043,KK00043,2025-06-07 23:35:26,158,"Mumbai Suburban, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0093,@rafiq_208,KK00208,2025-06-07 18:32:27,158,"Mumbai Suburban, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",noise
+KK-SOC-0117,@bhavesh_279,KK00279,2025-06-08 09:46:42,159,"Pune, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",noise
+KK-SOC-0124,@kishor_082,KK00082,2025-06-08 13:25:00,159,"Thane, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0140,@paresh_062,KK00062,2025-06-08 18:35:49,159,"Mumbai Suburban, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0085,@rajan_088,KK00088,2025-06-09 20:45:02,160,"Thane, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0104,@kishor_054,KK00054,2025-06-10 22:58:07,161,"Mumbai Suburban, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0146,@dattatray_009,KK00009,2025-06-11 13:04:24,162,"Raigad (Uran / JNPT), MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0048,@ganesh_089,KK00089,2025-06-12 23:15:32,163,"Thane, MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0076,@shabbir_046,KK00046,2025-06-12 17:04:40,163,"Mumbai City, MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0103,@nilesh_331,KK00331,2025-06-14 20:07:37,165,"Thane, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",noise
+KK-SOC-0130,@balkrishna_035,KK00035,2025-06-14 06:57:37,165,"Palghar, MH",Bhai ka birthday at the farmhouse tonight.,"#party,#thane",syndicate_social
+KK-SOC-0131,@fayyaz_271,KK00271,2025-06-15 07:20:35,166,"Thane, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",noise
+KK-SOC-0081,@kishor_004,KK00004,2025-06-16 20:06:56,167,"Raigad (Uran / JNPT), MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0110,@hanif_070,KK00070,2025-06-17 22:45:44,168,"Thane, MH",New tempo on the road from tomorrow. Bookings open.,"#transport,#navimumbai",syndicate_social
+KK-SOC-0013,@dnyaneshwar_065,KK00065,2025-06-18 09:08:35,169,"Mumbai Suburban, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",syndicate_social
+KK-SOC-0092,@prakash_415,KK00415,2025-06-18 09:22:00,169,"Mumbai Suburban, MH","Gold rate is down, best time to buy.","#zaveribazaar,#mumbai",noise
+KK-SOC-0008,@dnyaneshwar_182,KK00182,2025-06-19 19:06:17,170,"Palghar, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",noise
+KK-SOC-0088,@pravin_051,KK00051,2025-06-21 19:14:03,172,"Mumbai City, MH","Sea is calm today, good day at the jetty.","#konkan,#fishing",syndicate_social
+KK-SOC-0101,@rafiq_079,KK00079,2025-06-24 22:45:11,175,"Thane, MH","Cashew season starting, orders being taken.","#konkan,#business",syndicate_social
+KK-SOC-0029,@arif_086,KK00086,2025-06-28 08:27:29,179,"Thane, MH",Back home after two weeks on the boat.,"#ratnagiri,#home",syndicate_social
+KK-SOC-0069,@sameer_406,KK00406,2025-06-28 08:47:18,179,"Mumbai Suburban, MH",Full support to our bhau. Nobody can touch us.,"#power,#thane",noise

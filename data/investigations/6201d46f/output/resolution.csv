@@ -1,0 +1,29 @@
+master_id,merged_ids,method,confidence,name_score,phone_score,context_score,source_id,source_type,evidence_snippet,evidence_hash
+Dada,candidate->KK00011 score 71.2,fuzzy_reject(name:38/100=0.375+phone:0.0*0.04+ctx:1.0*0.02=0.395),0.5,37.5,0.0,1.0,KK-CRIM-0002,criminal_history,Dada,dfd8ff645c59e3a1
+Munshi,candidate->V2 score 71.2,fuzzy_reject(name:55/100=0.545+phone:0.0*0.04+ctx:0.5*0.02=0.555),0.5,54.5,0.0,0.5,KK-CRIM-0015,criminal_history,Munshi,8464bc0e9a3a9938
+Bhau,candidate->KK00012 score 81.4,fuzzy_reject(name:86/100=0.857+phone:0.0*0.04+ctx:1.0*0.02=0.877),0.5,85.7,0.0,1.0,KK-CRIM-0025,criminal_history,Bhau,f1944faddf57d820
+Nana,candidate->KK00005 score 71.2,fuzzy_reject(name:35/100=0.353+phone:0.0*0.04+ctx:1.0*0.02=0.373),0.5,35.3,0.0,1.0,KK-CRIM-0026,criminal_history,Nana,e88b2fc6d24e6920
+Anna,candidate->KK00005 score 71.2,fuzzy_reject(name:35/100=0.353+phone:0.0*0.04+ctx:1.0*0.02=0.373),0.5,35.3,0.0,1.0,KK-CRIM-0062,criminal_history,Anna,bf4fccd616251b67
+Primary,candidate->V1 score 71.2,fuzzy_reject(name:50/100=0.500+phone:0.0*0.04+ctx:0.5*0.02=0.510),0.5,50.0,0.0,0.5,KK-FIR-0059,fir,patrolling by the night beat. Primary accused was traced on mobile,d6c58686439266b9
+सचिन सावंत,candidate->KK00224 score 82.6,fuzzy_reject(name:80/100=0.800+phone:0.0*0.04+ctx:0.5*0.02=0.810),0.5,80.0,0.0,0.5,KK-FIR-0009,fir,uburban में पंजीकृत। अभियुक्त सचिन सावंत के विरुद्ध PMLA 2002 Sec 3 r/,950aff5fa3fd0981
+KK00020,सावंत,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:1.0*0.02=1.000),1.0,100.0,0.0,1.0,KK-FIR-0009,fir,an में पंजीकृत। अभियुक्त सचिन सावंत के विरुद्ध PMLA 2002 Sec 3 r/,d06ed056db09f124
+KK00077,Accused Anil Thakur,fuzzy(name:73/100=0.733+phone:0.0*0.04+ctx:1.0*0.02=0.753),0.753,73.3,0.0,1.0,KK-FIR-0048,fir,"o commit a scheduled offence. Accused Anil Thakur, Deepak Kadam, Prakash Shaikh",11f94bd99124388e
+KK00047,Accused Santosh Thakur,fuzzy(name:78/100=0.778+phone:0.0*0.04+ctx:0.8*0.02=0.794),0.794,77.8,0.0,0.8,KK-FIR-0002,fir,eipts dated in February 2025. Accused Santosh Thakur and Sameer Doshi were apprehe,202eacf777e9fc60
+KK00393,संतोष शिंदे,fuzzy_translit(name:81/100=0.815+phone:0.0*0.04+ctx:0.5*0.02=0.825),0.825,81.5,0.0,0.5,KK-FIR-0005,fir,Palghar में पंजीकृत। अभियुक्त संतोष शिंदे के विरुद्ध BNS 2023 Sec 317 (,adb4ae55771f3c02
+KK00055,शिंदे,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:1.0*0.02=1.000),1.0,100.0,0.0,1.0,KK-FIR-0005,fir,r में पंजीकृत। अभियुक्त संतोष शिंदे के विरुद्ध BNS 2023 Sec 317 (,07b6421d9439ebcd
+रवींद्र पाटील,candidate->KK00376 score 79.2,fuzzy_reject(name:74/100=0.741+phone:0.0*0.04+ctx:0.5*0.02=0.751),0.5,74.1,0.0,0.5,KK-FIR-0004,fir,ला Pune में पंजीकृत। अभियुक्त रवींद्र पाटील के विरुद्ध NDPS Act Sec 21(c),d866941e7d17d9c8
+KK00094,पाटील,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:0.8*0.02=1.000),1.0,100.0,0.0,0.8,KK-FIR-0004,fir,में पंजीकृत। अभियुक्त रवींद्र पाटील के विरुद्ध NDPS Act Sec 21(c),f2e8fc2ffd27f937
+KK00065,Accused Dnyaneshwar Bhandari,fuzzy(name:83/100=0.833+phone:0.0*0.04+ctx:1.0*0.02=0.853),0.853,83.3,0.0,1.0,KK-FIR-0049,fir,"concealing proceeds of crime. Accused Dnyaneshwar Bhandari, Pravin Kadam, Ashok Sayyed a",e3b396412af654ca
+KK00307,Accused Iqbal Shinde,fuzzy(name:75/100=0.750+phone:0.0*0.04+ctx:0.5*0.02=0.760),0.76,75.0,0.0,0.5,KK-FIR-0091,fir,"intent to commit an offence. Accused Iqbal Shinde, Santosh More absconding; not",9cf86e79d5782cc0
+KK00223,प्रकाश मोरे,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:0.5*0.02=1.000),1.0,100.0,0.0,0.5,KK-FIR-0008,fir,ा Thane में पंजीकृत। अभियुक्त प्रकाश मोरे के विरुद्ध NDPS Act Sec 21(c),eeda3f284c5c3537
+KK00091,मोरे,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:1.0*0.02=1.000),1.0,100.0,0.0,1.0,KK-FIR-0008,fir,में पंजीकृत। अभियुक्त प्रकाश मोरे के विरुद्ध NDPS Act Sec 21(c),4ae68e46081556a2
+KK00014,Accused Anil Tandel,fuzzy(name:73/100=0.733+phone:0.0*0.04+ctx:1.0*0.02=0.753),0.753,73.3,0.0,1.0,KK-FIR-0096,fir,"rotection money from traders. Accused Anil Tandel, Balkrishna Shaikh were ident",53a8c8dbf26570d0
+KK00021,Accused Santosh Bhandari,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:1.0*0.02=0.820),0.82,80.0,0.0,1.0,KK-FIR-0088,fir,"rotection money from traders. Accused Santosh Bhandari, Nilesh Parekh were identifie",edd27a72ad310e69
+KK00087,Accused Rafiq Deshmukh,fuzzy(name:78/100=0.778+phone:0.0*0.04+ctx:1.0*0.02=0.798),0.798,77.8,0.0,1.0,KK-FIR-0053,fir,"rotection money from traders. Accused Rafiq Deshmukh, Deepak Kadam, Javed Rane abs",31b4c1babce9d53b
+KK00313,गणेश जाधव,fuzzy_translit(name:89/100=0.889+phone:0.0*0.04+ctx:0.5*0.02=0.899),0.899,88.9,0.0,0.5,KK-FIR-0007,fir,/ JNPT) में पंजीकृत। अभियुक्त गणेश जाधव के विरुद्ध BNS 2023 Sec 61 (C,aa53df475f35c5f0
+KK00042,जाधव,fuzzy_translit(name:100/100=1.000+phone:0.0*0.04+ctx:0.8*0.02=1.000),1.0,100.0,0.0,0.8,KK-FIR-0007,fir,T) में पंजीकृत। अभियुक्त गणेश जाधव के विरुद्ध BNS 2023 Sec 61 (C,7bf393643a875820
+KK00035,Shaikh,fuzzy(name:100/100=1.000+phone:0.0*0.04+ctx:0.8*0.02=1.000),1.0,100.0,0.0,0.8,KK-FIR-0087,fir,me syndicate. Accused Prakash Shaikh absconding; notice issued und,fb49bc7298563828
+इम्तियाज़ शेख,candidate->KK00248 score 79.2,fuzzy_reject(name:77/100=0.769+phone:0.0*0.04+ctx:0.5*0.02=0.779),0.5,76.9,0.0,0.5,KK-FIR-0006,fir,tnagiri में पंजीकृत। अभियुक्त इम्तियाज़ शेख के विरुद्ध Maharashtra Police,294685870023f7d6
+KK00039,Accused Ravindra Bhosale,fuzzy(name:80/100=0.800+phone:0.0*0.04+ctx:1.0*0.02=0.820),0.82,80.0,0.0,1.0,KK-FIR-0074,fir,"oceeds of crime as untainted. Accused Ravindra Bhosale, Kishor Sanghvi were identifi",c6088b18f4142d33
+Harnai,candidate->KK00401 score 79.2,fuzzy_reject(name:55/100=0.545+phone:0.0*0.04+ctx:0.5*0.02=0.555),0.5,54.5,0.0,0.5,KK-INTEL-0002,intel,Fishing vessel out of Harnai observed taking on fuel far b,69accf88f686d271
+KK00318,Parekh Doshi,fuzzy(name:92/100=0.917+phone:0.0*0.04+ctx:0.5*0.02=0.927),0.927,91.7,0.0,0.5,INTEL0066,intel,"med Sahil who is connected to Parekh Doshi.""",3ec0c3a1c243908e

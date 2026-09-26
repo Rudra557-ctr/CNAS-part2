@@ -1,0 +1,109 @@
+record_id,person_id,name,alias,dob,prior_offences,gang_affiliation,known_address,ground_truth_flag
+KK-CRIM-0001,KK00001,Nilesh Khatib,,1981-03-15,2019 - Customs Act Sec 135; 2022 - Arms Act Sec 25,A,"158, near Ratnagiri City PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0002,KK00002,Iqbal Naik,Dada,1993-03-26,2019 - BNS 317 (Stolen property); 2021 - Arms Act Sec 25; 2022 - Customs Act Sec 135,A,"95, near Nhava Sheva Port PS, Raigad (Uran / JNPT), Maharashtra",core_gang
+KK-CRIM-0003,KK00003,Deepak Pawar,,1985-12-24,2019 - NDPS Act Sec 21,A,"306, near Guhagar PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0004,KK00005,Kishor Ansari,,1982-02-23,2020 - MCOCA 1999; 2023 - BNS 317 (Stolen property); 2024 - Maharashtra Police Act Sec 122,A,"53, near Satpati Coastal PS, Palghar, Maharashtra",core_gang
+KK-CRIM-0005,KK00008,Vilas Tandel,,1989-12-12,2021 - Arms Act Sec 25; 2023 - NDPS Act Sec 21,A,"282, near Khopoli PS, Raigad (Uran / JNPT), Maharashtra",core_gang
+KK-CRIM-0006,KK00011,Yogesh Kadam,Ustad,1982-01-08,2019 - Maharashtra Police Act Sec 122,A,"242, near Nhava Sheva Port PS, Raigad (Uran / JNPT), Maharashtra",core_gang
+KK-CRIM-0007,KK00012,Bhavesh Parekh,,1984-02-10,2024 - BNS 308 (Extortion),A,"330, near Uran PS, Raigad (Uran / JNPT), Maharashtra",core_gang
+KK-CRIM-0008,KK00013,Kishor Koli,,1990-06-22,2019 - MCOCA 1999; 2024 - Arms Act Sec 25,A,"222, near Palghar PS, Palghar, Maharashtra",core_gang
+KK-CRIM-0009,KK00014,Anil Tandel,,1979-08-09,2019 - Arms Act Sec 25; 2022 - Maharashtra Police Act Sec 122,A,"186, near Vasai PS, Palghar, Maharashtra",core_gang
+KK-CRIM-0010,KK00015,Balkrishna Shinde,,1998-10-14,2020 - MCOCA 1999; 2021 - BNS 317 (Stolen property),A,"2, near Nalasopara PS, Palghar, Maharashtra",core_gang
+KK-CRIM-0011,KK00016,Anil Tandel,,1984-12-19,2020 - Customs Act Sec 135; 2022 - BNS 308 (Extortion),A,"305, near Ratnagiri City PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0012,KK00017,Anil Tandel,,1975-09-28,2023 - Maharashtra Police Act Sec 122; 2024 - BNS 308 (Extortion),A,"288, near Khopoli PS, Raigad (Uran / JNPT), Maharashtra",core_gang
+KK-CRIM-0013,KK00018,Suhas Sanghvi,,1997-06-06,2019 - IPC 392 / BNS 309 (Robbery); 2022 - NDPS Act Sec 21,A,"15, near Harnai Coastal PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0014,KK00019,Arif Gaikwad,,1982-04-07,2020 - Arms Act Sec 25,A,"276, near Palghar PS, Palghar, Maharashtra",core_gang
+KK-CRIM-0015,KK00020,Vilas Sawant,Munshi,1970-06-01,2019 - BNS 317 (Stolen property); 2023 - Arms Act Sec 25,A,"217, near Satpati Coastal PS, Palghar, Maharashtra",core_gang
+KK-CRIM-0016,KK00021,Santosh Bhandari,,1992-12-04,2020 - NDPS Act Sec 21; 2023 - IPC 392 / BNS 309 (Robbery),A,"82, near Guhagar PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0017,KK00022,Dnyaneshwar Salvi,,1997-09-08,2019 - Maharashtra Police Act Sec 122; 2021 - Arms Act Sec 25; 2022 - MCOCA 1999,A,"120, near Dapoli PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0018,KK00023,Prakash Deshmukh,,1970-02-25,2019 - Arms Act Sec 25; 2020 - MCOCA 1999; 2022 - Maharashtra Police Act Sec 122,A,"242, near Guhagar PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0019,KK00024,Nilesh Parekh,,1981-04-22,2023 - Maharashtra Police Act Sec 122,A,"94, near Nhava Sheva Port PS, Raigad (Uran / JNPT), Maharashtra",core_gang
+KK-CRIM-0020,KK00025,Deepak Zaveri,,1989-11-26,2020 - Customs Act Sec 135; 2021 - BNS 317 (Stolen property); 2024 - MCOCA 1999,A,"160, near Panvel Taluka PS, Raigad (Uran / JNPT), Maharashtra",core_gang
+KK-CRIM-0021,KK00027,Hanif Shinde,,1991-12-01,2021 - BNS 308 (Extortion); 2022 - BNS 317 (Stolen property); 2023 - Customs Act Sec 135,A,"132, near Uran PS, Raigad (Uran / JNPT), Maharashtra",core_gang
+KK-CRIM-0022,KK00029,Pravin Koli,,1990-10-14,2019 - BNS 317 (Stolen property); 2024 - BNS 317 (Stolen property),A,"122, near Palghar PS, Palghar, Maharashtra",core_gang
+KK-CRIM-0023,KK00030,Vilas Khatib,,1968-02-11,2019 - BNS 308 (Extortion); 2020 - Maharashtra Police Act Sec 122; 2023 - Customs Act Sec 135,A,"274, near Guhagar PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0024,KK00031,Anil Chavan,,1993-04-21,2022 - NDPS Act Sec 21,A,"160, near Ratnagiri City PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0025,KK00032,Dattatray Mehta,Bhau,1986-04-12,2019 - IPC 392 / BNS 309 (Robbery),A,"119, near Khopoli PS, Raigad (Uran / JNPT), Maharashtra",core_gang
+KK-CRIM-0026,KK00033,Shirish Chavan,Nana,1980-01-25,2019 - BNS 308 (Extortion); 2023 - BNS 308 (Extortion),A,"27, near Guhagar PS, Ratnagiri, Maharashtra",core_gang
+KK-CRIM-0027,KK00036,Fayyaz Kadam,,1987-12-15,2020 - Maharashtra Police Act Sec 122; 2022 - BNS 308 (Extortion); 2024 - MCOCA 1999,A,"245, near Vasai PS, Palghar, Maharashtra",core_gang
+KK-CRIM-0028,KK00037,Ganesh Deshmukh,,1975-11-19,2021 - BNS 317 (Stolen property); 2022 - IPC 392 / BNS 309 (Robbery),B,"266, near Sakinaka PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0029,KK00038,Iqbal Mehta,,1991-07-10,2022 - BNS 308 (Extortion),B,"221, near Kurla PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0030,KK00039,Ravindra Bhosale,,1991-07-09,2021 - Maharashtra Police Act Sec 122; 2023 - BNS 308 (Extortion),B,"308, near Pydhonie PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0031,KK00040,Rajan Ansari,,1987-02-03,2019 - NDPS Act Sec 21; 2021 - NDPS Act Sec 21; 2024 - Arms Act Sec 25,B,"8, near Pydhonie PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0032,KK00041,Dnyaneshwar Parab,,1972-01-14,2022 - BNS 317 (Stolen property); 2023 - Maharashtra Police Act Sec 122,B,"152, near Bandra PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0033,KK00043,Vinod Mehta,,1990-02-06,2022 - BNS 308 (Extortion),B,"84, near Ghatkopar PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0034,KK00045,Kishor Sanghvi,,1982-05-03,2024 - Maharashtra Police Act Sec 122,B,"300, near Ghatkopar PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0035,KK00046,Shabbir Shaikh,,1977-05-24,2023 - Maharashtra Police Act Sec 122,B,"207, near VP Road PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0036,KK00048,Sameer Doshi,,1978-09-23,2019 - Customs Act Sec 135; 2023 - Customs Act Sec 135; 2024 - IPC 392 / BNS 309 (Robbery),B,"285, near VP Road PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0037,KK00049,Santosh Zaveri,,1980-04-03,2020 - IPC 392 / BNS 309 (Robbery); 2021 - Customs Act Sec 135; 2022 - Arms Act Sec 25,B,"123, near Sakinaka PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0038,KK00050,Shirish Patil,,1978-11-23,2019 - MCOCA 1999; 2021 - Maharashtra Police Act Sec 122,B,"181, near VP Road PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0039,KK00051,Pravin Kadam,,1985-09-06,2019 - IPC 392 / BNS 309 (Robbery); 2022 - BNS 308 (Extortion); 2023 - Arms Act Sec 25,B,"106, near Dongri PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0040,KK00053,Pravin Bhatkar,Seth,1997-05-23,2019 - Customs Act Sec 135; 2021 - Arms Act Sec 25,B,"236, near Kurla PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0041,KK00054,Kishor Sawant,Seth,1975-10-21,2020 - MCOCA 1999,B,"197, near Sakinaka PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0042,KK00055,Vilas Shinde,,1997-07-08,2024 - NDPS Act Sec 21,B,"256, near Dongri PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0043,KK00056,Mahesh Bhandari,,1985-04-06,2019 - BNS 317 (Stolen property); 2021 - MCOCA 1999,B,"220, near Kurla PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0044,KK00057,Balkrishna Parekh,,1978-10-04,2020 - IPC 392 / BNS 309 (Robbery); 2023 - NDPS Act Sec 21,B,"294, near VP Road PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0045,KK00058,Dattatray Patil,,1993-10-08,2023 - Maharashtra Police Act Sec 122; 2024 - Maharashtra Police Act Sec 122,B,"96, near Pydhonie PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0046,KK00059,Salim More,Dada,1996-11-17,2024 - BNS 317 (Stolen property),B,"230, near Ghatkopar PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0047,KK00060,Mangesh Tandel,,1995-07-12,2021 - Maharashtra Police Act Sec 122; 2022 - Maharashtra Police Act Sec 122; 2024 - NDPS Act Sec 21,B,"27, near Sakinaka PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0048,KK00061,Sameer Soni,,1978-06-20,2021 - MCOCA 1999,B,"193, near Dongri PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0049,KK00062,Paresh Parekh,,1999-07-04,2022 - BNS 308 (Extortion),B,"197, near Ghatkopar PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0050,KK00064,Anil Khatib,,1990-06-15,2022 - Maharashtra Police Act Sec 122; 2023 - Arms Act Sec 25; 2024 - Arms Act Sec 25,B,"280, near MRA Marg PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0051,KK00065,Dnyaneshwar Bhandari,,1987-07-18,2019 - BNS 308 (Extortion); 2020 - MCOCA 1999; 2022 - Maharashtra Police Act Sec 122,B,"192, near Ghatkopar PS, Mumbai Suburban, Maharashtra",core_gang
+KK-CRIM-0052,KK00066,Hanif Chavan,,1998-04-07,2022 - Customs Act Sec 135,B,"298, near VP Road PS, Mumbai City, Maharashtra",core_gang
+KK-CRIM-0053,KK00069,Imtiaz Kadam,,1979-06-07,2020 - BNS 317 (Stolen property); 2024 - NDPS Act Sec 21,C,"189, near Vartak Nagar PS, Thane, Maharashtra",core_gang
+KK-CRIM-0054,KK00070,Hanif Kadam,,1974-01-25,2020 - MCOCA 1999; 2023 - IPC 392 / BNS 309 (Robbery); 2024 - NDPS Act Sec 21,C,"31, near Rabodi PS, Thane, Maharashtra",core_gang
+KK-CRIM-0055,KK00071,Arif Salvi,Chacha,1985-06-16,2024 - Customs Act Sec 135,C,"252, near Wagle Estate PS, Thane, Maharashtra",core_gang
+KK-CRIM-0056,KK00072,Yogesh Momin,,1983-07-16,2019 - Maharashtra Police Act Sec 122,C,"99, near Vartak Nagar PS, Thane, Maharashtra",core_gang
+KK-CRIM-0057,KK00074,Prakash Bhosale,,1980-01-27,2020 - BNS 308 (Extortion); 2021 - IPC 392 / BNS 309 (Robbery); 2024 - Customs Act Sec 135,C,"303, near Rabodi PS, Thane, Maharashtra",core_gang
+KK-CRIM-0058,KK00075,Rafiq Pawar,,1988-08-18,2019 - Arms Act Sec 25,C,"134, near Wagle Estate PS, Thane, Maharashtra",core_gang
+KK-CRIM-0059,KK00076,Jitendra Shaikh,,1981-10-21,2020 - IPC 392 / BNS 309 (Robbery); 2022 - IPC 392 / BNS 309 (Robbery); 2023 - IPC 392 / BNS 309 (Robbery),C,"235, near Naupada PS, Thane, Maharashtra",core_gang
+KK-CRIM-0060,KK00077,Anil Thakur,Dada,1978-09-14,2020 - NDPS Act Sec 21; 2022 - IPC 392 / BNS 309 (Robbery); 2024 - Arms Act Sec 25,C,"200, near Kapurbawdi PS, Thane, Maharashtra",core_gang
+KK-CRIM-0061,KK00078,Shirish Salvi,Captain,1997-11-21,2022 - NDPS Act Sec 21; 2023 - Customs Act Sec 135; 2024 - IPC 392 / BNS 309 (Robbery),C,"73, near Rabodi PS, Thane, Maharashtra",core_gang
+KK-CRIM-0062,KK00080,Rajan Desai,Anna,1975-02-16,2019 - IPC 392 / BNS 309 (Robbery),C,"327, near Rabodi PS, Thane, Maharashtra",core_gang
+KK-CRIM-0063,KK00081,Deepak Kadam,,1994-03-10,2019 - BNS 308 (Extortion); 2021 - IPC 392 / BNS 309 (Robbery); 2023 - Maharashtra Police Act Sec 122,C,"232, near Rabodi PS, Thane, Maharashtra",core_gang
+KK-CRIM-0064,KK00082,Kishor Gaikwad,Havaldar,1977-09-10,2020 - Arms Act Sec 25; 2021 - Maharashtra Police Act Sec 122,C,"233, near Rabodi PS, Thane, Maharashtra",core_gang
+KK-CRIM-0065,KK00083,Sachin Naik,,1988-04-24,2023 - Arms Act Sec 25,C,"276, near Kapurbawdi PS, Thane, Maharashtra",core_gang
+KK-CRIM-0066,KK00084,Vinod Deshmukh,,1981-01-16,2019 - IPC 392 / BNS 309 (Robbery); 2021 - NDPS Act Sec 21; 2022 - Arms Act Sec 25,C,"42, near Vartak Nagar PS, Thane, Maharashtra",core_gang
+KK-CRIM-0067,KK00085,Prakash Shaikh,,1993-09-16,2019 - Arms Act Sec 25; 2021 - MCOCA 1999; 2022 - BNS 317 (Stolen property),C,"193, near Naupada PS, Thane, Maharashtra",core_gang
+KK-CRIM-0068,KK00086,Arif Bhosale,,1968-06-12,2022 - BNS 308 (Extortion),C,"199, near Wagle Estate PS, Thane, Maharashtra",core_gang
+KK-CRIM-0069,KK00087,Rafiq Deshmukh,Munshi,1979-02-27,2020 - MCOCA 1999; 2021 - BNS 317 (Stolen property),C,"237, near Vartak Nagar PS, Thane, Maharashtra",core_gang
+KK-CRIM-0070,KK00088,Rajan Sawant,,1987-10-18,2019 - BNS 308 (Extortion); 2024 - BNS 308 (Extortion),C,"172, near Naupada PS, Thane, Maharashtra",core_gang
+KK-CRIM-0071,KK00089,Ganesh Naik,,1992-01-08,2020 - BNS 308 (Extortion); 2022 - BNS 317 (Stolen property),C,"125, near Naupada PS, Thane, Maharashtra",core_gang
+KK-CRIM-0072,KK00091,Ashok More,,1984-02-13,2020 - NDPS Act Sec 21; 2021 - Maharashtra Police Act Sec 122; 2024 - NDPS Act Sec 21,C,"123, near Kapurbawdi PS, Thane, Maharashtra",core_gang
+KK-CRIM-0073,KK00092,Suhas Parekh,,1982-07-04,2020 - Maharashtra Police Act Sec 122; 2021 - Maharashtra Police Act Sec 122; 2022 - IPC 392 / BNS 309 (Robbery),C,"218, near Wagle Estate PS, Thane, Maharashtra",core_gang
+KK-CRIM-0074,KK00093,Rajan Sanghvi,,1980-02-03,2019 - MCOCA 1999,C,"158, near Vartak Nagar PS, Thane, Maharashtra",core_gang
+KK-CRIM-0075,KK00096,Hitesh Parekh,,1980-05-14,2019 - Customs Act Sec 135; 2020 - BNS 317 (Stolen property); 2024 - BNS 317 (Stolen property),Bridge,"288, near Palghar PS, Palghar, Maharashtra",core_gang
+KK-CRIM-0076,KK00353,Hanif Shah,,1989-10-13,2022 - Maharashtra Police Act Sec 122,Local-Offender,"46, near Naupada PS, Thane, Maharashtra",background
+KK-CRIM-0077,KK00090,Arif Mhatre,,1989-08-27,2019 - BNS 308 (Extortion); 2020 - NDPS Act Sec 21; 2021 - Customs Act Sec 135,C,"75, near Naupada PS, Thane, Maharashtra",core_gang
+KK-CRIM-0078,KK00364,Rakesh Deshmukh,Chacha,1997-01-11,2023 - BNS 308 (Extortion),Local-Offender,"100, near Rabodi PS, Thane, Maharashtra",background
+KK-CRIM-0079,KK00409,Ravindra Momin,,1987-06-10,2019 - Maharashtra Police Act Sec 122; 2022 - Maharashtra Police Act Sec 122; 2024 - MCOCA 1999,Local-Offender,"219, near Naupada PS, Thane, Maharashtra",background
+KK-CRIM-0080,KK00256,Sameer Jadhav,Nana,1988-12-03,2024 - Maharashtra Police Act Sec 122,Local-Offender,"282, near Andheri PS, Mumbai Suburban, Maharashtra",background
+KK-CRIM-0081,KK00326,Prakash Sayyed,,1981-03-25,2019 - BNS 317 (Stolen property); 2021 - Maharashtra Police Act Sec 122; 2024 - BNS 317 (Stolen property),Local-Offender,"111, near Bund Garden PS, Pune, Maharashtra",background
+KK-CRIM-0082,KK00315,Hitesh Jadhav,,1997-06-21,2022 - NDPS Act Sec 21; 2023 - BNS 317 (Stolen property); 2024 - NDPS Act Sec 21,Local-Offender,"253, near Ghatkopar PS, Mumbai Suburban, Maharashtra",background
+KK-CRIM-0083,KK00232,Ravindra Koli,Nana,1972-08-16,2024 - Arms Act Sec 25,Local-Offender,"108, near Naupada PS, Thane, Maharashtra",background
+KK-CRIM-0084,KK00166,Hitesh Shah,,1983-05-08,2022 - NDPS Act Sec 21; 2023 - IPC 392 / BNS 309 (Robbery),Peripheral-Associate,"247, near Rabodi PS, Thane, Maharashtra",background
+KK-CRIM-0085,KK00123,Nitin Shaikh,,1971-09-21,2023 - NDPS Act Sec 21,Peripheral-Associate,"124, near MRA Marg PS, Mumbai City, Maharashtra",background
+KK-CRIM-0086,KK00231,Sunil Pawar,,1993-11-16,2019 - IPC 392 / BNS 309 (Robbery); 2022 - Maharashtra Police Act Sec 122,Local-Offender,"300, near Rabodi PS, Thane, Maharashtra",background
+KK-CRIM-0087,KK00149,Paresh Khatib,,1993-03-07,2019 - BNS 317 (Stolen property); 2023 - Customs Act Sec 135; 2024 - BNS 308 (Extortion),Peripheral-Associate,"103, near Kurla PS, Mumbai Suburban, Maharashtra",background
+KK-CRIM-0088,KK00204,Vilas Desai,Nana,1970-11-22,2020 - Customs Act Sec 135,Peripheral-Associate,"115, near Andheri PS, Mumbai Suburban, Maharashtra",background
+KK-CRIM-0089,KK00268,Suhas More,,1980-07-25,2023 - Customs Act Sec 135,Local-Offender,"288, near Bund Garden PS, Pune, Maharashtra",background
+KK-CRIM-0090,KK00121,Mangesh Doshi,,1999-11-16,2019 - IPC 392 / BNS 309 (Robbery); 2022 - Customs Act Sec 135,Peripheral-Associate,"329, near Rabodi PS, Thane, Maharashtra",background
+KK-CRIM-0091,KK00331,Nilesh Bhatkar,,1973-11-22,2019 - MCOCA 1999; 2020 - NDPS Act Sec 21; 2021 - MCOCA 1999,Local-Offender,"282, near Vartak Nagar PS, Thane, Maharashtra",background
+KK-CRIM-0092,KK00269,Umesh Kulkarni,Seth,1976-12-08,2024 - Customs Act Sec 135,Local-Offender,"46, near Ghatkopar PS, Mumbai Suburban, Maharashtra",background
+KK-CRIM-0093,KK00348,Jitendra Parab,,1970-05-08,2022 - Maharashtra Police Act Sec 122; 2023 - BNS 317 (Stolen property),Local-Offender,"179, near Koregaon Park PS, Pune, Maharashtra",background
+KK-CRIM-0094,KK00280,Shabbir Parekh,Ustad,1986-06-11,2019 - Maharashtra Police Act Sec 122; 2020 - BNS 317 (Stolen property); 2024 - Arms Act Sec 25,Local-Offender,"100, near Kapurbawdi PS, Thane, Maharashtra",background
+KK-CRIM-0095,KK00287,Jitendra Bhatkar,,1998-01-02,2021 - BNS 317 (Stolen property); 2023 - NDPS Act Sec 21,Local-Offender,"36, near Kurla PS, Mumbai Suburban, Maharashtra",background
+KK-CRIM-0096,KK00378,Ravindra Sayyed,,1984-07-13,2020 - BNS 317 (Stolen property); 2021 - MCOCA 1999,Local-Offender,"19, near Faraskhana PS, Pune, Maharashtra",background
+KK-CRIM-0097,KK00140,Salim Kothari,,1978-03-06,2019 - Maharashtra Police Act Sec 122,Peripheral-Associate,"43, near Guhagar PS, Ratnagiri, Maharashtra",background
+KK-CRIM-0098,KK00180,Iqbal Parab,,1994-01-13,2019 - BNS 308 (Extortion); 2020 - IPC 392 / BNS 309 (Robbery); 2023 - IPC 392 / BNS 309 (Robbery),Peripheral-Associate,"240, near Rabodi PS, Thane, Maharashtra",background
+KK-CRIM-0099,KK00319,Bhavesh Desai,,1974-01-15,2021 - IPC 392 / BNS 309 (Robbery),Local-Offender,"234, near Wagle Estate PS, Thane, Maharashtra",background
+KK-CRIM-0100,KK00186,Santosh Kadam,,1990-07-24,2019 - Customs Act Sec 135; 2023 - Arms Act Sec 25; 2024 - BNS 308 (Extortion),Peripheral-Associate,"154, near Kapurbawdi PS, Thane, Maharashtra",background
+KK-CRIM-0101,KK00245,Rakesh Thakur,Bapu,1988-01-25,2019 - IPC 392 / BNS 309 (Robbery); 2020 - MCOCA 1999,Local-Offender,"195, near Kapurbawdi PS, Thane, Maharashtra",background
+KK-CRIM-0102,KK00273,Javed Sanghvi,,1987-11-21,2023 - MCOCA 1999; 2024 - BNS 308 (Extortion),Local-Offender,"13, near Rabodi PS, Thane, Maharashtra",background
+KK-CRIM-0103,KK00164,Nitin Thakur,Ustad,1990-07-06,2021 - IPC 392 / BNS 309 (Robbery); 2022 - BNS 317 (Stolen property); 2023 - Arms Act Sec 25,Peripheral-Associate,"10, near Palghar PS, Palghar, Maharashtra",background
+KK-CRIM-0104,KK00159,Hitesh Sayyed,,1977-05-04,2019 - NDPS Act Sec 21,Peripheral-Associate,"192, near Dongri PS, Mumbai City, Maharashtra",background
+KK-CRIM-0105,KK00258,Rajan Shah,,1981-09-20,2021 - MCOCA 1999; 2022 - MCOCA 1999; 2023 - MCOCA 1999,Local-Offender,"235, near Andheri PS, Mumbai Suburban, Maharashtra",background
+KK-CRIM-0106,KK00251,Kishor Deshmukh,,1977-06-09,2020 - NDPS Act Sec 21; 2024 - IPC 392 / BNS 309 (Robbery),Local-Offender,"190, near Rabodi PS, Thane, Maharashtra",background
+KK-CRIM-0107,KK00368,Rakesh Parab,,1968-08-23,2021 - MCOCA 1999,Local-Offender,"152, near Koregaon Park PS, Pune, Maharashtra",background
+KK-CRIM-0108,KK00195,Pravin Kothari,,1968-06-16,2021 - BNS 308 (Extortion); 2024 - BNS 308 (Extortion),Peripheral-Associate,"169, near Kapurbawdi PS, Thane, Maharashtra",background

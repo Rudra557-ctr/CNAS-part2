@@ -1,0 +1,89 @@
+report_id,date,day,team,location,confidence,activity_notes,ground_truth_flag
+KK-SURV-0066,2025-01-05,5,DRI Mumbai Zonal Unit,"Ratnagiri City PS, Ratnagiri",High,Subject met an unidentified person at a hotel for about forty minutes and left separately.,core_surveillance
+KK-SURV-0065,2025-01-06,6,DRI Mumbai Zonal Unit,"Nalasopara PS, Palghar",Medium,No movement recorded during the watch period.,core_surveillance
+KK-SURV-0073,2025-01-06,6,ANC Unit 3 (Navi Mumbai),"Faraskhana PS, Pune",High,No movement recorded during the watch period.,noise
+KK-SURV-0087,2025-01-08,8,Thane Crime Branch Unit 2,"Koregaon Park PS, Pune",Medium,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0031,2025-01-12,12,"Coastal Security Group, Ratnagiri","Guhagar PS, Ratnagiri",High,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0018,2025-01-14,14,"Coastal Security Group, Ratnagiri","Kapurbawdi PS, Thane",High,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0088,2025-01-14,14,ANC Unit 1 (Mumbai),"Kapurbawdi PS, Thane",Medium,No movement recorded during the watch period.,core_surveillance
+KK-SURV-0015,2025-01-16,16,Thane Crime Branch Unit 2,"Panvel Taluka PS, Raigad (Uran / JNPT)",High,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,noise
+KK-SURV-0001,2025-01-18,18,DRI Mumbai Zonal Unit,"JNPT Terminal 2, Raigad",High,Container yard watched from 04:00 hrs. CHA staff attached to Kishor Ansari seen photographing seal numbers and leaving in a private vehicle.,core_surveillance
+KK-SURV-0025,2025-01-18,18,"Coastal Security Group, Ratnagiri","Pydhonie PS, Mumbai City",High,No movement recorded during the watch period.,noise
+KK-SURV-0002,2025-01-19,19,"Coastal Security Group, Ratnagiri","Harnai Jetty, Ratnagiri",Medium,Vessel linked to Hitesh Parekh returned to jetty at 02:10 hrs with no catch offloaded.,core_surveillance
+KK-SURV-0053,2025-01-26,26,Thane Crime Branch Unit 2,"Uran PS, Raigad (Uran / JNPT)",Medium,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",noise
+KK-SURV-0032,2025-02-04,35,ANC Unit 3 (Navi Mumbai),"Naupada PS, Thane",Low,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0040,2025-02-05,36,Thane Crime Branch Unit 2,"Andheri PS, Mumbai Suburban",Medium,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",noise
+KK-SURV-0078,2025-02-06,37,EOW Mumbai,"Palghar PS, Palghar",High,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",noise
+KK-SURV-0075,2025-02-11,42,EOW Mumbai,"Palghar PS, Palghar",Medium,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0003,2025-02-13,44,EOW Mumbai,"Zaveri Bazaar, Mumbai City",High,Three angadia couriers observed entering the godown with cloth bags. Dnyaneshwar Parab present through the evening.,core_surveillance
+KK-SURV-0023,2025-02-16,47,ANC Unit 1 (Mumbai),"Sakinaka PS, Mumbai Suburban",High,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0048,2025-02-18,49,DRI Mumbai Zonal Unit,"Panvel Taluka PS, Raigad (Uran / JNPT)",Low,No movement recorded during the watch period.,core_surveillance
+KK-SURV-0026,2025-02-23,54,"Coastal Security Group, Ratnagiri","CBD Belapur PS, Navi Mumbai",Low,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0047,2025-02-23,54,"Coastal Security Group, Ratnagiri","Ghatkopar PS, Mumbai Suburban",Low,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",noise
+KK-SURV-0057,2025-02-26,57,"Coastal Security Group, Ratnagiri","Satpati Coastal PS, Palghar",Low,Subject met an unidentified person at a hotel for about forty minutes and left separately.,core_surveillance
+KK-SURV-0037,2025-03-01,60,"Coastal Security Group, Ratnagiri","Naupada PS, Thane",Low,No movement recorded during the watch period.,noise
+KK-SURV-0061,2025-03-03,62,"Coastal Security Group, Ratnagiri","MRA Marg PS, Mumbai City",Low,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",noise
+KK-SURV-0070,2025-03-06,65,"Coastal Security Group, Ratnagiri","Koregaon Park PS, Pune",High,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0050,2025-03-08,67,"Coastal Security Group, Ratnagiri","Bandra PS, Mumbai Suburban",Low,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",core_surveillance
+KK-SURV-0082,2025-03-12,71,ANC Unit 3 (Navi Mumbai),"Vartak Nagar PS, Thane",Medium,Subject met an unidentified person at a hotel for about forty minutes and left separately.,noise
+KK-SURV-0004,2025-03-16,75,Thane Crime Branch Unit 2,"Wagle Estate, Thane",High,Motorcycle without plates seen circling the complainant's office twice. Riders matched the description of Hanif Kadam.,core_surveillance
+KK-SURV-0021,2025-03-21,80,DRI Mumbai Zonal Unit,"Rabodi PS, Thane",Low,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",core_surveillance
+KK-SURV-0044,2025-03-21,80,Thane Crime Branch Unit 2,"Faraskhana PS, Pune",Low,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0036,2025-03-23,82,EOW Mumbai,"Nerul PS, Navi Mumbai",Low,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,noise
+KK-SURV-0081,2025-03-23,82,Thane Crime Branch Unit 2,"Satpati Coastal PS, Palghar",High,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0029,2025-03-24,83,Thane Crime Branch Unit 2,"Panvel Taluka PS, Raigad (Uran / JNPT)",Medium,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0013,2025-03-25,84,"Coastal Security Group, Ratnagiri","Ghatkopar PS, Mumbai Suburban",Low,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0007,2025-03-27,86,DRI Mumbai Zonal Unit,"Vasai PS, Palghar",High,No movement recorded during the watch period.,noise
+KK-SURV-0034,2025-03-27,86,Thane Crime Branch Unit 2,"Rabodi PS, Thane",Low,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0051,2025-03-27,86,EOW Mumbai,"Faraskhana PS, Pune",Medium,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",core_surveillance
+KK-SURV-0016,2025-03-29,88,Thane Crime Branch Unit 2,"APMC PS, Navi Mumbai",Low,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",core_surveillance
+KK-SURV-0005,2025-04-01,91,ANC Unit 3 (Navi Mumbai),"Ghatkopar PS, Mumbai Suburban",High,No movement recorded during the watch period.,core_surveillance
+KK-SURV-0030,2025-04-02,92,ANC Unit 1 (Mumbai),"Ghatkopar PS, Mumbai Suburban",Medium,Subject met an unidentified person at a hotel for about forty minutes and left separately.,noise
+KK-SURV-0009,2025-04-05,95,EOW Mumbai,"Vartak Nagar PS, Thane",Low,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0054,2025-04-07,97,DRI Mumbai Zonal Unit,"Vasai PS, Palghar",Medium,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",noise
+KK-SURV-0049,2025-04-09,99,"Coastal Security Group, Ratnagiri","Faraskhana PS, Pune",Medium,Subject met an unidentified person at a hotel for about forty minutes and left separately.,core_surveillance
+KK-SURV-0020,2025-04-10,100,"Coastal Security Group, Ratnagiri","Wagle Estate PS, Thane",Low,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0014,2025-04-11,101,DRI Mumbai Zonal Unit,"Nalasopara PS, Palghar",Low,Subject met an unidentified person at a hotel for about forty minutes and left separately.,noise
+KK-SURV-0008,2025-04-15,105,Thane Crime Branch Unit 2,"Nhava Sheva Port PS, Raigad (Uran / JNPT)",High,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0080,2025-04-15,105,"Coastal Security Group, Ratnagiri","Guhagar PS, Ratnagiri",High,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0083,2025-04-16,106,EOW Mumbai,"Khopoli PS, Raigad (Uran / JNPT)",Medium,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",core_surveillance
+KK-SURV-0086,2025-04-16,106,"Coastal Security Group, Ratnagiri","Kurla PS, Mumbai Suburban",High,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0017,2025-04-18,108,"Coastal Security Group, Ratnagiri","Faraskhana PS, Pune",High,Subject met an unidentified person at a hotel for about forty minutes and left separately.,noise
+KK-SURV-0063,2025-04-18,108,DRI Mumbai Zonal Unit,"Dongri PS, Mumbai City",High,Subject met an unidentified person at a hotel for about forty minutes and left separately.,core_surveillance
+KK-SURV-0022,2025-04-19,109,Thane Crime Branch Unit 2,"Palghar PS, Palghar",Medium,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0052,2025-04-19,109,EOW Mumbai,"Koregaon Park PS, Pune",High,Subject met an unidentified person at a hotel for about forty minutes and left separately.,noise
+KK-SURV-0072,2025-04-22,112,"Coastal Security Group, Ratnagiri","Uran PS, Raigad (Uran / JNPT)",Low,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,noise
+KK-SURV-0042,2025-04-28,118,Thane Crime Branch Unit 2,"Nhava Sheva Port PS, Raigad (Uran / JNPT)",Low,Subject met an unidentified person at a hotel for about forty minutes and left separately.,noise
+KK-SURV-0027,2025-04-30,120,EOW Mumbai,"Wagle Estate PS, Thane",High,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0043,2025-05-03,123,DRI Mumbai Zonal Unit,"Faraskhana PS, Pune",Medium,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,noise
+KK-SURV-0077,2025-05-04,124,DRI Mumbai Zonal Unit,"Harnai Coastal PS, Ratnagiri",High,Subject met an unidentified person at a hotel for about forty minutes and left separately.,core_surveillance
+KK-SURV-0045,2025-05-05,125,ANC Unit 3 (Navi Mumbai),"LT Marg PS, Mumbai City",High,Subject met an unidentified person at a hotel for about forty minutes and left separately.,core_surveillance
+KK-SURV-0067,2025-05-05,125,EOW Mumbai,"Nhava Sheva Port PS, Raigad (Uran / JNPT)",High,Subject met an unidentified person at a hotel for about forty minutes and left separately.,core_surveillance
+KK-SURV-0064,2025-05-13,133,ANC Unit 1 (Mumbai),"Bandra PS, Mumbai Suburban",High,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",core_surveillance
+KK-SURV-0055,2025-05-15,135,EOW Mumbai,"Koregaon Park PS, Pune",High,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0010,2025-05-16,136,ANC Unit 1 (Mumbai),"Wagle Estate PS, Thane",High,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0062,2025-05-18,138,DRI Mumbai Zonal Unit,"Panvel Taluka PS, Raigad (Uran / JNPT)",Medium,No movement recorded during the watch period.,noise
+KK-SURV-0060,2025-05-19,139,ANC Unit 3 (Navi Mumbai),"APMC PS, Navi Mumbai",Low,Subject met an unidentified person at a hotel for about forty minutes and left separately.,core_surveillance
+KK-SURV-0071,2025-05-19,139,DRI Mumbai Zonal Unit,"CBD Belapur PS, Navi Mumbai",Low,No movement recorded during the watch period.,noise
+KK-SURV-0084,2025-05-20,140,ANC Unit 1 (Mumbai),"Bund Garden PS, Pune",Medium,Subject met an unidentified person at a hotel for about forty minutes and left separately.,core_surveillance
+KK-SURV-0041,2025-05-23,143,Thane Crime Branch Unit 2,"Sakinaka PS, Mumbai Suburban",Medium,No movement recorded during the watch period.,core_surveillance
+KK-SURV-0085,2025-05-26,146,"Coastal Security Group, Ratnagiri","Panvel Taluka PS, Raigad (Uran / JNPT)",Low,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,noise
+KK-SURV-0019,2025-05-27,147,DRI Mumbai Zonal Unit,"Kurla PS, Mumbai Suburban",Low,Subject met an unidentified person at a hotel for about forty minutes and left separately.,noise
+KK-SURV-0012,2025-05-28,148,ANC Unit 1 (Mumbai),"Vasai PS, Palghar",Medium,Subject met an unidentified person at a hotel for about forty minutes and left separately.,noise
+KK-SURV-0079,2025-05-28,148,Thane Crime Branch Unit 2,"Nalasopara PS, Palghar",High,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0069,2025-06-01,152,EOW Mumbai,"Nerul PS, Navi Mumbai",Medium,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0058,2025-06-06,157,Thane Crime Branch Unit 2,"Guhagar PS, Ratnagiri",Low,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",noise
+KK-SURV-0046,2025-06-09,160,ANC Unit 3 (Navi Mumbai),"Koregaon Park PS, Pune",High,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",core_surveillance
+KK-SURV-0011,2025-06-10,161,ANC Unit 1 (Mumbai),"APMC PS, Navi Mumbai",High,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",core_surveillance
+KK-SURV-0056,2025-06-10,161,ANC Unit 1 (Mumbai),"Satpati Coastal PS, Palghar",Low,No movement recorded during the watch period.,core_surveillance
+KK-SURV-0068,2025-06-12,163,ANC Unit 3 (Navi Mumbai),"Ghatkopar PS, Mumbai Suburban",Medium,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0059,2025-06-14,165,DRI Mumbai Zonal Unit,"CBD Belapur PS, Navi Mumbai",Medium,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise
+KK-SURV-0033,2025-06-16,167,ANC Unit 1 (Mumbai),"Nhava Sheva Port PS, Raigad (Uran / JNPT)",Medium,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0035,2025-06-17,168,ANC Unit 3 (Navi Mumbai),"Pydhonie PS, Mumbai City",Low,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0076,2025-06-18,169,Thane Crime Branch Unit 2,"Khopoli PS, Raigad (Uran / JNPT)",Low,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0028,2025-06-20,171,"Coastal Security Group, Ratnagiri","Nerul PS, Navi Mumbai",Medium,Mobile surveillance discontinued after the subject took an evasive route through the market.,core_surveillance
+KK-SURV-0006,2025-06-22,173,DRI Mumbai Zonal Unit,"Vashi PS, Navi Mumbai",Low,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0039,2025-06-23,174,Thane Crime Branch Unit 2,"Palghar PS, Palghar",High,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,core_surveillance
+KK-SURV-0024,2025-06-25,176,Thane Crime Branch Unit 2,"Pydhonie PS, Mumbai City",Medium,Watch maintained at the godown; a tempo was loaded after dark and moved towards the highway.,noise
+KK-SURV-0038,2025-06-28,179,EOW Mumbai,"Palghar PS, Palghar",Medium,"Static surveillance outside the suspect's residence. Two visitors noted, both unidentified.",core_surveillance
+KK-SURV-0074,2025-06-28,179,"Coastal Security Group, Ratnagiri","Nerul PS, Navi Mumbai",High,Mobile surveillance discontinued after the subject took an evasive route through the market.,noise

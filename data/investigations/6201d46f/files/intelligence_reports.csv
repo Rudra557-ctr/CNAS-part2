@@ -1,0 +1,67 @@
+report_id,date,day,source_reliability,narrative,mentioned_entity_ids,ground_truth_flag
+KK-INTEL-0017,2025-01-02,2,C3 (Fairly Reliable),HUMINT reports movement of unaccounted cash between Palghar and Raigad (Uran / JNPT) through angadia couriers.,KK00088,noise
+KK-INTEL-0060,2025-01-03,3,D4 (Not Usually Reliable),Informant reports a dispute over commission between the port group and the Thane group.,KK00044,noise
+KK-INTEL-0057,2025-01-06,6,B2 (Usually Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Mumbai City.,KK00047,noise
+KK-INTEL-0038,2025-01-07,7,D4 (Not Usually Reliable),Source states that a safehouse near Navi Mumbai is being used to hold couriers before dispatch.,"KK00055,KK00037",syndicate_intel
+KK-INTEL-0001,2025-01-08,8,B2 (Usually Reliable),"Source reports a consignment of 'cashew' expected at JNPT in the first week of February, cleared through a known CHA. Landing cost said to be settled in Dubai.","KK00001,KK00005",syndicate_intel
+KK-INTEL-0031,2025-01-12,12,A1 (Completely Reliable),Source reports hawala settlement rates being quoted openly in the Palghar market.,"KK00056,KK00055",syndicate_intel
+KK-INTEL-0036,2025-01-13,13,B2 (Usually Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Palghar.,"KK00023,KK00021",syndicate_intel
+KK-INTEL-0002,2025-01-15,15,B2 (Usually Reliable),Fishing vessel out of Harnai observed taking on fuel far beyond a day's requirement. Owner previously named in a 2022 smuggling case.,KK00096,syndicate_intel
+KK-INTEL-0028,2025-01-16,16,B2 (Usually Reliable),HUMINT reports movement of unaccounted cash between Mumbai Suburban and Pune through angadia couriers.,"KK00054,KK00058",syndicate_intel
+KK-INTEL-0021,2025-01-18,18,C3 (Fairly Reliable),Source reports hawala settlement rates being quoted openly in the Palghar market.,KK00033,syndicate_intel
+KK-INTEL-0013,2025-01-21,21,A1 (Completely Reliable),HUMINT reports movement of unaccounted cash between Thane and Raigad (Uran / JNPT) through angadia couriers.,"KK00094,KK00088",syndicate_intel
+KK-INTEL-0024,2025-01-22,22,D4 (Not Usually Reliable),Source states that a safehouse near Thane is being used to hold couriers before dispatch.,KK00010,noise
+KK-INTEL-0003,2025-01-23,23,A1 (Completely Reliable),"After the port seizure, a Navi Mumbai transport contractor is reported to be moving goods for the syndicate on containers booked in other firms' names.",KK00095,syndicate_intel
+KK-INTEL-0027,2025-01-28,28,C3 (Fairly Reliable),Informant reports a dispute over commission between the port group and the Thane group.,"KK00045,KK00060",syndicate_intel
+KK-INTEL-0012,2025-02-01,32,B2 (Usually Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Pune.,KK00080,syndicate_intel
+KK-INTEL-0019,2025-02-07,38,A1 (Completely Reliable),Source reports hawala settlement rates being quoted openly in the Thane market.,"KK00050,KK00063",syndicate_intel
+KK-INTEL-0004,2025-02-08,39,B2 (Usually Reliable),Angadia channel operating out of Zaveri Bazaar is receiving cash from Uran. Tally book reportedly uses the code word 'kaju' for the February consignment.,"KK00041,KK00005",syndicate_intel
+KK-INTEL-0056,2025-02-12,43,A1 (Completely Reliable),Source reports hawala settlement rates being quoted openly in the Pune market.,KK00085,noise
+KK-INTEL-0041,2025-02-15,46,D4 (Not Usually Reliable),HUMINT reports movement of unaccounted cash between Pune and Pune through angadia couriers.,"KK00052,KK00038",noise
+KK-INTEL-0018,2025-02-16,47,B2 (Usually Reliable),Source states that a safehouse near Raigad (Uran / JNPT) is being used to hold couriers before dispatch.,KK00087,noise
+KK-INTEL-0005,2025-02-19,50,A1 (Completely Reliable),"Following the cash seizure, the syndicate is said to be recovering dues by force. A supari of Rs 8 lakh is reported to have been arranged in Thane.","KK00037,KK00067",syndicate_intel
+KK-INTEL-0062,2025-02-19,50,B2 (Usually Reliable),Source reports hawala settlement rates being quoted openly in the Mumbai Suburban market.,"KK00080,KK00079",noise
+KK-INTEL-0007,2025-02-23,54,B2 (Usually Reliable),HUMINT reports movement of unaccounted cash between Raigad (Uran / JNPT) and Mumbai Suburban through angadia couriers.,KK00059,noise
+KK-INTEL-0053,2025-02-23,54,A1 (Completely Reliable),Source states that a safehouse near Pune is being used to hold couriers before dispatch.,KK00061,syndicate_intel
+KK-INTEL-0008,2025-02-28,59,A1 (Completely Reliable),Source states that a safehouse near Ratnagiri is being used to hold couriers before dispatch.,KK00031,syndicate_intel
+KK-INTEL-0010,2025-03-01,60,A1 (Completely Reliable),HUMINT reports movement of unaccounted cash between Thane and Mumbai City through angadia couriers.,"KK00018,KK00002",noise
+KK-INTEL-0048,2025-03-10,69,D4 (Not Usually Reliable),Source states that a safehouse near Mumbai Suburban is being used to hold couriers before dispatch.,KK00054,syndicate_intel
+KK-INTEL-0059,2025-03-12,71,B2 (Usually Reliable),Informant reports a dispute over commission between the port group and the Thane group.,"KK00060,KK00037",syndicate_intel
+KK-INTEL-0006,2025-03-14,73,A1 (Completely Reliable),Two shooters from the Thane group have been provided a 7.65 mm pistol and a motorcycle. Target is a transport contractor over a disputed payment.,"KK00067,KK00070,KK00071",syndicate_intel
+KK-INTEL-0054,2025-03-17,76,A1 (Completely Reliable),Source reports hawala settlement rates being quoted openly in the Raigad (Uran / JNPT) market.,"KK00035,KK00014",syndicate_intel
+KK-INTEL-0045,2025-03-23,82,C3 (Fairly Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Thane.,"KK00048,KK00060",noise
+KK-INTEL-0020,2025-03-27,86,C3 (Fairly Reliable),Source reports hawala settlement rates being quoted openly in the Navi Mumbai market.,"KK00087,KK00079",syndicate_intel
+KK-INTEL-0032,2025-03-29,88,B2 (Usually Reliable),HUMINT reports movement of unaccounted cash between Mumbai City and Raigad (Uran / JNPT) through angadia couriers.,KK00052,noise
+KK-INTEL-0037,2025-03-31,90,B2 (Usually Reliable),Informant reports a dispute over commission between the port group and the Thane group.,KK00026,syndicate_intel
+KK-INTEL-0043,2025-04-02,92,C3 (Fairly Reliable),Informant reports a dispute over commission between the port group and the Thane group.,"KK00015,KK00016",noise
+KK-INTEL-0014,2025-04-12,102,C3 (Fairly Reliable),HUMINT reports movement of unaccounted cash between Pune and Palghar through angadia couriers.,"KK00012,KK00034",syndicate_intel
+KK-INTEL-0049,2025-04-14,104,C3 (Fairly Reliable),Informant reports a dispute over commission between the port group and the Thane group.,"KK00092,KK00084",noise
+KK-INTEL-0015,2025-04-15,105,B2 (Usually Reliable),Source states that a safehouse near Ratnagiri is being used to hold couriers before dispatch.,KK00013,noise
+KK-INTEL-0034,2025-04-18,108,B2 (Usually Reliable),HUMINT reports movement of unaccounted cash between Mumbai Suburban and Mumbai City through angadia couriers.,"KK00005,KK00002",syndicate_intel
+KK-INTEL-0023,2025-04-19,109,B2 (Usually Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Thane.,KK00054,syndicate_intel
+KK-INTEL-0063,2025-04-22,112,A1 (Completely Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Mumbai City.,"KK00022,KK00023",syndicate_intel
+KK-INTEL-0025,2025-04-23,113,D4 (Not Usually Reliable),Source states that a safehouse near Thane is being used to hold couriers before dispatch.,"KK00018,KK00023",noise
+KK-INTEL-0011,2025-04-25,115,C3 (Fairly Reliable),Informant reports a dispute over commission between the port group and the Thane group.,KK00076,syndicate_intel
+KK-INTEL-0029,2025-04-26,116,A1 (Completely Reliable),HUMINT reports movement of unaccounted cash between Pune and Raigad (Uran / JNPT) through angadia couriers.,KK00032,syndicate_intel
+KK-INTEL-0055,2025-04-28,118,A1 (Completely Reliable),Informant reports a dispute over commission between the port group and the Thane group.,KK00060,noise
+KK-INTEL-0064,2025-05-01,121,A1 (Completely Reliable),HUMINT reports movement of unaccounted cash between Navi Mumbai and Thane through angadia couriers.,"KK00070,KK00092",noise
+KK-INTEL-0051,2025-05-06,126,D4 (Not Usually Reliable),Informant reports a dispute over commission between the port group and the Thane group.,KK00069,syndicate_intel
+KK-INTEL-0022,2025-05-10,130,C3 (Fairly Reliable),Informant reports a dispute over commission between the port group and the Thane group.,"KK00062,KK00053",noise
+KK-INTEL-0030,2025-05-12,132,D4 (Not Usually Reliable),Source states that a safehouse near Ratnagiri is being used to hold couriers before dispatch.,"KK00091,KK00074",syndicate_intel
+KK-INTEL-0040,2025-05-17,137,C3 (Fairly Reliable),Source states that a safehouse near Palghar is being used to hold couriers before dispatch.,KK00084,syndicate_intel
+KK-INTEL-0016,2025-05-19,139,A1 (Completely Reliable),Source states that a safehouse near Thane is being used to hold couriers before dispatch.,"KK00007,KK00006",syndicate_intel
+KK-INTEL-0044,2025-05-19,139,B2 (Usually Reliable),Source states that a safehouse near Ratnagiri is being used to hold couriers before dispatch.,"KK00084,KK00087",syndicate_intel
+KK-INTEL-0050,2025-05-26,146,B2 (Usually Reliable),Source reports hawala settlement rates being quoted openly in the Raigad (Uran / JNPT) market.,KK00004,syndicate_intel
+KK-INTEL-0026,2025-05-31,151,D4 (Not Usually Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Ratnagiri.,"KK00088,KK00083",noise
+KK-INTEL-0035,2025-06-02,153,D4 (Not Usually Reliable),Informant reports a dispute over commission between the port group and the Thane group.,KK00019,noise
+KK-INTEL-0033,2025-06-08,159,D4 (Not Usually Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Thane.,"KK00080,KK00068",syndicate_intel
+KK-INTEL-0046,2025-06-11,162,B2 (Usually Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Mumbai City.,"KK00040,KK00052",noise
+KK-INTEL-0052,2025-06-16,167,D4 (Not Usually Reliable),Technical source indicates the group has switched to a new set of SIMs procured in Mumbai Suburban.,"KK00036,KK00025",syndicate_intel
+KK-INTEL-0009,2025-06-20,171,B2 (Usually Reliable),Informant reports a dispute over commission between the port group and the Thane group.,KK00045,syndicate_intel
+KK-INTEL-0047,2025-06-20,171,D4 (Not Usually Reliable),Source states that a safehouse near Mumbai City is being used to hold couriers before dispatch.,"KK00061,KK00046",noise
+KK-INTEL-0058,2025-06-21,172,B2 (Usually Reliable),Source states that a safehouse near Thane is being used to hold couriers before dispatch.,KK00080,noise
+KK-INTEL-0039,2025-06-23,174,C3 (Fairly Reliable),HUMINT reports movement of unaccounted cash between Raigad (Uran / JNPT) and Ratnagiri through angadia couriers.,"KK00055,KK00065",syndicate_intel
+KK-INTEL-0061,2025-06-23,174,C3 (Fairly Reliable),HUMINT reports movement of unaccounted cash between Ratnagiri and Pune through angadia couriers.,KK00025,syndicate_intel
+KK-INTEL-0042,2025-06-26,177,D4 (Not Usually Reliable),Informant reports a dispute over commission between the port group and the Thane group.,"KK00046,KK00042",syndicate_intel
+INTEL0065,2026-06-26,177,C3 (Fairly reliable / Possibly true),"Aryan is associated with Paresh Doshi. Recorded by admin via voice data entry; dictated as: ""Add a new person named Aryan which is connected to Paresh Doshi.""","V1, KK00318",
+INTEL0066,2026-06-26,177,C3 (Fairly reliable / Possibly true),"Sahil is associated with Paresh Doshi. Recorded by admin via voice data entry; dictated as: ""Add a person named Sahil who is connected to Parekh Doshi.""","V2, KK00318",
